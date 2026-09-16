@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rechod</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#eef2f7;color:#172033}
+.app{max-width:520px;margin:auto;background:white;min-height:100vh}
+header{background:#1877f2;color:white;padding:15px;font-size:25px;font-weight:bold}
+main{padding:12px}.card{background:white;border:1px solid #ddd;border-radius:12px;padding:12px;margin:10px 0}
+input,textarea{width:100%;padding:11px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
+button{border:0;border-radius:8px;padding:10px;margin:4px;background:#1877f2;color:white}
+nav{position:fixed;bottom:0;left:0;right:0;max-width:520px;margin:auto;background:white;
+display:flex;justify-content:space-around;padding:8px;border-top:1px solid #ddd}
+nav button{background:white;color:#222;font-size:20px}
+img,video{width:100%;border-radius:10px;max-height:500px}
+.small{color:#777;font-size:13px}
+</style>
+</head>
+
+<body>
+<div class="app">
+<header>Rechod <span id="name"></span></header>
+<main id="main"></main>
+
+<nav>
+<button onclick="show('home')">🏠</button>
+<button onclick="show('reels')">🎬</button>
+<button onclick="show('search')">🔎</button>
+<button onclick="show('create')">➕</button>
+<button onclick="show('profile')">👤</button>
+</nav>
+</div>
+
+<script type="module">
+import{initializeApp}from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getAuth,onAuthStateChanged,createUserWithEmailAndPassword,
+signInWithEmailAndPassword,signOut}from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{getDatabase,ref,push,set,onValue,update}from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+/* APNA FIREBASE CONFIG YAHAN PASTE KAREIN */
+const firebaseConfig={
+apiKey:"PASTE_API_KEY",
+authDomain:"PASTE_AUTH_DOMAIN",
+databaseURL:"PASTE_DATABASE_URL",
+projectId:"PASTE_PROJECT_ID",
+storageBucket:"PASTE_STORAGE_BUCKET",
+messagingSenderId:"PASTE_SENDER_ID",
+appId:"PASTE_APP_ID"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
+
+let user=null,profiles={},posts={},reels={},pageNow="home";
+
+const main=document.getElementById("main");
+
+function safe(x){
+return String(x||"").replace(/[&<>"']/g,
+m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;",
+"'":"&#39;"}[m]));
+}
+
+function login(){
+main.innerHTML=`
+<div class="card">
+<h1>Rechod</h1>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<input id="username" placeholder="Username (Signup)">
+<input id="age" type="number" placeholder="Age (Signup)">
+<button onclick="signup()">Sign Up</button>
+<button onclick="loginUser()">Login</button>
+<p id="error"></p>
+</div>`;
+}
+
+window.signup=async()=>{
+try{
+let u=await createUserWithEmailAndPassword(
+auth,email.value,password.value);
+await set(ref(db,"profiles/"+u.user.uid),{
+username:username.value||"User",
+age:age.value||"",
+bio:"Welcome to Rechod ❤️"
+});
+}catch(e){error.textContent=e.message}
+};
+
+window.loginUser=async()=>{
+try{
+await signInWithEmailAndPassword(auth,email.value,password.value)
+}catch(e){error.textContent=e.message}
+};
+
+window.show=p=>{
+pageNow=p;render();
+};
+
+function render(){
+if(!user)return login();
+name.textContent=profiles[user.uid]?.username||"";
+if(pageNow=="home")home();
+if(pageNow=="reels")reelPage();
+if(pageNow=="search")search();
+if(pageNow=="create")create();
+if(pageNow=="profile")profile();
+}
+
+function home(){
+let a=Object.entries(posts).reverse();
+main.innerHTML=a.map(([id,p])=>`
+<div class="card">
+<b>${safe(p.username)}</b>
+${p.imageUrl?`<img src="${safe(p.imageUrl)}">`:""}
+<p>${safe(p.caption)}</p>
+<button onclick="like('${id}')">❤️ ${p.likes||0}</button>
+</div>`).join("")||
+`<div class="card">अभी कोई post नहीं है।</div>`;
+}
+
+window.like=async id=>{
+let p=posts[id];
+await update(ref(db,"posts/"+id),{likes:(p.likes||0)+1});
+};
+
+function reelPage(){
+let a=Object.entries(reels).reverse();
+main.innerHTML=a.map(([id,r])=>`
+<div class="card">
+<b>${safe(r.username)}</b>
+<video src="${safe(r.videoUrl)}" controls loop playsinline></video>
+<p>${safe(r.caption)}</p>
+<button>❤️ ${r.likes||0}</button>
+</div>`).join("")||
+`<div class="card">अभी कोई Reel नहीं है।</div>`;
+}
+
+function create(){
+main.innerHTML=`
+<div class="card">
+<h3>📷 Create Post</h3>
+<input id="image" placeholder="Image URL">
+<textarea id="caption" placeholder="Caption"></textarea>
+<button onclick="addPost()">Post करें</button>
+</div>
+
+<div class="card">
+<h3>🎬 Create Reel</h3>
+<input id="video" placeholder="Video MP4 URL">
+<textarea id="rcaption" placeholder="Reel Caption"></textarea>
+<button onclick="addReel()">Reel डालें</button>
+<p class="small">
+इस free version में URL से image/video लगाया जा सकता है।
+</p>
+</div>`;
+}
+
+window.addPost=async()=>{
+if(!image.value)return alert("Image URL डालें");
+await push(ref(db,"posts"),{
+uid:user.uid,
+username:profiles[user.uid]?.username||"User",
+imageUrl:image.value,
+caption:caption.value,
+likes:0,
+createdAt:Date.now()
+});
+show("home");
+};
+
+window.addReel=async()=>{
+if(!video.value)return alert("Video URL डालें");
+await push(ref(db,"reels"),{
+uid:user.uid,
+username:profiles[user.uid]?.username||"User",
+videoUrl:video.value,
+caption:rcaption.value,
+likes:0,
+createdAt:Date.now()
+});
+show("reels");
+};
+
+function search(){
+main.innerHTML=`
+<div class="card">
+<input id="find" placeholder="Username search करें"
+oninput="findUser()">
+</div>
+<div id="results"></div>`;
+}
+
+window.findUser=()=>{
+let q=find.value.toLowerCase();
+results.innerHTML=Object.values(profiles)
+.filter(p=>(p.username||"").toLowerCase().includes(q))
+.map(p=>`<div class="card"><b>${safe(p.username)}</b>
+<br>Age: ${safe(p.age)}</div>`).join("");
+};
+
+function profile(){
+let p=profiles[user.uid]||{};
+main.innerHTML=`
+<div class="card">
+<h2>👤 ${safe(p.username)}</h2>
+<p>${safe(p.bio)}</p>
+<p>Age: ${safe(p.age)}</p>
+<button onclick="edit()">Edit Profile</button>
+<button onclick="signOut(auth)">Logout</button>
+</div>`;
+}
+
+window.edit=async()=>{
+let u=prompt("Username",profiles[user.uid]?.username||"");
+let b=prompt("Bio",profiles[user.uid]?.bio||"");
+if(u!==null)
+await update(ref(db,"profiles/"+user.uid),{
+username:u,bio:b||""
+});
+};
+
+onAuthStateChanged(auth,u=>{
+user=u;
+if(!u){render();return}
+
+onValue(ref(db,"profiles"),s=>{
+profiles=s.val()||{};render();
+});
+
+onValue(ref(db,"posts"),s=>{
+posts=s.val()||{};render();
+});
+
+onValue(ref(db,"reels"),s=>{
+reels=s.val()||{};render();
+});
+});
+</script>
+</body>
+</html>
