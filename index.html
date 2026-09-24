@@ -1,27 +1,987 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Rechod</title>
-  <script>
-    window.location.href = "./rechod-firebase.html";
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rechod</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef2f7;
+color:#172033;
+}
+
+.app{
+max-width:520px;
+margin:auto;
+background:white;
+min-height:100vh;
+padding-bottom:65px;
+}
+
+header{
+background:#1877f2;
+color:white;
+padding:15px;
+font-size:25px;
+font-weight:bold;
+}
+
+main{
+padding:12px;
+min-height:calc(100vh - 120px);
+}
+
+.card{
+background:white;
+border:1px solid #ddd;
+border-radius:12px;
+padding:12px;
+margin:10px 0;
+}
+
+input,textarea{
+width:100%;
+padding:11px;
+margin:5px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px;
+}
+
+button{
+border:0;
+border-radius:8px;
+padding:10px 14px;
+margin:4px;
+background:#1877f2;
+color:white;
+font-size:15px;
+}
+
+button:active{
+opacity:.8;
+}
+
+nav{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+max-width:520px;
+margin:auto;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:8px;
+border-top:1px solid #ddd;
+z-index:10;
+}
+
+nav button{
+background:white;
+color:#222;
+font-size:21px;
+padding:7px 12px;
+}
+
+img,video{
+width:100%;
+border-radius:10px;
+max-height:500px;
+object-fit:cover;
+}
+
+.small{
+color:#777;
+font-size:13px;
+}
+
+.error{
+color:#d00;
+padding:8px;
+word-break:break-word;
+}
+</style>
 </head>
+
 <body>
-  Opening Rechod...
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rechod</title>
-</head>
-<body>
-  <script>
-    window.location.replace("rechod-firebase.html");
-  </script>
+
+<div class="app">
+
+<header>
+Rechod <span id="userName"></span>
+</header>
+
+<main id="main"></main>
+
+<nav>
+<button onclick="showPage('home')">🏠</button>
+<button onclick="showPage('reels')">🎬</button>
+<button onclick="showPage('search')">🔎</button>
+<button onclick="showPage('create')">➕</button>
+<button onclick="showPage('profile')">👤</button>
+</nav>
+
+</div>
+
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getDatabase,
+ref,
+push,
+set,
+onValue,
+update
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
+
+authDomain:"vibe-social-app-6750d.firebaseapp.com",
+
+databaseURL:"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId:"vibe-social-app-6750d",
+
+storageBucket:"vibe-social-app-6750d.firebasestorage.app",
+
+messagingSenderId:"897864313569",
+
+appId:"1:897864313569:web:738169cb0e6694d3d2a5a0",
+
+measurementId:"G-DKZQ133PSN"
+
+};
+
+
+/* =========================
+   FIREBASE START
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let user = null;
+
+let profiles = {};
+
+let posts = {};
+
+let reels = {};
+
+let pageNow = "home";
+
+
+const mainEl = document.getElementById("main");
+
+const userNameEl = document.getElementById("userName");
+
+
+/* =========================
+   SAFE TEXT
+========================= */
+
+function safe(x){
+
+return String(x ?? "").replace(
+/[&<>"']/g,
+
+m => ({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[m])
+);
+
+}
+
+
+/* =========================
+   LOGIN PAGE
+========================= */
+
+function login(){
+
+mainEl.innerHTML = `
+
+<div class="card">
+
+<h1>Rechod</h1>
+
+<p>Login या नया account बनाएं</p>
+
+<input id="emailInput"
+type="email"
+placeholder="Email">
+
+<input id="passwordInput"
+type="password"
+placeholder="Password">
+
+<input id="usernameInput"
+placeholder="Username (Signup)">
+
+<input id="ageInput"
+type="number"
+placeholder="Age (Signup)">
+
+<button onclick="signupUser()">
+Sign Up
+</button>
+
+<button onclick="loginUser()">
+Login
+</button>
+
+<p id="loginError" class="error"></p>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   SIGNUP
+========================= */
+
+window.signupUser = async function(){
+
+const email =
+document.getElementById("emailInput").value.trim();
+
+const password =
+document.getElementById("passwordInput").value;
+
+const username =
+document.getElementById("usernameInput").value.trim();
+
+const age =
+document.getElementById("ageInput").value;
+
+const errorEl =
+document.getElementById("loginError");
+
+
+if(!email || !password){
+
+errorEl.textContent =
+"Email और Password भरें।";
+
+return;
+
+}
+
+try{
+
+const result =
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+await set(
+ref(db,"profiles/"+result.user.uid),
+{
+username:username || "User",
+age:age || "",
+bio:"Welcome to Rechod ❤️"
+}
+);
+
+}catch(e){
+
+errorEl.textContent =
+e.message;
+
+console.error(e);
+
+}
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
+
+window.loginUser = async function(){
+
+const email =
+document.getElementById("emailInput").value.trim();
+
+const password =
+document.getElementById("passwordInput").value;
+
+const errorEl =
+document.getElementById("loginError");
+
+
+if(!email || !password){
+
+errorEl.textContent =
+"Email और Password भरें।";
+
+return;
+
+}
+
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+}catch(e){
+
+errorEl.textContent =
+e.message;
+
+console.error(e);
+
+}
+
+};
+
+
+/* =========================
+   PAGE CHANGE
+========================= */
+
+window.showPage = function(page){
+
+pageNow = page;
+
+render();
+
+};
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+if(!user){
+
+login();
+
+return;
+
+}
+
+
+userNameEl.textContent =
+profiles[user.uid]?.username
+? " — " + profiles[user.uid].username
+: "";
+
+
+if(pageNow === "home"){
+home();
+}
+
+else if(pageNow === "reels"){
+reelPage();
+}
+
+else if(pageNow === "search"){
+search();
+}
+
+else if(pageNow === "create"){
+create();
+}
+
+else if(pageNow === "profile"){
+profile();
+}
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function home(){
+
+const list =
+Object.entries(posts)
+.reverse();
+
+
+mainEl.innerHTML =
+
+list.map(([id,p]) => `
+
+<div class="card">
+
+<b>${safe(p.username || "User")}</b>
+
+${p.imageUrl
+? `<img src="${safe(p.imageUrl)}"
+onerror="this.style.display='none'">`
+: ""}
+
+<p>${safe(p.caption)}</p>
+
+<button onclick="likePost('${id}')">
+❤️ ${p.likes || 0}
+</button>
+
+</div>
+
+`).join("")
+
+||
+
+`<div class="card">
+
+<h3>🏠 Rechod Home</h3>
+
+<p>अभी कोई post नहीं है।</p>
+
+<p>➕ दबाकर पहली post बनाएं।</p>
+
+</div>`;
+
+}
+
+
+/* =========================
+   LIKE
+========================= */
+
+window.likePost = async function(id){
+
+try{
+
+const p = posts[id];
+
+if(!p) return;
+
+await update(
+ref(db,"posts/"+id),
+{
+likes:(Number(p.likes) || 0) + 1
+}
+);
+
+}catch(e){
+
+console.error(e);
+
+alert("Like नहीं हो सका।");
+
+}
+
+};
+
+
+/* =========================
+   REELS
+========================= */
+
+function reelPage(){
+
+const list =
+Object.entries(reels)
+.reverse();
+
+
+mainEl.innerHTML =
+
+list.map(([id,r]) => `
+
+<div class="card">
+
+<b>${safe(r.username || "User")}</b>
+
+${
+r.videoUrl
+?
+`<video
+src="${safe(r.videoUrl)}"
+controls
+loop
+playsinline>
+</video>`
+:
+""
+}
+
+<p>${safe(r.caption)}</p>
+
+<button>
+❤️ ${r.likes || 0}
+</button>
+
+</div>
+
+`).join("")
+
+||
+
+`<div class="card">
+
+<h3>🎬 Reels</h3>
+
+<p>अभी कोई Reel नहीं है।</p>
+
+<p>➕ दबाकर Reel डालें।</p>
+
+</div>`;
+
+}
+
+
+/* =========================
+   CREATE
+========================= */
+
+function create(){
+
+mainEl.innerHTML = `
+
+<div class="card">
+
+<h3>📷 Create Post</h3>
+
+<input
+id="imageInput"
+placeholder="Image URL">
+
+<textarea
+id="captionInput"
+placeholder="Caption">
+</textarea>
+
+<button onclick="addPost()">
+Post करें
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🎬 Create Reel</h3>
+
+<input
+id="videoInput"
+placeholder="Video MP4 URL">
+
+<textarea
+id="reelCaptionInput"
+placeholder="Reel Caption">
+</textarea>
+
+<button onclick="addReel()">
+Reel डालें
+</button>
+
+<p class="small">
+इस version में URL से image/video लगाया जा सकता है।
+</p>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   ADD POST
+========================= */
+
+window.addPost = async function(){
+
+const image =
+document.getElementById("imageInput").value.trim();
+
+const caption =
+document.getElementById("captionInput").value.trim();
+
+
+if(!image){
+
+alert("Image URL डालें");
+
+return;
+
+}
+
+
+try{
+
+await push(
+ref(db,"posts"),
+{
+uid:user.uid,
+username:
+profiles[user.uid]?.username || "User",
+imageUrl:image,
+caption:caption,
+likes:0,
+createdAt:Date.now()
+}
+);
+
+showPage("home");
+
+}catch(e){
+
+console.error(e);
+
+alert("Post नहीं बन सकी: " + e.message);
+
+}
+
+};
+
+
+/* =========================
+   ADD REEL
+========================= */
+
+window.addReel = async function(){
+
+const video =
+document.getElementById("videoInput").value.trim();
+
+const caption =
+document.getElementById("reelCaptionInput").value.trim();
+
+
+if(!video){
+
+alert("Video URL डालें");
+
+return;
+
+}
+
+
+try{
+
+await push(
+ref(db,"reels"),
+{
+uid:user.uid,
+username:
+profiles[user.uid]?.username || "User",
+videoUrl:video,
+caption:caption,
+likes:0,
+createdAt:Date.now()
+}
+);
+
+showPage("reels");
+
+}catch(e){
+
+console.error(e);
+
+alert("Reel नहीं बनी: " + e.message);
+
+}
+
+};
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function search(){
+
+mainEl.innerHTML = `
+
+<div class="card">
+
+<input
+id="searchInput"
+placeholder="Username search करें"
+oninput="findUser()">
+
+</div>
+
+<div id="searchResults"></div>
+
+`;
+
+}
+
+
+/* =========================
+   FIND USER
+========================= */
+
+window.findUser = function(){
+
+const q =
+document.getElementById("searchInput")
+.value
+.toLowerCase()
+.trim();
+
+
+const resultEl =
+document.getElementById("searchResults");
+
+
+resultEl.innerHTML =
+
+Object.values(profiles)
+
+.filter(p =>
+(p.username || "")
+.toLowerCase()
+.includes(q)
+)
+
+.map(p => `
+
+<div class="card">
+
+<b>${safe(p.username || "User")}</b>
+
+<br>
+
+Age: ${safe(p.age)}
+
+</div>
+
+`).join("")
+
+||
+
+`<div class="card">
+कोई user नहीं मिला।
+</div>`;
+
+};
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function profile(){
+
+const p =
+profiles[user.uid] || {};
+
+
+mainEl.innerHTML = `
+
+<div class="card">
+
+<h2>
+👤 ${safe(p.username || "User")}
+</h2>
+
+<p>
+${safe(p.bio || "")}
+</p>
+
+<p>
+Age: ${safe(p.age || "")}
+</p>
+
+<button onclick="editProfile()">
+Edit Profile
+</button>
+
+<button onclick="logoutUser()">
+Logout
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   EDIT PROFILE
+========================= */
+
+window.editProfile = async function(){
+
+const current =
+profiles[user.uid] || {};
+
+
+const username =
+prompt(
+"Username",
+current.username || ""
+);
+
+
+const bio =
+prompt(
+"Bio",
+current.bio || ""
+);
+
+
+if(username === null){
+
+return;
+
+}
+
+
+try{
+
+await update(
+ref(db,"profiles/"+user.uid),
+{
+username:username,
+bio:bio || ""
+}
+);
+
+}catch(e){
+
+alert(
+"Profile update नहीं हुआ: "
++ e.message
+);
+
+}
+
+};
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+window.logoutUser = async function(){
+
+try{
+
+await signOut(auth);
+
+}catch(e){
+
+console.error(e);
+
+}
+
+};
+
+
+/* =========================
+   AUTH
+========================= */
+
+onAuthStateChanged(auth, function(u){
+
+user = u;
+
+
+if(!u){
+
+userNameEl.textContent = "";
+
+render();
+
+return;
+
+}
+
+
+onValue(
+ref(db,"profiles"),
+function(snapshot){
+
+profiles =
+snapshot.val() || {};
+
+render();
+
+}
+);
+
+
+onValue(
+ref(db,"posts"),
+function(snapshot){
+
+posts =
+snapshot.val() || {};
+
+render();
+
+}
+);
+
+
+onValue(
+ref(db,"reels"),
+function(snapshot){
+
+reels =
+snapshot.val() || {};
+
+render();
+
+}
+);
+
+});
+
+</script>
+
 </body>
 </html>
