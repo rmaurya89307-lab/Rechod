@@ -7,14 +7,12 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#eef2f7;
 color:#172033;
 }
-
 .app{
 max-width:520px;
 margin:auto;
@@ -22,7 +20,6 @@ background:white;
 min-height:100vh;
 padding-bottom:65px;
 }
-
 header{
 background:#1877f2;
 color:white;
@@ -30,12 +27,10 @@ padding:15px;
 font-size:25px;
 font-weight:bold;
 }
-
 main{
 padding:12px;
 min-height:calc(100vh - 120px);
 }
-
 .card{
 background:white;
 border:1px solid #ddd;
@@ -43,7 +38,6 @@ border-radius:12px;
 padding:12px;
 margin:10px 0;
 }
-
 input,textarea{
 width:100%;
 padding:11px;
@@ -52,7 +46,6 @@ border:1px solid #ccc;
 border-radius:8px;
 font-size:15px;
 }
-
 button{
 border:0;
 border-radius:8px;
@@ -62,11 +55,7 @@ background:#1877f2;
 color:white;
 font-size:15px;
 }
-
-button:active{
-opacity:.8;
-}
-
+button:active{opacity:.8}
 nav{
 position:fixed;
 bottom:0;
@@ -81,30 +70,39 @@ padding:8px;
 border-top:1px solid #ddd;
 z-index:10;
 }
-
 nav button{
 background:white;
 color:#222;
 font-size:21px;
 padding:7px 12px;
 }
-
 img,video{
 width:100%;
 border-radius:10px;
 max-height:500px;
 object-fit:cover;
 }
-
 .small{
 color:#777;
 font-size:13px;
 }
-
 .error{
 color:#d00;
 padding:8px;
 word-break:break-word;
+}
+.progress{
+background:#eee;
+border-radius:8px;
+overflow:hidden;
+height:12px;
+margin:8px 0;
+display:none;
+}
+.progressBar{
+height:100%;
+width:0%;
+background:#1877f2;
 }
 </style>
 </head>
@@ -129,7 +127,6 @@ Rechod <span id="userName"></span>
 
 </div>
 
-
 <script type="module">
 
 import { initializeApp }
@@ -153,6 +150,14 @@ onValue,
 update
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+import {
+getStorage,
+ref as storageRef,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 
 /* =========================
@@ -190,24 +195,20 @@ const auth = getAuth(app);
 
 const db = getDatabase(app);
 
+const storage = getStorage(app);
+
 
 /* =========================
    VARIABLES
 ========================= */
 
 let user = null;
-
 let profiles = {};
-
 let posts = {};
-
 let reels = {};
-
 let pageNow = "home";
 
-
 const mainEl = document.getElementById("main");
-
 const userNameEl = document.getElementById("userName");
 
 
@@ -233,7 +234,7 @@ m => ({
 
 
 /* =========================
-   LOGIN PAGE
+   LOGIN
 ========================= */
 
 function login(){
@@ -261,13 +262,9 @@ placeholder="Username (Signup)">
 type="number"
 placeholder="Age (Signup)">
 
-<button onclick="signupUser()">
-Sign Up
-</button>
+<button onclick="signupUser()">Sign Up</button>
 
-<button onclick="loginUser()">
-Login
-</button>
+<button onclick="loginUser()">Login</button>
 
 <p id="loginError" class="error"></p>
 
@@ -299,7 +296,6 @@ document.getElementById("ageInput").value;
 const errorEl =
 document.getElementById("loginError");
 
-
 if(!email || !password){
 
 errorEl.textContent =
@@ -329,9 +325,7 @@ bio:"Welcome to Rechod ❤️"
 
 }catch(e){
 
-errorEl.textContent =
-e.message;
-
+errorEl.textContent = e.message;
 console.error(e);
 
 }
@@ -354,7 +348,6 @@ document.getElementById("passwordInput").value;
 const errorEl =
 document.getElementById("loginError");
 
-
 if(!email || !password){
 
 errorEl.textContent =
@@ -363,7 +356,6 @@ errorEl.textContent =
 return;
 
 }
-
 
 try{
 
@@ -375,9 +367,7 @@ password
 
 }catch(e){
 
-errorEl.textContent =
-e.message;
-
+errorEl.textContent = e.message;
 console.error(e);
 
 }
@@ -392,7 +382,6 @@ console.error(e);
 window.showPage = function(page){
 
 pageNow = page;
-
 render();
 
 };
@@ -407,34 +396,27 @@ function render(){
 if(!user){
 
 login();
-
 return;
 
 }
-
 
 userNameEl.textContent =
 profiles[user.uid]?.username
 ? " — " + profiles[user.uid].username
 : "";
 
-
 if(pageNow === "home"){
 home();
 }
-
 else if(pageNow === "reels"){
 reelPage();
 }
-
 else if(pageNow === "search"){
 search();
 }
-
 else if(pageNow === "create"){
 create();
 }
-
 else if(pageNow === "profile"){
 profile();
 }
@@ -449,9 +431,7 @@ profile();
 function home(){
 
 const list =
-Object.entries(posts)
-.reverse();
-
+Object.entries(posts).reverse();
 
 mainEl.innerHTML =
 
@@ -528,9 +508,7 @@ alert("Like नहीं हो सका।");
 function reelPage(){
 
 const list =
-Object.entries(reels)
-.reverse();
-
+Object.entries(reels).reverse();
 
 mainEl.innerHTML =
 
@@ -591,17 +569,26 @@ mainEl.innerHTML = `
 <h3>📷 Create Post</h3>
 
 <input
-id="imageInput"
-placeholder="Image URL">
+id="imageFile"
+type="file"
+accept="image/*">
 
 <textarea
 id="captionInput"
 placeholder="Caption">
 </textarea>
 
+<div id="postProgress" class="progress">
+<div id="postProgressBar" class="progressBar"></div>
+</div>
+
 <button onclick="addPost()">
-Post करें
+📷 Photo Post करें
 </button>
+
+<p class="small">
+Phone Gallery से photo चुनें।
+</p>
 
 </div>
 
@@ -611,20 +598,25 @@ Post करें
 <h3>🎬 Create Reel</h3>
 
 <input
-id="videoInput"
-placeholder="Video MP4 URL">
+id="videoFile"
+type="file"
+accept="video/*">
 
 <textarea
 id="reelCaptionInput"
 placeholder="Reel Caption">
 </textarea>
 
+<div id="reelProgress" class="progress">
+<div id="reelProgressBar" class="progressBar"></div>
+</div>
+
 <button onclick="addReel()">
-Reel डालें
+🎬 Reel डालें
 </button>
 
 <p class="small">
-इस version में URL से image/video लगाया जा सकता है।
+Phone Gallery से video चुनें।
 </p>
 
 </div>
@@ -635,28 +627,69 @@ Reel डालें
 
 
 /* =========================
-   ADD POST
+   ADD PHOTO POST
 ========================= */
 
 window.addPost = async function(){
 
-const image =
-document.getElementById("imageInput").value.trim();
+const fileInput =
+document.getElementById("imageFile");
 
 const caption =
 document.getElementById("captionInput").value.trim();
 
+const progress =
+document.getElementById("postProgress");
 
-if(!image){
+const bar =
+document.getElementById("postProgressBar");
 
-alert("Image URL डालें");
+const file =
+fileInput.files[0];
 
+if(!file){
+
+alert("पहले Gallery से photo चुनें।");
 return;
 
 }
 
+if(!file.type.startsWith("image/")){
+
+alert("सिर्फ image/photo चुनें।");
+return;
+
+}
+
+if(file.size > 10 * 1024 * 1024){
+
+alert("Photo 10 MB से कम होना चाहिए।");
+return;
+
+}
 
 try{
+
+progress.style.display = "block";
+bar.style.width = "20%";
+
+const fileName =
+Date.now() + "_" + file.name.replace(/[^\w.-]/g,"_");
+
+const imageRef =
+storageRef(
+storage,
+"posts/" + user.uid + "/" + fileName
+);
+
+bar.style.width = "40%";
+
+await uploadBytes(imageRef,file);
+
+bar.style.width = "75%";
+
+const imageUrl =
+await getDownloadURL(imageRef);
 
 await push(
 ref(db,"posts"),
@@ -664,12 +697,16 @@ ref(db,"posts"),
 uid:user.uid,
 username:
 profiles[user.uid]?.username || "User",
-imageUrl:image,
+imageUrl:imageUrl,
 caption:caption,
 likes:0,
 createdAt:Date.now()
 }
 );
+
+bar.style.width = "100%";
+
+alert("Photo successfully post हो गई।");
 
 showPage("home");
 
@@ -677,7 +714,7 @@ showPage("home");
 
 console.error(e);
 
-alert("Post नहीं बन सकी: " + e.message);
+alert("Photo upload नहीं हुई: " + e.message);
 
 }
 
@@ -690,23 +727,64 @@ alert("Post नहीं बन सकी: " + e.message);
 
 window.addReel = async function(){
 
-const video =
-document.getElementById("videoInput").value.trim();
+const fileInput =
+document.getElementById("videoFile");
 
 const caption =
 document.getElementById("reelCaptionInput").value.trim();
 
+const progress =
+document.getElementById("reelProgress");
 
-if(!video){
+const bar =
+document.getElementById("reelProgressBar");
 
-alert("Video URL डालें");
+const file =
+fileInput.files[0];
 
+if(!file){
+
+alert("पहले Gallery से video चुनें।");
 return;
 
 }
 
+if(!file.type.startsWith("video/")){
+
+alert("सिर्फ video चुनें।");
+return;
+
+}
+
+if(file.size > 100 * 1024 * 1024){
+
+alert("Video 100 MB से कम होना चाहिए।");
+return;
+
+}
 
 try{
+
+progress.style.display = "block";
+bar.style.width = "20%";
+
+const fileName =
+Date.now() + "_" + file.name.replace(/[^\w.-]/g,"_");
+
+const videoRef =
+storageRef(
+storage,
+"reels/" + user.uid + "/" + fileName
+);
+
+bar.style.width = "40%";
+
+await uploadBytes(videoRef,file);
+
+bar.style.width = "75%";
+
+const videoUrl =
+await getDownloadURL(videoRef);
 
 await push(
 ref(db,"reels"),
@@ -714,12 +792,16 @@ ref(db,"reels"),
 uid:user.uid,
 username:
 profiles[user.uid]?.username || "User",
-videoUrl:video,
+videoUrl:videoUrl,
 caption:caption,
 likes:0,
 createdAt:Date.now()
 }
 );
+
+bar.style.width = "100%";
+
+alert("Reel successfully upload हो गई।");
 
 showPage("reels");
 
@@ -727,7 +809,7 @@ showPage("reels");
 
 console.error(e);
 
-alert("Reel नहीं बनी: " + e.message);
+alert("Reel upload नहीं हुई: " + e.message);
 
 }
 
@@ -766,14 +848,11 @@ window.findUser = function(){
 
 const q =
 document.getElementById("searchInput")
-.value
-.toLowerCase()
+.value.toLowerCase()
 .trim();
-
 
 const resultEl =
 document.getElementById("searchResults");
-
 
 resultEl.innerHTML =
 
@@ -817,7 +896,6 @@ function profile(){
 const p =
 profiles[user.uid] || {};
 
-
 mainEl.innerHTML = `
 
 <div class="card">
@@ -858,13 +936,11 @@ window.editProfile = async function(){
 const current =
 profiles[user.uid] || {};
 
-
 const username =
 prompt(
 "Username",
 current.username || ""
 );
-
 
 const bio =
 prompt(
@@ -872,13 +948,9 @@ prompt(
 current.bio || ""
 );
 
-
 if(username === null){
-
 return;
-
 }
-
 
 try{
 
@@ -893,8 +965,7 @@ bio:bio || ""
 }catch(e){
 
 alert(
-"Profile update नहीं हुआ: "
-+ e.message
+"Profile update नहीं हुआ: " + e.message
 );
 
 }
@@ -925,21 +996,17 @@ console.error(e);
    AUTH
 ========================= */
 
-onAuthStateChanged(auth, function(u){
+onAuthStateChanged(auth,function(u){
 
 user = u;
-
 
 if(!u){
 
 userNameEl.textContent = "";
-
 render();
-
 return;
 
 }
-
 
 onValue(
 ref(db,"profiles"),
@@ -953,7 +1020,6 @@ render();
 }
 );
 
-
 onValue(
 ref(db,"posts"),
 function(snapshot){
@@ -965,7 +1031,6 @@ render();
 
 }
 );
-
 
 onValue(
 ref(db,"reels"),
