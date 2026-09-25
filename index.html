@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1877f2">
 <title>Rechod</title>
 
 <style>
@@ -11,170 +12,177 @@ body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#eef2f7;
-color:#172033;
+color:#172033
 }
-.app{
+.wrap{
 max-width:520px;
 margin:auto;
-background:white;
 min-height:100vh;
-padding-bottom:65px;
+background:#fff
 }
-header{
+.top{
+position:sticky;
+top:0;
+z-index:5;
 background:#1877f2;
 color:white;
-padding:15px;
-font-size:25px;
-font-weight:bold;
+padding:14px 16px;
+font-size:24px;
+font-weight:700;
+display:flex;
+justify-content:space-between
 }
-main{
-padding:12px;
-min-height:calc(100vh - 120px);
+nav{
+position:sticky;
+bottom:0;
+z-index:6;
+display:flex;
+background:#fff;
+border-top:1px solid #ddd;
+justify-content:space-around;
+padding:8px 2px
 }
+nav button{
+border:0;
+background:none;
+font-size:20px;
+padding:5px
+}
+main{padding:12px}
 .card{
-background:white;
+background:#fff;
 border:1px solid #ddd;
 border-radius:12px;
 padding:12px;
-margin:10px 0;
+margin-bottom:12px;
+box-shadow:0 1px 3px #0001
 }
+input,textarea,button{font:inherit}
 input,textarea{
 width:100%;
 padding:11px;
-margin:5px 0;
 border:1px solid #ccc;
 border-radius:8px;
-font-size:15px;
+margin:5px 0
 }
-button{
+.btn{
+background:#1877f2;
+color:#fff;
 border:0;
 border-radius:8px;
 padding:10px 14px;
-margin:4px;
-background:#1877f2;
-color:white;
-font-size:15px;
+margin:4px 2px
 }
-button:active{opacity:.8}
-nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-max-width:520px;
-margin:auto;
-background:white;
-display:flex;
-justify-content:space-around;
-padding:8px;
-border-top:1px solid #ddd;
-z-index:10;
-}
-nav button{
-background:white;
-color:#222;
-font-size:21px;
-padding:7px 12px;
+.danger{background:#d33}
+.muted{
+color:#667085;
+font-size:13px
 }
 img,video{
 width:100%;
 border-radius:10px;
-max-height:500px;
-object-fit:cover;
+max-height:520px;
+object-fit:cover
 }
-.small{
-color:#777;
-font-size:13px;
+.tabs{
+display:flex;
+gap:5px;
+margin-bottom:10px
 }
-.error{
-color:#d00;
-padding:8px;
-word-break:break-word;
+.tabs button{
+flex:1;
+padding:9px;
+border:0;
+border-radius:8px
 }
-.progress{
-background:#eee;
-border-radius:8px;
-overflow:hidden;
-height:12px;
-margin:8px 0;
-display:none;
+.dark{
+background:#111827;
+color:#eee
 }
-.progressBar{
-height:100%;
-width:0%;
-background:#1877f2;
+.dark .wrap,
+.dark .card{
+background:#1f2937;
+color:#eee
 }
+.dark nav{background:#1f2937}
+.dark input,
+.dark textarea{
+background:#111827;
+color:#eee;
+border-color:#555
+}
+.row{
+display:flex;
+align-items:center;
+gap:8px
+}
+.center{text-align:center}
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="wrap">
 
-<header>
-Rechod <span id="userName"></span>
+<header class="top">
+Rechod
+<span id="userName"></span>
 </header>
 
-<main id="main"></main>
+<main id="app"></main>
 
 <nav>
-<button onclick="showPage('home')">🏠</button>
-<button onclick="showPage('reels')">🎬</button>
-<button onclick="showPage('search')">🔎</button>
-<button onclick="showPage('create')">➕</button>
-<button onclick="showPage('profile')">👤</button>
+<button onclick="page('home')">🏠</button>
+<button onclick="page('reels')">🎬</button>
+<button onclick="page('search')">🔎</button>
+<button onclick="page('create')">➕</button>
+<button onclick="page('messages')">💬</button>
+<button onclick="page('profile')">👤</button>
+<button onclick="page('settings')">⚙️</button>
 </nav>
 
 </div>
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{
+initializeApp
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
+import{
 getAuth,
 onAuthStateChanged,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
 signOut
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
+import{
 getDatabase,
 ref,
 push,
 set,
 onValue,
-update
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-import {
-getStorage,
-ref as storageRef,
-uploadBytes,
-getDownloadURL
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+update,
+runTransaction
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* FIREBASE CONFIG */
 
-const firebaseConfig = {
+const firebaseConfig={
 
 apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
 
 authDomain:"vibe-social-app-6750d.firebaseapp.com",
 
-databaseURL:"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
+databaseURL:
+"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
 
 projectId:"vibe-social-app-6750d",
 
-storageBucket:"vibe-social-app-6750d.firebasestorage.app",
+storageBucket:
+"vibe-social-app-6750d.firebasestorage.app",
 
 messagingSenderId:"897864313569",
 
@@ -185,43 +193,36 @@ measurementId:"G-DKZQ133PSN"
 };
 
 
-/* =========================
-   FIREBASE START
-========================= */
+const fb=initializeApp(firebaseConfig);
 
-const app = initializeApp(firebaseConfig);
+const auth=getAuth(fb);
 
-const auth = getAuth(app);
-
-const db = getDatabase(app);
-
-const storage = getStorage(app);
+const db=getDatabase(fb);
 
 
-/* =========================
-   VARIABLES
-========================= */
+let me=null;
 
-let user = null;
-let profiles = {};
-let posts = {};
-let reels = {};
-let pageNow = "home";
+let current="home";
 
-const mainEl = document.getElementById("main");
-const userNameEl = document.getElementById("userName");
+let profiles={};
+
+let posts={};
+
+let reels={};
+
+let messages={};
+
+let notifs={};
 
 
-/* =========================
-   SAFE TEXT
-========================= */
+const app=document.getElementById("app");
 
-function safe(x){
 
-return String(x ?? "").replace(
+function esc(x=""){
+
+return String(x).replace(
 /[&<>"']/g,
-
-m => ({
+m=>({
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
@@ -233,40 +234,90 @@ m => ({
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+function page(p){
+
+current=p;
+
+render();
+
+}
+
+
+function render(){
+
+if(!me){
+
+login();
+
+return;
+
+}
+
+document.getElementById("userName").textContent=
+profiles[me.uid]?.username||"";
+
+({
+
+home,
+
+reels:reelsPage,
+
+search,
+
+create,
+
+messages:messagesPage,
+
+profile,
+
+settings
+
+}[current]||home)();
+
+}
+
+
+/* LOGIN */
 
 function login(){
 
-mainEl.innerHTML = `
+app.innerHTML=`
 
-<div class="card">
+<div class="card center">
 
 <h1>Rechod</h1>
 
-<p>Login या नया account बनाएं</p>
+<p>Social app</p>
 
-<input id="emailInput"
-type="email"
-placeholder="Email">
+<input id="email" placeholder="Email">
 
-<input id="passwordInput"
+<input
+id="pass"
 type="password"
 placeholder="Password">
 
-<input id="usernameInput"
-placeholder="Username (Signup)">
+<input
+id="uname"
+placeholder="Username (signup)">
 
-<input id="ageInput"
+<input
+id="age"
 type="number"
-placeholder="Age (Signup)">
+placeholder="Age (signup)">
 
-<button onclick="signupUser()">Sign Up</button>
+<button
+class="btn"
+onclick="signup()">
+Sign Up
+</button>
 
-<button onclick="loginUser()">Login</button>
+<button
+class="btn"
+onclick="loginNow()">
+Login
+</button>
 
-<p id="loginError" class="error"></p>
+<p id="err" class="muted"></p>
 
 </div>
 
@@ -275,319 +326,313 @@ placeholder="Age (Signup)">
 }
 
 
-/* =========================
-   SIGNUP
-========================= */
-
-window.signupUser = async function(){
-
-const email =
-document.getElementById("emailInput").value.trim();
-
-const password =
-document.getElementById("passwordInput").value;
-
-const username =
-document.getElementById("usernameInput").value.trim();
-
-const age =
-document.getElementById("ageInput").value;
-
-const errorEl =
-document.getElementById("loginError");
-
-if(!email || !password){
-
-errorEl.textContent =
-"Email और Password भरें।";
-
-return;
-
-}
-
-try{
-
-const result =
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-await set(
-ref(db,"profiles/"+result.user.uid),
-{
-username:username || "User",
-age:age || "",
-bio:"Welcome to Rechod ❤️"
-}
-);
-
-}catch(e){
-
-errorEl.textContent = e.message;
-console.error(e);
-
-}
-
-};
-
-
-/* =========================
-   LOGIN
-========================= */
-
-window.loginUser = async function(){
-
-const email =
-document.getElementById("emailInput").value.trim();
-
-const password =
-document.getElementById("passwordInput").value;
-
-const errorEl =
-document.getElementById("loginError");
-
-if(!email || !password){
-
-errorEl.textContent =
-"Email और Password भरें।";
-
-return;
-
-}
+window.loginNow=async()=>{
 
 try{
 
 await signInWithEmailAndPassword(
 auth,
-email,
-password
+email.value,
+pass.value
 );
 
 }catch(e){
 
-errorEl.textContent = e.message;
-console.error(e);
+err.textContent=e.message;
 
 }
 
 };
 
 
-/* =========================
-   PAGE CHANGE
-========================= */
-
-window.showPage = function(page){
-
-pageNow = page;
-render();
-
-};
-
-
-/* =========================
-   RENDER
-========================= */
-
-function render(){
-
-if(!user){
-
-login();
-return;
-
-}
-
-userNameEl.textContent =
-profiles[user.uid]?.username
-? " — " + profiles[user.uid].username
-: "";
-
-if(pageNow === "home"){
-home();
-}
-else if(pageNow === "reels"){
-reelPage();
-}
-else if(pageNow === "search"){
-search();
-}
-else if(pageNow === "create"){
-create();
-}
-else if(pageNow === "profile"){
-profile();
-}
-
-}
-
-
-/* =========================
-   HOME
-========================= */
-
-function home(){
-
-const list =
-Object.entries(posts).reverse();
-
-mainEl.innerHTML =
-
-list.map(([id,p]) => `
-
-<div class="card">
-
-<b>${safe(p.username || "User")}</b>
-
-${p.imageUrl
-? `<img src="${safe(p.imageUrl)}"
-onerror="this.style.display='none'">`
-: ""}
-
-<p>${safe(p.caption)}</p>
-
-<button onclick="likePost('${id}')">
-❤️ ${p.likes || 0}
-</button>
-
-</div>
-
-`).join("")
-
-||
-
-`<div class="card">
-
-<h3>🏠 Rechod Home</h3>
-
-<p>अभी कोई post नहीं है।</p>
-
-<p>➕ दबाकर पहली post बनाएं।</p>
-
-</div>`;
-
-}
-
-
-/* =========================
-   LIKE
-========================= */
-
-window.likePost = async function(id){
+window.signup=async()=>{
 
 try{
 
-const p = posts[id];
+let c=
+await createUserWithEmailAndPassword(
+auth,
+email.value,
+pass.value
+);
 
-if(!p) return;
-
-await update(
-ref(db,"posts/"+id),
+await set(
+ref(db,"profiles/"+c.user.uid),
 {
-likes:(Number(p.likes) || 0) + 1
+username:
+uname.value||
+email.value.split("@")[0],
+
+age:Number(age.value)||0,
+
+bio:
+"Welcome to my Rechod profile! ❤️",
+
+createdAt:Date.now()
 }
 );
 
 }catch(e){
 
-console.error(e);
-
-alert("Like नहीं हो सका।");
+err.textContent=e.message;
 
 }
 
 };
 
 
-/* =========================
-   REELS
-========================= */
+/* HOME */
 
-function reelPage(){
+function home(){
 
-const list =
-Object.entries(reels).reverse();
+let a=
+Object.entries(posts)
+.sort(
+(x,y)=>
+(y[1].createdAt||0)-
+(x[1].createdAt||0)
+);
 
-mainEl.innerHTML =
+app.innerHTML=`
 
-list.map(([id,r]) => `
+<div class="tabs">
 
-<div class="card">
+<button onclick="page('home')">
+Posts
+</button>
 
-<b>${safe(r.username || "User")}</b>
-
-${
-r.videoUrl
-?
-`<video
-src="${safe(r.videoUrl)}"
-controls
-loop
-playsinline>
-</video>`
-:
-""
-}
-
-<p>${safe(r.caption)}</p>
-
-<button>
-❤️ ${r.likes || 0}
+<button onclick="page('reels')">
+Reels
 </button>
 
 </div>
 
-`).join("")
-
+${
+a.map(
+([id,p])=>postCard(id,p)
+).join("")
 ||
+'<div class="card center">No posts yet.</div>'
+}
 
-`<div class="card">
-
-<h3>🎬 Reels</h3>
-
-<p>अभी कोई Reel नहीं है।</p>
-
-<p>➕ दबाकर Reel डालें।</p>
-
-</div>`;
+`;
 
 }
 
 
-/* =========================
-   CREATE
-========================= */
+function postCard(id,p){
+
+let likes=
+Object.keys(p.likes||{}).length;
+
+return `
+
+<div class="card">
+
+<div class="row">
+
+<b>
+${esc(p.username||"User")}
+</b>
+
+<span class="muted">
+${new Date(
+p.createdAt||Date.now()
+).toLocaleString()}
+</span>
+
+</div>
+
+${
+p.imageUrl
+?
+`<img
+src="${esc(p.imageUrl)}"
+onerror="this.style.display='none'">`
+:""
+}
+
+<p>
+${esc(p.caption||"")}
+</p>
+
+<button
+class="btn"
+onclick="like('posts/${id}/likes')">
+❤️ ${likes}
+</button>
+
+<button
+class="btn"
+onclick="comment('${id}')">
+💬
+</button>
+
+<button
+class="btn"
+onclick="shareText('${esc(
+p.caption||"Rechod post"
+)}')">
+↗
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* LIKE */
+
+window.like=async path=>{
+
+let r=ref(db,path);
+
+await runTransaction(
+r,
+v=>v?null:me.uid
+);
+
+};
+
+
+/* COMMENT */
+
+window.comment=async id=>{
+
+let t=prompt("Comment");
+
+if(t)
+
+await push(
+ref(db,"posts/"+id+"/comments"),
+{
+uid:me.uid,
+username:
+profiles[me.uid]?.username,
+
+text:t,
+
+createdAt:Date.now()
+}
+);
+
+};
+
+
+/* SHARE */
+
+window.shareText=t=>
+
+navigator.share
+
+?
+navigator.share({
+title:"Rechod",
+text:t
+})
+
+:
+alert(t);
+
+
+/* REELS */
+
+function reelsPage(){
+
+let a=
+Object.entries(reels)
+.sort(
+(x,y)=>
+(y[1].createdAt||0)-
+(x[1].createdAt||0)
+);
+
+app.innerHTML=
+
+a.map(
+([id,r])=>`
+
+<div class="card">
+
+<b>
+${esc(r.username||"User")}
+</b>
+
+<video
+src="${esc(r.videoUrl)}"
+controls
+playsinline
+loop>
+</video>
+
+<p>
+${esc(r.caption||"")}
+</p>
+
+<button
+class="btn"
+onclick="like('reels/${id}/likes')">
+❤️ ${Object.keys(r.likes||{}).length}
+</button>
+
+<button
+class="btn"
+onclick="shareText('${esc(
+r.caption||"Rechod reel"
+)}')">
+↗
+</button>
+
+</div>
+
+`
+).join("")
+
+||
+'<div class="card center">No reels yet.</div>';
+
+}
+
+
+/* CREATE POST + REEL */
 
 function create(){
 
-mainEl.innerHTML = `
+app.innerHTML=`
 
 <div class="card">
 
 <h3>📷 Create Post</h3>
 
 <input
-id="imageFile"
+id="pfile"
 type="file"
 accept="image/*">
 
 <textarea
-id="captionInput"
+id="pcap"
 placeholder="Caption">
 </textarea>
 
-<div id="postProgress" class="progress">
-<div id="postProgressBar" class="progressBar"></div>
-</div>
+<progress
+id="pbar"
+value="0"
+max="100"
+style="width:100%;display:none">
+</progress>
 
-<button onclick="addPost()">
+<button
+class="btn"
+onclick="addPost()">
 📷 Photo Post करें
 </button>
 
-<p class="small">
-Phone Gallery से photo चुनें।
+<p class="muted">
+Phone Gallery से photo चुनें
+<br>
+Firebase Storage की जरूरत नहीं
 </p>
 
 </div>
@@ -598,25 +643,32 @@ Phone Gallery से photo चुनें।
 <h3>🎬 Create Reel</h3>
 
 <input
-id="videoFile"
+id="rfile"
 type="file"
 accept="video/*">
 
 <textarea
-id="reelCaptionInput"
-placeholder="Reel Caption">
+id="rcap"
+placeholder="Caption">
 </textarea>
 
-<div id="reelProgress" class="progress">
-<div id="reelProgressBar" class="progressBar"></div>
-</div>
+<progress
+id="rbar"
+value="0"
+max="100"
+style="width:100%;display:none">
+</progress>
 
-<button onclick="addReel()">
+<button
+class="btn"
+onclick="addReel()">
 🎬 Reel डालें
 </button>
 
-<p class="small">
-Phone Gallery से video चुनें।
+<p class="muted">
+Phone Gallery से video चुनें
+<br>
+अधिकतम 8 MB
 </p>
 
 </div>
@@ -626,297 +678,391 @@ Phone Gallery से video चुनें।
 }
 
 
-/* =========================
-   ADD PHOTO POST
-========================= */
+/* FILE TO DATA */
 
-window.addPost = async function(){
+function fileToDataURL(file,onProgress){
 
-const fileInput =
-document.getElementById("imageFile");
+return new Promise(
+(resolve,reject)=>{
 
-const caption =
-document.getElementById("captionInput").value.trim();
+let fr=new FileReader();
 
-const progress =
-document.getElementById("postProgress");
+fr.onprogress=e=>{
 
-const bar =
-document.getElementById("postProgressBar");
+if(
+e.lengthComputable &&
+onProgress
+)
 
-const file =
-fileInput.files[0];
+onProgress(
+Math.round(
+e.loaded/e.total*100
+)
+);
+
+};
+
+fr.onload=()=>resolve(fr.result);
+
+fr.onerror=()=>reject(
+fr.error||
+new Error("File read failed")
+);
+
+fr.readAsDataURL(file);
+
+});
+
+}
+
+
+/* IMAGE COMPRESS */
+
+function compressImage(file,onProgress){
+
+return new Promise(
+(resolve,reject)=>{
+
+let fr=new FileReader();
+
+fr.onprogress=e=>{
+
+if(
+e.lengthComputable &&
+onProgress
+)
+
+onProgress(
+Math.round(
+e.loaded/e.total*50
+)
+);
+
+};
+
+fr.onload=()=>{
+
+let img=new Image();
+
+img.onload=()=>{
+
+let max=1280;
+
+let w=img.width;
+
+let h=img.height;
+
+if(w>max||h>max){
+
+if(w>=h){
+
+h=Math.round(h*max/w);
+
+w=max;
+
+}else{
+
+w=Math.round(w*max/h);
+
+h=max;
+
+}
+
+}
+
+let c=document.createElement("canvas");
+
+c.width=w;
+
+c.height=h;
+
+c.getContext("2d")
+.drawImage(img,0,0,w,h);
+
+let data=
+c.toDataURL(
+"image/jpeg",
+0.78
+);
+
+if(onProgress)
+onProgress(100);
+
+resolve(data);
+
+};
+
+img.onerror=()=>
+reject(
+new Error("Image read failed")
+);
+
+img.src=fr.result;
+
+};
+
+fr.onerror=()=>
+reject(
+fr.error||
+new Error("File read failed")
+);
+
+fr.readAsDataURL(file);
+
+});
+
+}
+
+
+/* PHOTO POST */
+
+window.addPost=async()=>{
+
+let file=pfile.files[0];
 
 if(!file){
 
-alert("पहले Gallery से photo चुनें।");
+alert("पहले photo चुनें");
+
 return;
 
 }
 
-if(!file.type.startsWith("image/")){
+let bar=pbar;
 
-alert("सिर्फ image/photo चुनें।");
-return;
+bar.style.display="block";
 
-}
-
-if(file.size > 10 * 1024 * 1024){
-
-alert("Photo 10 MB से कम होना चाहिए।");
-return;
-
-}
+bar.value=0;
 
 try{
 
-progress.style.display = "block";
-bar.style.width = "20%";
-
-const fileName =
-Date.now() + "_" + file.name.replace(/[^\w.-]/g,"_");
-
-const imageRef =
-storageRef(
-storage,
-"posts/" + user.uid + "/" + fileName
+let data=
+await compressImage(
+file,
+v=>bar.value=v
 );
 
-bar.style.width = "40%";
+if(
+data.length>
+8*1024*1024
+)
 
-await uploadBytes(imageRef,file);
-
-bar.style.width = "75%";
-
-const imageUrl =
-await getDownloadURL(imageRef);
+throw new Error(
+"Photo बहुत बड़ी है. दूसरी photo चुनें."
+);
 
 await push(
 ref(db,"posts"),
 {
-uid:user.uid,
+uid:me.uid,
+
 username:
-profiles[user.uid]?.username || "User",
-imageUrl:imageUrl,
-caption:caption,
-likes:0,
-createdAt:Date.now()
+profiles[me.uid]?.username,
+
+imageUrl:data,
+
+caption:pcap.value,
+
+createdAt:Date.now(),
+
+mediaType:"image"
 }
 );
 
-bar.style.width = "100%";
+bar.value=100;
 
-alert("Photo successfully post हो गई।");
+alert("Photo post हो गया ✅");
 
-showPage("home");
+page("home");
 
 }catch(e){
 
-console.error(e);
-
-alert("Photo upload नहीं हुई: " + e.message);
+alert(
+"Upload नहीं हुआ: "+
+(e.message||e)
+);
 
 }
 
 };
 
 
-/* =========================
-   ADD REEL
-========================= */
+/* REEL */
 
-window.addReel = async function(){
+window.addReel=async()=>{
 
-const fileInput =
-document.getElementById("videoFile");
-
-const caption =
-document.getElementById("reelCaptionInput").value.trim();
-
-const progress =
-document.getElementById("reelProgress");
-
-const bar =
-document.getElementById("reelProgressBar");
-
-const file =
-fileInput.files[0];
+let file=rfile.files[0];
 
 if(!file){
 
-alert("पहले Gallery से video चुनें।");
+alert("पहले video चुनें");
+
 return;
 
 }
 
-if(!file.type.startsWith("video/")){
+if(
+file.size>
+8*1024*1024
+){
 
-alert("सिर्फ video चुनें।");
+alert(
+"Video 8 MB से छोटा रखें"
+);
+
 return;
 
 }
 
-if(file.size > 100 * 1024 * 1024){
+let bar=rbar;
 
-alert("Video 100 MB से कम होना चाहिए।");
-return;
+bar.style.display="block";
 
-}
+bar.value=0;
 
 try{
 
-progress.style.display = "block";
-bar.style.width = "20%";
-
-const fileName =
-Date.now() + "_" + file.name.replace(/[^\w.-]/g,"_");
-
-const videoRef =
-storageRef(
-storage,
-"reels/" + user.uid + "/" + fileName
+let data=
+await fileToDataURL(
+file,
+v=>bar.value=v
 );
-
-bar.style.width = "40%";
-
-await uploadBytes(videoRef,file);
-
-bar.style.width = "75%";
-
-const videoUrl =
-await getDownloadURL(videoRef);
 
 await push(
 ref(db,"reels"),
 {
-uid:user.uid,
+uid:me.uid,
+
 username:
-profiles[user.uid]?.username || "User",
-videoUrl:videoUrl,
-caption:caption,
-likes:0,
-createdAt:Date.now()
+profiles[me.uid]?.username,
+
+videoUrl:data,
+
+caption:rcap.value,
+
+createdAt:Date.now(),
+
+mediaType:"video"
 }
 );
 
-bar.style.width = "100%";
+bar.value=100;
 
-alert("Reel successfully upload हो गई।");
+alert("Reel डाल दी गई ✅");
 
-showPage("reels");
+page("reels");
 
 }catch(e){
 
-console.error(e);
-
-alert("Reel upload नहीं हुई: " + e.message);
+alert(
+"Upload नहीं हुआ: "+
+(e.message||e)
+);
 
 }
 
 };
 
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 function search(){
 
-mainEl.innerHTML = `
+app.innerHTML=`
 
 <div class="card">
 
 <input
-id="searchInput"
-placeholder="Username search करें"
-oninput="findUser()">
+id="sq"
+placeholder="Search username"
+oninput="doSearch()">
 
 </div>
 
-<div id="searchResults"></div>
+<div id="results"></div>
 
 `;
 
 }
 
 
-/* =========================
-   FIND USER
-========================= */
+window.doSearch=()=>{
 
-window.findUser = function(){
+let q=
+sq.value.toLowerCase();
 
-const q =
-document.getElementById("searchInput")
-.value.toLowerCase()
-.trim();
+results.innerHTML=
 
-const resultEl =
-document.getElementById("searchResults");
+Object.entries(profiles)
 
-resultEl.innerHTML =
-
-Object.values(profiles)
-
-.filter(p =>
-(p.username || "")
+.filter(
+([id,p])=>
+(p.username||"")
 .toLowerCase()
 .includes(q)
 )
 
-.map(p => `
+.map(
+([id,p])=>`
 
-<div class="card">
+<div class="card row">
 
-<b>${safe(p.username || "User")}</b>
+<b>
+${esc(p.username)}
+</b>
 
-<br>
+<span class="muted">
+Age: ${esc(p.age)}
+</span>
 
-Age: ${safe(p.age)}
+<button
+class="btn"
+onclick="message('${id}')">
+Message
+</button>
 
 </div>
 
-`).join("")
+`
+)
 
-||
-
-`<div class="card">
-कोई user नहीं मिला।
-</div>`;
+.join("");
 
 };
 
 
-/* =========================
-   PROFILE
-========================= */
+/* PROFILE */
 
 function profile(){
 
-const p =
-profiles[user.uid] || {};
+let p=
+profiles[me.uid]||{};
 
-mainEl.innerHTML = `
+app.innerHTML=`
 
-<div class="card">
+<div class="card center">
 
 <h2>
-👤 ${safe(p.username || "User")}
+${esc(p.username||"User")}
 </h2>
 
 <p>
-${safe(p.bio || "")}
+${esc(p.bio||"")}
 </p>
 
 <p>
-Age: ${safe(p.age || "")}
+Age: ${esc(p.age||"")}
 </p>
 
-<button onclick="editProfile()">
+<button
+class="btn"
+onclick="editProfile()">
 Edit Profile
 </button>
 
-<button onclick="logoutUser()">
+<button
+class="btn danger"
+onclick="signOut(auth)">
 Logout
 </button>
 
@@ -927,120 +1073,197 @@ Logout
 }
 
 
-/* =========================
-   EDIT PROFILE
-========================= */
+window.editProfile=async()=>{
 
-window.editProfile = async function(){
-
-const current =
-profiles[user.uid] || {};
-
-const username =
+let u=
 prompt(
 "Username",
-current.username || ""
+profiles[me.uid]?.username||""
 );
 
-const bio =
+let b=
 prompt(
 "Bio",
-current.bio || ""
+profiles[me.uid]?.bio||""
 );
 
-if(username === null){
-return;
-}
-
-try{
+if(u!=null)
 
 await update(
-ref(db,"profiles/"+user.uid),
+ref(db,"profiles/"+me.uid),
 {
-username:username,
-bio:bio || ""
+username:u,
+bio:b||""
 }
 );
-
-}catch(e){
-
-alert(
-"Profile update नहीं हुआ: " + e.message
-);
-
-}
 
 };
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* MESSAGES */
 
-window.logoutUser = async function(){
+function messagesPage(){
 
-try{
+let arr=
+Object.values(messages)
+.sort(
+(a,b)=>
+(a.createdAt||0)-
+(b.createdAt||0)
+);
 
-await signOut(auth);
+app.innerHTML=`
 
-}catch(e){
+<div class="card">
 
-console.error(e);
+<h3>Messages</h3>
+
+${
+arr.map(
+m=>`
+
+<p>
+<b>
+${esc(m.fromName||"User")}:
+</b>
+
+${esc(m.text)}
+
+</p>
+
+`
+).join("")
+
+||
+
+"No messages yet."
+}
+
+</div>
+
+`;
 
 }
+
+
+window.message=uid=>{
+
+let t=prompt("Message");
+
+if(t)
+
+push(
+ref(db,"messages"),
+{
+from:me.uid,
+
+to:uid,
+
+fromName:
+profiles[me.uid]?.username,
+
+text:t,
+
+createdAt:Date.now()
+}
+);
 
 };
 
 
-/* =========================
-   AUTH
-========================= */
+/* SETTINGS */
 
-onAuthStateChanged(auth,function(u){
+function settings(){
 
-user = u;
+app.innerHTML=`
+
+<div class="card">
+
+<h3>Settings</h3>
+
+<button
+class="btn"
+onclick="
+document.body.classList.toggle('dark')
+">
+🌙 Dark Mode
+</button>
+
+<button
+class="btn"
+onclick="
+alert('Rechod notifications are realtime.')
+">
+🔔 Notifications
+</button>
+
+<button
+class="btn"
+onclick="
+alert('Rechod uses Firebase Authentication and Realtime Database.')
+">
+ℹ️ About
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* FIREBASE REALTIME */
+
+onAuthStateChanged(
+auth,
+u=>{
+
+me=u;
 
 if(!u){
 
-userNameEl.textContent = "";
 render();
+
 return;
 
 }
 
 onValue(
 ref(db,"profiles"),
-function(snapshot){
-
-profiles =
-snapshot.val() || {};
-
+s=>{
+profiles=s.val()||{};
 render();
-
 }
 );
 
 onValue(
 ref(db,"posts"),
-function(snapshot){
-
-posts =
-snapshot.val() || {};
-
+s=>{
+posts=s.val()||{};
 render();
-
 }
 );
 
 onValue(
 ref(db,"reels"),
-function(snapshot){
-
-reels =
-snapshot.val() || {};
-
+s=>{
+reels=s.val()||{};
 render();
+}
+);
 
+onValue(
+ref(db,"messages"),
+s=>{
+messages=s.val()||{};
+render();
+}
+);
+
+onValue(
+ref(db,"notifications"),
+s=>{
+notifs=s.val()||{};
 }
 );
 
