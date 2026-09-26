@@ -232,15 +232,13 @@ m=>({
 );
 
 }
-
-
-function page(p){
+window.page=function(p){
 
 current=p;
 
 render();
 
-}
+};
 
 
 function render(){
@@ -309,13 +307,19 @@ placeholder="Age (signup)">
 class="btn"
 onclick="signup()">
 Sign Up
-</button>
+window.logoutNow=async()=>{
 
-<button
-class="btn"
-onclick="loginNow()">
-Login
-</button>
+try{
+
+await signOut(auth);
+
+}catch(e){
+
+alert("Logout नहीं हुआ: "+e.message);
+
+}
+
+};
 
 <p id="err" class="muted"></p>
 
