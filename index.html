@@ -157,16 +157,21 @@ signInWithEmailAndPassword,
 signOut
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-window.logoutNow=async()=>{
+window.logoutNow = async () => {
 
-try{
+  try {
 
-await signOut(auth);
+    await signOut(auth);
 
-}catch(e){
+    alert("Logout हो गया");
 
-alert("Logout नहीं हुआ: "+e.message);
-import{
+  } catch (e) {
+
+    alert("Logout नहीं हुआ: " + e.message);
+
+  }
+
+};
 getDatabase,
 ref,
 push,
