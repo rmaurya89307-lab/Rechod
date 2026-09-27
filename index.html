@@ -157,6 +157,15 @@ signInWithEmailAndPassword,
 signOut
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+window.logoutNow=async()=>{
+
+try{
+
+await signOut(auth);
+
+}catch(e){
+
+alert("Logout नहीं हुआ: "+e.message);
 import{
 getDatabase,
 ref,
@@ -167,7 +176,13 @@ update,
 runTransaction
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-
+import{
+getStorage,
+ref as storageRef,
+uploadBytes,
+getDownloadURL
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+  
 /* FIREBASE CONFIG */
 
 const firebaseConfig={
@@ -192,12 +207,13 @@ measurementId:"G-DKZQ133PSN"
 
 };
 
-
 const fb=initializeApp(firebaseConfig);
 
 const auth=getAuth(fb);
 
 const db=getDatabase(fb);
+
+const storage=getStorage(fb);
 
 
 let me=null;
@@ -672,7 +688,7 @@ onclick="addReel()">
 <p class="muted">
 Phone Gallery से video चुनें
 <br>
-अधिकतम 5GB
+अधिकतम 100MB
 </p>
 
 </div>
@@ -819,61 +835,52 @@ fr.readAsDataURL(file);
 
 
 /* PHOTO POST */
-
+  
 window.addPost=async()=>{
 
 let file=pfile.files[0];
 
 if(!file){
-
 alert("पहले photo चुनें");
-
 return;
+}
 
+if(file.size>10*1024*1024){
+alert("Photo 10 MB से छोटी रखें");
+return;
 }
 
 let bar=pbar;
-
 bar.style.display="block";
-
-bar.value=0;
+bar.value=20;
 
 try{
 
-let data=
-await compressImage(
-file,
-v=>bar.value=v
-);
+let path="posts/"+me.uid+"/"+Date.now()+"_"+file.name;
 
-if(
-data.length>
-8*1024*1024
-)
+let fileRef=storageRef(storage,path);
 
-throw new Error(
-"Photo बहुत बड़ी है. दूसरी photo चुनें."
-);
+bar.value=40;
+
+await uploadBytes(fileRef,file);
+
+bar.value=80;
+
+let imageUrl=await getDownloadURL(fileRef);
+
+bar.value=100;
 
 await push(
 ref(db,"posts"),
 {
 uid:me.uid,
-
-username:
-profiles[me.uid]?.username,
-
-imageUrl:data,
-
+username:profiles[me.uid]?.username||"User",
+imageUrl:imageUrl,
 caption:pcap.value,
-
 createdAt:Date.now(),
-
 mediaType:"image"
 }
 );
-
-bar.value=100;
 
 alert("Photo post हो गया ✅");
 
@@ -881,10 +888,7 @@ page("home");
 
 }catch(e){
 
-alert(
-"Upload नहीं हुआ: "+
-(e.message||e)
-);
+alert("Upload नहीं हुआ: "+(e.message||e));
 
 }
 
@@ -898,59 +902,46 @@ window.addReel=async()=>{
 let file=rfile.files[0];
 
 if(!file){
-
 alert("पहले video चुनें");
-
 return;
-
 }
 
-if(
-file.size>
-8*1024*1024
-){
-
-alert(
-"Video 8 MB से छोटा रखें"
-);
-
+if(file.size>100*1024*1024){
+alert("Reel 100 MB से छोटी रखें");
 return;
-
 }
 
 let bar=rbar;
-
 bar.style.display="block";
-
-bar.value=0;
+bar.value=20;
 
 try{
 
-let data=
-await fileToDataURL(
-file,
-v=>bar.value=v
-);
+let path="reels/"+me.uid+"/"+Date.now()+"_"+file.name;
+
+let fileRef=storageRef(storage,path);
+
+bar.value=40;
+
+await uploadBytes(fileRef,file);
+
+bar.value=80;
+
+let videoUrl=await getDownloadURL(fileRef);
+
+bar.value=100;
 
 await push(
 ref(db,"reels"),
 {
 uid:me.uid,
-
-username:
-profiles[me.uid]?.username,
-
-videoUrl:data,
-
+username:profiles[me.uid]?.username||"User",
+videoUrl:videoUrl,
 caption:rcap.value,
-
 createdAt:Date.now(),
-
 mediaType:"video"
 }
 );
-
-bar.value=100;
 
 alert("Reel डाल दी गई ✅");
 
@@ -958,10 +949,7 @@ page("reels");
 
 }catch(e){
 
-alert(
-"Upload नहीं हुआ: "+
-(e.message||e)
-);
+alert("Upload नहीं हुआ: "+(e.message||e));
 
 }
 
