@@ -8,18 +8,21 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#eef2f7;
 color:#172033
 }
+
 .wrap{
 max-width:520px;
 margin:auto;
 min-height:100vh;
 background:#fff
 }
+
 .top{
 position:sticky;
 top:0;
@@ -32,6 +35,7 @@ font-weight:700;
 display:flex;
 justify-content:space-between
 }
+
 nav{
 position:sticky;
 bottom:0;
@@ -42,13 +46,18 @@ border-top:1px solid #ddd;
 justify-content:space-around;
 padding:8px 2px
 }
+
 nav button{
 border:0;
 background:none;
 font-size:20px;
 padding:5px
 }
-main{padding:12px}
+
+main{
+padding:12px
+}
+
 .card{
 background:#fff;
 border:1px solid #ddd;
@@ -57,7 +66,11 @@ padding:12px;
 margin-bottom:12px;
 box-shadow:0 1px 3px #0001
 }
-input,textarea,button{font:inherit}
+
+input,textarea,button{
+font:inherit
+}
+
 input,textarea{
 width:100%;
 padding:11px;
@@ -65,6 +78,7 @@ border:1px solid #ccc;
 border-radius:8px;
 margin:5px 0
 }
+
 .btn{
 background:#1877f2;
 color:#fff;
@@ -73,50 +87,72 @@ border-radius:8px;
 padding:10px 14px;
 margin:4px 2px
 }
-.danger{background:#d33}
+
+.danger{
+background:#d33
+}
+
 .muted{
 color:#667085;
 font-size:13px
 }
+
 img,video{
 width:100%;
 border-radius:10px;
 max-height:520px;
 object-fit:cover
 }
+
 .tabs{
 display:flex;
 gap:5px;
 margin-bottom:10px
 }
+
 .tabs button{
 flex:1;
 padding:9px;
 border:0;
 border-radius:8px
 }
+
 .dark{
 background:#111827;
 color:#eee
 }
+
 .dark .wrap,
 .dark .card{
 background:#1f2937;
 color:#eee
 }
-.dark nav{background:#1f2937}
+
+.dark nav{
+background:#1f2937
+}
+
 .dark input,
 .dark textarea{
 background:#111827;
 color:#eee;
 border-color:#555
 }
+
 .row{
 display:flex;
 align-items:center;
 gap:8px
 }
-.center{text-align:center}
+
+.center{
+text-align:center
+}
+
+.progress{
+width:100%;
+display:none
+}
 </style>
 </head>
 
@@ -145,6 +181,10 @@ Rechod
 
 <script type="module">
 
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
 import{
 initializeApp
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -157,21 +197,7 @@ signInWithEmailAndPassword,
 signOut
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-window.logoutNow = async () => {
-
-  try {
-
-    await signOut(auth);
-
-    alert("Logout हो गया");
-
-  } catch (e) {
-
-    alert("Logout नहीं हुआ: " + e.message);
-
-  }
-
-};
+import{
 getDatabase,
 ref,
 push,
@@ -181,14 +207,10 @@ update,
 runTransaction
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-import{
-getStorage,
-ref as storageRef,
-uploadBytes,
-getDownloadURL
-}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-  
-/* FIREBASE CONFIG */
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
 const firebaseConfig={
 
@@ -218,8 +240,19 @@ const auth=getAuth(fb);
 
 const db=getDatabase(fb);
 
-const storage=getStorage(fb);
 
+/* =========================
+   CLOUDINARY
+========================= */
+
+const CLOUD_NAME="ut6gs93p";
+
+const UPLOAD_PRESET="rechod_upload";
+
+
+/* =========================
+   GLOBAL DATA
+========================= */
 
 let me=null;
 
@@ -235,9 +268,12 @@ let messages={};
 
 let notifs={};
 
-
 const app=document.getElementById("app");
 
+
+/* =========================
+   ESCAPE
+========================= */
 
 function esc(x=""){
 
@@ -253,6 +289,12 @@ m=>({
 );
 
 }
+
+
+/* =========================
+   PAGE
+========================= */
+
 window.page=function(p){
 
 current=p;
@@ -261,6 +303,10 @@ render();
 
 };
 
+
+/* =========================
+   RENDER
+========================= */
 
 function render(){
 
@@ -278,17 +324,11 @@ profiles[me.uid]?.username||"";
 ({
 
 home,
-
 reels:reelsPage,
-
 search,
-
 create,
-
 messages:messagesPage,
-
 profile,
-
 settings
 
 }[current]||home)();
@@ -296,7 +336,32 @@ settings
 }
 
 
-/* LOGIN */
+/* =========================
+   LOGOUT
+========================= */
+
+window.logoutNow=async()=>{
+
+try{
+
+await signOut(auth);
+
+alert("Logout हो गया ✅");
+
+current="home";
+
+}catch(e){
+
+alert("Logout नहीं हुआ: "+e.message);
+
+}
+
+};
+
+
+/* =========================
+   LOGIN
+========================= */
 
 function login(){
 
@@ -308,7 +373,10 @@ app.innerHTML=`
 
 <p>Social app</p>
 
-<input id="email" placeholder="Email">
+<input
+id="email"
+placeholder="Email"
+type="email">
 
 <input
 id="pass"
@@ -326,21 +394,15 @@ placeholder="Age (signup)">
 
 <button
 class="btn"
+onclick="loginNow()">
+Login
+</button>
+
+<button
+class="btn"
 onclick="signup()">
 Sign Up
-window.logoutNow=async()=>{
-
-try{
-
-await signOut(auth);
-
-}catch(e){
-
-alert("Logout नहीं हुआ: "+e.message);
-
-}
-
-};
+</button>
 
 <p id="err" class="muted"></p>
 
@@ -351,24 +413,33 @@ alert("Logout नहीं हुआ: "+e.message);
 }
 
 
+/* =========================
+   LOGIN FUNCTION
+========================= */
+
 window.loginNow=async()=>{
 
 try{
 
 await signInWithEmailAndPassword(
 auth,
-email.value,
-pass.value
+document.getElementById("email").value,
+document.getElementById("pass").value
 );
 
 }catch(e){
 
-err.textContent=e.message;
+document.getElementById("err").textContent=
+e.message;
 
 }
 
 };
 
+
+/* =========================
+   SIGNUP
+========================= */
 
 window.signup=async()=>{
 
@@ -377,18 +448,19 @@ try{
 let c=
 await createUserWithEmailAndPassword(
 auth,
-email.value,
-pass.value
+document.getElementById("email").value,
+document.getElementById("pass").value
 );
 
 await set(
 ref(db,"profiles/"+c.user.uid),
 {
 username:
-uname.value||
-email.value.split("@")[0],
+document.getElementById("uname").value||
+document.getElementById("email").value.split("@")[0],
 
-age:Number(age.value)||0,
+age:
+Number(document.getElementById("age").value)||0,
 
 bio:
 "Welcome to my Rechod profile! ❤️",
@@ -397,16 +469,21 @@ createdAt:Date.now()
 }
 );
 
+alert("Account बन गया ✅");
+
 }catch(e){
 
-err.textContent=e.message;
+document.getElementById("err").textContent=
+e.message;
 
 }
 
 };
 
 
-/* HOME */
+/* =========================
+   HOME
+========================= */
 
 function home(){
 
@@ -444,6 +521,10 @@ a.map(
 
 }
 
+
+/* =========================
+   POST CARD
+========================= */
 
 function postCard(id,p){
 
@@ -508,7 +589,9 @@ p.caption||"Rechod post"
 }
 
 
-/* LIKE */
+/* =========================
+   LIKE
+========================= */
 
 window.like=async path=>{
 
@@ -522,7 +605,9 @@ v=>v?null:me.uid
 };
 
 
-/* COMMENT */
+/* =========================
+   COMMENT
+========================= */
 
 window.comment=async id=>{
 
@@ -535,10 +620,8 @@ ref(db,"posts/"+id+"/comments"),
 {
 uid:me.uid,
 username:
-profiles[me.uid]?.username,
-
+profiles[me.uid]?.username||"User",
 text:t,
-
 createdAt:Date.now()
 }
 );
@@ -546,23 +629,31 @@ createdAt:Date.now()
 };
 
 
-/* SHARE */
+/* =========================
+   SHARE
+========================= */
 
-window.shareText=t=>
+window.shareText=t=>{
 
-navigator.share
+if(navigator.share){
 
-?
 navigator.share({
 title:"Rechod",
 text:t
-})
+});
 
-:
+}else{
+
 alert(t);
 
+}
 
-/* REELS */
+};
+
+
+/* =========================
+   REELS
+========================= */
 
 function reelsPage(){
 
@@ -621,7 +712,9 @@ r.caption||"Rechod reel"
 }
 
 
-/* CREATE POST + REEL */
+/* =========================
+   CREATE
+========================= */
 
 function create(){
 
@@ -638,14 +731,13 @@ accept="image/*">
 
 <textarea
 id="pcap"
-placeholder="Caption">
-</textarea>
+placeholder="Caption"></textarea>
 
 <progress
 id="pbar"
+class="progress"
 value="0"
-max="100"
-style="width:100%;display:none">
+max="100">
 </progress>
 
 <button
@@ -655,9 +747,9 @@ onclick="addPost()">
 </button>
 
 <p class="muted">
-Phone Gallery से photo चुनें
+Mobile Gallery से photo चुनें
 <br>
-Firebase Storage की जरूरत नहीं
+Cloudinary पर direct upload होगा
 </p>
 
 </div>
@@ -674,14 +766,13 @@ accept="video/*">
 
 <textarea
 id="rcap"
-placeholder="Caption">
-</textarea>
+placeholder="Caption"></textarea>
 
 <progress
 id="rbar"
+class="progress"
 value="0"
-max="100"
-style="width:100%;display:none">
+max="100">
 </progress>
 
 <button
@@ -691,9 +782,9 @@ onclick="addReel()">
 </button>
 
 <p class="muted">
-Phone Gallery से video चुनें
+Mobile Gallery से video चुनें
 <br>
-अधिकतम 100MB
+अधिकतम 100 MB
 </p>
 
 </div>
@@ -703,189 +794,158 @@ Phone Gallery से video चुनें
 }
 
 
-/* FILE TO DATA */
+/* =========================
+   CLOUDINARY UPLOAD
+========================= */
 
-function fileToDataURL(file,onProgress){
+async function cloudinaryUpload(file,onProgress){
 
-return new Promise(
-(resolve,reject)=>{
+let url=
+`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
 
-let fr=new FileReader();
+let form=new FormData();
 
-fr.onprogress=e=>{
+form.append("file",file);
+
+form.append(
+"upload_preset",
+UPLOAD_PRESET
+);
+
+return new Promise((resolve,reject)=>{
+
+let xhr=new XMLHttpRequest();
+
+xhr.open("POST",url);
+
+xhr.upload.onprogress=e=>{
 
 if(
 e.lengthComputable &&
 onProgress
-)
+){
 
 onProgress(
 Math.round(
-e.loaded/e.total*100
+(e.loaded/e.total)*100
 )
 );
 
-};
-
-fr.onload=()=>resolve(fr.result);
-
-fr.onerror=()=>reject(
-fr.error||
-new Error("File read failed")
-);
-
-fr.readAsDataURL(file);
-
-});
-
 }
-
-
-/* IMAGE COMPRESS */
-
-function compressImage(file,onProgress){
-
-return new Promise(
-(resolve,reject)=>{
-
-let fr=new FileReader();
-
-fr.onprogress=e=>{
-
-if(
-e.lengthComputable &&
-onProgress
-)
-
-onProgress(
-Math.round(
-e.loaded/e.total*50
-)
-);
 
 };
 
-fr.onload=()=>{
-
-let img=new Image();
-
-img.onload=()=>{
-
-let max=1280;
-
-let w=img.width;
-
-let h=img.height;
-
-if(w>max||h>max){
-
-if(w>=h){
-
-h=Math.round(h*max/w);
-
-w=max;
-
-}else{
-
-w=Math.round(w*max/h);
-
-h=max;
-
-}
-
-}
-
-let c=document.createElement("canvas");
-
-c.width=w;
-
-c.height=h;
-
-c.getContext("2d")
-.drawImage(img,0,0,w,h);
-
-let data=
-c.toDataURL(
-"image/jpeg",
-0.78
-);
-
-if(onProgress)
-onProgress(100);
-
-resolve(data);
-
-};
-
-img.onerror=()=>
-reject(
-new Error("Image read failed")
-);
-
-img.src=fr.result;
-
-};
-
-fr.onerror=()=>
-reject(
-fr.error||
-new Error("File read failed")
-);
-
-fr.readAsDataURL(file);
-
-});
-
-}
-
-
-/* PHOTO POST */
-  
-window.addPost=async()=>{
-
-let file=pfile.files[0];
-
-if(!file){
-alert("पहले photo चुनें");
-return;
-}
-
-if(file.size>10*1024*1024){
-alert("Photo 10 MB से छोटी रखें");
-return;
-}
-
-let bar=pbar;
-bar.style.display="block";
-bar.value=20;
+xhr.onload=()=>{
 
 try{
 
-let path="posts/"+me.uid+"/"+Date.now()+"_"+file.name;
+let data=JSON.parse(xhr.responseText);
 
-let fileRef=storageRef(storage,path);
+if(xhr.status>=200 && xhr.status<300){
 
-bar.value=40;
+resolve(data);
 
-await uploadBytes(fileRef,file);
+}else{
 
-bar.value=80;
+reject(
+new Error(
+data.error?.message||
+"Cloudinary upload failed"
+)
+);
 
-let imageUrl=await getDownloadURL(fileRef);
+}
 
-bar.value=100;
+}catch(e){
+
+reject(e);
+
+}
+
+};
+
+xhr.onerror=()=>{
+
+reject(
+new Error("Internet/upload error")
+);
+
+};
+
+xhr.send(form);
+
+});
+
+}
+
+
+/* =========================
+   PHOTO POST
+========================= */
+
+window.addPost=async()=>{
+
+let file=
+document.getElementById("pfile").files[0];
+
+if(!file){
+
+alert("पहले photo चुनें");
+
+return;
+
+}
+
+
+/* 10 MB PHOTO LIMIT */
+
+if(file.size>10*1024*1024){
+
+alert("Photo 10 MB से छोटी रखें");
+
+return;
+
+}
+
+let bar=
+document.getElementById("pbar");
+
+bar.style.display="block";
+
+bar.value=0;
+
+try{
+
+let result=
+await cloudinaryUpload(
+file,
+p=>{
+bar.value=p;
+}
+);
+
+let imageUrl=result.secure_url;
 
 await push(
 ref(db,"posts"),
 {
 uid:me.uid,
-username:profiles[me.uid]?.username||"User",
+
+username:
+profiles[me.uid]?.username||"User",
+
 imageUrl:imageUrl,
-caption:pcap.value,
+
+caption:
+document.getElementById("pcap").value,
+
 createdAt:Date.now(),
+
 mediaType:"image"
 }
 );
+
+bar.value=100;
 
 alert("Photo post हो गया ✅");
 
@@ -893,60 +953,94 @@ page("home");
 
 }catch(e){
 
-alert("Upload नहीं हुआ: "+(e.message||e));
+alert(
+"Photo upload नहीं हुआ: "+
+(e.message||e)
+);
 
 }
 
 };
 
 
-/* REEL */
+/* =========================
+   REEL UPLOAD
+========================= */
 
 window.addReel=async()=>{
 
-let file=rfile.files[0];
+let file=
+document.getElementById("rfile").files[0];
 
 if(!file){
+
 alert("पहले video चुनें");
+
 return;
+
 }
+
+
+/* 100 MB VIDEO LIMIT */
 
 if(file.size>100*1024*1024){
-alert("Reel 100 MB से छोटी रखें");
+
+alert("Video 100 MB से छोटी रखें");
+
 return;
+
 }
 
-let bar=rbar;
+
+/* VIDEO TYPE CHECK */
+
+if(!file.type.startsWith("video/")){
+
+alert("सिर्फ video file चुनें");
+
+return;
+
+}
+
+let bar=
+document.getElementById("rbar");
+
 bar.style.display="block";
-bar.value=20;
+
+bar.value=0;
 
 try{
 
-let path="reels/"+me.uid+"/"+Date.now()+"_"+file.name;
+let result=
+await cloudinaryUpload(
+file,
+p=>{
+bar.value=p;
+}
+);
 
-let fileRef=storageRef(storage,path);
-
-bar.value=40;
-
-await uploadBytes(fileRef,file);
-
-bar.value=80;
-
-let videoUrl=await getDownloadURL(fileRef);
-
-bar.value=100;
+let videoUrl=result.secure_url;
 
 await push(
 ref(db,"reels"),
 {
 uid:me.uid,
-username:profiles[me.uid]?.username||"User",
+
+username:
+profiles[me.uid]?.username||"User",
+
 videoUrl:videoUrl,
-caption:rcap.value,
+
+caption:
+document.getElementById("rcap").value,
+
 createdAt:Date.now(),
+
 mediaType:"video"
 }
 );
+
+bar.value=100;
 
 alert("Reel डाल दी गई ✅");
 
@@ -954,14 +1048,19 @@ page("reels");
 
 }catch(e){
 
-alert("Upload नहीं हुआ: "+(e.message||e));
+alert(
+"Video upload नहीं हुआ: "+
+(e.message||e)
+);
 
 }
 
 };
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 function search(){
 
@@ -986,9 +1085,10 @@ oninput="doSearch()">
 window.doSearch=()=>{
 
 let q=
-sq.value.toLowerCase();
+document.getElementById("sq").value
+.toLowerCase();
 
-results.innerHTML=
+document.getElementById("results").innerHTML=
 
 Object.entries(profiles)
 
@@ -1005,11 +1105,11 @@ Object.entries(profiles)
 <div class="card row">
 
 <b>
-${esc(p.username)}
+${esc(p.username||"User")}
 </b>
 
 <span class="muted">
-Age: ${esc(p.age)}
+Age: ${esc(p.age||"")}
 </span>
 
 <button
@@ -1028,7 +1128,9 @@ Message
 };
 
 
-/* PROFILE */
+/* =========================
+   PROFILE
+========================= */
 
 function profile(){
 
@@ -1057,10 +1159,12 @@ onclick="editProfile()">
 Edit Profile
 </button>
 
+<br>
+
 <button
 class="btn danger"
-onclick="signOut(auth)">
-Logout
+onclick="logoutNow()">
+🚪 Logout
 </button>
 
 </div>
@@ -1069,6 +1173,10 @@ Logout
 
 }
 
+
+/* =========================
+   EDIT PROFILE
+========================= */
 
 window.editProfile=async()=>{
 
@@ -1097,7 +1205,9 @@ bio:b||""
 };
 
 
-/* MESSAGES */
+/* =========================
+   MESSAGES
+========================= */
 
 function messagesPage(){
 
@@ -1120,6 +1230,7 @@ arr.map(
 m=>`
 
 <p>
+
 <b>
 ${esc(m.fromName||"User")}:
 </b>
@@ -1143,6 +1254,10 @@ ${esc(m.text)}
 }
 
 
+/* =========================
+   SEND MESSAGE
+========================= */
+
 window.message=uid=>{
 
 let t=prompt("Message");
@@ -1157,7 +1272,7 @@ from:me.uid,
 to:uid,
 
 fromName:
-profiles[me.uid]?.username,
+profiles[me.uid]?.username||"User",
 
 text:t,
 
@@ -1168,7 +1283,9 @@ createdAt:Date.now()
 };
 
 
-/* SETTINGS */
+/* =========================
+   SETTINGS
+========================= */
 
 function settings(){
 
@@ -1197,9 +1314,17 @@ alert('Rechod notifications are realtime.')
 <button
 class="btn"
 onclick="
-alert('Rechod uses Firebase Authentication and Realtime Database.')
+alert('Rechod uses Firebase Authentication, Realtime Database and Cloudinary.')
 ">
 ℹ️ About
+</button>
+
+<br>
+
+<button
+class="btn danger"
+onclick="logoutNow()">
+🚪 Logout
 </button>
 
 </div>
@@ -1209,7 +1334,9 @@ alert('Rechod uses Firebase Authentication and Realtime Database.')
 }
 
 
-/* FIREBASE REALTIME */
+/* =========================
+   FIREBASE REALTIME
+========================= */
 
 onAuthStateChanged(
 auth,
@@ -1225,42 +1352,71 @@ return;
 
 }
 
+
+/* PROFILES */
+
 onValue(
 ref(db,"profiles"),
 s=>{
+
 profiles=s.val()||{};
+
 render();
+
 }
 );
+
+
+/* POSTS */
 
 onValue(
 ref(db,"posts"),
 s=>{
+
 posts=s.val()||{};
+
 render();
+
 }
 );
+
+
+/* REELS */
 
 onValue(
 ref(db,"reels"),
 s=>{
+
 reels=s.val()||{};
+
 render();
+
 }
 );
+
+
+/* MESSAGES */
 
 onValue(
 ref(db,"messages"),
 s=>{
+
 messages=s.val()||{};
+
 render();
+
 }
 );
+
+
+/* NOTIFICATIONS */
 
 onValue(
 ref(db,"notifications"),
 s=>{
+
 notifs=s.val()||{};
+
 }
 );
 
