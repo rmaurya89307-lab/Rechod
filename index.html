@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -20,7 +20,8 @@ color:#172033
 max-width:520px;
 margin:auto;
 min-height:100vh;
-background:#fff
+background:#fff;
+padding-bottom:70px
 }
 
 .top{
@@ -33,29 +34,39 @@ padding:14px 16px;
 font-size:24px;
 font-weight:700;
 display:flex;
-justify-content:space-between
+justify-content:space-between;
+align-items:center
 }
 
+/* BOTTOM NAVIGATION */
+
 nav{
-position:sticky;
+position:fixed;
+left:50%;
 bottom:0;
-z-index:30;
+transform:translateX(-50%);
+width:100%;
+max-width:520px;
+z-index:999;
 display:flex;
 background:#fff;
 border-top:1px solid #ddd;
 justify-content:space-around;
-padding:8px 2px
+padding:8px 2px;
+box-shadow:0 -2px 8px #0002
 }
 
 nav button{
 border:0;
 background:none;
 font-size:20px;
-padding:5px
+padding:5px;
+cursor:pointer
 }
 
 main{
-padding:12px
+padding:12px;
+padding-bottom:85px
 }
 
 .card{
@@ -85,11 +96,21 @@ color:#fff;
 border:0;
 border-radius:8px;
 padding:10px 14px;
-margin:4px 2px
+margin:4px 2px;
+cursor:pointer
 }
 
 .danger{
 background:#d33
+}
+
+.follow{
+background:#1877f2
+}
+
+.following{
+background:#ddd;
+color:#222
 }
 
 .muted{
@@ -129,7 +150,8 @@ color:#eee
 }
 
 .dark nav{
-background:#1f2937
+background:#1f2937;
+color:#eee
 }
 
 .dark input,
@@ -154,9 +176,7 @@ width:100%;
 display:none
 }
 
-/* =========================
-   STORY
-========================= */
+/* STORY */
 
 .story-row{
 display:flex;
@@ -207,9 +227,7 @@ font-size:30px;
 margin:auto
 }
 
-/* =========================
-   FILTERS
-========================= */
+/* FILTERS */
 
 .filter-box{
 display:flex;
@@ -261,7 +279,7 @@ background:#eaf3ff
 position:fixed;
 inset:0;
 background:#000;
-z-index:100;
+z-index:1000;
 display:none;
 align-items:center;
 justify-content:center;
@@ -287,7 +305,7 @@ right:12px;
 color:white;
 display:flex;
 justify-content:space-between;
-z-index:101
+z-index:1001
 }
 
 .story-close{
@@ -324,6 +342,76 @@ left:15px;
 color:white;
 font-size:13px
 }
+
+/* PROFILE */
+
+.profile-head{
+text-align:center
+}
+
+.profile-photo{
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+margin:auto;
+border:3px solid #1877f2
+}
+
+.profile-placeholder{
+width:110px;
+height:110px;
+border-radius:50%;
+background:#1877f2;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:45px;
+font-weight:bold;
+margin:auto
+}
+
+.stats{
+display:flex;
+justify-content:center;
+gap:35px;
+margin:15px 0
+}
+
+.stat{
+text-align:center
+}
+
+.stat b{
+font-size:20px
+}
+
+.user-card{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.user-avatar{
+width:55px;
+height:55px;
+border-radius:50%;
+object-fit:cover
+}
+
+.user-placeholder{
+width:55px;
+height:55px;
+border-radius:50%;
+background:#1877f2;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold
+}
 </style>
 </head>
 
@@ -332,7 +420,7 @@ font-size:13px
 <div class="wrap">
 
 <header class="top">
-Rechod
+<span>Rechod</span>
 <span id="userName"></span>
 </header>
 
@@ -349,6 +437,7 @@ Rechod
 </nav>
 
 </div>
+
 
 <!-- STORY VIEWER -->
 
@@ -384,11 +473,10 @@ onclick="closeStory()">
 
 </div>
 
+
 <script type="module">
 
-/* =========================
-   FIREBASE IMPORTS
-========================= */
+/* FIREBASE */
 
 import{
 initializeApp
@@ -413,9 +501,7 @@ runTransaction
 }from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* =========================
-   FIREBASE CONFIG
-========================= */
+/* FIREBASE CONFIG */
 
 const firebaseConfig={
 
@@ -433,7 +519,7 @@ storageBucket:
 
 messagingSenderId:"897864313569",
 
-appId:"1:897864313569:web:738169cb0e6694d3d2a5a0",
+appId:"1:897864313569:web:738169cb0e6694d3d2a5a5",
 
 measurementId:"G-DKZQ133PSN"
 
@@ -446,18 +532,14 @@ const auth=getAuth(fb);
 const db=getDatabase(fb);
 
 
-/* =========================
-   CLOUDINARY
-========================= */
+/* CLOUDINARY */
 
 const CLOUD_NAME="ut6gs93p";
 
 const UPLOAD_PRESET="rechod_upload";
 
 
-/* =========================
-   GLOBAL DATA
-========================= */
+/* DATA */
 
 let me=null;
 let current="home";
@@ -470,14 +552,14 @@ let messages={};
 let notifs={};
 
 let selectedFilter="normal";
+let selectedStoryFilter="normal";
 let currentStoryId=null;
+let viewingProfileId=null;
 
 const app=document.getElementById("app");
 
 
-/* =========================
-   ESCAPE
-========================= */
+/* ESCAPE */
 
 function esc(x=""){
 
@@ -495,22 +577,19 @@ m=>({
 }
 
 
-/* =========================
-   PAGE
-========================= */
+/* PAGE */
 
 window.page=function(p){
 
 current=p;
+viewingProfileId=null;
 
 render();
 
 };
 
 
-/* =========================
-   RENDER
-========================= */
+/* RENDER */
 
 function render(){
 
@@ -540,17 +619,13 @@ settings
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
+/* LOGOUT */
 
 window.logoutNow=async()=>{
 
 try{
 
 await signOut(auth);
-
-alert("Logout हो गया ✅");
 
 current="home";
 
@@ -563,9 +638,7 @@ alert("Logout नहीं हुआ: "+e.message);
 };
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 function login(){
 
@@ -575,7 +648,7 @@ app.innerHTML=`
 
 <h1>Rechod</h1>
 
-<p>Social app</p>
+<p>Social App</p>
 
 <input
 id="email"
@@ -617,9 +690,7 @@ Sign Up
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 window.loginNow=async()=>{
 
@@ -633,17 +704,14 @@ document.getElementById("pass").value
 
 }catch(e){
 
-document.getElementById("err").textContent=
-e.message;
+document.getElementById("err").textContent=e.message;
 
 }
 
 };
 
 
-/* =========================
-   SIGNUP
-========================= */
+/* SIGNUP */
 
 window.signup=async()=>{
 
@@ -669,7 +737,12 @@ Number(document.getElementById("age").value)||0,
 bio:
 "Welcome to my Rechod profile! ❤️",
 
-createdAt:Date.now()
+createdAt:Date.now(),
+
+followers:{},
+
+following:{}
+
 }
 );
 
@@ -677,38 +750,32 @@ alert("Account बन गया ✅");
 
 }catch(e){
 
-document.getElementById("err").textContent=
-e.message;
+document.getElementById("err").textContent=e.message;
 
 }
 
 };
 
 
-/* =========================
-   GET ACTIVE STORIES
-========================= */
+/* STORIES */
 
 function activeStories(){
 
 let now=Date.now();
 
 return Object.entries(stories)
-.filter(([id,s])=>{
-return s.createdAt &&
-(now-s.createdAt)<24*60*60*1000;
-})
+.filter(([id,s])=>
+s.createdAt &&
+(now-s.createdAt)<24*60*60*1000
+)
 .sort((a,b)=>
-(b[1].createdAt||0)-
-(a[1].createdAt||0)
+(b[1].createdAt||0)-(a[1].createdAt||0)
 );
 
 }
 
 
-/* =========================
-   STORY ROW
-========================= */
+/* STORY ROW */
 
 function storyRow(){
 
@@ -722,7 +789,8 @@ let html=`
 
 <div class="story-row">
 
-<div class="story-item"
+<div
+class="story-item"
 onclick="page('create')">
 
 <div class="add-story">+</div>
@@ -737,17 +805,13 @@ a.forEach(([id,s])=>{
 
 let name=s.username||"User";
 
-let initial=
-(name.charAt(0)||"U").toUpperCase();
+let p=profiles[s.uid]||{};
 
-html+=`
-
-<div
-class="story-item"
-onclick="openStory('${id}')">
-
-<div class="story-avatar">
-
+let avatar=p.photoUrl
+?
+`<img src="${esc(p.photoUrl)}">`
+:
+`
 <div style="
 width:56px;
 height:56px;
@@ -758,12 +822,20 @@ display:flex;
 align-items:center;
 justify-content:center;
 font-size:22px;
-font-weight:bold;
-">
-
-${esc(initial)}
-
+font-weight:bold">
+${esc(name.charAt(0).toUpperCase())}
 </div>
+`;
+
+html+=`
+
+<div
+class="story-item"
+onclick="openStory('${id}')">
+
+<div class="story-avatar">
+
+${avatar}
 
 </div>
 
@@ -789,18 +861,14 @@ return html;
 }
 
 
-/* =========================
-   HOME
-========================= */
+/* HOME */
 
 function home(){
 
 let a=
 Object.entries(posts)
-.sort(
-(x,y)=>
-(y[1].createdAt||0)-
-(x[1].createdAt||0)
+.sort((x,y)=>
+(y[1].createdAt||0)-(x[1].createdAt||0)
 );
 
 app.innerHTML=`
@@ -820,9 +888,7 @@ Reels
 </div>
 
 ${
-a.map(
-([id,p])=>postCard(id,p)
-).join("")
+a.map(([id,p])=>postCard(id,p)).join("")
 ||
 '<div class="card center">No posts yet.</div>'
 }
@@ -832,38 +898,65 @@ a.map(
 }
 
 
-/* =========================
-   POST CARD
-========================= */
+/* POST CARD */
 
 function postCard(id,p){
 
 let likes=
 Object.keys(p.likes||{}).length;
 
+let user=p.uid?profiles[p.uid]:null;
+
 return `
 
 <div class="card">
 
-<div class="row">
+<div
+class="row"
+style="cursor:pointer"
+onclick="openProfile('${p.uid||""}')">
 
-<b>
-${esc(p.username||"User")}
-</b>
+${
+user?.photoUrl
+?
+`<img
+src="${esc(user.photoUrl)}"
+style="
+width:42px;
+height:42px;
+border-radius:50%;
+object-fit:cover">`
+:
+`
+<div class="user-placeholder"
+style="width:42px;height:42px;font-size:17px">
+${esc((p.username||"U").charAt(0).toUpperCase())}
+</div>
+`
+}
+
+<div>
+
+<b>${esc(p.username||"User")}</b>
+
+<br>
 
 <span class="muted">
-${new Date(
-p.createdAt||Date.now()
-).toLocaleString()}
+${new Date(p.createdAt||Date.now()).toLocaleString()}
 </span>
 
 </div>
+
+</div>
+
+<br>
 
 ${
 p.imageUrl
 ?
 `<img
 src="${esc(p.imageUrl)}"
+class="f-${esc(p.filter||"normal")}"
 onerror="this.style.display='none'">`
 :""
 }
@@ -886,9 +979,7 @@ onclick="comment('${id}')">
 
 <button
 class="btn"
-onclick="shareText('${esc(
-p.caption||"Rechod post"
-)}')">
+onclick="shareText('${esc(p.caption||"Rechod post")}')">
 ↗
 </button>
 
@@ -899,9 +990,7 @@ p.caption||"Rechod post"
 }
 
 
-/* =========================
-   LIKE
-========================= */
+/* LIKE */
 
 window.like=async path=>{
 
@@ -915,9 +1004,7 @@ v=>v?null:me.uid
 };
 
 
-/* =========================
-   COMMENT
-========================= */
+/* COMMENT */
 
 window.comment=async id=>{
 
@@ -939,9 +1026,7 @@ createdAt:Date.now()
 };
 
 
-/* =========================
-   SHARE
-========================= */
+/* SHARE */
 
 window.shareText=t=>{
 
@@ -961,30 +1046,34 @@ alert(t);
 };
 
 
-/* =========================
-   REELS
-========================= */
+/* REELS */
 
 function reelsPage(){
 
 let a=
 Object.entries(reels)
-.sort(
-(x,y)=>
-(y[1].createdAt||0)-
-(x[1].createdAt||0)
+.sort((x,y)=>
+(y[1].createdAt||0)-(x[1].createdAt||0)
 );
 
 app.innerHTML=
 
-a.map(
-([id,r])=>`
+a.map(([id,r])=>`
 
 <div class="card">
+
+<div
+class="row"
+onclick="openProfile('${r.uid||""}')"
+style="cursor:pointer">
 
 <b>
 ${esc(r.username||"User")}
 </b>
+
+</div>
+
+<br>
 
 <video
 src="${esc(r.videoUrl)}"
@@ -1005,16 +1094,13 @@ onclick="like('reels/${id}/likes')">
 
 <button
 class="btn"
-onclick="shareText('${esc(
-r.caption||"Rechod reel"
-)}')">
+onclick="shareText('${esc(r.caption||"Rechod reel")}')">
 ↗
 </button>
 
 </div>
 
-`
-).join("")
+`).join("")
 
 ||
 '<div class="card center">No reels yet.</div>';
@@ -1022,13 +1108,12 @@ r.caption||"Rechod reel"
 }
 
 
-/* =========================
-   CREATE PAGE
-========================= */
+/* CREATE */
 
 function create(){
 
 selectedFilter="normal";
+selectedStoryFilter="normal";
 
 app.innerHTML=`
 
@@ -1046,80 +1131,7 @@ onchange="previewPost()">
 
 <div class="filter-box">
 
-<button class="filter-btn active"
-onclick="setFilter('normal',this)">
-Normal
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('bright',this)">
-Bright
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('vivid',this)">
-Vivid
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('vintage',this)">
-Vintage
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('warm',this)">
-Warm
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('cool',this)">
-Cool
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('bw',this)">
-B&W
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('sunset',this)">
-Sunset
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('cinematic',this)">
-Cinematic
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('glow',this)">
-Glow
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('pink',this)">
-Pink
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('nature',this)">
-Nature
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('dramatic',this)">
-Dramatic
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('fade',this)">
-Fade
-</button>
-
-<button class="filter-btn"
-onclick="setFilter('dark',this)">
-Dark
-</button>
+${filterButtons("setFilter")}
 
 </div>
 
@@ -1143,8 +1155,6 @@ onclick="addPost()">
 </div>
 
 
-<!-- STORY -->
-
 <div class="card">
 
 <h3>⭕ Add Story</h3>
@@ -1159,80 +1169,7 @@ onchange="previewStory()">
 
 <div class="filter-box">
 
-<button class="filter-btn active"
-onclick="setStoryFilter('normal',this)">
-Normal
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('bright',this)">
-Bright
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('vivid',this)">
-Vivid
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('vintage',this)">
-Vintage
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('warm',this)">
-Warm
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('cool',this)">
-Cool
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('bw',this)">
-B&W
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('sunset',this)">
-Sunset
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('cinematic',this)">
-Cinematic
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('glow',this)">
-Glow
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('pink',this)">
-Pink
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('nature',this)">
-Nature
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('dramatic',this)">
-Dramatic
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('fade',this)">
-Fade
-</button>
-
-<button class="filter-btn"
-onclick="setStoryFilter('dark',this)">
-Dark
-</button>
+${filterButtons("setStoryFilter")}
 
 </div>
 
@@ -1259,8 +1196,6 @@ Story 24 घंटे बाद अपने-आप hide हो जाएगी�
 
 </div>
 
-
-<!-- REEL -->
 
 <div class="card">
 
@@ -1289,8 +1224,6 @@ onclick="addReel()">
 </button>
 
 <p class="muted">
-Mobile Gallery से video चुनें
-<br>
 अधिकतम 100 MB
 </p>
 
@@ -1301,35 +1234,61 @@ Mobile Gallery से video चुनें
 }
 
 
-/* =========================
-   FILTER
-========================= */
+/* FILTER BUTTONS */
+
+function filterButtons(fn){
+
+let arr=[
+["normal","Normal"],
+["bright","Bright"],
+["vivid","Vivid"],
+["vintage","Vintage"],
+["warm","Warm"],
+["cool","Cool"],
+["bw","B&W"],
+["sunset","Sunset"],
+["cinematic","Cinematic"],
+["glow","Glow"],
+["pink","Pink"],
+["nature","Nature"],
+["dramatic","Dramatic"],
+["fade","Fade"],
+["dark","Dark"]
+];
+
+return arr.map(x=>`
+
+<button
+class="filter-btn ${x[0]=="normal"?"active":""}"
+onclick="${fn}('${x[0]}',this)">
+${x[1]}
+</button>
+
+`).join("");
+
+}
+
+
+/* FILTER */
 
 window.setFilter=(name,button)=>{
 
 selectedFilter=name;
 
-document.querySelectorAll(".filter-btn")
+document.querySelectorAll(".filter-box:first-of-type .filter-btn")
 .forEach(x=>x.classList.remove("active"));
 
 button.classList.add("active");
 
 let img=document.getElementById("postPreviewImg");
 
-if(img){
-
+if(img)
 img.className="f-"+name;
-
-}
 
 };
 
 
-/* =========================
-   STORY FILTER
-========================= */
-
-let selectedStoryFilter="normal";
+/* STORY FILTER */
 
 window.setStoryFilter=(name,button)=>{
 
@@ -1338,18 +1297,13 @@ selectedStoryFilter=name;
 let box=
 document.getElementById("storyPreviewMedia");
 
-if(box){
-
+if(box)
 box.className="story-media f-"+name;
-
-}
 
 };
 
 
-/* =========================
-   PHOTO PREVIEW
-========================= */
+/* PHOTO PREVIEW */
 
 window.previewPost=()=>{
 
@@ -1372,9 +1326,7 @@ src="${url}">
 };
 
 
-/* =========================
-   STORY PREVIEW
-========================= */
+/* STORY PREVIEW */
 
 window.previewStory=()=>{
 
@@ -1415,9 +1367,7 @@ src="${url}">
 };
 
 
-/* =========================
-   CLOUDINARY UPLOAD
-========================= */
+/* CLOUDINARY */
 
 async function cloudinaryUpload(file,onProgress){
 
@@ -1427,11 +1377,7 @@ let url=
 let form=new FormData();
 
 form.append("file",file);
-
-form.append(
-"upload_preset",
-UPLOAD_PRESET
-);
+form.append("upload_preset",UPLOAD_PRESET);
 
 return new Promise((resolve,reject)=>{
 
@@ -1441,15 +1387,10 @@ xhr.open("POST",url);
 
 xhr.upload.onprogress=e=>{
 
-if(
-e.lengthComputable &&
-onProgress
-){
+if(e.lengthComputable&&onProgress){
 
 onProgress(
-Math.round(
-(e.loaded/e.total)*100
-)
+Math.round((e.loaded/e.total)*100)
 );
 
 }
@@ -1462,7 +1403,7 @@ try{
 
 let data=JSON.parse(xhr.responseText);
 
-if(xhr.status>=200 && xhr.status<300){
+if(xhr.status>=200&&xhr.status<300){
 
 resolve(data);
 
@@ -1487,9 +1428,7 @@ reject(e);
 
 xhr.onerror=()=>{
 
-reject(
-new Error("Internet/upload error")
-);
+reject(new Error("Internet/upload error"));
 
 };
 
@@ -1500,9 +1439,7 @@ xhr.send(form);
 }
 
 
-/* =========================
-   PHOTO POST
-========================= */
+/* PHOTO POST */
 
 window.addPost=async()=>{
 
@@ -1512,7 +1449,6 @@ document.getElementById("pfile").files[0];
 if(!file){
 
 alert("पहले photo चुनें");
-
 return;
 
 }
@@ -1520,46 +1456,33 @@ return;
 if(file.size>10*1024*1024){
 
 alert("Photo 10 MB से छोटी रखें");
-
 return;
 
 }
 
-let bar=
-document.getElementById("pbar");
+let bar=document.getElementById("pbar");
 
 bar.style.display="block";
-
 bar.value=0;
 
 try{
 
 let result=
-await cloudinaryUpload(
-file,
-p=>{
+await cloudinaryUpload(file,p=>{
 bar.value=p;
-}
-);
+});
 
 await push(
 ref(db,"posts"),
 {
 uid:me.uid,
-
 username:
 profiles[me.uid]?.username||"User",
-
-imageUrl:
-result.secure_url,
-
+imageUrl:result.secure_url,
 caption:
 document.getElementById("pcap").value,
-
 filter:selectedFilter,
-
 createdAt:Date.now(),
-
 mediaType:"image"
 }
 );
@@ -1572,19 +1495,14 @@ page("home");
 
 }catch(e){
 
-alert(
-"Photo upload नहीं हुआ: "+
-(e.message||e)
-);
+alert("Photo upload नहीं हुआ: "+(e.message||e));
 
 }
 
 };
 
 
-/* =========================
-   ADD STORY
-========================= */
+/* STORY */
 
 window.addStory=async()=>{
 
@@ -1594,24 +1512,18 @@ document.getElementById("sfile").files[0];
 if(!file){
 
 alert("पहले photo या video चुनें");
-
 return;
 
 }
-
-
-/* STORY LIMIT */
 
 if(file.size>100*1024*1024){
 
-alert("Story video/photo 100 MB से छोटी रखें");
-
+alert("Story 100 MB से छोटी रखें");
 return;
 
 }
 
-let bar=
-document.getElementById("sbar");
+let bar=document.getElementById("sbar");
 
 bar.style.display="block";
 bar.value=0;
@@ -1619,43 +1531,26 @@ bar.value=0;
 try{
 
 let result=
-await cloudinaryUpload(
-file,
-p=>{
+await cloudinaryUpload(file,p=>{
 bar.value=p;
-}
-);
+});
 
-let isVideo=
-file.type.startsWith("video/");
+let isVideo=file.type.startsWith("video/");
 
 await push(
 ref(db,"stories"),
 {
 uid:me.uid,
-
 username:
 profiles[me.uid]?.username||"User",
-
-mediaUrl:
-result.secure_url,
-
-mediaType:
-isVideo?"video":"image",
-
+mediaUrl:result.secure_url,
+mediaType:isVideo?"video":"image",
 caption:
 document.getElementById("scap").value,
-
-filter:
-selectedStoryFilter,
-
+filter:selectedStoryFilter,
 createdAt:Date.now(),
-
-expiresAt:
-Date.now()+24*60*60*1000,
-
+expiresAt:Date.now()+24*60*60*1000,
 likes:{},
-
 views:{}
 }
 );
@@ -1668,19 +1563,14 @@ page("home");
 
 }catch(e){
 
-alert(
-"Story upload नहीं हुई: "+
-(e.message||e)
-);
+alert("Story upload नहीं हुई: "+(e.message||e));
 
 }
 
 };
 
 
-/* =========================
-   OPEN STORY
-========================= */
+/* OPEN STORY */
 
 window.openStory=async id=>{
 
@@ -1689,34 +1579,24 @@ let s=stories[id];
 if(!s)return;
 
 if(
-Date.now()-(s.createdAt||0)
->=24*60*60*1000
+Date.now()-(s.createdAt||0)>=24*60*60*1000
 ){
 
 alert("यह Story expire हो गई है");
-
 return;
 
 }
 
 currentStoryId=id;
 
-
-/* VIEW */
-
 await set(
 ref(db,"stories/"+id+"/views/"+me.uid),
 true
 );
 
-let viewer=
-document.getElementById("storyViewer");
+let media=document.getElementById("storyMedia");
 
-let media=
-document.getElementById("storyMedia");
-
-let filter=
-"f-"+(s.filter||"normal");
+let filter="f-"+(s.filter||"normal");
 
 if(s.mediaType==="video"){
 
@@ -1757,19 +1637,17 @@ Object.keys(s.likes||{}).length;
 document.getElementById("storyViewCount").textContent=
 Object.keys(s.views||{}).length+1;
 
-viewer.classList.add("show");
+document.getElementById("storyViewer")
+.classList.add("show");
 
 };
 
 
-/* =========================
-   CLOSE STORY
-========================= */
+/* CLOSE STORY */
 
 window.closeStory=()=>{
 
-document
-.getElementById("storyViewer")
+document.getElementById("storyViewer")
 .classList.remove("show");
 
 document.getElementById("storyMedia").innerHTML="";
@@ -1779,16 +1657,13 @@ currentStoryId=null;
 };
 
 
-/* =========================
-   STORY LIKE
-========================= */
+/* STORY LIKE */
 
 window.likeCurrentStory=async()=>{
 
 if(!currentStoryId)return;
 
-let r=
-ref(
+let r=ref(
 db,
 "stories/"+currentStoryId+"/likes/"+me.uid
 );
@@ -1798,24 +1673,10 @@ r,
 v=>v?null:true
 );
 
-let s=stories[currentStoryId];
-
-if(s){
-
-document.getElementById(
-"storyLikeCount"
-).textContent=
-Object.keys(s.likes||{}).length+
-(s.likes?.[me.uid]?0:1);
-
-}
-
 };
 
 
-/* =========================
-   REEL UPLOAD
-========================= */
+/* REEL */
 
 window.addReel=async()=>{
 
@@ -1825,7 +1686,6 @@ document.getElementById("rfile").files[0];
 if(!file){
 
 alert("पहले video चुनें");
-
 return;
 
 }
@@ -1833,7 +1693,6 @@ return;
 if(file.size>100*1024*1024){
 
 alert("Video 100 MB से छोटी रखें");
-
 return;
 
 }
@@ -1841,13 +1700,11 @@ return;
 if(!file.type.startsWith("video/")){
 
 alert("सिर्फ video file चुनें");
-
 return;
 
 }
 
-let bar=
-document.getElementById("rbar");
+let bar=document.getElementById("rbar");
 
 bar.style.display="block";
 bar.value=0;
@@ -1855,29 +1712,20 @@ bar.value=0;
 try{
 
 let result=
-await cloudinaryUpload(
-file,
-p=>{
+await cloudinaryUpload(file,p=>{
 bar.value=p;
-}
-);
+});
 
 await push(
 ref(db,"reels"),
 {
 uid:me.uid,
-
 username:
 profiles[me.uid]?.username||"User",
-
-videoUrl:
-result.secure_url,
-
+videoUrl:result.secure_url,
 caption:
 document.getElementById("rcap").value,
-
 createdAt:Date.now(),
-
 mediaType:"video"
 }
 );
@@ -1890,19 +1738,14 @@ page("reels");
 
 }catch(e){
 
-alert(
-"Video upload नहीं हुआ: "+
-(e.message||e)
-);
+alert("Video upload नहीं हुआ: "+(e.message||e));
 
 }
 
 };
 
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 function search(){
 
@@ -1910,9 +1753,11 @@ app.innerHTML=`
 
 <div class="card">
 
+<h3>🔎 Search Users</h3>
+
 <input
 id="sq"
-placeholder="Search username"
+placeholder="Username search करें"
 oninput="doSearch()">
 
 </div>
@@ -1927,358 +1772,139 @@ oninput="doSearch()">
 window.doSearch=()=>{
 
 let q=
-document.getElementById("sq").value
+(document.getElementById("sq").value||"")
 .toLowerCase();
 
 document.getElementById("results").innerHTML=
 
 Object.entries(profiles)
 
-.filter(
-([id,p])=>
-(p.username||"")
-.toLowerCase()
-.includes(q)
+.filter(([id,p])=>
+id!==me.uid &&
+(p.username||"").toLowerCase().includes(q)
 )
 
-.map(
-([id,p])=>`
+.map(([id,p])=>userSearchCard(id,p))
+.join("")
 
-<div class="card row">
+||
 
-<b>
-${esc(p.username||"User")}
-</b>
+'<div class="card center">User नहीं मिला।</div>';
+
+};
+
+
+/* USER SEARCH CARD */
+
+function userSearchCard(id,p){
+
+let followers=
+Object.keys(p.followers||{}).length;
+
+let isFollowing=
+!!(profiles[me.uid]?.following?.[id]);
+
+let avatar=p.photoUrl
+?
+`<img class="user-avatar" src="${esc(p.photoUrl)}">`
+:
+`
+<div class="user-placeholder">
+${esc((p.username||"U").charAt(0).toUpperCase())}
+</div>
+`;
+
+return `
+
+<div class="card">
+
+<div class="user-card">
+
+${avatar}
+
+<div style="flex:1">
+
+<b>${esc(p.username||"User")}</b>
+
+<br>
 
 <span class="muted">
-Age: ${esc(p.age||"")}
+${followers} Followers
 </span>
+
+</div>
+
+</div>
+
+<button
+class="btn"
+onclick="openProfile('${id}')">
+👤 Profile
+</button>
+
+<button
+class="btn ${isFollowing?"following":"follow"}"
+onclick="toggleFollow('${id}')">
+${isFollowing?"Following":"Follow"}
+</button>
 
 <button
 class="btn"
 onclick="message('${id}')">
-Message
-</button>
-
-</div>
-
-`
-)
-
-.join("");
-
-};
-
-
-/* =========================
-   PROFILE
-========================= */
-
-function profile(){
-
-let p=
-profiles[me.uid]||{};
-
-app.innerHTML=`
-
-<div class="card center">
-
-<h2>
-${esc(p.username||"User")}
-</h2>
-
-<p>
-${esc(p.bio||"")}
-</p>
-
-<p>
-Age: ${esc(p.age||"")}
-</p>
-
-<button
-class="btn"
-onclick="editProfile()">
-Edit Profile
-</button>
-
-<br>
-
-<button
-class="btn danger"
-onclick="logoutNow()">
-🚪 Logout
+💬 Message
 </button>
 
 </div>
 
 `;
 
-}
+};
 
 
-/* =========================
-   EDIT PROFILE
-========================= */
+/* OPEN OTHER PROFILE */
 
-window.editProfile=async()=>{
+window.openProfile=id=>{
 
-let u=
-prompt(
-"Username",
-profiles[me.uid]?.username||""
-);
+if(!id)return;
 
-let b=
-prompt(
-"Bio",
-profiles[me.uid]?.bio||""
-);
+viewingProfileId=id;
 
-if(u!=null)
-
-await update(
-ref(db,"profiles/"+me.uid),
-{
-username:u,
-bio:b||""
-}
-);
+otherProfile(id);
 
 };
 
 
-/* =========================
-   MESSAGES
-========================= */
+/* OTHER PROFILE */
 
-function messagesPage(){
+function otherProfile(id){
 
-let arr=
-Object.values(messages)
-.sort(
-(a,b)=>
-(a.createdAt||0)-
-(b.createdAt||0)
-);
+let p=profiles[id];
 
-app.innerHTML=`
+if(!p){
 
-<div class="card">
-
-<h3>Messages</h3>
-
-${
-arr.map(
-m=>`
-
-<p>
-
-<b>
-${esc(m.fromName||"User")}:
-</b>
-
-${esc(m.text)}
-
-</p>
-
-`
-).join("")
-
-||
-
-"No messages yet."
-}
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   SEND MESSAGE
-========================= */
-
-window.message=uid=>{
-
-let t=prompt("Message");
-
-if(t)
-
-push(
-ref(db,"messages"),
-{
-from:me.uid,
-
-to:uid,
-
-fromName:
-profiles[me.uid]?.username||"User",
-
-text:t,
-
-createdAt:Date.now()
-}
-);
-
-};
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-function settings(){
-
-app.innerHTML=`
-
-<div class="card">
-
-<h3>Settings</h3>
-
-<button
-class="btn"
-onclick="
-document.body.classList.toggle('dark')
-">
-🌙 Dark Mode
-</button>
-
-<button
-class="btn"
-onclick="
-alert('Rechod notifications are realtime.')
-">
-🔔 Notifications
-</button>
-
-<button
-class="btn"
-onclick="
-alert('Rechod uses Firebase Authentication, Realtime Database and Cloudinary.')
-">
-ℹ️ About
-</button>
-
-<br>
-
-<button
-class="btn danger"
-onclick="logoutNow()">
-🚪 Logout
-</button>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-   FIREBASE REALTIME
-========================= */
-
-onAuthStateChanged(
-auth,
-u=>{
-
-me=u;
-
-if(!u){
-
-render();
+app.innerHTML=
+'<div class="card center">Profile नहीं मिली।</div>';
 
 return;
 
 }
 
+let followers=
+Object.keys(p.followers||{}).length;
 
-/* PROFILES */
+let following=
+Object.keys(p.following||{}).length;
 
-onValue(
-ref(db,"profiles"),
-s=>{
-
-profiles=s.val()||{};
-
-render();
-
-}
+let userPosts=
+Object.entries(posts)
+.filter(([postId,x])=>x.uid===id)
+.sort((a,b)=>
+(b[1].createdAt||0)-(a[1].createdAt||0)
 );
 
+let isFollowing=
+!!(profiles[me.uid]?.following?.[id]);
 
-/* POSTS */
-
-onValue(
-ref(db,"posts"),
-s=>{
-
-posts=s.val()||{};
-
-render();
-
-}
-);
-
-
-/* REELS */
-
-onValue(
-ref(db,"reels"),
-s=>{
-
-reels=s.val()||{};
-
-render();
-
-}
-);
-
-
-/* STORIES */
-
-onValue(
-ref(db,"stories"),
-s=>{
-
-stories=s.val()||{};
-
-render();
-
-}
-);
-
-
-/* MESSAGES */
-
-onValue(
-ref(db,"messages"),
-s=>{
-
-messages=s.val()||{};
-
-render();
-
-}
-);
-
-
-/* NOTIFICATIONS */
-
-onValue(
-ref(db,"notifications"),
-s=>{
-
-notifs=s.val()||{};
-
-}
-);
-
-});
-
-</script>
-
-</body>
-</html>
+let photo=p.photoUrl
+?
+`<img class="profile-photo"
