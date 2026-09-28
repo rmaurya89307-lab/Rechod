@@ -26,7 +26,7 @@ background:#fff
 .top{
 position:sticky;
 top:0;
-z-index:5;
+z-index:20;
 background:#1877f2;
 color:white;
 padding:14px 16px;
@@ -39,7 +39,7 @@ justify-content:space-between
 nav{
 position:sticky;
 bottom:0;
-z-index:6;
+z-index:30;
 display:flex;
 background:#fff;
 border-top:1px solid #ddd;
@@ -153,6 +153,177 @@ text-align:center
 width:100%;
 display:none
 }
+
+/* =========================
+   STORY
+========================= */
+
+.story-row{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:4px 2px 12px;
+margin-bottom:8px
+}
+
+.story-row::-webkit-scrollbar{
+display:none
+}
+
+.story-item{
+min-width:70px;
+text-align:center;
+font-size:12px;
+cursor:pointer
+}
+
+.story-avatar{
+width:62px;
+height:62px;
+border-radius:50%;
+padding:3px;
+background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);
+margin:auto
+}
+
+.story-avatar img{
+width:56px;
+height:56px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid white
+}
+
+.add-story{
+width:62px;
+height:62px;
+border-radius:50%;
+background:#1877f2;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+margin:auto
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filter-box{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding:8px 0
+}
+
+.filter-box::-webkit-scrollbar{
+display:none
+}
+
+.filter-btn{
+min-width:72px;
+padding:7px 5px;
+border:1px solid #ddd;
+border-radius:8px;
+background:#fff;
+font-size:12px;
+cursor:pointer
+}
+
+.filter-btn.active{
+border:2px solid #1877f2;
+background:#eaf3ff
+}
+
+/* 15 FILTERS */
+
+.f-normal{filter:none}
+.f-bright{filter:brightness(1.25)}
+.f-vivid{filter:saturate(1.65) contrast(1.08)}
+.f-vintage{filter:sepia(.45) contrast(.95) brightness(1.05)}
+.f-warm{filter:sepia(.25) saturate(1.35) hue-rotate(-8deg)}
+.f-cool{filter:saturate(.9) hue-rotate(12deg) brightness(1.04)}
+.f-bw{filter:grayscale(1)}
+.f-sunset{filter:sepia(.3) saturate(1.6) hue-rotate(-12deg) contrast(1.08)}
+.f-cinematic{filter:contrast(1.25) saturate(.85) brightness(.95)}
+.f-glow{filter:brightness(1.12) saturate(1.15) contrast(.92)}
+.f-pink{filter:saturate(1.2) hue-rotate(315deg)}
+.f-nature{filter:saturate(1.5) hue-rotate(12deg) contrast(1.05)}
+.f-dramatic{filter:contrast(1.45) saturate(1.15) brightness(.88)}
+.f-fade{filter:contrast(.85) brightness(1.08) saturate(.75)}
+.f-dark{filter:brightness(.72) contrast(1.2) saturate(1.1)}
+
+/* STORY VIEWER */
+
+.story-viewer{
+position:fixed;
+inset:0;
+background:#000;
+z-index:100;
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column
+}
+
+.story-viewer.show{
+display:flex
+}
+
+.story-media{
+max-width:100%;
+max-height:80vh;
+object-fit:contain;
+border-radius:0
+}
+
+.story-top{
+position:absolute;
+top:15px;
+left:12px;
+right:12px;
+color:white;
+display:flex;
+justify-content:space-between;
+z-index:101
+}
+
+.story-close{
+background:#ffffff33;
+color:white;
+border:0;
+border-radius:50%;
+width:42px;
+height:42px;
+font-size:22px
+}
+
+.story-actions{
+position:absolute;
+bottom:25px;
+left:0;
+right:0;
+text-align:center
+}
+
+.story-actions button{
+background:#ffffff22;
+color:#fff;
+border:0;
+border-radius:20px;
+padding:10px 16px;
+margin:4px
+}
+
+.story-info{
+position:absolute;
+bottom:85px;
+left:15px;
+color:white;
+font-size:13px
+}
 </style>
 </head>
 
@@ -176,6 +347,40 @@ Rechod
 <button onclick="page('profile')">👤</button>
 <button onclick="page('settings')">⚙️</button>
 </nav>
+
+</div>
+
+<!-- STORY VIEWER -->
+
+<div id="storyViewer" class="story-viewer">
+
+<div class="story-top">
+
+<b id="storyUser"></b>
+
+<button
+class="story-close"
+onclick="closeStory()">
+✕
+</button>
+
+</div>
+
+<div id="storyMedia"></div>
+
+<div id="storyInfo" class="story-info"></div>
+
+<div class="story-actions">
+
+<button onclick="likeCurrentStory()">
+❤️ <span id="storyLikeCount">0</span>
+</button>
+
+<button>
+👀 <span id="storyViewCount">0</span>
+</button>
+
+</div>
 
 </div>
 
@@ -255,18 +460,17 @@ const UPLOAD_PRESET="rechod_upload";
 ========================= */
 
 let me=null;
-
 let current="home";
 
 let profiles={};
-
 let posts={};
-
 let reels={};
-
+let stories={};
 let messages={};
-
 let notifs={};
+
+let selectedFilter="normal";
+let currentStoryId=null;
 
 const app=document.getElementById("app");
 
@@ -414,7 +618,7 @@ Sign Up
 
 
 /* =========================
-   LOGIN FUNCTION
+   LOGIN
 ========================= */
 
 window.loginNow=async()=>{
@@ -482,6 +686,110 @@ e.message;
 
 
 /* =========================
+   GET ACTIVE STORIES
+========================= */
+
+function activeStories(){
+
+let now=Date.now();
+
+return Object.entries(stories)
+.filter(([id,s])=>{
+return s.createdAt &&
+(now-s.createdAt)<24*60*60*1000;
+})
+.sort((a,b)=>
+(b[1].createdAt||0)-
+(a[1].createdAt||0)
+);
+
+}
+
+
+/* =========================
+   STORY ROW
+========================= */
+
+function storyRow(){
+
+let a=activeStories();
+
+let html=`
+
+<div class="card">
+
+<h3>Stories</h3>
+
+<div class="story-row">
+
+<div class="story-item"
+onclick="page('create')">
+
+<div class="add-story">+</div>
+
+<div>Add Story</div>
+
+</div>
+
+`;
+
+a.forEach(([id,s])=>{
+
+let name=s.username||"User";
+
+let initial=
+(name.charAt(0)||"U").toUpperCase();
+
+html+=`
+
+<div
+class="story-item"
+onclick="openStory('${id}')">
+
+<div class="story-avatar">
+
+<div style="
+width:56px;
+height:56px;
+border-radius:50%;
+background:#1877f2;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold;
+">
+
+${esc(initial)}
+
+</div>
+
+</div>
+
+<div>
+${esc(name.substring(0,9))}
+</div>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+</div>
+</div>
+
+`;
+
+return html;
+
+}
+
+
+/* =========================
    HOME
 ========================= */
 
@@ -496,6 +804,8 @@ Object.entries(posts)
 );
 
 app.innerHTML=`
+
+${storyRow()}
 
 <div class="tabs">
 
@@ -713,10 +1023,12 @@ r.caption||"Rechod reel"
 
 
 /* =========================
-   CREATE
+   CREATE PAGE
 ========================= */
 
 function create(){
+
+selectedFilter="normal";
 
 app.innerHTML=`
 
@@ -727,7 +1039,89 @@ app.innerHTML=`
 <input
 id="pfile"
 type="file"
-accept="image/*">
+accept="image/*"
+onchange="previewPost()">
+
+<div id="postPreview"></div>
+
+<div class="filter-box">
+
+<button class="filter-btn active"
+onclick="setFilter('normal',this)">
+Normal
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('bright',this)">
+Bright
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('vivid',this)">
+Vivid
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('vintage',this)">
+Vintage
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('warm',this)">
+Warm
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('cool',this)">
+Cool
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('bw',this)">
+B&W
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('sunset',this)">
+Sunset
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('cinematic',this)">
+Cinematic
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('glow',this)">
+Glow
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('pink',this)">
+Pink
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('nature',this)">
+Nature
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('dramatic',this)">
+Dramatic
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('fade',this)">
+Fade
+</button>
+
+<button class="filter-btn"
+onclick="setFilter('dark',this)">
+Dark
+</button>
+
+</div>
 
 <textarea
 id="pcap"
@@ -746,14 +1140,127 @@ onclick="addPost()">
 📷 Photo Post करें
 </button>
 
+</div>
+
+
+<!-- STORY -->
+
+<div class="card">
+
+<h3>⭕ Add Story</h3>
+
+<input
+id="sfile"
+type="file"
+accept="image/*,video/*"
+onchange="previewStory()">
+
+<div id="storyPreview"></div>
+
+<div class="filter-box">
+
+<button class="filter-btn active"
+onclick="setStoryFilter('normal',this)">
+Normal
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('bright',this)">
+Bright
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('vivid',this)">
+Vivid
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('vintage',this)">
+Vintage
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('warm',this)">
+Warm
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('cool',this)">
+Cool
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('bw',this)">
+B&W
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('sunset',this)">
+Sunset
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('cinematic',this)">
+Cinematic
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('glow',this)">
+Glow
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('pink',this)">
+Pink
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('nature',this)">
+Nature
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('dramatic',this)">
+Dramatic
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('fade',this)">
+Fade
+</button>
+
+<button class="filter-btn"
+onclick="setStoryFilter('dark',this)">
+Dark
+</button>
+
+</div>
+
+<input
+id="scap"
+placeholder="Story text/caption">
+
+<progress
+id="sbar"
+class="progress"
+value="0"
+max="100">
+</progress>
+
+<button
+class="btn"
+onclick="addStory()">
+⭕ Story डालें
+</button>
+
 <p class="muted">
-Mobile Gallery से photo चुनें
-<br>
-Cloudinary पर direct upload होगा
+Story 24 घंटे बाद अपने-आप hide हो जाएगी।
 </p>
 
 </div>
 
+
+<!-- REEL -->
 
 <div class="card">
 
@@ -792,6 +1299,120 @@ Mobile Gallery से video चुनें
 `;
 
 }
+
+
+/* =========================
+   FILTER
+========================= */
+
+window.setFilter=(name,button)=>{
+
+selectedFilter=name;
+
+document.querySelectorAll(".filter-btn")
+.forEach(x=>x.classList.remove("active"));
+
+button.classList.add("active");
+
+let img=document.getElementById("postPreviewImg");
+
+if(img){
+
+img.className="f-"+name;
+
+}
+
+};
+
+
+/* =========================
+   STORY FILTER
+========================= */
+
+let selectedStoryFilter="normal";
+
+window.setStoryFilter=(name,button)=>{
+
+selectedStoryFilter=name;
+
+let box=
+document.getElementById("storyPreviewMedia");
+
+if(box){
+
+box.className="story-media f-"+name;
+
+}
+
+};
+
+
+/* =========================
+   PHOTO PREVIEW
+========================= */
+
+window.previewPost=()=>{
+
+let file=
+document.getElementById("pfile").files[0];
+
+if(!file)return;
+
+let url=URL.createObjectURL(file);
+
+document.getElementById("postPreview").innerHTML=`
+
+<img
+id="postPreviewImg"
+class="f-${selectedFilter}"
+src="${url}">
+
+`;
+
+};
+
+
+/* =========================
+   STORY PREVIEW
+========================= */
+
+window.previewStory=()=>{
+
+let file=
+document.getElementById("sfile").files[0];
+
+if(!file)return;
+
+let url=URL.createObjectURL(file);
+
+if(file.type.startsWith("video/")){
+
+document.getElementById("storyPreview").innerHTML=`
+
+<video
+id="storyPreviewMedia"
+class="story-media f-${selectedStoryFilter}"
+src="${url}"
+controls
+playsinline>
+</video>
+
+`;
+
+}else{
+
+document.getElementById("storyPreview").innerHTML=`
+
+<img
+id="storyPreviewMedia"
+class="story-media f-${selectedStoryFilter}"
+src="${url}">
+
+`;
+
+}
+
+};
 
 
 /* =========================
@@ -896,9 +1517,6 @@ return;
 
 }
 
-
-/* 10 MB PHOTO LIMIT */
-
 if(file.size>10*1024*1024){
 
 alert("Photo 10 MB से छोटी रखें");
@@ -924,8 +1542,6 @@ bar.value=p;
 }
 );
 
-let imageUrl=result.secure_url;
-
 await push(
 ref(db,"posts"),
 {
@@ -934,10 +1550,13 @@ uid:me.uid,
 username:
 profiles[me.uid]?.username||"User",
 
-imageUrl:imageUrl,
+imageUrl:
+result.secure_url,
 
 caption:
 document.getElementById("pcap").value,
+
+filter:selectedFilter,
 
 createdAt:Date.now(),
 
@@ -964,6 +1583,237 @@ alert(
 
 
 /* =========================
+   ADD STORY
+========================= */
+
+window.addStory=async()=>{
+
+let file=
+document.getElementById("sfile").files[0];
+
+if(!file){
+
+alert("पहले photo या video चुनें");
+
+return;
+
+}
+
+
+/* STORY LIMIT */
+
+if(file.size>100*1024*1024){
+
+alert("Story video/photo 100 MB से छोटी रखें");
+
+return;
+
+}
+
+let bar=
+document.getElementById("sbar");
+
+bar.style.display="block";
+bar.value=0;
+
+try{
+
+let result=
+await cloudinaryUpload(
+file,
+p=>{
+bar.value=p;
+}
+);
+
+let isVideo=
+file.type.startsWith("video/");
+
+await push(
+ref(db,"stories"),
+{
+uid:me.uid,
+
+username:
+profiles[me.uid]?.username||"User",
+
+mediaUrl:
+result.secure_url,
+
+mediaType:
+isVideo?"video":"image",
+
+caption:
+document.getElementById("scap").value,
+
+filter:
+selectedStoryFilter,
+
+createdAt:Date.now(),
+
+expiresAt:
+Date.now()+24*60*60*1000,
+
+likes:{},
+
+views:{}
+}
+);
+
+bar.value=100;
+
+alert("Story डाल दी गई ✅");
+
+page("home");
+
+}catch(e){
+
+alert(
+"Story upload नहीं हुई: "+
+(e.message||e)
+);
+
+}
+
+};
+
+
+/* =========================
+   OPEN STORY
+========================= */
+
+window.openStory=async id=>{
+
+let s=stories[id];
+
+if(!s)return;
+
+if(
+Date.now()-(s.createdAt||0)
+>=24*60*60*1000
+){
+
+alert("यह Story expire हो गई है");
+
+return;
+
+}
+
+currentStoryId=id;
+
+
+/* VIEW */
+
+await set(
+ref(db,"stories/"+id+"/views/"+me.uid),
+true
+);
+
+let viewer=
+document.getElementById("storyViewer");
+
+let media=
+document.getElementById("storyMedia");
+
+let filter=
+"f-"+(s.filter||"normal");
+
+if(s.mediaType==="video"){
+
+media.innerHTML=`
+
+<video
+class="story-media ${filter}"
+src="${esc(s.mediaUrl)}"
+autoplay
+controls
+playsinline
+loop>
+</video>
+
+`;
+
+}else{
+
+media.innerHTML=`
+
+<img
+class="story-media ${filter}"
+src="${esc(s.mediaUrl)}">
+
+`;
+
+}
+
+document.getElementById("storyUser").textContent=
+s.username||"User";
+
+document.getElementById("storyInfo").textContent=
+s.caption||"";
+
+document.getElementById("storyLikeCount").textContent=
+Object.keys(s.likes||{}).length;
+
+document.getElementById("storyViewCount").textContent=
+Object.keys(s.views||{}).length+1;
+
+viewer.classList.add("show");
+
+};
+
+
+/* =========================
+   CLOSE STORY
+========================= */
+
+window.closeStory=()=>{
+
+document
+.getElementById("storyViewer")
+.classList.remove("show");
+
+document.getElementById("storyMedia").innerHTML="";
+
+currentStoryId=null;
+
+};
+
+
+/* =========================
+   STORY LIKE
+========================= */
+
+window.likeCurrentStory=async()=>{
+
+if(!currentStoryId)return;
+
+let r=
+ref(
+db,
+"stories/"+currentStoryId+"/likes/"+me.uid
+);
+
+await runTransaction(
+r,
+v=>v?null:true
+);
+
+let s=stories[currentStoryId];
+
+if(s){
+
+document.getElementById(
+"storyLikeCount"
+).textContent=
+Object.keys(s.likes||{}).length+
+(s.likes?.[me.uid]?0:1);
+
+}
+
+};
+
+
+/* =========================
    REEL UPLOAD
 ========================= */
 
@@ -980,9 +1830,6 @@ return;
 
 }
 
-
-/* 100 MB VIDEO LIMIT */
-
 if(file.size>100*1024*1024){
 
 alert("Video 100 MB से छोटी रखें");
@@ -990,9 +1837,6 @@ alert("Video 100 MB से छोटी रखें");
 return;
 
 }
-
-
-/* VIDEO TYPE CHECK */
 
 if(!file.type.startsWith("video/")){
 
@@ -1006,7 +1850,6 @@ let bar=
 document.getElementById("rbar");
 
 bar.style.display="block";
-
 bar.value=0;
 
 try{
@@ -1019,8 +1862,6 @@ bar.value=p;
 }
 );
 
-let videoUrl=result.secure_url;
-
 await push(
 ref(db,"reels"),
 {
@@ -1029,7 +1870,8 @@ uid:me.uid,
 username:
 profiles[me.uid]?.username||"User",
 
-videoUrl:videoUrl,
+videoUrl:
+result.secure_url,
 
 caption:
 document.getElementById("rcap").value,
@@ -1388,6 +2230,20 @@ ref(db,"reels"),
 s=>{
 
 reels=s.val()||{};
+
+render();
+
+}
+);
+
+
+/* STORIES */
+
+onValue(
+ref(db,"stories"),
+s=>{
+
+stories=s.val()||{};
 
 render();
 
