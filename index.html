@@ -1,1166 +1,1303 @@
-<!DOCTYPE html>  
-<html lang="hi">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width,initial-scale=1">  
-<meta name="theme-color" content="#1877f2">  
-<title>Rechod</title>  <style>  
-*{box-sizing:border-box}  
-  
-body{  
-margin:0;  
-font-family:Arial,sans-serif;  
-background:#eef2f7;  
-color:#172033  
-}  
-  
-.wrap{  
-max-width:520px;  
-margin:auto;  
-min-height:100vh;  
-background:#fff;  
-padding-bottom:70px  
-}  
-  
-.top{  
-position:sticky;  
-top:0;  
-z-index:20;  
-background:#1877f2;  
-color:white;  
-padding:14px 16px;  
-font-size:24px;  
-font-weight:700;  
-display:flex;  
-justify-content:space-between;  
-align-items:center  
-}  
-  
-/* BOTTOM NAVIGATION */  
-  
-nav{  
-position:fixed;  
-left:50%;  
-bottom:0;  
-transform:translateX(-50%);  
-width:100%;  
-max-width:520px;  
-z-index:999;  
-display:flex;  
-background:#fff;  
-border-top:1px solid #ddd;  
-justify-content:space-around;  
-padding:8px 2px;  
-box-shadow:0 -2px 8px #0002  
-}  
-  
-nav button{  
-border:0;  
-background:none;  
-font-size:20px;  
-padding:5px;  
-cursor:pointer  
-}  
-  
-main{  
-padding:12px;  
-padding-bottom:85px  
-}  
-  
-.card{  
-background:#fff;  
-border:1px solid #ddd;  
-border-radius:12px;  
-padding:12px;  
-margin-bottom:12px;  
-box-shadow:0 1px 3px #0001  
-}  
-  
-input,textarea,button{  
-font:inherit  
-}  
-  
-input,textarea{  
-width:100%;  
-padding:11px;  
-border:1px solid #ccc;  
-border-radius:8px;  
-margin:5px 0  
-}  
-  
-.btn{  
-background:#1877f2;  
-color:#fff;  
-border:0;  
-border-radius:8px;  
-padding:10px 14px;  
-margin:4px 2px;  
-cursor:pointer  
-}  
-  
-.danger{  
-background:#d33  
-}  
-  
-.follow{  
-background:#1877f2  
-}  
-  
-.following{  
-background:#ddd;  
-color:#222  
-}  
-  
-.muted{  
-color:#667085;  
-font-size:13px  
-}  
-  
-img,video{  
-width:100%;  
-border-radius:10px;  
-max-height:520px;  
-object-fit:cover  
-}  
-  
-.tabs{  
-display:flex;  
-gap:5px;  
-margin-bottom:10px  
-}  
-  
-.tabs button{  
-flex:1;  
-padding:9px;  
-border:0;  
-border-radius:8px  
-}  
-  
-.dark{  
-background:#111827;  
-color:#eee  
-}  
-  
-.dark .wrap,  
-.dark .card{  
-background:#1f2937;  
-color:#eee  
-}  
-  
-.dark nav{  
-background:#1f2937;  
-color:#eee  
-}  
-  
-.dark input,  
-.dark textarea{  
-background:#111827;  
-color:#eee;  
-border-color:#555  
-}  
-  
-.row{  
-display:flex;  
-align-items:center;  
-gap:8px  
-}  
-  
-.center{  
-text-align:center  
-}  
-  
-.progress{  
-width:100%;  
-display:none  
-}  
-  
-/* STORY */  
-  
-.story-row{  
-display:flex;  
-gap:10px;  
-overflow-x:auto;  
-padding:4px 2px 12px;  
-margin-bottom:8px  
-}  
-  
-.story-row::-webkit-scrollbar{  
-display:none  
-}  
-  
-.story-item{  
-min-width:70px;  
-text-align:center;  
-font-size:12px;  
-cursor:pointer  
-}  
-  
-.story-avatar{  
-width:62px;  
-height:62px;  
-border-radius:50%;  
-padding:3px;  
-background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);  
-margin:auto  
-}  
-  
-.story-avatar img{  
-width:56px;  
-height:56px;  
-border-radius:50%;  
-object-fit:cover;  
-border:3px solid white  
-}  
-  
-.add-story{  
-width:62px;  
-height:62px;  
-border-radius:50%;  
-background:#1877f2;  
-color:white;  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-size:30px;  
-margin:auto  
-}  
-  
-/* FILTERS */  
-  
-.filter-box{  
-display:flex;  
-gap:8px;  
-overflow-x:auto;  
-padding:8px 0  
-}  
-  
-.filter-box::-webkit-scrollbar{  
-display:none  
-}  
-  
-.filter-btn{  
-min-width:72px;  
-padding:7px 5px;  
-border:1px solid #ddd;  
-border-radius:8px;  
-background:#fff;  
-font-size:12px;  
-cursor:pointer  
-}  
-  
-.filter-btn.active{  
-border:2px solid #1877f2;  
-background:#eaf3ff  
-}  
-  
-/* 15 FILTERS */  
-  
-.f-normal{filter:none}  
-.f-bright{filter:brightness(1.25)}  
-.f-vivid{filter:saturate(1.65) contrast(1.08)}  
-.f-vintage{filter:sepia(.45) contrast(.95) brightness(1.05)}  
-.f-warm{filter:sepia(.25) saturate(1.35) hue-rotate(-8deg)}  
-.f-cool{filter:saturate(.9) hue-rotate(12deg) brightness(1.04)}  
-.f-bw{filter:grayscale(1)}  
-.f-sunset{filter:sepia(.3) saturate(1.6) hue-rotate(-12deg) contrast(1.08)}  
-.f-cinematic{filter:contrast(1.25) saturate(.85) brightness(.95)}  
-.f-glow{filter:brightness(1.12) saturate(1.15) contrast(.92)}  
-.f-pink{filter:saturate(1.2) hue-rotate(315deg)}  
-.f-nature{filter:saturate(1.5) hue-rotate(12deg) contrast(1.05)}  
-.f-dramatic{filter:contrast(1.45) saturate(1.15) brightness(.88)}  
-.f-fade{filter:contrast(.85) brightness(1.08) saturate(.75)}  
-.f-dark{filter:brightness(.72) contrast(1.2) saturate(1.1)}  
-  
-/* STORY VIEWER */  
-  
-.story-viewer{  
-position:fixed;  
-inset:0;  
-background:#000;  
-z-index:1000;  
-display:none;  
-align-items:center;  
-justify-content:center;  
-flex-direction:column  
-}  
-  
-.story-viewer.show{  
-display:flex  
-}  
-  
-.story-media{  
-max-width:100%;  
-max-height:80vh;  
-object-fit:contain;  
-border-radius:0  
-}  
-  
-.story-top{  
-position:absolute;  
-top:15px;  
-left:12px;  
-right:12px;  
-color:white;  
-display:flex;  
-justify-content:space-between;  
-z-index:1001  
-}  
-  
-.story-close{  
-background:#ffffff33;  
-color:white;  
-border:0;  
-border-radius:50%;  
-width:42px;  
-height:42px;  
-font-size:22px  
-}  
-  
-.story-actions{  
-position:absolute;  
-bottom:25px;  
-left:0;  
-right:0;  
-text-align:center  
-}  
-  
-.story-actions button{  
-background:#ffffff22;  
-color:#fff;  
-border:0;  
-border-radius:20px;  
-padding:10px 16px;  
-margin:4px  
-}  
-  
-.story-info{  
-position:absolute;  
-bottom:85px;  
-left:15px;  
-color:white;  
-font-size:13px  
-}  
-  
-/* PROFILE */  
-  
-.profile-head{  
-text-align:center  
-}  
-  
-.profile-photo{  
-width:110px;  
-height:110px;  
-border-radius:50%;  
-object-fit:cover;  
-margin:auto;  
-border:3px solid #1877f2  
-}  
-  
-.profile-placeholder{  
-width:110px;  
-height:110px;  
-border-radius:50%;  
-background:#1877f2;  
-color:#fff;  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-size:45px;  
-font-weight:bold;  
-margin:auto  
-}  
-  
-.stats{  
-display:flex;  
-justify-content:center;  
-gap:35px;  
-margin:15px 0  
-}  
-  
-.stat{  
-text-align:center  
-}  
-  
-.stat b{  
-font-size:20px  
-}  
-  
-.user-card{  
-display:flex;  
-align-items:center;  
-gap:10px  
-}  
-  
-.user-avatar{  
-width:55px;  
-height:55px;  
-border-radius:50%;  
-object-fit:cover  
-}  
-  
-.user-placeholder{  
-width:55px;  
-height:55px;  
-border-radius:50%;  
-background:#1877f2;  
-color:white;  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-size:22px;  
-font-weight:bold  
-}  
-</style>  </head>  <body>  <div class="wrap">  <header class="top">  
-<span>Rechod</span>  
-<span id="userName"></span>  
-</header>  <main id="app"></main>  <nav>  
-<button onclick="page('home')">🏠</button>  
-<button onclick="page('reels')">🎬</button>  
-<button onclick="page('search')">🔎</button>  
-<button onclick="page('create')">➕</button>  
-<button onclick="page('messages')">💬</button>  
-<button onclick="page('profile')">👤</button>  
-<button onclick="page('settings')">⚙️</button>  
-</nav>  </div>  <!-- STORY VIEWER -->  <div id="storyViewer" class="story-viewer">  <div class="story-top">  <b id="storyUser"></b>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1877f2">
+<title>Rechod</title>
 
-<button  
-class="story-close"  
-onclick="closeStory()">
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef2f7;
+color:#172033
+}
+
+.wrap{
+max-width:520px;
+margin:auto;
+min-height:100vh;
+background:#fff;
+padding-bottom:80px
+}
+
+.top{
+position:sticky;
+top:0;
+z-index:20;
+background:#1877f2;
+color:white;
+padding:14px 16px;
+font-size:24px;
+font-weight:700;
+display:flex;
+justify-content:space-between;
+align-items:center
+}
+
+nav{
+position:fixed;
+left:50%;
+bottom:0;
+transform:translateX(-50%);
+width:100%;
+max-width:520px;
+z-index:999;
+display:flex;
+background:#fff;
+border-top:1px solid #ddd;
+justify-content:space-around;
+padding:8px 2px;
+box-shadow:0 -2px 8px #0002
+}
+
+nav button{
+border:0;
+background:none;
+font-size:20px;
+padding:5px;
+cursor:pointer
+}
+
+main{
+padding:12px;
+padding-bottom:85px
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:12px;
+padding:12px;
+margin-bottom:12px;
+box-shadow:0 1px 3px #0001
+}
+
+input,textarea,button{
+font:inherit
+}
+
+input,textarea{
+width:100%;
+padding:11px;
+border:1px solid #ccc;
+border-radius:8px;
+margin:5px 0
+}
+
+.btn{
+background:#1877f2;
+color:#fff;
+border:0;
+border-radius:8px;
+padding:10px 14px;
+margin:4px 2px;
+cursor:pointer
+}
+
+.danger{
+background:#d33
+}
+
+.follow{
+background:#1877f2
+}
+
+.following{
+background:#ddd;
+color:#222
+}
+
+.muted{
+color:#667085;
+font-size:13px
+}
+
+img,video{
+width:100%;
+border-radius:10px;
+max-height:520px;
+object-fit:cover
+}
+
+.tabs{
+display:flex;
+gap:5px;
+margin-bottom:10px
+}
+
+.tabs button{
+flex:1;
+padding:9px;
+border:0;
+border-radius:8px
+}
+
+.dark{
+background:#111827;
+color:#eee
+}
+
+.dark .wrap,
+.dark .card{
+background:#1f2937;
+color:#eee
+}
+
+.dark nav{
+background:#1f2937;
+color:#eee
+}
+
+.dark input,
+.dark textarea{
+background:#111827;
+color:#eee;
+border-color:#555
+}
+
+.row{
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.center{
+text-align:center
+}
+
+.progress{
+width:100%;
+display:none
+}
+
+/* STORY */
+
+.story-row{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:4px 2px 12px;
+margin-bottom:8px
+}
+
+.story-row::-webkit-scrollbar{
+display:none
+}
+
+.story-item{
+min-width:70px;
+text-align:center;
+font-size:12px;
+cursor:pointer
+}
+
+.story-avatar{
+width:62px;
+height:62px;
+border-radius:50%;
+padding:3px;
+background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7);
+margin:auto
+}
+
+.story-avatar img{
+width:56px;
+height:56px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid white
+}
+
+.add-story{
+width:62px;
+height:62px;
+border-radius:50%;
+background:#1877f2;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+margin:auto
+}
+
+/* FILTERS */
+
+.filter-box{
+display:flex;
+gap:8px;
+overflow-x:auto;
+padding:8px 0
+}
+
+.filter-box::-webkit-scrollbar{
+display:none
+}
+
+.filter-btn{
+min-width:72px;
+padding:7px 5px;
+border:1px solid #ddd;
+border-radius:8px;
+background:#fff;
+font-size:12px;
+cursor:pointer
+}
+
+.filter-btn.active{
+border:2px solid #1877f2;
+background:#eaf3ff
+}
+
+.f-normal{filter:none}
+.f-bright{filter:brightness(1.25)}
+.f-vivid{filter:saturate(1.65) contrast(1.08)}
+.f-vintage{filter:sepia(.45) contrast(.95) brightness(1.05)}
+.f-warm{filter:sepia(.25) saturate(1.35) hue-rotate(-8deg)}
+.f-cool{filter:saturate(.9) hue-rotate(12deg) brightness(1.04)}
+.f-bw{filter:grayscale(1)}
+.f-sunset{filter:sepia(.3) saturate(1.6) hue-rotate(-12deg) contrast(1.08)}
+.f-cinematic{filter:contrast(1.25) saturate(.85) brightness(.95)}
+.f-glow{filter:brightness(1.12) saturate(1.15) contrast(.92)}
+.f-pink{filter:saturate(1.2) hue-rotate(315deg)}
+.f-nature{filter:saturate(1.5) hue-rotate(12deg) contrast(1.05)}
+.f-dramatic{filter:contrast(1.45) saturate(1.15) brightness(.88)}
+.f-fade{filter:contrast(.85) brightness(1.08) saturate(.75)}
+.f-dark{filter:brightness(.72) contrast(1.2) saturate(1.1)}
+
+/* STORY VIEWER */
+
+.story-viewer{
+position:fixed;
+inset:0;
+background:#000;
+z-index:1000;
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column
+}
+
+.story-viewer.show{
+display:flex
+}
+
+.story-media{
+max-width:100%;
+max-height:80vh;
+object-fit:contain;
+border-radius:0
+}
+
+.story-top{
+position:absolute;
+top:15px;
+left:12px;
+right:12px;
+color:white;
+display:flex;
+justify-content:space-between;
+z-index:1001
+}
+
+.story-close{
+background:#ffffff33;
+color:white;
+border:0;
+border-radius:50%;
+width:42px;
+height:42px;
+font-size:22px
+}
+
+.story-actions{
+position:absolute;
+bottom:25px;
+left:0;
+right:0;
+text-align:center
+}
+
+.story-actions button{
+background:#ffffff22;
+color:#fff;
+border:0;
+border-radius:20px;
+padding:10px 16px;
+margin:4px
+}
+
+.story-info{
+position:absolute;
+bottom:85px;
+left:15px;
+color:white;
+font-size:13px
+}
+
+/* PROFILE */
+
+.profile-head{
+text-align:center
+}
+
+.profile-photo{
+width:110px;
+height:110px;
+border-radius:50%;
+object-fit:cover;
+margin:auto;
+border:3px solid #1877f2
+}
+
+.profile-placeholder{
+width:110px;
+height:110px;
+border-radius:50%;
+background:#1877f2;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:45px;
+font-weight:bold;
+margin:auto
+}
+
+.stats{
+display:flex;
+justify-content:center;
+gap:35px;
+margin:15px 0
+}
+
+.stat{
+text-align:center
+}
+
+.stat b{
+font-size:20px
+}
+
+.user-card{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.user-avatar{
+width:55px;
+height:55px;
+border-radius:50%;
+object-fit:cover
+}
+
+.user-placeholder{
+width:55px;
+height:55px;
+border-radius:50%;
+background:#1877f2;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="top">
+<span>Rechod</span>
+<span id="userName"></span>
+</header>
+
+<main id="app"></main>
+
+<nav>
+<button onclick="page('home')">🏠</button>
+<button onclick="page('reels')">🎬</button>
+<button onclick="page('search')">🔎</button>
+<button onclick="page('create')">➕</button>
+<button onclick="page('messages')">💬</button>
+<button onclick="page('profile')">👤</button>
+<button onclick="page('settings')">⚙️</button>
+</nav>
+
+</div>
+
+<!-- STORY VIEWER -->
+
+<div id="storyViewer" class="story-viewer">
+
+<div class="story-top">
+<b id="storyUser"></b>
+
+<button class="story-close" onclick="closeStory()">
 ✕
 </button>
+</div>
 
-</div>  <div id="storyMedia"></div>  <div id="storyInfo" class="story-info"></div>  <div class="story-actions">  <button onclick="likeCurrentStory()">  
-❤️ <span id="storyLikeCount">0</span>  
-</button>  <button>  
-👀 <span id="storyViewCount">0</span>  
-</button>  </div>  </div>  <script type="module">  
-  
-/* FIREBASE */  
-  
-import{  
-initializeApp  
-}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";  
-  
-import{  
-getAuth,  
-onAuthStateChanged,  
-createUserWithEmailAndPassword,  
-signInWithEmailAndPassword,  
-signOut  
-}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";  
-  
-import{  
-getDatabase,  
-ref,  
-push,  
-set,  
-onValue,  
-update,  
-runTransaction  
-}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";  
-  
-  
-/* FIREBASE CONFIG */  
-  
-const firebaseConfig={  
-  
-apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",  
-  
-authDomain:"vibe-social-app-6750d.firebaseapp.com",  
-  
-databaseURL:  
-"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",  
-  
-projectId:"vibe-social-app-6750d",  
-  
-storageBucket:  
-"vibe-social-app-6750d.firebasestorage.app",  
-  
-messagingSenderId:"897864313569",  
-  
-appId:"1:897864313569:web:738169cb0e6694d3d2a5a5",  
-  
-measurementId:"G-DKZQ133PSN"  
-  
-};  
-  
-const fb=initializeApp(firebaseConfig);  
-  
-const auth=getAuth(fb);  
-  
-const db=getDatabase(fb);  
-  
-  
-/* CLOUDINARY */  
-  
-const CLOUD_NAME="ut6gs93p";  
-  
-const UPLOAD_PRESET="rechod_upload";  
-  
-  
-/* DATA */  
-  
-let me=null;  
-let current="home";  
-  
-let profiles={};  
-let posts={};  
-let reels={};  
-let stories={};  
-let messages={};  
-let notifs={};  
-  
-let selectedFilter="normal";  
-let selectedStoryFilter="normal";  
-let currentStoryId=null;  
-let viewingProfileId=null;  
-  
-const app=document.getElementById("app");  
-  
-  
-/* ESCAPE */  
-  
-function esc(x=""){  
-  
-return String(x).replace(  
-/[&<>"']/g,  
-m=>({  
-"&":"&amp;",  
-"<":"&lt;",  
-">":"&gt;",  
-'"':"&quot;",  
-"'":"&#39;"  
-}[m])  
-);  
-  
-}  
-  
-  
-/* PAGE */  
-  
-window.page=function(p){  
-  
-current=p;  
-viewingProfileId=null;  
-  
-render();  
-  
-};  
-  
-  
-/* RENDER */  
-  
-function render(){  
-  
-if(!me){  
-  
-login();  
-  
-return;  
-  
-}  
-  
-document.getElementById("userName").textContent=  
-profiles[me.uid]?.username||"";  
-  
-({  
-  
-home,  
-reels:reelsPage,  
-search,  
-create,  
-messages:messagesPage,  
-profile,  
-settings  
-  
-}[current]||home)();  
-  
-}  
-  
-  
-/* LOGOUT */  
-  
-window.logoutNow=async()=>{  
-  
-try{  
-  
-await signOut(auth);  
-  
-current="home";  
-  
-}catch(e){  
-  
-alert("Logout नहीं हुआ: "+e.message);  
-  
-}  
-  
-};  
-  
-  
-/* LOGIN */  
-  
-function login(){  
-  
-app.innerHTML=`  
-  
-<div class="card center">  
-  
-<h1>Rechod</h1>  
-  
-<p>Social App</p>  
-  
-<input  
-id="email"  
-placeholder="Email"  
-type="email">  
-  
-<input  
-id="pass"  
-type="password"  
-placeholder="Password">  
-  
-<input  
-id="uname"  
-placeholder="Username (signup)">  
-  
-<input  
-id="age"  
-type="number"  
-placeholder="Age (signup)">  
-  
-<button  
-class="btn"  
-onclick="loginNow()">  
-Login  
-</button>  
-  
-<button  
-class="btn"  
-onclick="signup()">  
-Sign Up  
-</button>  
-  
-<p id="err" class="muted"></p>  
-  
-</div>  
-  
-`;  
-  
-}  
-  
-  
-/* LOGIN */  
-  
-window.loginNow=async()=>{  
-  
-try{  
-  
-await signInWithEmailAndPassword(  
-auth,  
-document.getElementById("email").value,  
-document.getElementById("pass").value  
-);  
-  
-}catch(e){  
-  
-document.getElementById("err").textContent=e.message;  
-  
-}  
-  
-};  
-  
-  
-/* SIGNUP */  
-  
-window.signup=async()=>{  
-  
-try{  
-  
-let c=  
-await createUserWithEmailAndPassword(  
-auth,  
-document.getElementById("email").value,  
-document.getElementById("pass").value  
-);  
-  
-await set(  
-ref(db,"profiles/"+c.user.uid),  
-{  
-username:  
-document.getElementById("uname").value||  
-document.getElementById("email").value.split("@")[0],  
-  
-age:  
-Number(document.getElementById("age").value)||0,  
-  
-bio:  
-"Welcome to my Rechod profile! ❤️",  
-  
-createdAt:Date.now(),  
-  
-followers:{},  
-  
-following:{}  
-  
-}  
-);  
-  
-alert("Account बन गया ✅");  
-  
-}catch(e){  
-  
-document.getElementById("err").textContent=e.message;  
-  
-}  
-  
-};  
-  
-  
-/* STORIES */  
-  
-function activeStories(){  
-  
-let now=Date.now();  
-  
-return Object.entries(stories)  
-.filter(([id,s])=>  
-s.createdAt &&  
-(now-s.createdAt)<24*60*60*1000  
-)  
-.sort((a,b)=>  
-(b[1].createdAt||0)-(a[1].createdAt||0)  
-);  
-  
-}  
-  
-  
-/* STORY ROW */  
-  
-function storyRow(){  
-  
-let a=activeStories();  
-  
-let html=`  
-  
-<div class="card">  
-  
-<h3>Stories</h3>  
-  
-<div class="story-row">  
-  
-<div  
-class="story-item"  
-onclick="page('create')">  
-  
-<div class="add-story">+</div>  
-  
-<div>Add Story</div>  
-  
-</div>  
-  
-`;  
-  
-a.forEach(([id,s])=>{  
-  
-let name=s.username||"User";  
-  
-let p=profiles[s.uid]||{};  
-  
-let avatar=p.photoUrl  
-?  
-`<img src="${esc(p.photoUrl)}">`  
-:  
-`  
-<div style="  
-width:56px;  
-height:56px;  
-border-radius:50%;  
-background:#1877f2;  
-color:white;  
-display:flex;  
-align-items:center;  
-justify-content:center;  
-font-size:22px;  
-font-weight:bold">  
-${esc(name.charAt(0).toUpperCase())}  
-</div>  
-`;  
-  
-html+=`  
-  
-<div  
-class="story-item"  
-onclick="openStory('${id}')">  
-  
-<div class="story-avatar">  
-  
-${avatar}  
-  
-</div>  
-  
-<div>  
-${esc(name.substring(0,9))}  
-</div>  
-  
-</div>  
-  
-`;  
-  
-});  
-  
-html+=`  
-  
-</div>  
-</div>  
-  
-`;  
-  
-return html;  
-  
-}  
-  
-  
-/* HOME */  
-  
-function home(){  
-  
-let a=  
-Object.entries(posts)  
-.sort((x,y)=>  
-(y[1].createdAt||0)-(x[1].createdAt||0)  
-);  
-  
-app.innerHTML=`  
-  
-${storyRow()}  
-  
-<div class="tabs">  
-  
-<button onclick="page('home')">  
-Posts  
-</button>  
-  
-<button onclick="page('reels')">  
-Reels  
-</button>  
-  
-</div>  
-  
-${  
-a.map(([id,p])=>postCard(id,p)).join("")  
-||  
-'<div class="card center">No posts yet.</div>'  
-}  
-  
-`;  
-  
-}  
-  
-  
-/* POST CARD */  
-  
-function postCard(id,p){  
-  
-let likes=  
-Object.keys(p.likes||{}).length;  
-  
-let user=p.uid?profiles[p.uid]:null;  
-  
-return `  
-  
-<div class="card">  
-  
-<div  
-class="row"  
-style="cursor:pointer"  
-onclick="openProfile('${p.uid||""}')">  
-  
-${  
-user?.photoUrl  
-?  
-`<img  
-src="${esc(user.photoUrl)}"  
-style="  
-width:42px;  
-height:42px;  
-border-radius:50%;  
-object-fit:cover">`  
-:  
-`  
-<div class="user-placeholder"  
-style="width:42px;height:42px;font-size:17px">  
-${esc((p.username||"U").charAt(0).toUpperCase())}  
-</div>  
-`  
-}  
-  
-<div>  
-  
-<b>${esc(p.username||"User")}</b>  
-  
-<br>  
-  
-<span class="muted">  
-${new Date(p.createdAt||Date.now()).toLocaleString()}  
-</span>  
-  
-</div>  
-  
-</div>  
-  
-<br>  
-  
-${  
-p.imageUrl  
-?  
-`<img  
-src="${esc(p.imageUrl)}"  
-class="f-${esc(p.filter||"normal")}"  
-onerror="this.style.display='none'">`  
-:""  
-}  
-  
-<p>  
-${esc(p.caption||"")}  
-</p>  
-  
-<button  
-class="btn"  
-onclick="like('posts/${id}/likes')">  
-❤️ ${likes}  
-</button>  
-  
-<button  
-class="btn"  
-onclick="comment('${id}')">  
-💬  
-</button>  
-  
-<button  
-class="btn"  
-onclick="shareText('${esc(p.caption||"Rechod post")}')">  
-↗  
-</button>  
-  
-</div>  
-  
-`;  
-  
-}  
-  
-  
-/* LIKE */  
-  
-window.like=async path=>{  
-  
-let r=ref(db,path);  
-  
-await runTransaction(  
-r,  
-v=>v?null:me.uid  
-);  
-  
-};  
-  
-  
-/* COMMENT */  
-  
-window.comment=async id=>{  
-  
-let t=prompt("Comment");  
-  
-if(t)  
-  
-await push(  
-ref(db,"posts/"+id+"/comments"),  
-{  
-uid:me.uid,  
-username:  
-profiles[me.uid]?.username||"User",  
-text:t,  
-createdAt:Date.now()  
-}  
-);  
-  
-};  
-  
-  
-/* SHARE */  
-  
-window.shareText=t=>{  
-  
-if(navigator.share){  
-  
-navigator.share({  
-title:"Rechod",  
-text:t  
-});  
-  
-}else{  
-  
-alert(t);  
-  
-}  
-  
-};  
-  
-  
-/* REELS */  
-  
-function reelsPage(){  
-  
-let a=  
-Object.entries(reels)  
-.sort((x,y)=>  
-(y[1].createdAt||0)-(x[1].createdAt||0)  
-);  
-  
-app.innerHTML=  
-  
-a.map(([id,r])=>`  
-  
-<div class="card">  
-  
-<div  
-class="row"  
-onclick="openProfile('${r.uid||""}')"  
-style="cursor:pointer">  
-  
-<b>  
-${esc(r.username||"User")}  
-</b>  
-  
-</div>  
-  
-<br>  
-  
-<video  
-src="${esc(r.videoUrl)}"  
-controls  
-playsinline  
-loop>  
-</video>  
-  
-<p>  
-${esc(r.caption||"")}  
-</p>  
-  
-<button  
-class="btn"  
-onclick="like('reels/${id}/likes')">  
-❤️ ${Object.keys(r.likes||{}).length}  
-</button>  
-  
-<button  
-class="btn"  
-onclick="shareText('${esc(r.caption||"Rechod reel")}')">  
-↗  
-</button>  
-  
-</div>  
-  
-`).join("")  
-  
-||  
-'<div class="card center">No reels yet.</div>';  
-  
-}  
-  
-  
-/* CREATE */  
-  
-function create(){  
-  
-selectedFilter="normal";  
-selectedStoryFilter="normal";  
-  
-app.innerHTML=`  
-  
-<div class="card">  
-  
-<h3>📷 Create Post</h3>  
-  
-<input  
-id="pfile"  
-type="file"  
-accept="image/*"  
-onchange="previewPost()">  
-  
-<div id="postPreview"></div>  
-  
-<div class="filter-box">  
-  
-${filterButtons("setFilter")}  
-  
-</div>  
-  
-<textarea  
-id="pcap"  
-placeholder="Caption"></textarea>  <progress  
-id="pbar"  
-class="progress"  
-value="0"  
-max="100">
-</progress>
+<div id="storyMedia"></div>
 
-<button  
-class="btn"  
-onclick="addPost()">
-📷 Photo Post करें
+<div id="storyInfo" class="story-info"></div>
+
+<div class="story-actions">
+
+<button onclick="likeCurrentStory()">
+❤️ <span id="storyLikeCount">0</span>
 </button>
 
-</div>  <div class="card">  <h3>⭕ Add Story</h3>  <input  
-id="sfile"  
-type="file"  
-accept="image/*,video/*"  
-onchange="previewStory()">
-
-<div id="storyPreview"></div>  <div class="filter-box">  ${filterButtons("setStoryFilter")}
-
-</div>  <input  
-id="scap"  
-placeholder="Story text/caption">
-
-<progress  
-id="sbar"  
-class="progress"  
-value="0"  
-max="100">
-</progress>
-
-<button  
-class="btn"  
-onclick="addStory()">
-⭕ Story डालें
+<button>
+👀 <span id="storyViewCount">0</span>
 </button>
 
-<p class="muted">  
-Story 24 घंटे बाद अपने-आप hide हो जाएगी।  
-</p>  </div>  <div class="card">  <h3>🎬 Create Reel</h3>  <input  
-id="rfile"  
-type="file"  
-accept="video/*">
+</div>
+</div>
 
-<textarea  
-id="rcap"  
-placeholder="Caption"></textarea>  <progress  
-id="rbar"  
-class="progress"  
-value="0"  
-max="100">
-</progress>
 
-<button  
-class="btn"  
-onclick="addReel()">
-🎬 Reel डालें
-</button>
+<script type="module">
 
-<p class="muted">  
-अधिकतम 100 MB  
-</p>  </div>  `;
+/* FIREBASE */
+
+import{
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import{
+getAuth,
+onAuthStateChanged,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+signOut
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import{
+getDatabase,
+ref,
+push,
+set,
+onValue,
+update,
+runTransaction
+}
+from
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig={
+
+apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
+
+authDomain:"vibe-social-app-6750d.firebaseapp.com",
+
+databaseURL:
+"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId:"vibe-social-app-6750d",
+
+storageBucket:
+"vibe-social-app-6750d.firebasestorage.app",
+
+messagingSenderId:"897864313569",
+
+appId:"1:897864313569:web:738169cb0e6694d3d2a5a5",
+
+measurementId:"G-DKZQ133PSN"
+
+};
+
+const fb=initializeApp(firebaseConfig);
+
+const auth=getAuth(fb);
+
+const db=getDatabase(fb);
+
+
+/* CLOUDINARY */
+
+const CLOUD_NAME="ut6gs93p";
+
+const UPLOAD_PRESET="rechod_upload";
+
+
+/* DATA */
+
+let me=null;
+
+let current="home";
+
+let profiles={};
+let posts={};
+let reels={};
+let stories={};
+let messages={};
+let notifs={};
+
+let selectedFilter="normal";
+let selectedStoryFilter="normal";
+
+let currentStoryId=null;
+let viewingProfileId=null;
+
+const app=document.getElementById("app");
+
+
+/* ESCAPE */
+
+function esc(x=""){
+
+return String(x).replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[m])
+);
 
 }
+
+
+/* PAGE */
+
+window.page=function(p){
+
+current=p;
+
+viewingProfileId=null;
+
+render();
+
+};
+
+
+/* RENDER */
+
+function render(){
+
+if(!me){
+
+login();
+
+return;
+
+}
+
+document.getElementById("userName").textContent=
+profiles[me.uid]?.username||"";
+
+({
+home,
+reels:reelsPage,
+search,
+create,
+messages:messagesPage,
+profile,
+settings
+}[current]||home)();
+
+}
+
+
+/* LOGOUT */
+
+window.logoutNow=async()=>{
+
+try{
+
+await signOut(auth);
+
+current="home";
+
+}catch(e){
+
+alert("Logout नहीं हुआ: "+e.message);
+
+}
+
+};
+
+
+/* LOGIN */
+
+function login(){
+
+app.innerHTML=`
+
+<div class="card center">
+
+<h1>Rechod</h1>
+
+<p>Social App</p>
+
+<input
+id="email"
+placeholder="Email"
+type="email">
+
+<input
+id="pass"
+type="password"
+placeholder="Password">
+
+<input
+id="uname"
+placeholder="Username (signup)">
+
+<input
+id="age"
+type="number"
+placeholder="Age (signup)">
+
+<button
+class="btn"
+onclick="loginNow()">
+Login
+</button>
+
+<button
+class="btn"
+onclick="signup()">
+Sign Up
+</button>
+
+<p id="err" class="muted"></p>
+
+</div>
+
+`;
+
+}
+
+
+/* LOGIN */
+
+window.loginNow=async()=>{
+
+try{
+
+let email=document.getElementById("email").value.trim();
+
+let pass=document.getElementById("pass").value;
+
+if(!email||!pass){
+
+document.getElementById("err").textContent=
+"Email और Password डालें";
+
+return;
+
+}
+
+await signInWithEmailAndPassword(
+auth,
+email,
+pass
+);
+
+}catch(e){
+
+document.getElementById("err").textContent=
+e.message;
+
+}
+
+};
+
+
+/* SIGNUP */
+
+window.signup=async()=>{
+
+try{
+
+let email=document.getElementById("email").value.trim();
+
+let pass=document.getElementById("pass").value;
+
+let uname=document.getElementById("uname").value.trim();
+
+let age=Number(document.getElementById("age").value)||0;
+
+if(!email||!pass){
+
+document.getElementById("err").textContent=
+"Email और Password डालें";
+
+return;
+
+}
+
+let c=
+await createUserWithEmailAndPassword(
+auth,
+email,
+pass
+);
+
+await set(
+ref(db,"profiles/"+c.user.uid),
+{
+username:
+uname||
+email.split("@")[0],
+
+age:age,
+
+bio:
+"Welcome to my Rechod profile! ❤️",
+
+createdAt:Date.now(),
+
+followers:{},
+
+following:{}
+}
+);
+
+alert("Account बन गया ✅");
+
+}catch(e){
+
+document.getElementById("err").textContent=
+e.message;
+
+}
+
+};
+
+
+/* STORIES */
+
+function activeStories(){
+
+let now=Date.now();
+
+return Object.entries(stories)
+
+.filter(([id,s])=>
+s.createdAt &&
+(now-s.createdAt)<24*60*60*1000
+)
+
+.sort((a,b)=>
+(b[1].createdAt||0)-
+(a[1].createdAt||0)
+);
+
+}
+
+
+/* STORY ROW */
+
+function storyRow(){
+
+let a=activeStories();
+
+let html=`
+
+<div class="card">
+
+<h3>Stories</h3>
+
+<div class="story-row">
+
+<div
+class="story-item"
+onclick="page('create')">
+
+<div class="add-story">+</div>
+
+<div>Add Story</div>
+
+</div>
+`;
+
+a.forEach(([id,s])=>{
+
+let name=s.username||"User";
+
+let p=profiles[s.uid]||{};
+
+let avatar=p.photoUrl
+?
+`<img src="${esc(p.photoUrl)}">`
+:
+`
+<div style="
+width:56px;
+height:56px;
+border-radius:50%;
+background:#1877f2;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+font-weight:bold">
+
+${esc(name.charAt(0).toUpperCase())}
+
+</div>
+`;
+
+html+=`
+
+<div
+class="story-item"
+onclick="openStory('${id}')">
+
+<div class="story-avatar">
+
+${avatar}
+
+</div>
+
+<div>
+${esc(name.substring(0,9))}
+</div>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+</div>
+</div>
+
+`;
+
+return html;
+
+}
+
+
+/* HOME */
+
+function home(){
+
+let a=
+Object.entries(posts)
+.sort((x,y)=>
+(y[1].createdAt||0)-
+(x[1].createdAt||0)
+);
+
+app.innerHTML=`
+
+${storyRow()}
+
+<div class="tabs">
+
+<button onclick="page('home')">
+Posts
+</button>
+
+<button onclick="page('reels')">
+Reels
+</button>
+
+</div>
+
+${
+a.map(([id,p])=>postCard(id,p)).join("")
+||
+'<div class="card center">No posts yet.</div>'
+}
+
+`;
+
+}
+
+
+/* POST CARD */
+
+function postCard(id,p){
+
+let likes=
+Object.keys(p.likes||{}).length;
+
+let user=p.uid?profiles[p.uid]:null;
+
+return `
+
+<div class="card">
+
+<div
+class="row"
+style="cursor:pointer"
+onclick="openProfile('${p.uid||""}')">
+
+${
+user?.photoUrl
+?
+`<img
+src="${esc(user.photoUrl)}"
+style="
+width:42px;
+height:42px;
+border-radius:50%;
+object-fit:cover">`
+:
+`
+<div class="user-placeholder"
+style="width:42px;height:42px;font-size:17px">
+
+${esc((p.username||"U").charAt(0).toUpperCase())}
+
+</div>
+`
+}
+
+<div>
+
+<b>${esc(p.username||"User")}</b>
+
+<br>
+
+<span class="muted">
+${new Date(p.createdAt||Date.now()).toLocaleString()}
+</span>
+
+</div>
+
+</div>
+
+<br>
+
+${
+p.imageUrl
+?
+`<img
+src="${esc(p.imageUrl)}"
+class="f-${esc(p.filter||"normal")}"
+onerror="this.style.display='none'">`
+:""
+}
+
+<p>
+${esc(p.caption||"")}
+</p>
+
+<button
+class="btn"
+onclick="like('posts/${id}/likes')">
+
+❤️ ${likes}
+
+</button>
+
+<button
+class="btn"
+onclick="comment('${id}')">
+
+💬
+
+</button>
+
+<button
+class="btn"
+onclick="shareText('${esc(p.caption||"Rechod post")}')">
+
+↗
+
+</button>
+
+</div>
+
+`;
+
+}
+
+
+/* LIKE */
+
+window.like=async path=>{
+
+if(!me)return;
+
+try{
+
+let r=ref(db,path);
+
+await runTransaction(
+r,
+v=>v?null:me.uid
+);
+
+}catch(e){
+
+alert("Like नहीं हुआ: "+e.message);
+
+}
+
+};
+
+
+/* COMMENT */
+
+window.comment=async id=>{
+
+let t=prompt("Comment");
+
+if(t){
+
+await push(
+ref(db,"posts/"+id+"/comments"),
+{
+uid:me.uid,
+username:
+profiles[me.uid]?.username||"User",
+text:t,
+createdAt:Date.now()
+}
+);
+
+}
+
+};
+
+
+/* SHARE */
+
+window.shareText=t=>{
+
+if(navigator.share){
+
+navigator.share({
+title:"Rechod",
+text:t
+}).catch(()=>{});
+
+}else{
+
+alert(t);
+
+}
+
+};
+
+
+/* REELS */
+
+function reelsPage(){
+
+let a=
+Object.entries(reels)
+.sort((x,y)=>
+(y[1].createdAt||0)-
+(x[1].createdAt||0)
+);
+
+app.innerHTML=
+
+a.map(([id,r])=>`
+
+<div class="card">
+
+<div
+class="row"
+onclick="openProfile('${r.uid||""}')"
+style="cursor:pointer">
+
+<b>
+${esc(r.username||"User")}
+</b>
+
+</div>
+
+<br>
+
+<video
+src="${esc(r.videoUrl||"")}"
+controls
+playsinline
+loop>
+</video>
+
+<p>
+${esc(r.caption||"")}
+</p>
+
+<button
+class="btn"
+onclick="like('reels/${id}/likes')">
+
+❤️ ${Object.keys(r.likes||{}).length}
+
+</button>
+
+<button
+class="btn"
+onclick="shareText('${esc(r.caption||"Rechod reel")}')">
+
+↗
+
+</button>
+
+</div>
+
+`).join("")
+
+||
+
+'<div class="card center">No reels yet.</div>';
+
+}
+
+
+/* CREATE */
+
+function create(){
+
+selectedFilter="normal";
+
+selectedStoryFilter="normal";
+
+app.innerHTML=`
+
+<div class="card">
+
+<h3>📷 Create Post</h3>
+
+<input
+id="pfile"
+type="file"
+accept="image/*"
+onchange="previewPost()">
+
+<div id="postPreview"></div>
+
+<div class="filter-box">
+
+${filterButtons("setFilter")}
+
+</div>
+
+<textarea
+id="pcap"
+placeholder="Caption"></textarea>
+
+<progress
+id="pbar"
+class="progress"
+value="0"
+max="100">
+</progress>
+
+<button
+class="btn"
+onclick="addPost()">
+
+📷 Photo Post करें
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>⭕ Add Story</h3>
+
+<input
+id="sfile"
+type="file"
+accept="image/*,video/*"
+onchange="previewStory()">
+
+<div id="storyPreview"></div>
+
+<div class="filter-box">
+
+${filterButtons("setStoryFilter")}
+
+</div>
+
+<input
+id="scap"
+placeholder="Story text/caption">
+
+<progress
+id="sbar"
+class="progress"
+value="0"
+max="100">
+</progress>
+
+<button
+class="btn"
+onclick="addStory()">
+
+⭕ Story डालें
+
+</button>
+
+<p class="muted">
+Story 24 घंटे बाद अपने-आप hide हो जाएगी।
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>🎬 Create Reel</h3>
+
+<input
+id="rfile"
+type="file"
+accept="video/*">
+
+<textarea
+id="rcap"
+placeholder="Caption"></textarea>
+
+<progress
+id="rbar"
+class="progress"
+value="0"
+max="100">
+</progress>
+
+<button
+class="btn"
+onclick="addReel()">
+
+🎬 Reel डालें
+
+</button>
+
+<p class="muted">
+अधिकतम 100 MB
+</p>
+
+</div>
+
+`;
+
+}
+
 
 /* FILTER BUTTONS */
 
@@ -1187,14 +1324,18 @@ let arr=[
 return arr.map(x=>`
 
 <button
+type="button"
 class="filter-btn ${x[0]=="normal"?"active":""}"
 onclick="${fn}('${x[0]}',this)">
+
 ${x[1]}
+
 </button>
 
 `).join("");
 
 }
+
 
 /* FILTER */
 
@@ -1202,17 +1343,28 @@ window.setFilter=(name,button)=>{
 
 selectedFilter=name;
 
-document.querySelectorAll(".filter-box:first-of-type .filter-btn")
+let box=button.closest(".filter-box");
+
+if(box){
+
+box.querySelectorAll(".filter-btn")
 .forEach(x=>x.classList.remove("active"));
+
+}
 
 button.classList.add("active");
 
-let img=document.getElementById("postPreviewImg");
+let img=
+document.getElementById("postPreviewImg");
 
-if(img)
+if(img){
+
 img.className="f-"+name;
 
+}
+
 };
+
 
 /* STORY FILTER */
 
@@ -1220,13 +1372,29 @@ window.setStoryFilter=(name,button)=>{
 
 selectedStoryFilter=name;
 
-let box=
+let box=button.closest(".filter-box");
+
+if(box){
+
+box.querySelectorAll(".filter-btn")
+.forEach(x=>x.classList.remove("active"));
+
+}
+
+button.classList.add("active");
+
+let media=
 document.getElementById("storyPreviewMedia");
 
-if(box)
-box.className="story-media f-"+name;
+if(media){
+
+media.className=
+"story-media f-"+name;
+
+}
 
 };
+
 
 /* PHOTO PREVIEW */
 
@@ -1237,18 +1405,27 @@ document.getElementById("pfile").files[0];
 
 if(!file)return;
 
+if(!file.type.startsWith("image/")){
+
+alert("सिर्फ photo चुनें");
+
+return;
+
+}
+
 let url=URL.createObjectURL(file);
 
 document.getElementById("postPreview").innerHTML=`
 
-<img  
-id="postPreviewImg"  
-class="f-${selectedFilter}"  
+<img
+id="postPreviewImg"
+class="f-${selectedFilter}"
 src="${url}">
 
 `;
 
 };
+
 
 /* STORY PREVIEW */
 
@@ -1265,11 +1442,11 @@ if(file.type.startsWith("video/")){
 
 document.getElementById("storyPreview").innerHTML=`
 
-<video  
-id="storyPreviewMedia"  
-class="story-media f-${selectedStoryFilter}"  
-src="${url}"  
-controls  
+<video
+id="storyPreviewMedia"
+class="story-media f-${selectedStoryFilter}"
+src="${url}"
+controls
 playsinline>
 </video>
 
@@ -1279,9 +1456,9 @@ playsinline>
 
 document.getElementById("storyPreview").innerHTML=`
 
-<img  
-id="storyPreviewMedia"  
-class="story-media f-${selectedStoryFilter}"  
+<img
+id="storyPreviewMedia"
+class="story-media f-${selectedStoryFilter}"
 src="${url}">
 
 `;
@@ -1290,17 +1467,24 @@ src="${url}">
 
 };
 
-/* CLOUDINARY */
+
+/* CLOUDINARY UPLOAD */
 
 async function cloudinaryUpload(file,onProgress){
 
+/* FIXED URL */
+
 let url=
-https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload;
+`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
 
 let form=new FormData();
 
 form.append("file",file);
-form.append("upload_preset",UPLOAD_PRESET);
+
+form.append(
+"upload_preset",
+UPLOAD_PRESET
+);
 
 return new Promise((resolve,reject)=>{
 
@@ -1313,7 +1497,9 @@ xhr.upload.onprogress=e=>{
 if(e.lengthComputable&&onProgress){
 
 onProgress(
-Math.round((e.loaded/e.total)*100)
+Math.round(
+(e.loaded/e.total)*100
+)
 );
 
 }
@@ -1324,9 +1510,13 @@ xhr.onload=()=>{
 
 try{
 
-let data=JSON.parse(xhr.responseText);
+let data=
+JSON.parse(xhr.responseText);
 
-if(xhr.status>=200&&xhr.status<300){
+if(
+xhr.status>=200&&
+xhr.status<300
+){
 
 resolve(data);
 
@@ -1351,7 +1541,9 @@ reject(e);
 
 xhr.onerror=()=>{
 
-reject(new Error("Internet/upload error"));
+reject(
+new Error("Internet/upload error")
+);
 
 };
 
@@ -1361,51 +1553,91 @@ xhr.send(form);
 
 }
 
+
 /* PHOTO POST */
 
 window.addPost=async()=>{
 
-let file=
-document.getElementById("pfile").files[0];
+if(!me){
+
+alert("पहले Login करें");
+
+return;
+
+}
+
+let input=
+document.getElementById("pfile");
+
+let file=input.files[0];
 
 if(!file){
 
 alert("पहले photo चुनें");
+
 return;
 
 }
 
-if(file.size>1010241024){
+/* PHOTO LIMIT 10 MB */
+
+if(file.size>10*1024*1024){
 
 alert("Photo 10 MB से छोटी रखें");
+
 return;
 
 }
 
-let bar=document.getElementById("pbar");
+let bar=
+document.getElementById("pbar");
 
 bar.style.display="block";
+
 bar.value=0;
 
 try{
 
 let result=
-await cloudinaryUpload(file,p=>{
-bar.value=p;
-});
+await cloudinaryUpload(
+file,
+p=>bar.value=p
+);
+
+if(!result.secure_url){
+
+throw new Error(
+"Photo URL नहीं मिली"
+);
+
+}
 
 await push(
 ref(db,"posts"),
 {
 uid:me.uid,
+
 username:
-profiles[me.uid]?.username||"User",
-imageUrl:result.secure_url,
+profiles[me.uid]?.username||
+"User",
+
+imageUrl:
+result.secure_url,
+
 caption:
 document.getElementById("pcap").value,
-filter:selectedFilter,
-createdAt:Date.now(),
-mediaType:"image"
+
+filter:
+selectedFilter,
+
+createdAt:
+Date.now(),
+
+mediaType:
+"image",
+
+likes:{}
+
 }
 );
 
@@ -1417,15 +1649,29 @@ page("home");
 
 }catch(e){
 
-alert("Photo upload नहीं हुआ: "+(e.message||e));
+console.error(e);
+
+alert(
+"Photo upload नहीं हुआ: "+
+(e.message||e)
+);
 
 }
 
 };
 
+
 /* STORY */
 
 window.addStory=async()=>{
+
+if(!me){
+
+alert("पहले Login करें");
+
+return;
+
+}
 
 let file=
 document.getElementById("sfile").files[0];
@@ -1433,46 +1679,70 @@ document.getElementById("sfile").files[0];
 if(!file){
 
 alert("पहले photo या video चुनें");
+
 return;
 
 }
 
-if(file.size>10010241024){
+/* STORY LIMIT 100 MB */
+
+if(file.size>100*1024*1024){
 
 alert("Story 100 MB से छोटी रखें");
+
 return;
 
 }
 
-let bar=document.getElementById("sbar");
+let bar=
+document.getElementById("sbar");
 
 bar.style.display="block";
+
 bar.value=0;
 
 try{
 
 let result=
-await cloudinaryUpload(file,p=>{
-bar.value=p;
-});
+await cloudinaryUpload(
+file,
+p=>bar.value=p
+);
 
-let isVideo=file.type.startsWith("video/");
+let isVideo=
+file.type.startsWith("video/");
 
 await push(
 ref(db,"stories"),
 {
 uid:me.uid,
+
 username:
-profiles[me.uid]?.username||"User",
-mediaUrl:result.secure_url,
-mediaType:isVideo?"video":"image",
+profiles[me.uid]?.username||
+"User",
+
+mediaUrl:
+result.secure_url,
+
+mediaType:
+isVideo?"video":"image",
+
 caption:
 document.getElementById("scap").value,
-filter:selectedStoryFilter,
-createdAt:Date.now(),
-expiresAt:Date.now()+246060*1000,
+
+filter:
+selectedStoryFilter,
+
+createdAt:
+Date.now(),
+
+expiresAt:
+Date.now()+24*60*60*1000,
+
 likes:{},
+
 views:{}
+
 }
 );
 
@@ -1484,11 +1754,17 @@ page("home");
 
 }catch(e){
 
-alert("Story upload नहीं हुई: "+(e.message||e));
+console.error(e);
+
+alert(
+"Story upload नहीं हुई: "+
+(e.message||e)
+);
 
 }
 
 };
+
 
 /* OPEN STORY */
 
@@ -1499,35 +1775,50 @@ let s=stories[id];
 if(!s)return;
 
 if(
-Date.now()-(s.createdAt||0)>=246060*1000
+Date.now()-(s.createdAt||0)>=
+24*60*60*1000
 ){
 
 alert("यह Story expire हो गई है");
+
 return;
 
 }
 
 currentStoryId=id;
 
+try{
+
 await set(
-ref(db,"stories/"+id+"/views/"+me.uid),
+ref(
+db,
+"stories/"+id+"/views/"+me.uid
+),
 true
 );
 
-let media=document.getElementById("storyMedia");
+}catch(e){
 
-let filter="f-"+(s.filter||"normal");
+console.log(e);
+
+}
+
+let media=
+document.getElementById("storyMedia");
+
+let filter=
+"f-"+(s.filter||"normal");
 
 if(s.mediaType==="video"){
 
 media.innerHTML=`
 
-<video  
-class="story-media ${filter}"  
-src="${esc(s.mediaUrl)}"  
-autoplay  
-controls  
-playsinline  
+<video
+class="story-media ${filter}"
+src="${esc(s.mediaUrl)}"
+autoplay
+controls
+playsinline
 loop>
 </video>
 
@@ -1537,30 +1828,35 @@ loop>
 
 media.innerHTML=`
 
-<img  
-class="story-media ${filter}"  
+<img
+class="story-media ${filter}"
 src="${esc(s.mediaUrl)}">
 
 `;
 
 }
 
-document.getElementById("storyUser").textContent=
+document.getElementById("storyUser")
+.textContent=
 s.username||"User";
 
-document.getElementById("storyInfo").textContent=
+document.getElementById("storyInfo")
+.textContent=
 s.caption||"";
 
-document.getElementById("storyLikeCount").textContent=
+document.getElementById("storyLikeCount")
+.textContent=
 Object.keys(s.likes||{}).length;
 
-document.getElementById("storyViewCount").textContent=
-Object.keys(s.views||{}).length+1;
+document.getElementById("storyViewCount")
+.textContent=
+Object.keys(s.views||{}).length;
 
 document.getElementById("storyViewer")
 .classList.add("show");
 
 };
+
 
 /* CLOSE STORY */
 
@@ -1569,33 +1865,56 @@ window.closeStory=()=>{
 document.getElementById("storyViewer")
 .classList.remove("show");
 
-document.getElementById("storyMedia").innerHTML="";
+document.getElementById("storyMedia")
+.innerHTML="";
 
 currentStoryId=null;
 
 };
 
+
 /* STORY LIKE */
 
 window.likeCurrentStory=async()=>{
 
-if(!currentStoryId)return;
+if(!currentStoryId||!me)return;
 
 let r=ref(
 db,
-"stories/"+currentStoryId+"/likes/"+me.uid
+"stories/"+currentStoryId+
+"/likes/"+me.uid
 );
+
+try{
 
 await runTransaction(
 r,
 v=>v?null:true
 );
 
+}catch(e){
+
+alert(
+"Like नहीं हुआ: "+
+e.message
+);
+
+}
+
 };
+
 
 /* REEL */
 
 window.addReel=async()=>{
+
+if(!me){
+
+alert("पहले Login करें");
+
+return;
+
+}
 
 let file=
 document.getElementById("rfile").files[0];
@@ -1603,13 +1922,7 @@ document.getElementById("rfile").files[0];
 if(!file){
 
 alert("पहले video चुनें");
-return;
 
-}
-
-if(file.size>10010241024){
-
-alert("Video 100 MB से छोटी रखें");
 return;
 
 }
@@ -1617,33 +1930,67 @@ return;
 if(!file.type.startsWith("video/")){
 
 alert("सिर्फ video file चुनें");
+
 return;
 
 }
 
-let bar=document.getElementById("rbar");
+/* REEL LIMIT 100 MB */
+
+if(file.size>100*1024*1024){
+
+alert("Video 100 MB से छोटी रखें");
+
+return;
+
+}
+
+let bar=
+document.getElementById("rbar");
 
 bar.style.display="block";
+
 bar.value=0;
 
 try{
 
 let result=
-await cloudinaryUpload(file,p=>{
-bar.value=p;
-});
+await cloudinaryUpload(
+file,
+p=>bar.value=p
+);
+
+if(!result.secure_url){
+
+throw new Error(
+"Video URL नहीं मिली"
+);
+
+}
 
 await push(
 ref(db,"reels"),
 {
 uid:me.uid,
+
 username:
-profiles[me.uid]?.username||"User",
-videoUrl:result.secure_url,
+profiles[me.uid]?.username||
+"User",
+
+videoUrl:
+result.secure_url,
+
 caption:
 document.getElementById("rcap").value,
-createdAt:Date.now(),
-mediaType:"video"
+
+createdAt:
+Date.now(),
+
+mediaType:
+"video",
+
+likes:{}
+
 }
 );
 
@@ -1655,11 +2002,17 @@ page("reels");
 
 }catch(e){
 
-alert("Video upload नहीं हुआ: "+(e.message||e));
+console.error(e);
+
+alert(
+"Video upload नहीं हुआ: "+
+(e.message||e)
+);
 
 }
 
 };
+
 
 /* SEARCH */
 
@@ -1667,14 +2020,23 @@ function search(){
 
 app.innerHTML=`
 
-<div class="card">  <h3>🔎 Search Users</h3>  <input  
-id="sq"  
-placeholder="Username search करें"  
+<div class="card">
+
+<h3>🔎 Search Users</h3>
+
+<input
+id="sq"
+placeholder="Username search करें"
 oninput="doSearch()">
 
-</div>  <div id="results"></div>  `;
+</div>
+
+<div id="results"></div>
+
+`;
 
 }
+
 
 window.doSearch=()=>{
 
@@ -1687,11 +2049,16 @@ document.getElementById("results").innerHTML=
 Object.entries(profiles)
 
 .filter(([id,p])=>
-id!==me.uid &&
-(p.username||"").toLowerCase().includes(q)
+id!==me.uid&&
+(p.username||"")
+.toLowerCase()
+.includes(q)
 )
 
-.map(([id,p])=>userSearchCard(id,p))
+.map(([id,p])=>
+userSearchCard(id,p)
+)
+
 .join("")
 
 ||
@@ -1699,6 +2066,7 @@ id!==me.uid &&
 '<div class="card center">User नहीं मिला।</div>';
 
 };
+
 
 /* USER SEARCH CARD */
 
@@ -1712,42 +2080,77 @@ let isFollowing=
 
 let avatar=p.photoUrl
 ?
-<img class="user-avatar" src="${esc(p.photoUrl)}">
+`<img class="user-avatar"
+src="${esc(p.photoUrl)}">`
 :
 `
 
-<div class="user-placeholder">  
-${esc((p.username||"U").charAt(0).toUpperCase())}  
-</div>  
-`;  return `
+<div class="user-placeholder">
 
-<div class="card">  <div class="user-card">  ${avatar}
+${esc(
+(p.username||"U")
+.charAt(0)
+.toUpperCase()
+)}
 
-<div style="flex:1">  <b>${esc(p.username||"User")}</b>
+</div>
 
-<br>  <span class="muted">  
-${followers} Followers  
-</span>  </div>  </div>  <button  
-class="btn"  
+`;
+
+return `
+
+<div class="card">
+
+<div class="user-card">
+
+${avatar}
+
+<div style="flex:1">
+
+<b>
+${esc(p.username||"User")}
+</b>
+
+<br>
+
+<span class="muted">
+${followers} Followers
+</span>
+
+</div>
+
+</div>
+
+<button
+class="btn"
 onclick="openProfile('${id}')">
+
 👤 Profile
+
 </button>
 
 <button
 class="btn ${isFollowing?"following":"follow"}"
 onclick="toggleFollow('${id}')">
+
 ${isFollowing?"Following":"Follow"}
+
 </button>
 
-<button  
-class="btn"  
+<button
+class="btn"
 onclick="message('${id}')">
+
 💬 Message
+
 </button>
 
-</div>  `;
+</div>
+
+`;
 
 };
+
 
 /* OPEN OTHER PROFILE */
 
@@ -1760,6 +2163,7 @@ viewingProfileId=id;
 otherProfile(id);
 
 };
+
 
 /* OTHER PROFILE */
 
@@ -1784,9 +2188,14 @@ Object.keys(p.following||{}).length;
 
 let userPosts=
 Object.entries(posts)
-.filter(([postId,x])=>x.uid===id)
+
+.filter(([postId,x])=>
+x.uid===id
+)
+
 .sort((a,b)=>
-(b[1].createdAt||0)-(a[1].createdAt||0)
+(b[1].createdAt||0)-
+(a[1].createdAt||0)
 );
 
 let isFollowing=
@@ -1794,62 +2203,126 @@ let isFollowing=
 
 let photo=p.photoUrl
 ?
-<img class="profile-photo" src="${esc(p.photoUrl)}">
+`<img
+class="profile-photo"
+src="${esc(p.photoUrl)}">`
 :
 `
 
-<div class="profile-placeholder">  
-${esc((p.username||"U").charAt(0).toUpperCase())}  
-</div>  
-`;  app.innerHTML=`
+<div class="profile-placeholder">
 
-<div class="card profile-head">  ${photo}
+${esc(
+(p.username||"U")
+.charAt(0)
+.toUpperCase()
+)}
 
-<h2>  
-${esc(p.username||"User")}  
-</h2>  <p>  
-${esc(p.bio||"")}  
-</p>  <div class="stats">  <div class="stat">  
-<b>${userPosts.length}</b>  
-<br>  
-<span class="muted">Posts</span>  
-</div>  <div class="stat">  
-<b>${followers}</b>  
-<br>  
-<span class="muted">Followers</span>  
-</div>  <div class="stat">  
-<b>${following}</b>  
-<br>  
-<span class="muted">Following</span>  
-</div>  </div>  <button
+</div>
+
+`;
+
+app.innerHTML=`
+
+<div class="card profile-head">
+
+${photo}
+
+<h2>
+${esc(p.username||"User")}
+</h2>
+
+<p>
+${esc(p.bio||"")}
+</p>
+
+<div class="stats">
+
+<div class="stat">
+
+<b>${userPosts.length}</b>
+
+<br>
+
+<span class="muted">
+Posts
+</span>
+
+</div>
+
+<div class="stat">
+
+<b>${followers}</b>
+
+<br>
+
+<span class="muted">
+Followers
+</span>
+
+</div>
+
+<div class="stat">
+
+<b>${following}</b>
+
+<br>
+
+<span class="muted">
+Following
+</span>
+
+</div>
+
+</div>
+
+<button
 class="btn ${isFollowing?"following":"follow"}"
 onclick="toggleFollow('${id}')">
+
 ${isFollowing?"✓ Following":"➕ Follow"}
+
 </button>
 
-<button  
-class="btn"  
+<button
+class="btn"
 onclick="message('${id}')">
+
 💬 Message
+
 </button>
 
-<button  
-class="btn"  
+<button
+class="btn"
 onclick="page('search')">
+
 ← Back
+
 </button>
 
-</div>  <div class="card">  <h3>📷 Posts</h3>  ${
-userPosts.map(([postId,x])=>
+</div>
+
+<div class="card">
+
+<h3>📷 Posts</h3>
+
+${
+userPosts
+.map(([postId,x])=>
 postCard(postId,x)
-).join("")
+)
+.join("")
+
 ||
+
 '<p class="muted">अभी कोई post नहीं है।</p>'
 }
 
-</div>  `;
+</div>
+
+`;
 
 }
+
 
 /* FOLLOW / UNFOLLOW */
 
@@ -1864,26 +2337,47 @@ let updates={};
 
 if(amFollowing){
 
-updates["profiles/"+me.uid+"/following/"+uid]=null;
+updates[
+"profiles/"+me.uid+
+"/following/"+uid
+]=null;
 
-updates["profiles/"+uid+"/followers/"+me.uid]=null;
+updates[
+"profiles/"+uid+
+"/followers/"+me.uid
+]=null;
 
 }else{
 
-updates["profiles/"+me.uid+"/following/"+uid]=true;
+updates[
+"profiles/"+me.uid+
+"/following/"+uid
+]=true;
 
-updates["profiles/"+uid+"/followers/"+me.uid]=true;
+updates[
+"profiles/"+uid+
+"/followers/"+me.uid
+]=true;
 
-updates["notifications/"+uid+"/"+me.uid]={
+updates[
+"notifications/"+uid+
+"/"+me.uid
+]={
 type:"follow",
 username:
-profiles[me.uid]?.username||"User",
+profiles[me.uid]?.username||
+"User",
 createdAt:Date.now()
 };
 
 }
 
-await update(ref(db),updates);
+try{
+
+await update(
+ref(db),
+updates
+);
 
 if(viewingProfileId){
 
@@ -1895,13 +2389,24 @@ render();
 
 }
 
+}catch(e){
+
+alert(
+"Follow नहीं हुआ: "+
+e.message
+);
+
+}
+
 };
+
 
 /* MY PROFILE */
 
 function profile(){
 
-let p=profiles[me.uid]||{};
+let p=
+profiles[me.uid]||{};
 
 let followers=
 Object.keys(p.followers||{}).length;
@@ -1911,95 +2416,171 @@ Object.keys(p.following||{}).length;
 
 let myPosts=
 Object.entries(posts)
-.filter(([id,x])=>x.uid===me.uid)
+
+.filter(([id,x])=>
+x.uid===me.uid
+)
+
 .sort((a,b)=>
-(b[1].createdAt||0)-(a[1].createdAt||0)
+(b[1].createdAt||0)-
+(a[1].createdAt||0)
 );
 
 let photo=p.photoUrl
 ?
-<img   class="profile-photo"   src="${esc(p.photoUrl)}">
+`<img
+class="profile-photo"
+src="${esc(p.photoUrl)}">`
 :
 `
 
-<div class="profile-placeholder">  
-${esc((p.username||"U").charAt(0).toUpperCase())}  
-</div>  
-`;  app.innerHTML=`
+<div class="profile-placeholder">
 
-<div class="card profile-head">  ${photo}
+${esc(
+(p.username||"U")
+.charAt(0)
+.toUpperCase()
+)}
 
-<br>  <input  
-id="profilePhoto"  
-type="file"  
+</div>
+
+`;
+
+app.innerHTML=`
+
+<div class="card profile-head">
+
+${photo}
+
+<br>
+
+<input
+id="profilePhoto"
+type="file"
 accept="image/*">
 
-<button  
-class="btn"  
+<button
+class="btn"
 onclick="uploadProfilePhoto()">
+
 📷 Profile Photo बदलें
+
 </button>
 
-<h2>  
-${esc(p.username||"User")}  
-</h2>  <p>  
-${esc(p.bio||"")}  
-</p>  <p>  
-Age: ${esc(p.age||"")}  
-</p>  <div class="stats">  <div class="stat">  
-<b>${myPosts.length}</b>  
-<br>  
-<span class="muted">Posts</span>  
-</div>  <div class="stat">  
-<b>${followers}</b>  
-<br>  
-<span class="muted">Followers</span>  
-</div>  <div class="stat">  
-<b>${following}</b>  
-<br>  
-<span class="muted">Following</span>  
-</div>  </div>  <button  
-class="btn"  
+<h2>
+${esc(p.username||"User")}
+</h2>
+
+<p>
+${esc(p.bio||"")}
+</p>
+
+<p>
+Age: ${esc(p.age||"")}
+</p>
+
+<div class="stats">
+
+<div class="stat">
+
+<b>${myPosts.length}</b>
+
+<br>
+
+<span class="muted">
+Posts
+</span>
+
+</div>
+
+<div class="stat">
+
+<b>${followers}</b>
+
+<br>
+
+<span class="muted">
+Followers
+</span>
+
+</div>
+
+<div class="stat">
+
+<b>${following}</b>
+
+<br>
+
+<span class="muted">
+Following
+</span>
+
+</div>
+
+</div>
+
+<button
+class="btn"
 onclick="editProfile()">
+
 ✏️ Edit Profile
+
 </button>
 
-<button  
-class="btn danger"  
+<button
+class="btn danger"
 onclick="logoutNow()">
+
 🚪 Logout
+
 </button>
 
-</div>  <div class="card">  <h3>📷 My Posts</h3>  ${
-myPosts.map(([id,x])=>
+</div>
+
+<div class="card">
+
+<h3>📷 My Posts</h3>
+
+${
+myPosts
+.map(([id,x])=>
 postCard(id,x)
-).join("")
+)
+.join("")
+
 ||
+
 '<p class="muted">अभी कोई post नहीं है।</p>'
 }
 
-</div>  `;
+</div>
+
+`;
 
 }
+
 
 /* PROFILE PHOTO */
 
 window.uploadProfilePhoto=async()=>{
 
-let input=document.getElementById("profilePhoto");
+let input=
+document.getElementById("profilePhoto");
 
 let file=input.files[0];
 
 if(!file){
 
 alert("पहले photo चुनें");
+
 return;
 
 }
 
-if(file.size>1010241024){
+if(file.size>10*1024*1024){
 
 alert("Profile photo 10 MB से छोटी रखें");
+
 return;
 
 }
@@ -2007,6 +2588,7 @@ return;
 if(!file.type.startsWith("image/")){
 
 alert("सिर्फ photo चुनें");
+
 return;
 
 }
@@ -2019,7 +2601,8 @@ await cloudinaryUpload(file);
 await update(
 ref(db,"profiles/"+me.uid),
 {
-photoUrl:result.secure_url
+photoUrl:
+result.secure_url
 }
 );
 
@@ -2038,6 +2621,7 @@ alert(
 
 };
 
+
 /* EDIT PROFILE */
 
 window.editProfile=async()=>{
@@ -2054,15 +2638,30 @@ let b=prompt(
 profiles[me.uid]?.bio||""
 );
 
+try{
+
 await update(
 ref(db,"profiles/"+me.uid),
 {
-username:u.trim()||"User",
-bio:b||""
+username:
+u.trim()||"User",
+
+bio:
+b||""
 }
 );
 
+}catch(e){
+
+alert(
+"Profile update नहीं हुआ: "+
+e.message
+);
+
+}
+
 };
+
 
 /* MESSAGES */
 
@@ -2070,60 +2669,103 @@ function messagesPage(){
 
 let arr=
 Object.entries(messages)
+
 .filter(([id,m])=>
-m.from===me.uid||m.to===me.uid
+m.from===me.uid||
+m.to===me.uid
 )
+
 .sort((a,b)=>
-(a[1].createdAt||0)-(b[1].createdAt||0)
+(a[1].createdAt||0)-
+(b[1].createdAt||0)
 );
 
 app.innerHTML=`
 
-<div class="card">  <h3>💬 Messages</h3>  ${
+<div class="card">
+
+<h3>💬 Messages</h3>
+
+${
 arr.map(([id,m])=>`
 
-<div class="card">  <b>  
-${esc(m.fromName||"User")}  
-</b>  <p>  
-${esc(m.text||"")}  
-</p>  <span class="muted">  
-${new Date(m.createdAt||Date.now()).toLocaleString()}  
-</span>  </div>  `).join("")
+<div class="card">
+
+<b>
+${esc(m.fromName||"User")}
+</b>
+
+<p>
+${esc(m.text||"")}
+</p>
+
+<span class="muted">
+${new Date(
+m.createdAt||Date.now()
+).toLocaleString()}
+</span>
+
+</div>
+
+`).join("")
 
 ||
 
 "<p class='muted'>No messages yet.</p>"
 }
 
-</div>  `;
+</div>
+
+`;
 
 }
 
+
 /* SEND MESSAGE */
 
-window.message=uid=>{
+window.message=async uid=>{
 
 let t=prompt("Message");
 
 if(!t)return;
 
-push(
+try{
+
+await push(
 ref(db,"messages"),
 {
 from:me.uid,
+
 to:uid,
+
 fromName:
-profiles[me.uid]?.username||"User",
+profiles[me.uid]?.username||
+"User",
+
 toName:
-profiles[uid]?.username||"User",
+profiles[uid]?.username||
+"User",
+
 text:t,
-createdAt:Date.now()
+
+createdAt:
+Date.now()
 }
 );
 
 alert("Message भेज दिया ✅");
 
+}catch(e){
+
+alert(
+"Message नहीं गया: "+
+e.message
+);
+
+}
+
 };
+
 
 /* SETTINGS */
 
@@ -2131,39 +2773,56 @@ function settings(){
 
 app.innerHTML=`
 
-<div class="card">  <h3>⚙️ Settings</h3>  <button  
-class="btn"  
-onclick="  
-document.body.classList.toggle('dark')  
+<div class="card">
+
+<h3>⚙️ Settings</h3>
+
+<button
+class="btn"
+onclick="
+document.body.classList.toggle('dark')
 ">
+
 🌙 Dark Mode
+
 </button>
 
-<button  
-class="btn"  
-onclick="  
-alert('Rechod notifications realtime हैं।')  
+<button
+class="btn"
+onclick="
+alert('Rechod notifications realtime हैं।')
 ">
+
 🔔 Notifications
+
 </button>
 
-<button  
-class="btn"  
-onclick="  
-alert('Rechod uses Firebase + Cloudinary.')  
+<button
+class="btn"
+onclick="
+alert('Rechod uses Firebase + Cloudinary.')
 ">
+
 ℹ️ About
+
 </button>
 
-<br>  <button  
-class="btn danger"  
+<br>
+
+<button
+class="btn danger"
 onclick="logoutNow()">
+
 🚪 Logout
+
 </button>
 
-</div>  `;
+</div>
+
+`;
 
 }
+
 
 /* FIREBASE REALTIME */
 
@@ -2175,10 +2834,15 @@ me=u;
 
 if(!u){
 
+document.getElementById("userName")
+.textContent="";
+
 render();
+
 return;
 
 }
+
 
 /* PROFILES */
 
@@ -2193,6 +2857,7 @@ render();
 }
 );
 
+
 /* POSTS */
 
 onValue(
@@ -2205,6 +2870,7 @@ render();
 
 }
 );
+
 
 /* REELS */
 
@@ -2219,6 +2885,7 @@ render();
 }
 );
 
+
 /* STORIES */
 
 onValue(
@@ -2231,6 +2898,7 @@ render();
 
 }
 );
+
 
 /* MESSAGES */
 
@@ -2245,6 +2913,7 @@ render();
 }
 );
 
+
 /* NOTIFICATIONS */
 
 onValue(
@@ -2258,5 +2927,7 @@ notifs=s.val()||{};
 
 });
 
-</script>  </body>  
-   </html>
+</script>
+
+</body>
+  </html>
