@@ -98,13 +98,9 @@ margin:4px 2px;
 cursor:pointer
 }
 
-.danger{
-background:#d33
-}
+.danger{background:#d33}
 
-.follow{
-background:#1877f2
-}
+.follow{background:#1877f2}
 
 .following{
 background:#ddd;
@@ -123,58 +119,46 @@ max-height:520px;
 object-fit:cover
 }
 
-.tabs{
-display:flex;
-gap:5px;
-margin-bottom:10px
-}
-
-.tabs button{
-flex:1;
-padding:9px;
-border:0;
-border-radius:8px
-}
-
-.dark{
-background:#111827;
-color:#eee
-}
-
-.dark .wrap,
-.dark .card{
-background:#1f2937;
-color:#eee
-}
-
-.dark nav{
-background:#1f2937;
-color:#eee
-}
-
-.dark input,
-.dark textarea{
-background:#111827;
-color:#eee;
-border-color:#555
-}
-
 .row{
 display:flex;
 align-items:center;
 gap:8px
 }
 
-.center{
-text-align:center
-}
+.center{text-align:center}
 
 .progress{
 width:100%;
 display:none
 }
 
-/* STORY */
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:5px
+}
+
+.gallery img{
+height:230px;
+object-fit:cover
+}
+
+.login-btn{
+width:100%;
+margin-top:7px
+}
+
+.google{
+background:#fff;
+color:#222;
+border:1px solid #ccc
+}
+
+.phone{
+background:#16a34a
+}
+
+/* STORIES */
 
 .story-row{
 display:flex;
@@ -257,17 +241,17 @@ background:#eaf3ff
 .f-bright{filter:brightness(1.25)}
 .f-vivid{filter:saturate(1.65) contrast(1.08)}
 .f-vintage{filter:sepia(.45) contrast(.95) brightness(1.05)}
-.f-warm{filter:sepia(.25) saturate(1.35) hue-rotate(-8deg)}
-.f-cool{filter:saturate(.9) hue-rotate(12deg) brightness(1.04)}
+.f-warm{filter:sepia(.25) saturate(1.35)}
+.f-cool{filter:saturate(.9) hue-rotate(12deg)}
 .f-bw{filter:grayscale(1)}
-.f-sunset{filter:sepia(.3) saturate(1.6) hue-rotate(-12deg) contrast(1.08)}
-.f-cinematic{filter:contrast(1.25) saturate(.85) brightness(.95)}
-.f-glow{filter:brightness(1.12) saturate(1.15) contrast(.92)}
+.f-sunset{filter:sepia(.3) saturate(1.6)}
+.f-cinematic{filter:contrast(1.25) saturate(.85)}
+.f-glow{filter:brightness(1.12) saturate(1.15)}
 .f-pink{filter:saturate(1.2) hue-rotate(315deg)}
-.f-nature{filter:saturate(1.5) hue-rotate(12deg) contrast(1.05)}
-.f-dramatic{filter:contrast(1.45) saturate(1.15) brightness(.88)}
-.f-fade{filter:contrast(.85) brightness(1.08) saturate(.75)}
-.f-dark{filter:brightness(.72) contrast(1.2) saturate(1.1)}
+.f-nature{filter:saturate(1.5)}
+.f-dramatic{filter:contrast(1.45) saturate(1.15)}
+.f-fade{filter:contrast(.85) brightness(1.08)}
+.f-dark{filter:brightness(.72) contrast(1.2)}
 
 /* STORY VIEWER */
 
@@ -282,13 +266,11 @@ justify-content:center;
 flex-direction:column
 }
 
-.story-viewer.show{
-display:flex
-}
+.story-viewer.show{display:flex}
 
 .story-media{
 max-width:100%;
-max-height:80vh;
+max-height:75vh;
 object-fit:contain;
 border-radius:0
 }
@@ -341,9 +323,7 @@ font-size:13px
 
 /* PROFILE */
 
-.profile-head{
-text-align:center
-}
+.profile-head{text-align:center}
 
 .profile-photo{
 width:110px;
@@ -375,13 +355,9 @@ gap:35px;
 margin:15px 0
 }
 
-.stat{
-text-align:center
-}
+.stat{text-align:center}
 
-.stat b{
-font-size:20px
-}
+.stat b{font-size:20px}
 
 .user-card{
 display:flex;
@@ -407,6 +383,39 @@ align-items:center;
 justify-content:center;
 font-size:22px;
 font-weight:bold
+}
+
+.mention{
+color:#1877f2;
+font-weight:bold;
+cursor:pointer
+}
+
+.dark{
+background:#111827;
+color:#eee
+}
+
+.dark .wrap,
+.dark .card{
+background:#1f2937;
+color:#eee
+}
+
+.dark nav{
+background:#1f2937;
+color:#eee
+}
+
+.dark input,
+.dark textarea{
+background:#111827;
+color:#eee;
+border-color:#555
+}
+
+#recaptcha-container{
+margin:8px 0
 }
 </style>
 </head>
@@ -434,16 +443,11 @@ font-weight:bold
 
 </div>
 
-<!-- STORY VIEWER -->
-
 <div id="storyViewer" class="story-viewer">
 
 <div class="story-top">
 <b id="storyUser"></b>
-
-<button class="story-close" onclick="closeStory()">
-✕
-</button>
+<button class="story-close" onclick="closeStory()">✕</button>
 </div>
 
 <div id="storyMedia"></div>
@@ -451,7 +455,6 @@ font-weight:bold
 <div id="storyInfo" class="story-info"></div>
 
 <div class="story-actions">
-
 <button onclick="likeCurrentStory()">
 ❤️ <span id="storyLikeCount">0</span>
 </button>
@@ -459,10 +462,9 @@ font-weight:bold
 <button>
 👀 <span id="storyViewCount">0</span>
 </button>
-
-</div>
 </div>
 
+</div>
 
 <script type="module">
 
@@ -470,19 +472,19 @@ font-weight:bold
 
 import{
 initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import{
 getAuth,
 onAuthStateChanged,
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
+signInWithPopup,
+GoogleAuthProvider,
+signInWithPhoneNumber,
+RecaptchaVerifier,
 signOut
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import{
 getDatabase,
@@ -492,12 +494,10 @@ set,
 onValue,
 update,
 runTransaction
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 
-/* FIREBASE CONFIG */
+/* CONFIG */
 
 const firebaseConfig={
 
@@ -522,23 +522,19 @@ measurementId:"G-DKZQ133PSN"
 };
 
 const fb=initializeApp(firebaseConfig);
-
 const auth=getAuth(fb);
-
 const db=getDatabase(fb);
 
 
 /* CLOUDINARY */
 
 const CLOUD_NAME="ut6gs93p";
-
 const UPLOAD_PRESET="rechod_upload";
 
 
 /* DATA */
 
 let me=null;
-
 let current="home";
 
 let profiles={};
@@ -553,6 +549,7 @@ let selectedStoryFilter="normal";
 
 let currentStoryId=null;
 let viewingProfileId=null;
+let phoneConfirmation=null;
 
 const app=document.getElementById("app");
 
@@ -560,7 +557,6 @@ const app=document.getElementById("app");
 /* ESCAPE */
 
 function esc(x=""){
-
 return String(x).replace(
 /[&<>"']/g,
 m=>({
@@ -571,6 +567,19 @@ m=>({
 "'":"&#39;"
 }[m])
 );
+}
+
+
+/* MENTION TEXT */
+
+function mentionHtml(text=""){
+
+let safe=esc(text);
+
+return safe.replace(
+/@([A-Za-z0-9_.]{2,30})/g,
+'<span class="mention">@$1</span>'
+);
 
 }
 
@@ -578,13 +587,9 @@ m=>({
 /* PAGE */
 
 window.page=function(p){
-
 current=p;
-
 viewingProfileId=null;
-
 render();
-
 };
 
 
@@ -593,11 +598,8 @@ render();
 function render(){
 
 if(!me){
-
 login();
-
 return;
-
 }
 
 document.getElementById("userName").textContent=
@@ -612,30 +614,22 @@ messages:messagesPage,
 profile,
 settings
 }[current]||home)();
-
 }
 
 
 /* LOGOUT */
 
 window.logoutNow=async()=>{
-
 try{
-
 await signOut(auth);
-
 current="home";
-
 }catch(e){
-
 alert("Logout नहीं हुआ: "+e.message);
-
 }
-
 };
 
 
-/* LOGIN */
+/* LOGIN PAGE */
 
 function login(){
 
@@ -647,35 +641,78 @@ app.innerHTML=`
 
 <p>Social App</p>
 
+<input id="loginUser"
+placeholder="Username / Email">
+
+<input id="pass"
+type="password"
+placeholder="Password">
+
+<button class="btn login-btn"
+onclick="loginNow()">
+🔐 Login
+</button>
+
+<button class="btn google login-btn"
+onclick="googleLogin()">
+🌐 Continue with Google
+</button>
+
+<hr>
+
+<h3>📱 Phone Login</h3>
+
 <input
-id="email"
+id="phone"
+placeholder="+91XXXXXXXXXX"
+type="tel">
+
+<div id="recaptcha-container"></div>
+
+<button
+class="btn phone login-btn"
+onclick="sendOTP()">
+📱 Send OTP
+</button>
+
+<input
+id="otp"
+placeholder="OTP"
+type="number">
+
+<button
+class="btn phone login-btn"
+onclick="verifyOTP()">
+✅ Verify OTP
+</button>
+
+<hr>
+
+<h3>🆕 Create Account</h3>
+
+<input
+id="signupEmail"
 placeholder="Email"
 type="email">
 
 <input
-id="pass"
-type="password"
-placeholder="Password">
+id="signupPass"
+placeholder="Password"
+type="password">
 
 <input
 id="uname"
-placeholder="Username (signup)">
+placeholder="Username">
 
 <input
 id="age"
 type="number"
-placeholder="Age (signup)">
+placeholder="Age">
 
 <button
-class="btn"
-onclick="loginNow()">
-Login
-</button>
-
-<button
-class="btn"
+class="btn login-btn"
 onclick="signup()">
-Sign Up
+Create Account
 </button>
 
 <p id="err" class="muted"></p>
@@ -683,26 +720,44 @@ Sign Up
 </div>
 
 `;
-
 }
 
 
-/* LOGIN */
+/* EMAIL / USERNAME LOGIN */
 
 window.loginNow=async()=>{
 
 try{
 
-let email=document.getElementById("email").value.trim();
+let value=
+document.getElementById("loginUser")
+.value.trim();
 
-let pass=document.getElementById("pass").value;
+let pass=
+document.getElementById("pass").value;
 
-if(!email||!pass){
-
-document.getElementById("err").textContent=
-"Email और Password डालें";
-
+if(!value||!pass){
+err.textContent="Username/Email और Password डालें";
 return;
+}
+
+let email=value;
+
+if(!value.includes("@")){
+
+let found=
+Object.entries(profiles).find(
+([id,p])=>
+(p.username||"").toLowerCase()===
+value.toLowerCase()
+);
+
+if(!found){
+err.textContent="Username नहीं मिला";
+return;
+}
+
+email=found[1].email;
 
 }
 
@@ -714,8 +769,7 @@ pass
 
 }catch(e){
 
-document.getElementById("err").textContent=
-e.message;
+document.getElementById("err").textContent=e.message;
 
 }
 
@@ -728,41 +782,96 @@ window.signup=async()=>{
 
 try{
 
-let email=document.getElementById("email").value.trim();
+let email=
+document.getElementById("signupEmail").value.trim();
 
-let pass=document.getElementById("pass").value;
+let pass=
+document.getElementById("signupPass").value;
 
-let uname=document.getElementById("uname").value.trim();
+let uname=
+document.getElementById("uname").value.trim();
 
-let age=Number(document.getElementById("age").value)||0;
+let age=
+Number(document.getElementById("age").value)||0;
 
-if(!email||!pass){
+if(!email||!pass||!uname){
 
-document.getElementById("err").textContent=
-"Email और Password डालें";
+err.textContent=
+"Email, Password और Username डालें";
 
 return;
+}
 
+let exists=
+Object.values(profiles).some(
+p=>
+(p.username||"").toLowerCase()===
+uname.toLowerCase()
+);
+
+if(exists){
+err.textContent="यह Username पहले से मौजूद है";
+return;
 }
 
 let c=
 await createUserWithEmailAndPassword(
-auth,
-email,
-pass
+auth,email,pass
 );
 
 await set(
 ref(db,"profiles/"+c.user.uid),
 {
-username:
-uname||
-email.split("@")[0],
-
+username:uname,
+email:email,
 age:age,
+bio:"Welcome to my Rechod profile! ❤️",
+createdAt:Date.now(),
+followers:{},
+following:{}
+}
+);
 
-bio:
-"Welcome to my Rechod profile! ❤️",
+alert("Account बन गया ✅");
+
+}catch(e){
+
+document.getElementById("err").textContent=e.message;
+
+}
+
+};
+
+
+/* GOOGLE */
+
+window.googleLogin=async()=>{
+
+try{
+
+const provider=new GoogleAuthProvider();
+
+let result=
+await signInWithPopup(auth,provider);
+
+let u=result.user;
+
+if(!profiles[u.uid]){
+
+await set(
+ref(db,"profiles/"+u.uid),
+{
+username:
+(u.displayName||u.email?.split("@")[0]||"User")
+.replace(/\s+/g,"_"),
+
+email:u.email||"",
+
+phone:u.phoneNumber||"",
+
+photoUrl:u.photoURL||"",
+
+bio:"Welcome to my Rechod profile! ❤️",
 
 createdAt:Date.now(),
 
@@ -772,12 +881,122 @@ following:{}
 }
 );
 
-alert("Account बन गया ✅");
+}
 
 }catch(e){
 
-document.getElementById("err").textContent=
-e.message;
+alert("Google Login नहीं हुआ: "+e.message);
+
+}
+
+};
+
+
+/* PHONE OTP */
+
+window.sendOTP=async()=>{
+
+try{
+
+let phone=
+document.getElementById("phone").value.trim();
+
+if(!phone){
+
+alert("Phone number डालें");
+
+return;
+}
+
+if(!window.recaptchaVerifier){
+
+window.recaptchaVerifier=
+new RecaptchaVerifier(
+auth,
+"recaptcha-container",
+{
+size:"normal"
+}
+);
+
+}
+
+phoneConfirmation=
+await signInWithPhoneNumber(
+auth,
+phone,
+window.recaptchaVerifier
+);
+
+alert("OTP भेज दिया गया ✅");
+
+}catch(e){
+
+console.error(e);
+
+alert(
+"OTP नहीं भेजा गया: "+
+e.message
+);
+
+}
+
+};
+
+
+/* VERIFY OTP */
+
+window.verifyOTP=async()=>{
+
+try{
+
+if(!phoneConfirmation){
+
+alert("पहले Send OTP दबाएँ");
+return;
+
+}
+
+let otp=
+document.getElementById("otp").value.trim();
+
+if(!otp){
+
+alert("OTP डालें");
+return;
+}
+
+let result=
+await phoneConfirmation.confirm(otp);
+
+let u=result.user;
+
+if(!profiles[u.uid]){
+
+let base=
+"User_"+(u.uid||"").slice(0,6);
+
+await set(
+ref(db,"profiles/"+u.uid),
+{
+username:base,
+phone:u.phoneNumber||"",
+email:u.email||"",
+photoUrl:"",
+bio:"Welcome to my Rechod profile! ❤️",
+createdAt:Date.now(),
+followers:{},
+following:{}
+}
+);
+
+}
+
+alert("Phone Login सफल ✅");
+
+}catch(e){
+
+alert("OTP गलत है या expire हो गया: "+e.message);
 
 }
 
@@ -791,12 +1010,10 @@ function activeStories(){
 let now=Date.now();
 
 return Object.entries(stories)
-
 .filter(([id,s])=>
 s.createdAt &&
 (now-s.createdAt)<24*60*60*1000
 )
-
 .sort((a,b)=>
 (b[1].createdAt||0)-
 (a[1].createdAt||0)
@@ -833,7 +1050,6 @@ onclick="page('create')">
 a.forEach(([id,s])=>{
 
 let name=s.username||"User";
-
 let p=profiles[s.uid]||{};
 
 let avatar=p.photoUrl
@@ -852,9 +1068,7 @@ align-items:center;
 justify-content:center;
 font-size:22px;
 font-weight:bold">
-
 ${esc(name.charAt(0).toUpperCase())}
-
 </div>
 `;
 
@@ -865,14 +1079,10 @@ class="story-item"
 onclick="openStory('${id}')">
 
 <div class="story-avatar">
-
 ${avatar}
-
 </div>
 
-<div>
-${esc(name.substring(0,9))}
-</div>
+<div>${esc(name.substring(0,9))}</div>
 
 </div>
 
@@ -884,7 +1094,6 @@ html+=`
 
 </div>
 </div>
-
 `;
 
 return html;
@@ -908,15 +1117,8 @@ app.innerHTML=`
 ${storyRow()}
 
 <div class="tabs">
-
-<button onclick="page('home')">
-Posts
-</button>
-
-<button onclick="page('reels')">
-Reels
-</button>
-
+<button onclick="page('home')">Posts</button>
+<button onclick="page('reels')">Reels</button>
 </div>
 
 ${
@@ -938,6 +1140,39 @@ let likes=
 Object.keys(p.likes||{}).length;
 
 let user=p.uid?profiles[p.uid]:null;
+
+let photos=[];
+
+if(Array.isArray(p.imageUrls)){
+photos=p.imageUrls;
+}else if(p.imageUrl){
+photos=[p.imageUrl];
+}
+
+let gallery=photos.length
+?
+`
+<div class="gallery">
+${photos.map((x,i)=>`
+<img
+src="${esc(x)}"
+class="f-${esc(p.filter||"normal")}"
+onerror="this.style.display='none'">
+`).join("")}
+</div>
+`
+:"";
+
+let song=p.songUrl
+?
+`
+<audio
+src="${esc(p.songUrl)}"
+controls
+style="width:100%;margin-top:8px">
+</audio>
+`
+:"";
 
 return `
 
@@ -962,9 +1197,7 @@ object-fit:cover">`
 `
 <div class="user-placeholder"
 style="width:42px;height:42px;font-size:17px">
-
 ${esc((p.username||"U").charAt(0).toUpperCase())}
-
 </div>
 `
 }
@@ -985,42 +1218,28 @@ ${new Date(p.createdAt||Date.now()).toLocaleString()}
 
 <br>
 
-${
-p.imageUrl
-?
-`<img
-src="${esc(p.imageUrl)}"
-class="f-${esc(p.filter||"normal")}"
-onerror="this.style.display='none'">`
-:""
-}
+${gallery}
 
-<p>
-${esc(p.caption||"")}
-</p>
+<p>${mentionHtml(p.caption||"")}</p>
+
+${song}
 
 <button
 class="btn"
 onclick="like('posts/${id}/likes')">
-
 ❤️ ${likes}
-
 </button>
 
 <button
 class="btn"
 onclick="comment('${id}')">
-
-💬
-
+💬 Comment
 </button>
 
 <button
 class="btn"
 onclick="shareText('${esc(p.caption||"Rechod post")}')">
-
-↗
-
+↗ Share
 </button>
 
 </div>
@@ -1120,9 +1339,7 @@ class="row"
 onclick="openProfile('${r.uid||""}')"
 style="cursor:pointer">
 
-<b>
-${esc(r.username||"User")}
-</b>
+<b>${esc(r.username||"User")}</b>
 
 </div>
 
@@ -1135,24 +1352,29 @@ playsinline
 loop>
 </video>
 
-<p>
-${esc(r.caption||"")}
-</p>
+<p>${mentionHtml(r.caption||"")}</p>
+
+${
+r.songUrl
+?
+`<audio
+src="${esc(r.songUrl)}"
+controls
+style="width:100%">
+</audio>`
+:""
+}
 
 <button
 class="btn"
 onclick="like('reels/${id}/likes')">
-
 ❤️ ${Object.keys(r.likes||{}).length}
-
 </button>
 
 <button
 class="btn"
 onclick="shareText('${esc(r.caption||"Rechod reel")}')">
-
-↗
-
+↗ Share
 </button>
 
 </div>
@@ -1171,7 +1393,6 @@ onclick="shareText('${esc(r.caption||"Rechod reel")}')">
 function create(){
 
 selectedFilter="normal";
-
 selectedStoryFilter="normal";
 
 app.innerHTML=`
@@ -1180,23 +1401,36 @@ app.innerHTML=`
 
 <h3>📷 Create Post</h3>
 
+<p class="muted">
+एक साथ अधिकतम 10 photos
+</p>
+
 <input
 id="pfile"
 type="file"
 accept="image/*"
+multiple
 onchange="previewPost()">
 
 <div id="postPreview"></div>
 
 <div class="filter-box">
-
 ${filterButtons("setFilter")}
-
 </div>
 
 <textarea
 id="pcap"
-placeholder="Caption"></textarea>
+placeholder="Caption लिखें... @username mention करें">
+</textarea>
+
+<input
+id="psong"
+type="file"
+accept="audio/*">
+
+<p class="muted">
+🎵 Post में song/audio
+</p>
 
 <progress
 id="pbar"
@@ -1208,9 +1442,7 @@ max="100">
 <button
 class="btn"
 onclick="addPost()">
-
 📷 Photo Post करें
-
 </button>
 
 </div>
@@ -1229,14 +1461,21 @@ onchange="previewStory()">
 <div id="storyPreview"></div>
 
 <div class="filter-box">
-
 ${filterButtons("setStoryFilter")}
-
 </div>
 
 <input
 id="scap"
-placeholder="Story text/caption">
+placeholder="Story text... @username">
+
+<input
+id="ssong"
+type="file"
+accept="audio/*">
+
+<p class="muted">
+🎵 Story में song/audio
+</p>
 
 <progress
 id="sbar"
@@ -1248,13 +1487,11 @@ max="100">
 <button
 class="btn"
 onclick="addStory()">
-
 ⭕ Story डालें
-
 </button>
 
 <p class="muted">
-Story 24 घंटे बाद अपने-आप hide हो जाएगी।
+Story 24 घंटे बाद hide हो जाएगी।
 </p>
 
 </div>
@@ -1271,7 +1508,17 @@ accept="video/*">
 
 <textarea
 id="rcap"
-placeholder="Caption"></textarea>
+placeholder="Reel caption... @username">
+</textarea>
+
+<input
+id="rsong"
+type="file"
+accept="audio/*">
+
+<p class="muted">
+🎵 Reel में song/audio
+</p>
 
 <progress
 id="rbar"
@@ -1283,9 +1530,7 @@ max="100">
 <button
 class="btn"
 onclick="addReel()">
-
 🎬 Reel डालें
-
 </button>
 
 <p class="muted">
@@ -1327,9 +1572,7 @@ return arr.map(x=>`
 type="button"
 class="filter-btn ${x[0]=="normal"?"active":""}"
 onclick="${fn}('${x[0]}',this)">
-
 ${x[1]}
-
 </button>
 
 `).join("");
@@ -1354,14 +1597,11 @@ box.querySelectorAll(".filter-btn")
 
 button.classList.add("active");
 
-let img=
-document.getElementById("postPreviewImg");
-
-if(img){
-
+document
+.querySelectorAll("#postPreview img")
+.forEach(img=>{
 img.className="f-"+name;
-
-}
+});
 
 };
 
@@ -1387,10 +1627,7 @@ let media=
 document.getElementById("storyPreviewMedia");
 
 if(media){
-
-media.className=
-"story-media f-"+name;
-
+media.className="story-media f-"+name;
 }
 
 };
@@ -1400,27 +1637,46 @@ media.className=
 
 window.previewPost=()=>{
 
-let file=
-document.getElementById("pfile").files[0];
+let files=
+Array.from(
+document.getElementById("pfile").files
+);
 
-if(!file)return;
+if(files.length>10){
 
-if(!file.type.startsWith("image/")){
+alert("एक साथ अधिकतम 10 photos चुन सकते हैं");
 
-alert("सिर्फ photo चुनें");
-
+document.getElementById("pfile").value="";
 return;
 
 }
 
-let url=URL.createObjectURL(file);
+if(!files.length)return;
+
+let bad=files.find(
+f=>!f.type.startsWith("image/")
+);
+
+if(bad){
+
+alert("सिर्फ photos चुनें");
+return;
+
+}
 
 document.getElementById("postPreview").innerHTML=`
 
+<div class="gallery">
+
+${files.map(file=>`
+
 <img
-id="postPreviewImg"
 class="f-${selectedFilter}"
-src="${url}">
+src="${URL.createObjectURL(file)}">
+
+`).join("")}
+
+</div>
 
 `;
 
@@ -1468,11 +1724,9 @@ src="${url}">
 };
 
 
-/* CLOUDINARY UPLOAD */
+/* CLOUDINARY */
 
 async function cloudinaryUpload(file,onProgress){
-
-/* FIXED URL */
 
 let url=
 `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
@@ -1481,10 +1735,7 @@ let form=new FormData();
 
 form.append("file",file);
 
-form.append(
-"upload_preset",
-UPLOAD_PRESET
-);
+form.append("upload_preset",UPLOAD_PRESET);
 
 return new Promise((resolve,reject)=>{
 
@@ -1510,13 +1761,9 @@ xhr.onload=()=>{
 
 try{
 
-let data=
-JSON.parse(xhr.responseText);
+let data=JSON.parse(xhr.responseText);
 
-if(
-xhr.status>=200&&
-xhr.status<300
-){
+if(xhr.status>=200&&xhr.status<300){
 
 resolve(data);
 
@@ -1539,13 +1786,9 @@ reject(e);
 
 };
 
-xhr.onerror=()=>{
-
-reject(
+xhr.onerror=()=>reject(
 new Error("Internet/upload error")
 );
-
-};
 
 xhr.send(form);
 
@@ -1554,61 +1797,93 @@ xhr.send(form);
 }
 
 
-/* PHOTO POST */
+/* MULTI PHOTO POST */
 
 window.addPost=async()=>{
 
 if(!me){
-
 alert("पहले Login करें");
-
 return;
+}
+
+let files=
+Array.from(
+document.getElementById("pfile").files
+);
+
+if(!files.length){
+alert("पहले photos चुनें");
+return;
+}
+
+if(files.length>10){
+alert("अधिकतम 10 photos");
+return;
+}
+
+for(let f of files){
+
+if(!f.type.startsWith("image/")){
+alert("सिर्फ photos चुनें");
+return;
+}
+
+if(f.size>10*1024*1024){
+alert("हर photo 10 MB से छोटी रखें");
+return;
+}
 
 }
 
-let input=
-document.getElementById("pfile");
-
-let file=input.files[0];
-
-if(!file){
-
-alert("पहले photo चुनें");
-
-return;
-
-}
-
-/* PHOTO LIMIT 10 MB */
-
-if(file.size>10*1024*1024){
-
-alert("Photo 10 MB से छोटी रखें");
-
-return;
-
-}
-
-let bar=
-document.getElementById("pbar");
+let bar=document.getElementById("pbar");
 
 bar.style.display="block";
-
 bar.value=0;
 
 try{
 
+let urls=[];
+
+for(let i=0;i<files.length;i++){
+
 let result=
 await cloudinaryUpload(
-file,
-p=>bar.value=p
+files[i],
+p=>{
+bar.value=
+Math.round(
+((i+(p/100))/files.length)*100
+);
+}
 );
 
 if(!result.secure_url){
+throw new Error("Photo URL नहीं मिली");
+}
 
-throw new Error(
-"Photo URL नहीं मिली"
+urls.push(result.secure_url);
+
+}
+
+let songUrl="";
+
+let song=
+document.getElementById("psong").files[0];
+
+if(song){
+
+if(!song.type.startsWith("audio/")){
+alert("सिर्फ audio/song file चुनें");
+return;
+}
+
+let sr=
+await cloudinaryUpload(
+song,
+p=>{}
 );
+
+songUrl=sr.secure_url||"";
 
 }
 
@@ -1618,23 +1893,20 @@ ref(db,"posts"),
 uid:me.uid,
 
 username:
-profiles[me.uid]?.username||
-"User",
+profiles[me.uid]?.username||"User",
 
-imageUrl:
-result.secure_url,
+imageUrls:urls,
 
 caption:
 document.getElementById("pcap").value,
 
-filter:
-selectedFilter,
+filter:selectedFilter,
 
-createdAt:
-Date.now(),
+songUrl:songUrl,
 
-mediaType:
-"image",
+createdAt:Date.now(),
+
+mediaType:"images",
 
 likes:{}
 
@@ -1643,7 +1915,10 @@ likes:{}
 
 bar.value=100;
 
-alert("Photo post हो गया ✅");
+alert(
+files.length+
+" photo वाला Post हो गया ✅"
+);
 
 page("home");
 
@@ -1652,7 +1927,7 @@ page("home");
 console.error(e);
 
 alert(
-"Photo upload नहीं हुआ: "+
+"Post upload नहीं हुआ: "+
 (e.message||e)
 );
 
@@ -1666,39 +1941,26 @@ alert(
 window.addStory=async()=>{
 
 if(!me){
-
 alert("पहले Login करें");
-
 return;
-
 }
 
 let file=
 document.getElementById("sfile").files[0];
 
 if(!file){
-
 alert("पहले photo या video चुनें");
-
 return;
-
 }
-
-/* STORY LIMIT 100 MB */
 
 if(file.size>100*1024*1024){
-
 alert("Story 100 MB से छोटी रखें");
-
 return;
-
 }
 
-let bar=
-document.getElementById("sbar");
+let bar=document.getElementById("sbar");
 
 bar.style.display="block";
-
 bar.value=0;
 
 try{
@@ -1709,6 +1971,25 @@ file,
 p=>bar.value=p
 );
 
+let songUrl="";
+
+let song=
+document.getElementById("ssong").files[0];
+
+if(song){
+
+if(!song.type.startsWith("audio/")){
+alert("सिर्फ audio file चुनें");
+return;
+}
+
+let sr=
+await cloudinaryUpload(song,p=>{});
+
+songUrl=sr.secure_url||"";
+
+}
+
 let isVideo=
 file.type.startsWith("video/");
 
@@ -1718,23 +1999,20 @@ ref(db,"stories"),
 uid:me.uid,
 
 username:
-profiles[me.uid]?.username||
-"User",
+profiles[me.uid]?.username||"User",
 
-mediaUrl:
-result.secure_url,
+mediaUrl:result.secure_url,
 
-mediaType:
-isVideo?"video":"image",
+mediaType:isVideo?"video":"image",
 
 caption:
 document.getElementById("scap").value,
 
-filter:
-selectedStoryFilter,
+filter:selectedStoryFilter,
 
-createdAt:
-Date.now(),
+songUrl:songUrl,
+
+createdAt:Date.now(),
 
 expiresAt:
 Date.now()+24*60*60*1000,
@@ -1780,7 +2058,6 @@ Date.now()-(s.createdAt||0)>=
 ){
 
 alert("यह Story expire हो गई है");
-
 return;
 
 }
@@ -1790,18 +2067,11 @@ currentStoryId=id;
 try{
 
 await set(
-ref(
-db,
-"stories/"+id+"/views/"+me.uid
-),
+ref(db,"stories/"+id+"/views/"+me.uid),
 true
 );
 
-}catch(e){
-
-console.log(e);
-
-}
+}catch(e){}
 
 let media=
 document.getElementById("storyMedia");
@@ -1836,13 +2106,26 @@ src="${esc(s.mediaUrl)}">
 
 }
 
+if(s.songUrl){
+
+media.innerHTML+=`
+
+<audio
+src="${esc(s.songUrl)}"
+controls
+autoplay
+style="width:90%;margin-top:10px">
+</audio>
+
+`;
+
+}
+
 document.getElementById("storyUser")
-.textContent=
-s.username||"User";
+.textContent=s.username||"User";
 
 document.getElementById("storyInfo")
-.textContent=
-s.caption||"";
+.innerHTML=mentionHtml(s.caption||"");
 
 document.getElementById("storyLikeCount")
 .textContent=
@@ -1894,10 +2177,7 @@ v=>v?null:true
 
 }catch(e){
 
-alert(
-"Like नहीं हुआ: "+
-e.message
-);
+alert("Like नहीं हुआ: "+e.message);
 
 }
 
@@ -1909,47 +2189,31 @@ e.message
 window.addReel=async()=>{
 
 if(!me){
-
 alert("पहले Login करें");
-
 return;
-
 }
 
 let file=
 document.getElementById("rfile").files[0];
 
 if(!file){
-
 alert("पहले video चुनें");
-
 return;
-
 }
 
 if(!file.type.startsWith("video/")){
-
 alert("सिर्फ video file चुनें");
-
 return;
-
 }
-
-/* REEL LIMIT 100 MB */
 
 if(file.size>100*1024*1024){
-
 alert("Video 100 MB से छोटी रखें");
-
 return;
-
 }
 
-let bar=
-document.getElementById("rbar");
+let bar=document.getElementById("rbar");
 
 bar.style.display="block";
-
 bar.value=0;
 
 try{
@@ -1961,10 +2225,25 @@ p=>bar.value=p
 );
 
 if(!result.secure_url){
+throw new Error("Video URL नहीं मिली");
+}
 
-throw new Error(
-"Video URL नहीं मिली"
-);
+let songUrl="";
+
+let song=
+document.getElementById("rsong").files[0];
+
+if(song){
+
+if(!song.type.startsWith("audio/")){
+alert("सिर्फ audio file चुनें");
+return;
+}
+
+let sr=
+await cloudinaryUpload(song,p=>{});
+
+songUrl=sr.secure_url||"";
 
 }
 
@@ -1974,20 +2253,18 @@ ref(db,"reels"),
 uid:me.uid,
 
 username:
-profiles[me.uid]?.username||
-"User",
+profiles[me.uid]?.username||"User",
 
-videoUrl:
-result.secure_url,
+videoUrl:result.secure_url,
 
 caption:
 document.getElementById("rcap").value,
 
-createdAt:
-Date.now(),
+songUrl:songUrl,
 
-mediaType:
-"video",
+createdAt:Date.now(),
+
+mediaType:"video",
 
 likes:{}
 
@@ -2037,7 +2314,6 @@ oninput="doSearch()">
 
 }
 
-
 window.doSearch=()=>{
 
 let q=
@@ -2055,10 +2331,7 @@ id!==me.uid&&
 .includes(q)
 )
 
-.map(([id,p])=>
-userSearchCard(id,p)
-)
-
+.map(([id,p])=>userSearchCard(id,p))
 .join("")
 
 ||
@@ -2068,7 +2341,7 @@ userSearchCard(id,p)
 };
 
 
-/* USER SEARCH CARD */
+/* USER CARD */
 
 function userSearchCard(id,p){
 
@@ -2084,17 +2357,11 @@ let avatar=p.photoUrl
 src="${esc(p.photoUrl)}">`
 :
 `
-
 <div class="user-placeholder">
-
 ${esc(
-(p.username||"U")
-.charAt(0)
-.toUpperCase()
+(p.username||"U").charAt(0).toUpperCase()
 )}
-
 </div>
-
 `;
 
 return `
@@ -2107,9 +2374,7 @@ ${avatar}
 
 <div style="flex:1">
 
-<b>
-${esc(p.username||"User")}
-</b>
+<b>${esc(p.username||"User")}</b>
 
 <br>
 
@@ -2124,35 +2389,29 @@ ${followers} Followers
 <button
 class="btn"
 onclick="openProfile('${id}')">
-
 👤 Profile
-
 </button>
 
 <button
 class="btn ${isFollowing?"following":"follow"}"
 onclick="toggleFollow('${id}')">
-
 ${isFollowing?"Following":"Follow"}
-
 </button>
 
 <button
 class="btn"
 onclick="message('${id}')">
-
 💬 Message
-
 </button>
 
 </div>
 
 `;
 
-};
+}
 
 
-/* OPEN OTHER PROFILE */
+/* PROFILE OPEN */
 
 window.openProfile=id=>{
 
@@ -2188,11 +2447,7 @@ Object.keys(p.following||{}).length;
 
 let userPosts=
 Object.entries(posts)
-
-.filter(([postId,x])=>
-x.uid===id
-)
-
+.filter(([postId,x])=>x.uid===id)
 .sort((a,b)=>
 (b[1].createdAt||0)-
 (a[1].createdAt||0)
@@ -2203,22 +2458,15 @@ let isFollowing=
 
 let photo=p.photoUrl
 ?
-`<img
-class="profile-photo"
+`<img class="profile-photo"
 src="${esc(p.photoUrl)}">`
 :
 `
-
 <div class="profile-placeholder">
-
 ${esc(
-(p.username||"U")
-.charAt(0)
-.toUpperCase()
+(p.username||"U").charAt(0).toUpperCase()
 )}
-
 </div>
-
 `;
 
 app.innerHTML=`
@@ -2227,50 +2475,25 @@ app.innerHTML=`
 
 ${photo}
 
-<h2>
-${esc(p.username||"User")}
-</h2>
+<h2>${esc(p.username||"User")}</h2>
 
-<p>
-${esc(p.bio||"")}
-</p>
+<p>${esc(p.bio||"")}</p>
 
 <div class="stats">
 
 <div class="stat">
-
-<b>${userPosts.length}</b>
-
-<br>
-
-<span class="muted">
-Posts
-</span>
-
+<b>${userPosts.length}</b><br>
+<span class="muted">Posts</span>
 </div>
 
 <div class="stat">
-
-<b>${followers}</b>
-
-<br>
-
-<span class="muted">
-Followers
-</span>
-
+<b>${followers}</b><br>
+<span class="muted">Followers</span>
 </div>
 
 <div class="stat">
-
-<b>${following}</b>
-
-<br>
-
-<span class="muted">
-Following
-</span>
-
+<b>${following}</b><br>
+<span class="muted">Following</span>
 </div>
 
 </div>
@@ -2278,25 +2501,19 @@ Following
 <button
 class="btn ${isFollowing?"following":"follow"}"
 onclick="toggleFollow('${id}')">
-
 ${isFollowing?"✓ Following":"➕ Follow"}
-
 </button>
 
 <button
 class="btn"
 onclick="message('${id}')">
-
 💬 Message
-
 </button>
 
 <button
 class="btn"
 onclick="page('search')">
-
 ← Back
-
 </button>
 
 </div>
@@ -2306,14 +2523,10 @@ onclick="page('search')">
 <h3>📷 Posts</h3>
 
 ${
-userPosts
-.map(([postId,x])=>
+userPosts.map(([postId,x])=>
 postCard(postId,x)
-)
-.join("")
-
+).join("")
 ||
-
 '<p class="muted">अभी कोई post नहीं है।</p>'
 }
 
@@ -2324,7 +2537,7 @@ postCard(postId,x)
 }
 
 
-/* FOLLOW / UNFOLLOW */
+/* FOLLOW */
 
 window.toggleFollow=async uid=>{
 
@@ -2365,8 +2578,7 @@ updates[
 ]={
 type:"follow",
 username:
-profiles[me.uid]?.username||
-"User",
+profiles[me.uid]?.username||"User",
 createdAt:Date.now()
 };
 
@@ -2374,27 +2586,17 @@ createdAt:Date.now()
 
 try{
 
-await update(
-ref(db),
-updates
-);
+await update(ref(db),updates);
 
 if(viewingProfileId){
-
 otherProfile(uid);
-
 }else{
-
 render();
-
 }
 
 }catch(e){
 
-alert(
-"Follow नहीं हुआ: "+
-e.message
-);
+alert("Follow नहीं हुआ: "+e.message);
 
 }
 
@@ -2405,8 +2607,7 @@ e.message
 
 function profile(){
 
-let p=
-profiles[me.uid]||{};
+let p=profiles[me.uid]||{};
 
 let followers=
 Object.keys(p.followers||{}).length;
@@ -2416,11 +2617,7 @@ Object.keys(p.following||{}).length;
 
 let myPosts=
 Object.entries(posts)
-
-.filter(([id,x])=>
-x.uid===me.uid
-)
-
+.filter(([id,x])=>x.uid===me.uid)
 .sort((a,b)=>
 (b[1].createdAt||0)-
 (a[1].createdAt||0)
@@ -2433,17 +2630,11 @@ class="profile-photo"
 src="${esc(p.photoUrl)}">`
 :
 `
-
 <div class="profile-placeholder">
-
 ${esc(
-(p.username||"U")
-.charAt(0)
-.toUpperCase()
+(p.username||"U").charAt(0).toUpperCase()
 )}
-
 </div>
-
 `;
 
 app.innerHTML=`
@@ -2462,77 +2653,40 @@ accept="image/*">
 <button
 class="btn"
 onclick="uploadProfilePhoto()">
-
 📷 Profile Photo बदलें
-
 </button>
 
-<h2>
-${esc(p.username||"User")}
-</h2>
+<h2>${esc(p.username||"User")}</h2>
 
-<p>
-${esc(p.bio||"")}
-</p>
+<p>${esc(p.bio||"")}</p>
 
-<p>
-Age: ${esc(p.age||"")}
-</p>
+<p>Age: ${esc(p.age||"")}</p>
 
 <div class="stats">
 
 <div class="stat">
-
-<b>${myPosts.length}</b>
-
-<br>
-
-<span class="muted">
-Posts
-</span>
-
+<b>${myPosts.length}</b><br>
+<span class="muted">Posts</span>
 </div>
 
 <div class="stat">
-
-<b>${followers}</b>
-
-<br>
-
-<span class="muted">
-Followers
-</span>
-
+<b>${followers}</b><br>
+<span class="muted">Followers</span>
 </div>
 
 <div class="stat">
-
-<b>${following}</b>
-
-<br>
-
-<span class="muted">
-Following
-</span>
-
+<b>${following}</b><br>
+<span class="muted">Following</span>
 </div>
 
 </div>
 
-<button
-class="btn"
-onclick="editProfile()">
-
+<button class="btn" onclick="editProfile()">
 ✏️ Edit Profile
-
 </button>
 
-<button
-class="btn danger"
-onclick="logoutNow()">
-
+<button class="btn danger" onclick="logoutNow()">
 🚪 Logout
-
 </button>
 
 </div>
@@ -2542,14 +2696,8 @@ onclick="logoutNow()">
 <h3>📷 My Posts</h3>
 
 ${
-myPosts
-.map(([id,x])=>
-postCard(id,x)
-)
-.join("")
-
+myPosts.map(([id,x])=>postCard(id,x)).join("")
 ||
-
 '<p class="muted">अभी कोई post नहीं है।</p>'
 }
 
@@ -2564,33 +2712,22 @@ postCard(id,x)
 
 window.uploadProfilePhoto=async()=>{
 
-let input=
-document.getElementById("profilePhoto");
-
-let file=input.files[0];
+let file=
+document.getElementById("profilePhoto").files[0];
 
 if(!file){
-
 alert("पहले photo चुनें");
-
 return;
-
-}
-
-if(file.size>10*1024*1024){
-
-alert("Profile photo 10 MB से छोटी रखें");
-
-return;
-
 }
 
 if(!file.type.startsWith("image/")){
-
 alert("सिर्फ photo चुनें");
-
 return;
+}
 
+if(file.size>10*1024*1024){
+alert("Profile photo 10 MB से छोटी रखें");
+return;
 }
 
 try{
@@ -2601,8 +2738,7 @@ await cloudinaryUpload(file);
 await update(
 ref(db,"profiles/"+me.uid),
 {
-photoUrl:
-result.secure_url
+photoUrl:result.secure_url
 }
 );
 
@@ -2643,20 +2779,14 @@ try{
 await update(
 ref(db,"profiles/"+me.uid),
 {
-username:
-u.trim()||"User",
-
-bio:
-b||""
+username:u.trim()||"User",
+bio:b||""
 }
 );
 
 }catch(e){
 
-alert(
-"Profile update नहीं हुआ: "+
-e.message
-);
+alert("Profile update नहीं हुआ: "+e.message);
 
 }
 
@@ -2669,12 +2799,10 @@ function messagesPage(){
 
 let arr=
 Object.entries(messages)
-
 .filter(([id,m])=>
 m.from===me.uid||
 m.to===me.uid
 )
-
 .sort((a,b)=>
 (a[1].createdAt||0)-
 (b[1].createdAt||0)
@@ -2691,13 +2819,9 @@ arr.map(([id,m])=>`
 
 <div class="card">
 
-<b>
-${esc(m.fromName||"User")}
-</b>
+<b>${esc(m.fromName||"User")}</b>
 
-<p>
-${esc(m.text||"")}
-</p>
+<p>${esc(m.text||"")}</p>
 
 <span class="muted">
 ${new Date(
@@ -2721,7 +2845,7 @@ m.createdAt||Date.now()
 }
 
 
-/* SEND MESSAGE */
+/* MESSAGE */
 
 window.message=async uid=>{
 
@@ -2735,21 +2859,13 @@ await push(
 ref(db,"messages"),
 {
 from:me.uid,
-
 to:uid,
-
 fromName:
-profiles[me.uid]?.username||
-"User",
-
+profiles[me.uid]?.username||"User",
 toName:
-profiles[uid]?.username||
-"User",
-
+profiles[uid]?.username||"User",
 text:t,
-
-createdAt:
-Date.now()
+createdAt:Date.now()
 }
 );
 
@@ -2757,10 +2873,7 @@ alert("Message भेज दिया ✅");
 
 }catch(e){
 
-alert(
-"Message नहीं गया: "+
-e.message
-);
+alert("Message नहीं गया: "+e.message);
 
 }
 
@@ -2782,9 +2895,7 @@ class="btn"
 onclick="
 document.body.classList.toggle('dark')
 ">
-
 🌙 Dark Mode
-
 </button>
 
 <button
@@ -2792,19 +2903,15 @@ class="btn"
 onclick="
 alert('Rechod notifications realtime हैं।')
 ">
-
 🔔 Notifications
-
 </button>
 
 <button
 class="btn"
 onclick="
-alert('Rechod uses Firebase + Cloudinary.')
+alert('Rechod Firebase + Cloudinary पर चलता है।')
 ">
-
 ℹ️ About
-
 </button>
 
 <br>
@@ -2812,9 +2919,7 @@ alert('Rechod uses Firebase + Cloudinary.')
 <button
 class="btn danger"
 onclick="logoutNow()">
-
 🚪 Logout
-
 </button>
 
 </div>
@@ -2824,7 +2929,7 @@ onclick="logoutNow()">
 }
 
 
-/* FIREBASE REALTIME */
+/* REALTIME */
 
 onAuthStateChanged(
 auth,
@@ -2849,11 +2954,8 @@ return;
 onValue(
 ref(db,"profiles"),
 s=>{
-
 profiles=s.val()||{};
-
 render();
-
 }
 );
 
@@ -2863,11 +2965,8 @@ render();
 onValue(
 ref(db,"posts"),
 s=>{
-
 posts=s.val()||{};
-
 render();
-
 }
 );
 
@@ -2877,11 +2976,8 @@ render();
 onValue(
 ref(db,"reels"),
 s=>{
-
 reels=s.val()||{};
-
 render();
-
 }
 );
 
@@ -2891,11 +2987,8 @@ render();
 onValue(
 ref(db,"stories"),
 s=>{
-
 stories=s.val()||{};
-
 render();
-
 }
 );
 
@@ -2905,11 +2998,8 @@ render();
 onValue(
 ref(db,"messages"),
 s=>{
-
 messages=s.val()||{};
-
 render();
-
 }
 );
 
@@ -2919,9 +3009,7 @@ render();
 onValue(
 ref(db,"notifications"),
 s=>{
-
 notifs=s.val()||{};
-
 }
 );
 
