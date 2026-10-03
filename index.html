@@ -7,7 +7,9 @@
 <title>Rechod</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+ box-sizing:border-box;
+}
 
 body{
  margin:0;
@@ -41,13 +43,19 @@ button{
  background:#151a23;
 }
 
+.hidden{
+ display:none!important;
+}
+
+/* HEADER */
+
 header{
  position:sticky;
  top:0;
  z-index:50;
  background:#fff;
  border-bottom:1px solid #ddd;
- padding:12px 15px;
+ padding:10px 12px;
  display:flex;
  align-items:center;
  justify-content:space-between;
@@ -59,20 +67,45 @@ header{
 }
 
 .logo{
- font-size:25px;
+ font-size:26px;
  font-weight:bold;
  color:#1877f2;
+}
+
+.header-actions{
+ display:flex;
+ align-items:center;
+ gap:4px;
 }
 
 .topbtn{
  border:0;
  background:transparent;
  font-size:22px;
+ padding:7px;
+ position:relative;
 }
+
+.badge{
+ position:absolute;
+ top:1px;
+ right:0;
+ background:#e53935;
+ color:#fff;
+ width:17px;
+ height:17px;
+ border-radius:50%;
+ font-size:10px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+
+/* PAGE */
 
 .page{
  padding:15px;
- padding-bottom:85px;
+ padding-bottom:90px;
 }
 
 .card{
@@ -88,7 +121,9 @@ header{
  border-color:#343c49;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
  width:100%;
  padding:12px;
  border:1px solid #ccc;
@@ -105,6 +140,11 @@ input,select,textarea{
  background:#252d39;
  color:#fff;
  border-color:#48515f;
+}
+
+textarea{
+ min-height:90px;
+ resize:vertical;
 }
 
 button.primary{
@@ -131,8 +171,10 @@ button.secondary{
  border-color:#6ea8ff;
 }
 
-.hidden{
- display:none!important;
+.danger{
+ background:#e53935!important;
+ color:#fff!important;
+ border:0!important;
 }
 
 .err{
@@ -146,12 +188,28 @@ button.secondary{
  margin:8px 0;
 }
 
+small{
+ color:#777;
+}
+
+.dark small{
+ color:#aab2c0;
+}
+
+hr{
+ border:0;
+ border-top:1px solid #ddd;
+ margin:15px 0;
+}
+
+/* AUTH */
+
 .auth-title{
  text-align:center;
- font-size:32px;
+ font-size:34px;
  color:#1877f2;
  font-weight:bold;
- margin:25px 0 10px;
+ margin:30px 0 8px;
 }
 
 .auth-sub{
@@ -180,6 +238,8 @@ button.secondary{
  margin:10px 0;
 }
 
+/* BOTTOM */
+
 .bottom{
  position:fixed;
  bottom:0;
@@ -187,7 +247,7 @@ button.secondary{
  transform:translateX(-50%);
  width:100%;
  max-width:520px;
- height:65px;
+ height:66px;
  background:#fff;
  border-top:1px solid #ddd;
  display:flex;
@@ -205,11 +265,12 @@ button.secondary{
  border:0;
  background:transparent;
  color:#777;
- font-size:11px;
+ font-size:10px;
  display:flex;
  flex-direction:column;
  align-items:center;
- gap:3px;
+ gap:2px;
+ padding:4px;
 }
 
 .nav b{
@@ -220,11 +281,18 @@ button.secondary{
  color:#1877f2;
 }
 
+/* STORIES */
+
 .story-row{
  display:flex;
  gap:12px;
  overflow-x:auto;
  padding:5px 0 12px;
+ scrollbar-width:none;
+}
+
+.story-row::-webkit-scrollbar{
+ display:none;
 }
 
 .story{
@@ -242,6 +310,25 @@ button.secondary{
  padding:2px;
  background:#fff;
 }
+
+.story-add{
+ width:62px;
+ height:62px;
+ border-radius:50%;
+ background:#eef2f7;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:32px;
+ color:#1877f2;
+ border:2px dashed #1877f2;
+}
+
+.dark .story-add{
+ background:#252d39;
+}
+
+/* USER */
 
 .avatar{
  width:45px;
@@ -261,9 +348,16 @@ button.secondary{
  font-weight:bold;
 }
 
+.post-time{
+ font-size:11px;
+ color:#777;
+}
+
+/* POSTS */
+
 .post-img{
  width:100%;
- max-height:500px;
+ max-height:520px;
  object-fit:cover;
  border-radius:10px;
  margin-top:10px;
@@ -273,6 +367,7 @@ button.secondary{
  display:grid;
  grid-template-columns:repeat(2,1fr);
  gap:4px;
+ margin-top:10px;
 }
 
 .multi-grid img{
@@ -284,15 +379,25 @@ button.secondary{
 
 .actions{
  display:flex;
+ align-items:center;
  gap:18px;
- padding:10px 0;
+ padding:10px 0 2px;
 }
 
 .action{
  border:0;
  background:transparent;
- font-size:16px;
+ font-size:15px;
+ padding:5px;
+ color:inherit;
 }
+
+.caption{
+ white-space:pre-wrap;
+ word-break:break-word;
+}
+
+/* REELS */
 
 .reel{
  position:relative;
@@ -305,7 +410,7 @@ button.secondary{
 .reel video{
  width:100%;
  display:block;
- max-height:650px;
+ max-height:680px;
 }
 
 .reel-info{
@@ -314,8 +419,25 @@ button.secondary{
  left:12px;
  color:#fff;
  right:12px;
- text-shadow:0 1px 3px #000;
+ text-shadow:0 1px 4px #000;
+ z-index:2;
 }
+
+.reel-actions{
+ display:flex;
+ gap:8px;
+ margin-top:8px;
+}
+
+.reel-action{
+ border:0;
+ border-radius:20px;
+ background:rgba(0,0,0,.55);
+ color:#fff;
+ padding:7px 10px;
+}
+
+/* PROFILE */
 
 .profile-head{
  text-align:center;
@@ -328,6 +450,7 @@ button.secondary{
  border-radius:50%;
  object-fit:cover;
  border:3px solid #1877f2;
+ background:#ddd;
 }
 
 .stats{
@@ -342,8 +465,10 @@ button.secondary{
  font-size:20px;
 }
 
+/* CHAT */
+
 .chat-box{
- height:60vh;
+ height:58vh;
  overflow-y:auto;
  padding:10px;
  background:#f3f5f8;
@@ -360,6 +485,7 @@ button.secondary{
  border-radius:15px;
  margin:6px 0;
  clear:both;
+ word-break:break-word;
 }
 
 .msg.me{
@@ -399,11 +525,18 @@ button.secondary{
  border-radius:10px;
 }
 
+/* FILTER */
+
 .filter-row{
  display:flex;
  gap:7px;
  overflow-x:auto;
  padding:5px 0;
+ scrollbar-width:none;
+}
+
+.filter-row::-webkit-scrollbar{
+ display:none;
 }
 
 .filter-btn{
@@ -414,20 +547,30 @@ button.secondary{
  border-radius:20px;
 }
 
+.dark .filter-btn{
+ background:#252d39;
+ color:#fff;
+ border-color:#48515f;
+}
+
 .filter-btn.selected{
  background:#1877f2;
  color:#fff;
  border-color:#1877f2;
 }
 
+/* PREVIEW */
+
 .preview{
  width:100%;
- max-height:350px;
+ max-height:380px;
  object-fit:contain;
  background:#111;
  border-radius:10px;
  margin:10px 0;
 }
+
+/* SEARCH */
 
 .search-result{
  display:flex;
@@ -437,24 +580,85 @@ button.secondary{
  border-bottom:1px solid #ddd;
 }
 
+.search-result:last-child{
+ border-bottom:0;
+}
+
+/* NOTIFICATION */
+
 .notif{
- padding:10px;
+ padding:12px 5px;
  border-bottom:1px solid #ddd;
 }
 
-small{
- color:#777;
-}
-
-hr{
- border:0;
- border-top:1px solid #ddd;
- margin:15px 0;
-}
+/* AUDIO */
 
 audio{
  width:100%;
  margin-top:8px;
+}
+
+/* COMMENT */
+
+.comment{
+ padding:7px 0;
+ border-bottom:1px solid #eee;
+}
+
+.dark .comment{
+ border-color:#333;
+}
+
+/* MODAL */
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.65);
+ z-index:500;
+ display:flex;
+ align-items:flex-end;
+ justify-content:center;
+}
+
+.modal-box{
+ width:100%;
+ max-width:520px;
+ max-height:80vh;
+ overflow:auto;
+ background:#fff;
+ border-radius:18px 18px 0 0;
+ padding:16px;
+}
+
+.dark .modal-box{
+ background:#1d2430;
+ color:#fff;
+}
+
+.modal-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+.close-btn{
+ border:0;
+ background:transparent;
+ font-size:24px;
+}
+
+.tag{
+ color:#1877f2;
+ font-weight:bold;
+}
+
+/* EMPTY */
+
+.empty{
+ text-align:center;
+ padding:30px 10px;
+ color:#777;
 }
 </style>
 </head>
@@ -464,45 +668,78 @@ audio{
 <div class="wrap">
 
 <header id="header" class="hidden">
+
  <div class="logo">Rechod</div>
- <button class="topbtn" onclick="page('settings')">⚙️</button>
+
+ <div class="header-actions">
+
+  <button class="topbtn" onclick="page('notifications')">
+   🔔
+   <span id="notifBadge" class="badge hidden">0</span>
+  </button>
+
+  <button class="topbtn" onclick="page('settings')">
+   ⚙️
+  </button>
+
+ </div>
+
 </header>
+
 
 <div id="app"></div>
 
+
 <div id="bottom" class="bottom hidden">
+
  <button class="nav active" data-page="home" onclick="page('home')">
-  <b>⌂</b>Home
+  <b>⌂</b>
+  Home
  </button>
 
  <button class="nav" data-page="reels" onclick="page('reels')">
-  <b>▶</b>Reels
+  <b>▶</b>
+  Reels
  </button>
 
  <button class="nav" data-page="search" onclick="page('search')">
-  <b>⌕</b>Search
+  <b>⌕</b>
+  Search
  </button>
 
  <button class="nav" data-page="create" onclick="page('create')">
-  <b>＋</b>Create
+  <b>＋</b>
+  Create
  </button>
 
  <button class="nav" data-page="messages" onclick="page('messages')">
-  <b>✉</b>Chat
+  <b>✉</b>
+  Chat
  </button>
 
  <button class="nav" data-page="profile" onclick="page('profile')">
-  <b>◉</b>Profile
+  <b>◉</b>
+  Profile
  </button>
-</div>
 
 </div>
+
+<div id="modal"></div>
+
+</div>
+
 
 <script type="module">
 
-import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+/* =====================================================
+   FIREBASE
+===================================================== */
 
-import{
+import {
+ initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
  getAuth,
  onAuthStateChanged,
  createUserWithEmailAndPassword,
@@ -513,9 +750,9 @@ import{
  RecaptchaVerifier,
  signOut,
  updateProfile
-}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import{
+import {
  getDatabase,
  ref,
  push,
@@ -525,12 +762,8 @@ import{
  get,
  remove,
  runTransaction
-}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-
-/* =========================
-   FIREBASE
-========================= */
 
 const firebaseConfig={
  apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
@@ -544,23 +777,27 @@ const firebaseConfig={
 };
 
 const appFirebase=initializeApp(firebaseConfig);
+
 const auth=getAuth(appFirebase);
+
 const db=getDatabase(appFirebase);
 
 
-/* =========================
+/* =====================================================
    CLOUDINARY
-========================= */
+===================================================== */
 
 const CLOUD_NAME="ut6gs93p";
+
 const UPLOAD_PRESET="rechod_upload";
 
 
-/* =========================
+/* =====================================================
    STATE
-========================= */
+===================================================== */
 
 let me=null;
+
 let current="home";
 
 let profiles={};
@@ -573,41 +810,61 @@ let notifs={};
 let selectedFilter="normal";
 let selectedStoryFilter="normal";
 
-let currentStoryId=null;
-let viewingProfileId=null;
-let chatUserId=null;
-
 let postFiles=[];
 let storyFileData=null;
 let reelFileData=null;
 
+let currentStoryId=null;
+let viewingProfileId=null;
+let chatUserId=null;
+
 let recaptchaVerifier=null;
 let phoneConfirmation=null;
 
+let dataListenersStarted=false;
 
-/* =========================
+
+/* =====================================================
    FILTERS
-========================= */
+===================================================== */
 
 const filters={
+
  normal:"none",
+
  bright:"brightness(1.25)",
+
  vivid:"saturate(1.5)",
+
  vintage:"sepia(.45) contrast(.9)",
+
  warm:"sepia(.25) saturate(1.25)",
+
  cool:"hue-rotate(15deg) saturate(.9)",
+
  bw:"grayscale(1)",
+
  sunset:"sepia(.35) saturate(1.5) contrast(1.1)",
+
  cinematic:"contrast(1.2) saturate(.8)",
+
  glow:"brightness(1.2) saturate(1.2)",
+
  pink:"hue-rotate(320deg) saturate(1.3)",
+
  nature:"saturate(1.7) hue-rotate(5deg)",
+
  dramatic:"contrast(1.5) brightness(.9)",
+
  fade:"contrast(.8) brightness(1.1)",
+
  dark:"brightness(.7) contrast(1.2)"
+
 };
 
+
 const filterNames={
+
  normal:"Normal",
  bright:"Bright",
  vivid:"Vivid",
@@ -623,14 +880,16 @@ const filterNames={
  dramatic:"Dramatic",
  fade:"Fade",
  dark:"Dark"
+
 };
 
 
-/* =========================
+/* =====================================================
    COUNTRIES
-========================= */
+===================================================== */
 
 const countries=[
+
  ["+91","🇮🇳 India"],
  ["+1","🇺🇸 USA"],
  ["+44","🇬🇧 UK"],
@@ -697,7 +956,6 @@ const countries=[
  ["+64","🇳🇿 New Zealand"],
  ["+234","🇳🇬 Nigeria"],
  ["+47","🇳🇴 Norway"],
- ["+968","🇴🇲 Oman"],
  ["+63","🇵🇭 Philippines"],
  ["+48","🇵🇱 Poland"],
  ["+351","🇵🇹 Portugal"],
@@ -715,46 +973,102 @@ const countries=[
  ["+598","🇺🇾 Uruguay"],
  ["+58","🇻🇪 Venezuela"],
  ["+84","🇻🇳 Vietnam"]
+
 ];
 
 
-/* =========================
+/* =====================================================
    AUTH SCREEN
-========================= */
+===================================================== */
 
 function authScreen(){
 
- let countryOptions=countries.map((c,i)=>
-   `<option value="${c[0]}" ${i===0?"selected":""}>${c[1]} (${c[0]})</option>`
- ).join("");
+ let countryOptions=countries.map((c,i)=>`
 
- document.getElementById("header").classList.add("hidden");
- document.getElementById("bottom").classList.add("hidden");
+ <option value="${c[0]}" ${i===0?"selected":""}>
+ ${c[1]} (${c[0]})
+ </option>
+
+ `).join("");
+
+ document.getElementById("header")
+ .classList.add("hidden");
+
+ document.getElementById("bottom")
+ .classList.add("hidden");
 
  document.getElementById("app").innerHTML=`
 
  <div class="page">
 
-  <div class="auth-title">Rechod</div>
-  <div class="auth-sub">Connect • Share • Chat</div>
+  <div class="auth-title">
+   Rechod
+  </div>
+
+  <div class="auth-sub">
+   Connect • Share • Chat
+  </div>
+
 
   <div class="card">
 
-   <input id="name" placeholder="Name">
+   <h3>Create Account</h3>
 
-   <input id="username" placeholder="Username">
+   <input
+    id="name"
+    placeholder="Name"
+   >
 
-   <input id="email" type="email" placeholder="Email">
+   <input
+    id="username"
+    placeholder="Username"
+   >
 
-   <input id="password" type="password" placeholder="Password">
+   <input
+    id="email"
+    type="email"
+    placeholder="Email"
+   >
 
-   <button class="primary" onclick="signup()">Create Account</button>
+   <input
+    id="password"
+    type="password"
+    placeholder="Password"
+   >
 
-   <button class="secondary" style="width:100%;margin:5px 0"
-   onclick="login()">Login</button>
+   <button
+    class="primary"
+    onclick="signup()">
+    Create Account
+   </button>
 
-   <button class="primary"
-   onclick="googleLogin()">🔵 Continue with Google</button>
+   <hr>
+
+   <h3>Login</h3>
+
+   <input
+    id="loginId"
+    placeholder="Email या Username"
+   >
+
+   <input
+    id="loginPassword"
+    type="password"
+    placeholder="Password"
+   >
+
+   <button
+    class="primary"
+    onclick="login()">
+    Login
+   </button>
+
+   <button
+    class="secondary"
+    style="width:100%;margin:5px 0"
+    onclick="googleLogin()">
+    🔵 Continue with Google
+   </button>
 
    <hr>
 
@@ -767,37 +1081,45 @@ function authScreen(){
     </select>
 
     <input
-      id="phone"
-      type="tel"
-      inputmode="numeric"
-      autocomplete="tel"
-      placeholder="Phone Number"
+     id="phone"
+     type="tel"
+     inputmode="numeric"
+     autocomplete="tel"
+     placeholder="Phone Number"
     >
 
    </div>
 
    <small>
-   केवल अपना phone number डालें। Country code अपने आप जुड़ जाएगा।
+    केवल अपना phone number डालें।
+    Country code अपने आप जुड़ जाएगा।
    </small>
 
-   <button class="primary" onclick="sendOTP()">
-   📱 Send OTP
+   <button
+    class="primary"
+    onclick="sendOTP()">
+    📱 Send OTP
    </button>
 
-   <div id="recaptcha-container" class="recaptcha"></div>
+   <div
+    id="recaptcha-container"
+    class="recaptcha">
+   </div>
 
    <div id="otpArea" class="hidden">
 
     <input
-      id="otp"
-      type="tel"
-      inputmode="numeric"
-      maxlength="6"
-      placeholder="6 Digit OTP"
+     id="otp"
+     type="tel"
+     inputmode="numeric"
+     maxlength="6"
+     placeholder="6 Digit OTP"
     >
 
-    <button class="primary" onclick="verifyOTP()">
-    Verify OTP
+    <button
+     class="primary"
+     onclick="verifyOTP()">
+     Verify OTP
     </button>
 
    </div>
@@ -807,351 +1129,495 @@ function authScreen(){
   </div>
 
  </div>
+
  `;
+
 }
 
 
-/* =========================
+/* =====================================================
    SIGNUP
-========================= */
+===================================================== */
 
 window.signup=async function(){
 
- const name=document.getElementById("name").value.trim();
- const username=document.getElementById("username").value.trim().toLowerCase();
- const email=document.getElementById("email").value.trim();
- const password=document.getElementById("password").value;
+ const name=
+ document.getElementById("name").value.trim();
 
- const err=document.getElementById("err");
+ const username=
+ document.getElementById("username")
+ .value.trim()
+ .toLowerCase()
+ .replace(/\s/g,"");
+
+ const email=
+ document.getElementById("email").value.trim();
+
+ const password=
+ document.getElementById("password").value;
+
+ const err=
+ document.getElementById("err");
 
  if(!name||!username||!email||!password){
-   err.textContent="सभी details भरें";
-   return;
+
+  err.textContent=
+  "सभी details भरें";
+
+  return;
+
  }
 
  if(password.length<6){
-   err.textContent="Password कम से कम 6 characters का होना चाहिए";
-   return;
+
+  err.textContent=
+  "Password कम से कम 6 characters का होना चाहिए";
+
+  return;
+
  }
 
  try{
 
-   const result=
-   await createUserWithEmailAndPassword(auth,email,password);
+  const all=
+  await get(ref(db,"profiles"));
 
-   const u=result.user;
+  const data=
+  all.val()||{};
 
-   await updateProfile(u,{
-     displayName:name
-   });
+  const exists=
+  Object.values(data).some(
+   p=>
+   String(p.username||"").toLowerCase()===
+   username
+  );
 
-   await set(ref(db,"profiles/"+u.uid),{
-     uid:u.uid,
-     name:name,
-     username:username,
-     email:email,
-     phone:"",
-     photo:"",
-     bio:"",
-     followers:{},
-     following:{},
-     createdAt:Date.now()
-   });
+  if(exists){
 
-   err.innerHTML=
-   '<div class="success">✅ Account बन गया</div>';
+   err.textContent=
+   "यह username पहले से मौजूद है";
+
+   return;
+
+  }
+
+  const result=
+  await createUserWithEmailAndPassword(
+   auth,
+   email,
+   password
+  );
+
+  const u=result.user;
+
+  await updateProfile(u,{
+   displayName:name
+  });
+
+  await set(
+   ref(db,"profiles/"+u.uid),
+   {
+    uid:u.uid,
+    name:name,
+    username:username,
+    email:email,
+    phone:"",
+    photo:"",
+    bio:"",
+    followers:{},
+    following:{},
+    createdAt:Date.now()
+   }
+  );
+
+  err.innerHTML=
+  '<div class="success">✅ Account बन गया</div>';
 
  }catch(e){
 
-   console.error(e);
-   err.textContent="❌ "+(e.code||e.message);
+  console.error(e);
+
+  err.textContent=
+  "❌ "+(e.code||e.message);
 
  }
 
 };
 
 
-/* =========================
-   LOGIN
-========================= */
+/* =====================================================
+   LOGIN EMAIL / USERNAME
+===================================================== */
 
 window.login=async function(){
 
- const email=document.getElementById("email").value.trim();
- const password=document.getElementById("password").value;
- const err=document.getElementById("err");
+ const loginId=
+ document.getElementById("loginId")
+ .value.trim();
 
- if(!email||!password){
-   err.textContent="Email और Password डालें";
-   return;
+ const password=
+ document.getElementById("loginPassword")
+ .value;
+
+ const err=
+ document.getElementById("err");
+
+ if(!loginId||!password){
+
+  err.textContent=
+  "Email/Username और Password डालें";
+
+  return;
+
  }
 
  try{
 
-   await signInWithEmailAndPassword(auth,email,password);
+  let email=loginId;
+
+  if(!loginId.includes("@")){
+
+   const snap=
+   await get(ref(db,"profiles"));
+
+   const data=
+   snap.val()||{};
+
+   let found=null;
+
+   Object.values(data).forEach(p=>{
+
+    if(
+     String(p.username||"")
+     .toLowerCase()===
+     loginId.toLowerCase()
+    ){
+
+     found=p;
+
+    }
+
+   });
+
+   if(!found){
+
+    err.textContent=
+    "Username नहीं मिला";
+
+    return;
+
+   }
+
+   email=found.email;
+
+  }
+
+  await signInWithEmailAndPassword(
+   auth,
+   email,
+   password
+  );
 
  }catch(e){
 
-   console.error(e);
-   err.textContent="❌ "+(e.code||e.message);
+  console.error(e);
+
+  err.textContent=
+  "❌ "+(e.code||e.message);
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    GOOGLE LOGIN
-========================= */
+===================================================== */
 
 window.googleLogin=async function(){
 
  try{
 
-   const provider=new GoogleAuthProvider();
+  const provider=
+  new GoogleAuthProvider();
 
-   const result=
-   await signInWithPopup(auth,provider);
+  const result=
+  await signInWithPopup(
+   auth,
+   provider
+  );
 
-   const u=result.user;
+  const u=result.user;
 
-   const profileRef=ref(db,"profiles/"+u.uid);
-   const snap=await get(profileRef);
+  const profileRef=
+  ref(db,"profiles/"+u.uid);
 
-   if(!snap.exists()){
+  const snap=
+  await get(profileRef);
 
-     let username=
-       (u.displayName||"user")
-       .toLowerCase()
-       .replace(/[^a-z0-9]/g,"")
-       .slice(0,12);
+  if(!snap.exists()){
 
-     username=username||("user"+String(u.uid).slice(0,6));
+   let base=
+   (u.displayName||"user")
+   .toLowerCase()
+   .replace(/[^a-z0-9]/g,"")
+   .slice(0,12);
 
-     await set(profileRef,{
-       uid:u.uid,
-       name:u.displayName||"Rechod User",
-       username:username,
-       email:u.email||"",
-       phone:"",
-       photo:u.photoURL||"",
-       bio:"",
-       followers:{},
-       following:{},
-       createdAt:Date.now()
-     });
+   if(!base){
+
+    base="user";
 
    }
 
+   let username=
+   base+String(u.uid).slice(0,5);
+
+   await set(
+    profileRef,
+    {
+     uid:u.uid,
+     name:u.displayName||"Rechod User",
+     username:username,
+     email:u.email||"",
+     phone:"",
+     photo:u.photoURL||"",
+     bio:"",
+     followers:{},
+     following:{},
+     createdAt:Date.now()
+    }
+   );
+
+  }
+
  }catch(e){
 
-   console.error(e);
-   alert("Google Login Error:\n"+(e.code||e.message));
+  console.error(e);
+
+  alert(
+   "Google Login Error:\n"+
+   (e.code||e.message)
+  );
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    PHONE OTP
-========================= */
+===================================================== */
 
 window.sendOTP=async function(){
 
  const country=
- document.getElementById("countryCode").value;
+ document.getElementById("countryCode")
+ .value;
 
  let number=
- document.getElementById("phone").value.trim();
+ document.getElementById("phone")
+ .value.trim();
 
- number=number.replace(/\D/g,"");
+ number=
+ number.replace(/\D/g,"");
 
  if(!number){
 
-   alert("Phone number डालें");
-   return;
+  alert("Phone number डालें");
+
+  return;
 
  }
 
- /*
-   अगर user 0 से number शुरू करता है,
-   तो शुरुआत का 0 हटाया जाएगा।
- */
+ number=
+ number.replace(/^0+/,"");
 
- number=number.replace(/^0+/,"");
-
- const phone=country+number;
+ const phone=
+ country+number;
 
  try{
 
-   if(recaptchaVerifier){
+  if(recaptchaVerifier){
 
-     try{
-       recaptchaVerifier.clear();
-     }catch(e){}
+   try{
+    recaptchaVerifier.clear();
+   }catch(e){}
 
-     recaptchaVerifier=null;
+   recaptchaVerifier=null;
 
+  }
+
+  recaptchaVerifier=
+  new RecaptchaVerifier(
+   auth,
+   "recaptcha-container",
+   {
+    size:"normal"
    }
+  );
 
-   recaptchaVerifier=
-   new RecaptchaVerifier(
-     auth,
-     "recaptcha-container",
-     {
-       size:"normal"
-     }
-   );
+  await recaptchaVerifier.render();
 
-   await recaptchaVerifier.render();
+  phoneConfirmation=
+  await signInWithPhoneNumber(
+   auth,
+   phone,
+   recaptchaVerifier
+  );
 
-   phoneConfirmation=
-   await signInWithPhoneNumber(
-     auth,
-     phone,
-     recaptchaVerifier
-   );
+  document
+  .getElementById("otpArea")
+  .classList.remove("hidden");
 
-   document
-   .getElementById("otpArea")
-   .classList.remove("hidden");
-
-   alert(
-     "✅ OTP भेज दिया गया\n\nNumber: "+phone
-   );
+  alert(
+   "✅ OTP भेज दिया गया\n\n"+
+   "Number: "+phone
+  );
 
  }catch(e){
 
-   console.error(e);
+  console.error(e);
 
-   alert(
-     "❌ OTP नहीं भेजा गया:\n"+
-     (e.code||e.message)
-   );
+  alert(
+   "❌ OTP नहीं भेजा गया:\n"+
+   (e.code||e.message)
+  );
 
-   if(recaptchaVerifier){
+  if(recaptchaVerifier){
 
-     try{
-       recaptchaVerifier.clear();
-     }catch(x){}
+   try{
+    recaptchaVerifier.clear();
+   }catch(x){}
 
-     recaptchaVerifier=null;
+   recaptchaVerifier=null;
 
-   }
+  }
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    VERIFY OTP
-========================= */
+===================================================== */
 
 window.verifyOTP=async function(){
 
  const otp=
- document.getElementById("otp").value.trim();
+ document.getElementById("otp")
+ .value.trim();
 
- const errBox=
+ const err=
  document.getElementById("err");
 
  if(!phoneConfirmation){
 
-   errBox.textContent="पहले Send OTP दबाएँ";
-   return;
+  err.textContent=
+  "पहले Send OTP दबाएँ";
+
+  return;
 
  }
 
  if(!/^\d{6}$/.test(otp)){
 
-   errBox.textContent="6 digit OTP डालें";
-   return;
+  err.textContent=
+  "6 digit OTP डालें";
+
+  return;
 
  }
 
  try{
 
-   const result=
-   await phoneConfirmation.confirm(otp);
+  const result=
+  await phoneConfirmation.confirm(otp);
 
-   const u=result.user;
+  const u=result.user;
 
-   const profileRef=
-   ref(db,"profiles/"+u.uid);
+  const profileRef=
+  ref(db,"profiles/"+u.uid);
 
-   const snap=
-   await get(profileRef);
+  const snap=
+  await get(profileRef);
 
-   if(!snap.exists()){
+  if(!snap.exists()){
 
-     let username=
-     "user"+String(u.uid).slice(0,6);
+   const username=
+   "user"+String(u.uid).slice(0,7);
 
-     await set(profileRef,{
-       uid:u.uid,
-       name:"Rechod User",
-       username:username,
-       email:u.email||"",
-       phone:u.phoneNumber||"",
-       photo:"",
-       bio:"",
-       followers:{},
-       following:{},
-       createdAt:Date.now()
-     });
+   await set(
+    profileRef,
+    {
+     uid:u.uid,
+     name:"Rechod User",
+     username:username,
+     email:u.email||"",
+     phone:u.phoneNumber||"",
+     photo:"",
+     bio:"",
+     followers:{},
+     following:{},
+     createdAt:Date.now()
+    }
+   );
 
-   }
+  }
 
-   phoneConfirmation=null;
+  phoneConfirmation=null;
 
-   if(recaptchaVerifier){
+  if(recaptchaVerifier){
 
-     try{
-       recaptchaVerifier.clear();
-     }catch(e){}
+   try{
+    recaptchaVerifier.clear();
+   }catch(e){}
 
-     recaptchaVerifier=null;
+   recaptchaVerifier=null;
 
-   }
-
-   errBox.innerHTML=
-   '<div class="success">✅ Phone login successful</div>';
+  }
 
  }catch(e){
 
-   console.error(e);
+  console.error(e);
 
-   if(e.code==="auth/invalid-verification-code"){
+  if(
+   e.code===
+   "auth/invalid-verification-code"
+  ){
 
-     errBox.textContent="❌ OTP गलत है";
+   err.textContent=
+   "❌ OTP गलत है";
 
-   }else if(e.code==="auth/code-expired"){
+  }else if(
+   e.code===
+   "auth/code-expired"
+  ){
 
-     errBox.textContent=
-     "❌ OTP expire हो गया। नया OTP भेजें";
+   err.textContent=
+   "❌ OTP expire हो गया। नया OTP भेजें";
 
-   }else{
+  }else{
 
-     errBox.textContent=
-     "❌ OTP verification error: "+
-     (e.code||e.message);
+   err.textContent=
+   "❌ "+(e.code||e.message);
 
-   }
+  }
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    AUTH STATE
-========================= */
+===================================================== */
 
-onAuthStateChanged(auth,async u=>{
+onAuthStateChanged(
+ auth,
+ async u=>{
 
- if(u){
+  if(u){
 
    me=u;
 
@@ -1167,161 +1633,285 @@ onAuthStateChanged(auth,async u=>{
 
    page("home");
 
- }else{
+  }else{
 
    me=null;
+
    authScreen();
 
+  }
+
  }
+);
 
-});
 
-
-/* =========================
-   LOAD DATA
-========================= */
+/* =====================================================
+   LOAD DATABASE
+===================================================== */
 
 async function loadData(){
 
- onValue(ref(db,"profiles"),snap=>{
-   profiles=snap.val()||{};
-   render();
- });
+ if(dataListenersStarted)return;
 
- onValue(ref(db,"posts"),snap=>{
-   posts=snap.val()||{};
-   render();
- });
+ dataListenersStarted=true;
 
- onValue(ref(db,"reels"),snap=>{
-   reels=snap.val()||{};
-   render();
- });
 
- onValue(ref(db,"stories"),snap=>{
-   stories=snap.val()||{};
-   render();
- });
+ onValue(
+  ref(db,"profiles"),
+  snap=>{
 
- onValue(ref(db,"messages"),snap=>{
-   messages=snap.val()||{};
-   render();
- });
+   profiles=
+   snap.val()||{};
 
- onValue(ref(db,"notifs/"+me.uid),snap=>{
-   notifs=snap.val()||{};
+   updateNotificationBadge();
+
    render();
- });
+
+  }
+ );
+
+
+ onValue(
+  ref(db,"posts"),
+  snap=>{
+
+   posts=
+   snap.val()||{};
+
+   render();
+
+  }
+ );
+
+
+ onValue(
+  ref(db,"reels"),
+  snap=>{
+
+   reels=
+   snap.val()||{};
+
+   render();
+
+  }
+ );
+
+
+ onValue(
+  ref(db,"stories"),
+  snap=>{
+
+   stories=
+   snap.val()||{};
+
+   render();
+
+  }
+ );
+
+
+ onValue(
+  ref(db,"messages"),
+  snap=>{
+
+   messages=
+   snap.val()||{};
+
+   render();
+
+  }
+ );
+
+
+ onValue(
+  ref(db,"notifs/"+me.uid),
+  snap=>{
+
+   notifs=
+   snap.val()||{};
+
+   updateNotificationBadge();
+
+   render();
+
+  }
+ );
 
 }
 
 
-/* =========================
+/* =====================================================
    PAGE
-========================= */
+===================================================== */
 
 window.page=function(p){
 
  current=p;
 
- document.querySelectorAll(".nav")
+ chatUserId=
+ p==="messages"
+ ?
+ chatUserId
+ :
+ null;
+
+ document
+ .querySelectorAll(".nav")
  .forEach(btn=>{
-   btn.classList.toggle(
-     "active",
-     btn.dataset.page===p
-   );
+
+  btn.classList.toggle(
+   "active",
+   btn.dataset.page===p
+  );
+
  });
 
  render();
 
  window.scrollTo({
-   top:0,
-   behavior:"smooth"
+  top:0,
+  behavior:"smooth"
  });
 
 };
 
 
-/* =========================
+/* =====================================================
    RENDER
-========================= */
+===================================================== */
 
 function render(){
 
  if(!me)return;
 
- const app=document.getElementById("app");
+ const app=
+ document.getElementById("app");
 
- if(current==="home") app.innerHTML=homePage();
- else if(current==="reels") app.innerHTML=reelsPage();
- else if(current==="search") app.innerHTML=searchPage();
- else if(current==="create") app.innerHTML=createPage();
- else if(current==="messages") app.innerHTML=messagesPage();
- else if(current==="profile") app.innerHTML=profilePage();
- else if(current==="settings") app.innerHTML=settingsPage();
- else if(current==="notifications") app.innerHTML=notificationsPage();
- else if(current==="viewProfile") app.innerHTML=viewProfilePage();
+ if(current==="home")
+  app.innerHTML=homePage();
+
+ else if(current==="reels")
+  app.innerHTML=reelsPage();
+
+ else if(current==="search")
+  app.innerHTML=searchPage();
+
+ else if(current==="create")
+  app.innerHTML=createPage();
+
+ else if(current==="messages")
+  app.innerHTML=messagesPage();
+
+ else if(current==="profile")
+  app.innerHTML=profilePage();
+
+ else if(current==="settings")
+  app.innerHTML=settingsPage();
+
+ else if(current==="notifications")
+  app.innerHTML=notificationsPage();
+
+ else if(current==="viewProfile")
+  app.innerHTML=viewProfilePage();
 
 }
 
 
-/* =========================
+/* =====================================================
    HOME
-========================= */
+===================================================== */
 
 function homePage(){
 
- let storyHTML="";
+ let storyHTML=`
 
- storyHTML+=`
  <div class="story">
-   <div onclick="page('create')" style="font-size:42px">＋</div>
-   <small>Your Story</small>
+
+  <div
+   class="story-add"
+   onclick="page('create')">
+   ＋
+  </div>
+
+  <small>Your Story</small>
+
  </div>
+
  `;
 
- Object.entries(stories).forEach(([id,s])=>{
 
-   if(Date.now()-s.createdAt>86400000)return;
+ Object.entries(stories)
+ .sort(
+  (a,b)=>
+  (b[1].createdAt||0)-
+  (a[1].createdAt||0)
+ )
+ .forEach(([id,s])=>{
 
-   const p=profiles[s.uid]||{};
+  if(
+   !s.createdAt||
+   Date.now()-s.createdAt>86400000
+  )return;
 
-   storyHTML+=`
-   <div class="story" onclick="viewStory('${id}')">
+  const p=
+  profiles[s.uid]||{};
 
-    <img class="story-img"
-      src="${s.url||p.photo||avatar(s.uid)}">
+  storyHTML+=`
 
-    <div>${escapeHTML(p.username||"user")}</div>
+  <div
+   class="story"
+   onclick="viewStory('${id}')">
 
+   <img
+    class="story-img"
+    src="${s.url||p.photo||avatar(s.uid)}">
+
+   <div>
+    ${escapeHTML(
+     p.username||"user"
+    )}
    </div>
-   `;
+
+  </div>
+
+  `;
 
  });
+
 
  let postHTML="";
 
  const arr=
  Object.entries(posts)
- .sort((a,b)=>
-   (b[1].createdAt||0)-(a[1].createdAt||0)
+ .sort(
+  (a,b)=>
+  (b[1].createdAt||0)-
+  (a[1].createdAt||0)
  );
+
 
  if(!arr.length){
 
-   postHTML=`
-   <div class="card" style="text-align:center">
-    अभी कोई post नहीं है।
-   </div>
-   `;
+  postHTML=`
+
+  <div class="card empty">
+   अभी कोई post नहीं है।
+   <br>
+   Create से पहला post डालें।
+  </div>
+
+  `;
 
  }
 
+
  arr.forEach(([id,p])=>{
 
-   postHTML+=postCard(id,p);
+  postHTML+=
+  postCard(id,p);
 
  });
+
 
  return`
 
@@ -1340,50 +1930,117 @@ function homePage(){
 }
 
 
-/* =========================
+/* =====================================================
    POST CARD
-========================= */
+===================================================== */
 
 function postCard(id,p){
 
- const owner=profiles[p.uid]||{};
+ const owner=
+ profiles[p.uid]||{};
 
  let media="";
 
- if(Array.isArray(p.images)&&p.images.length){
 
-   if(p.images.length===1){
+ if(
+  Array.isArray(p.images)&&
+  p.images.length
+ ){
 
-     media=`
-     <img
-       class="post-img"
-       style="filter:${filters[p.filter]||"none"}"
-       src="${p.images[0]}"
-     >
-     `;
+  if(p.images.length===1){
 
-   }else{
+   media=`
 
-     media=`
-     <div class="multi-grid">
-       ${p.images.map(x=>`
-         <img
-           style="filter:${filters[p.filter]||"none"}"
-           src="${x}"
-         >
-       `).join("")}
-     </div>
-     `;
+   <img
+    class="post-img"
+    style="filter:${
+     filters[p.filter]||"none"
+    }"
+    src="${p.images[0]}">
 
-   }
+   `;
+
+  }else{
+
+   media=`
+
+   <div class="multi-grid">
+
+    ${
+     p.images.map(x=>`
+
+      <img
+       style="filter:${
+        filters[p.filter]||"none"
+       }"
+       src="${x}">
+
+     `).join("")
+    }
+
+   </div>
+
+   `;
+
+  }
 
  }
 
- let likeCount=
- p.likes?Object.keys(p.likes).length:0;
 
- let liked=
+ const likeCount=
+ p.likes?
+ Object.keys(p.likes).length:
+ 0;
+
+
+ const liked=
  p.likes&&p.likes[me.uid];
+
+
+ const commentCount=
+ p.comments?
+ Object.keys(p.comments).length:
+ 0;
+
+
+ let commentsHTML="";
+
+
+ if(p.comments){
+
+  commentsHTML=
+  Object.values(p.comments)
+  .sort(
+   (a,b)=>
+   (a.createdAt||0)-
+   (b.createdAt||0)
+  )
+  .slice(-3)
+  .map(c=>{
+
+   const cp=
+   profiles[c.uid]||{};
+
+   return`
+
+   <div class="comment">
+
+    <b>
+     @${escapeHTML(
+      cp.username||"user"
+     )}
+    </b>
+
+    ${formatText(c.text)}
+
+   </div>
+
+   `;
+
+  }).join("");
+
+ }
+
 
  return`
 
@@ -1391,49 +2048,109 @@ function postCard(id,p){
 
   <div class="userline">
 
-   <img class="avatar"
-   src="${owner.photo||avatar(p.uid)}">
+   <img
+    class="avatar"
+    src="${
+     owner.photo||
+     avatar(p.uid)
+    }">
 
-   <div>
+   <div style="flex:1">
 
-    <div class="username">
-      ${escapeHTML(owner.username||owner.name||"user")}
+    <div
+     class="username"
+     onclick="openProfile('${p.uid}')">
+
+     ${escapeHTML(
+      owner.username||
+      owner.name||
+      "user"
+     )}
+
     </div>
 
-    <small>
-      ${timeAgo(p.createdAt)}
-    </small>
+    <div class="post-time">
+     ${timeAgo(p.createdAt)}
+    </div>
 
    </div>
 
+   ${
+    p.uid===me.uid
+    ?
+    `<button
+      class="topbtn"
+      onclick="deletePost('${id}')">
+      ⋮
+     </button>`
+    :""
+   }
+
   </div>
+
 
   ${media}
 
-  ${p.caption?
-   `<p>${escapeHTML(p.caption)}</p>`:""}
 
-  ${p.song?
-   `<audio controls src="${p.song}"></audio>`:""}
+  ${
+   p.caption
+   ?
+   `<p class="caption">
+     ${formatText(p.caption)}
+    </p>`
+   :""
+  }
+
+
+  ${
+   p.song
+   ?
+   `<audio
+     controls
+     src="${p.song}">
+    </audio>`
+   :""
+  }
+
 
   <div class="actions">
 
-   <button class="action"
-   onclick="likePost('${id}')">
-   ${liked?"❤️":"🤍"} ${likeCount}
+   <button
+    class="action"
+    onclick="likePost('${id}')">
+
+    ${liked?"❤️":"🤍"}
+    ${likeCount}
+
    </button>
 
-   <button class="action"
-   onclick="commentPost('${id}')">
-   💬
+
+   <button
+    class="action"
+    onclick="openComments('${id}')">
+
+    💬 ${commentCount}
+
    </button>
 
-   <button class="action"
-   onclick="sharePost('${id}')">
-   ↗️
+
+   <button
+    class="action"
+    onclick="sharePost('${id}')">
+
+    ↗️ Share
+
    </button>
 
   </div>
+
+
+  ${
+   commentsHTML
+   ?
+   `<div>${commentsHTML}</div>`
+   :""
+  }
 
  </div>
 
@@ -1442,130 +2159,372 @@ function postCard(id,p){
 }
 
 
-/* =========================
-   LIKE
-========================= */
+/* =====================================================
+   POST LIKE
+===================================================== */
 
 window.likePost=async function(id){
 
  const likeRef=
- ref(db,`posts/${id}/likes/${me.uid}`);
+ ref(
+  db,
+  `posts/${id}/likes/${me.uid}`
+ );
 
  await runTransaction(
-   likeRef,
-   value=>value?null:true
+  likeRef,
+  value=>
+  value?null:true
  );
 
 };
 
 
-/* =========================
-   COMMENT
-========================= */
+/* =====================================================
+   COMMENTS
+===================================================== */
 
-window.commentPost=function(id){
+window.openComments=function(id){
 
- const text=prompt("Comment लिखें");
+ const p=
+ posts[id]||{};
+
+ let html="";
+
+ Object.entries(
+  p.comments||{}
+ )
+ .sort(
+  (a,b)=>
+  (a[1].createdAt||0)-
+  (b[1].createdAt||0)
+ )
+ .forEach(([cid,c])=>{
+
+  const cp=
+  profiles[c.uid]||{};
+
+  html+=`
+
+  <div class="comment">
+
+   <b>
+    @${escapeHTML(
+     cp.username||"user"
+    )}
+   </b>
+
+   <br>
+
+   ${formatText(c.text)}
+
+   <br>
+
+   <small>
+    ${timeAgo(c.createdAt)}
+   </small>
+
+  </div>
+
+  `;
+
+ });
+
+
+ document.getElementById("modal").innerHTML=`
+
+ <div
+  class="modal"
+  onclick="closeModal(event)">
+
+  <div
+   class="modal-box"
+   onclick="event.stopPropagation()">
+
+   <div class="modal-head">
+
+    <h3>💬 Comments</h3>
+
+    <button
+     class="close-btn"
+     onclick="closeModal()">
+     ×
+    </button>
+
+   </div>
+
+
+   <div>
+    ${html||"<p>अभी कोई comment नहीं है।</p>"}
+   </div>
+
+
+   <textarea
+    id="newComment"
+    placeholder="Comment लिखें...">
+   </textarea>
+
+   <button
+    class="primary"
+    onclick="addComment('${id}')">
+    Comment
+   </button>
+
+  </div>
+
+ </div>
+
+ `;
+
+};
+
+
+window.addComment=async function(id){
+
+ const input=
+ document.getElementById("newComment");
+
+ const text=
+ input.value.trim();
 
  if(!text)return;
 
  const cRef=
- push(ref(db,`posts/${id}/comments`));
+ push(
+  ref(db,`posts/${id}/comments`)
+ );
 
- set(cRef,{
+ await set(
+  cRef,
+  {
    uid:me.uid,
    text:text,
    createdAt:Date.now()
- });
+  }
+ );
+
+ await notifyMentions(
+  text,
+  "comment",
+  id
+ );
+
+ closeModal();
 
 };
 
 
-/* =========================
+/* =====================================================
    SHARE
-========================= */
+===================================================== */
 
 window.sharePost=async function(id){
 
- const url=location.href+"#post-"+id;
+ const url=
+ location.href+
+ "#post-"+id;
 
  if(navigator.share){
 
-   try{
+  try{
 
-     await navigator.share({
-       title:"Rechod",
-       text:"Rechod post",
-       url:url
-     });
+   await navigator.share({
+    title:"Rechod",
+    text:"Rechod post",
+    url:url
+   });
 
-   }catch(e){}
+  }catch(e){}
 
  }else{
 
-   await navigator.clipboard.writeText(url);
-   alert("Post link copied");
+  try{
+
+   await navigator.clipboard
+   .writeText(url);
+
+   alert(
+    "Post link copied"
+   );
+
+  }catch(e){
+
+   alert(url);
+
+  }
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
+   DELETE POST
+===================================================== */
+
+window.deletePost=async function(id){
+
+ const p=posts[id];
+
+ if(!p||p.uid!==me.uid)return;
+
+ if(
+  !confirm(
+   "यह post delete करना है?"
+  )
+ )return;
+
+ await remove(
+  ref(db,"posts/"+id)
+ );
+
+};
+
+
+/* =====================================================
    REELS
-========================= */
+===================================================== */
 
 function reelsPage(){
 
  let html=`
+
  <div class="page">
- <h2>🎬 Reels</h2>
+
+  <h2>🎬 Reels</h2>
+
  `;
+
 
  const arr=
  Object.entries(reels)
- .sort((a,b)=>
-   (b[1].createdAt||0)-(a[1].createdAt||0)
+ .sort(
+  (a,b)=>
+  (b[1].createdAt||0)-
+  (a[1].createdAt||0)
  );
+
 
  if(!arr.length){
 
-   html+=`
-   <div class="card">
-    अभी कोई Reel नहीं है।
-   </div>
-   `;
+  html+=`
+
+  <div class="card empty">
+   अभी कोई Reel नहीं है।
+  </div>
+
+  `;
 
  }
 
- arr.forEach(([id,r])=>{
 
-   const p=profiles[r.uid]||{};
+ arr.forEach(
+ ([id,r])=>{
 
-   html+=`
-   <div class="reel">
+  const p=
+  profiles[r.uid]||{};
 
-    <video
-      src="${r.url}"
-      controls
-      playsinline
-      loop
-    ></video>
+  const likes=
+  Object.keys(
+   r.likes||{}
+  ).length;
 
-    <div class="reel-info">
+  const liked=
+  r.likes&&r.likes[me.uid];
 
-      <b>@${escapeHTML(p.username||"user")}</b>
 
-      <div>
-       ${escapeHTML(r.caption||"")}
-      </div>
+  html+=`
+
+  <div class="reel">
+
+   <video
+    src="${r.url}"
+    controls
+    playsinline
+    loop>
+   </video>
+
+
+   <div class="reel-info">
+
+    <b>
+     @${escapeHTML(
+      p.username||"user"
+     )}
+    </b>
+
+    <div>
+     ${formatText(
+      r.caption||""
+     )}
+    </div>
+
+
+    ${
+     r.song
+     ?
+     `<audio
+       controls
+       src="${r.song}">
+      </audio>`
+     :""
+    }
+
+
+    <div class="reel-actions">
+
+     <button
+      class="reel-action"
+      onclick="likeReel('${id}')">
+
+      ${liked?"❤️":"🤍"}
+      ${likes}
+
+     </button>
+
+
+     <button
+      class="reel-action"
+      onclick="openReelComments('${id}')">
+
+      💬
+      ${Object.keys(
+       r.comments||{}
+      ).length}
+
+     </button>
+
+
+     <button
+      class="reel-action"
+      onclick="shareReel('${id}')">
+
+      ↗️
+
+     </button>
+
+
+     ${
+      r.uid===me.uid
+      ?
+      `<button
+       class="reel-action"
+       onclick="deleteReel('${id}')">
+       🗑️
+       </button>`
+      :""
+     }
 
     </div>
 
    </div>
-   `;
+
+  </div>
+
+  `;
 
  });
+
 
  html+=`</div>`;
 
@@ -1574,9 +2533,224 @@ function reelsPage(){
 }
 
 
-/* =========================
+/* =====================================================
+   REEL LIKE
+===================================================== */
+
+window.likeReel=async function(id){
+
+ const likeRef=
+ ref(
+  db,
+  `reels/${id}/likes/${me.uid}`
+ );
+
+ await runTransaction(
+  likeRef,
+  value=>
+  value?null:true
+ );
+
+};
+
+
+/* =====================================================
+   REEL COMMENTS
+===================================================== */
+
+window.openReelComments=function(id){
+
+ const r=
+ reels[id]||{};
+
+ let html="";
+
+
+ Object.values(
+  r.comments||{}
+ )
+ .sort(
+  (a,b)=>
+  (a.createdAt||0)-
+  (b.createdAt||0)
+ )
+ .forEach(c=>{
+
+  const p=
+  profiles[c.uid]||{};
+
+  html+=`
+
+  <div class="comment">
+
+   <b>
+    @${escapeHTML(
+     p.username||"user"
+    )}
+   </b>
+
+   <br>
+
+   ${formatText(c.text)}
+
+  </div>
+
+  `;
+
+ });
+
+
+ document.getElementById("modal").innerHTML=`
+
+ <div
+  class="modal"
+  onclick="closeModal(event)">
+
+  <div
+   class="modal-box"
+   onclick="event.stopPropagation()">
+
+   <div class="modal-head">
+
+    <h3>💬 Reel Comments</h3>
+
+    <button
+     class="close-btn"
+     onclick="closeModal()">
+     ×
+    </button>
+
+   </div>
+
+   ${html||"<p>कोई comment नहीं है।</p>"}
+
+   <textarea
+    id="newReelComment"
+    placeholder="Comment लिखें...">
+   </textarea>
+
+   <button
+    class="primary"
+    onclick="addReelComment('${id}')">
+    Comment
+   </button>
+
+  </div>
+
+ </div>
+
+ `;
+
+};
+
+
+window.addReelComment=async function(id){
+
+ const input=
+ document.getElementById(
+  "newReelComment"
+ );
+
+ const text=
+ input.value.trim();
+
+ if(!text)return;
+
+ const rRef=
+ push(
+  ref(db,`reels/${id}/comments`)
+ );
+
+ await set(
+  rRef,
+  {
+   uid:me.uid,
+   text:text,
+   createdAt:Date.now()
+  }
+ );
+
+ await notifyMentions(
+  text,
+  "reel",
+  id
+ );
+
+ closeModal();
+
+};
+
+
+/* =====================================================
+   REEL SHARE
+===================================================== */
+
+window.shareReel=async function(id){
+
+ const url=
+ location.href+
+ "#reel-"+id;
+
+ if(navigator.share){
+
+  try{
+
+   await navigator.share({
+    title:"Rechod Reel",
+    text:"Rechod Reel",
+    url:url
+   });
+
+  }catch(e){}
+
+ }else{
+
+  try{
+
+   await navigator.clipboard
+   .writeText(url);
+
+   alert(
+    "Reel link copied"
+   );
+
+  }catch(e){
+
+   alert(url);
+
+  }
+
+ }
+
+};
+
+
+/* =====================================================
+   DELETE REEL
+===================================================== */
+
+window.deleteReel=async function(id){
+
+ const r=reels[id];
+
+ if(!r||r.uid!==me.uid)return;
+
+ if(
+  !confirm(
+   "यह Reel delete करना है?"
+  )
+ )return;
+
+ await remove(
+  ref(db,"reels/"+id)
+ );
+
+};
+
+
+/* =====================================================
    SEARCH
-========================= */
+===================================================== */
 
 function searchPage(){
 
@@ -1587,9 +2761,9 @@ function searchPage(){
   <h2>🔎 Search</h2>
 
   <input
-    id="searchInput"
-    placeholder="Username या name search करें"
-    oninput="doSearch()"
+   id="searchInput"
+   placeholder="Username या name search करें"
+   oninput="doSearch()"
   >
 
   <div id="searchResults"></div>
@@ -1604,72 +2778,95 @@ function searchPage(){
 window.doSearch=function(){
 
  const q=
- document.getElementById("searchInput")
- .value
+ document.getElementById(
+  "searchInput"
+ ).value
  .trim()
  .toLowerCase();
 
  const box=
- document.getElementById("searchResults");
+ document.getElementById(
+  "searchResults"
+ );
 
  if(!q){
 
-   box.innerHTML="";
-   return;
+  box.innerHTML="";
+
+  return;
 
  }
 
  let html="";
 
- Object.entries(profiles).forEach(([uid,p])=>{
 
-   if(
-     String(p.username||"")
-     .toLowerCase()
-     .includes(q)||
-     String(p.name||"")
-     .toLowerCase()
-     .includes(q)
-   ){
+ Object.entries(profiles)
+ .forEach(([uid,p])=>{
 
-     html+=`
-     <div class="search-result">
+  if(
+   String(p.username||"")
+   .toLowerCase()
+   .includes(q)||
+   String(p.name||"")
+   .toLowerCase()
+   .includes(q)
+  ){
 
-      <img
-       class="avatar"
-       src="${p.photo||avatar(uid)}"
-      >
+   html+=`
 
-      <div style="flex:1">
+   <div class="search-result">
 
-       <b>${escapeHTML(p.username||"user")}</b>
-       <br>
-       <small>${escapeHTML(p.name||"")}</small>
+    <img
+     class="avatar"
+     src="${
+      p.photo||
+      avatar(uid)
+     }"
+    >
 
-      </div>
+    <div style="flex:1">
 
-      <button
-       class="secondary"
-       onclick="openProfile('${uid}')">
-       View
-      </button>
+     <b>
+      ${escapeHTML(
+       p.username||"user"
+      )}
+     </b>
 
-     </div>
-     `;
+     <br>
 
-   }
+     <small>
+      ${escapeHTML(
+       p.name||""
+      )}
+     </small>
+
+    </div>
+
+    <button
+     class="secondary"
+     onclick="openProfile('${uid}')">
+     View
+    </button>
+
+   </div>
+
+   `;
+
+  }
 
  });
 
+
  box.innerHTML=
- html||"<p>कोई user नहीं मिला</p>";
+ html||
+ "<p>कोई user नहीं मिला</p>";
 
 };
 
 
-/* =========================
+/* =====================================================
    CREATE PAGE
-========================= */
+===================================================== */
 
 function createPage(){
 
@@ -1679,120 +2876,175 @@ function createPage(){
 
   <h2>＋ Create</h2>
 
+
+  <!-- POST -->
+
   <div class="card">
 
    <h3>📸 Post</h3>
 
+   <small>
+    एक बार में अधिकतम 10 photos
+   </small>
+
    <input
-     id="postFiles"
-     type="file"
-     accept="image/*"
-     multiple
-     onchange="previewPosts()"
+    id="postFiles"
+    type="file"
+    accept="image/*"
+    multiple
+    onchange="previewPosts()"
    >
 
    <div id="postPreview"></div>
 
+
    <div class="filter-row">
 
-    ${Object.entries(filterNames).map(([k,n])=>`
+    ${
+     Object.entries(filterNames)
+     .map(([k,n])=>`
+
       <button
-       class="filter-btn ${k===selectedFilter?"selected":""}"
+       type="button"
+       class="filter-btn ${
+        k===selectedFilter
+        ?"selected":""
+       }"
        onclick="selectFilter('${k}')">
+
        ${n}
+
       </button>
-    `).join("")}
+
+     `).join("")
+    }
 
    </div>
 
+
    <textarea
-     id="postCaption"
-     placeholder="Caption..."
-   ></textarea>
+    id="postCaption"
+    placeholder="Caption लिखें... @username #hashtag">
+   </textarea>
+
 
    <input
-     id="postSong"
-     type="file"
-     accept="audio/*"
+    id="postSong"
+    type="file"
+    accept="audio/*"
    >
 
-   <button class="primary"
-   onclick="uploadPost()">
-   📤 Post Upload
+
+   <button
+    class="primary"
+    onclick="uploadPost()">
+
+    📤 Post Upload
+
    </button>
 
   </div>
 
+
+  <!-- STORY -->
 
   <div class="card">
 
    <h3>⭕ Story</h3>
 
    <input
-     id="storyFile"
-     type="file"
-     accept="image/*,video/*"
-     onchange="previewStory()"
+    id="storyFile"
+    type="file"
+    accept="image/*,video/*"
+    onchange="previewStory()"
    >
 
    <div id="storyPreview"></div>
 
+
    <div class="filter-row">
 
-    ${Object.entries(filterNames).map(([k,n])=>`
+    ${
+     Object.entries(filterNames)
+     .map(([k,n])=>`
+
       <button
-       class="filter-btn ${k===selectedStoryFilter?"selected":""}"
+       type="button"
+       class="filter-btn ${
+        k===selectedStoryFilter
+        ?"selected":""
+       }"
        onclick="selectStoryFilter('${k}')">
+
        ${n}
+
       </button>
-    `).join("")}
+
+     `).join("")
+    }
 
    </div>
 
-   <button class="primary"
-   onclick="uploadStory()">
-   ⭕ Story Upload
+
+   <input
+    id="storySong"
+    type="file"
+    accept="audio/*"
+   >
+
+
+   <button
+    class="primary"
+    onclick="uploadStory()">
+
+    ⭕ Story Upload
+
    </button>
 
+
    <small>
-   Story 24 घंटे बाद अपने आप hide होगी।
+    Story 24 घंटे बाद hide होगी।
    </small>
 
   </div>
 
+
+  <!-- REEL -->
 
   <div class="card">
 
    <h3>🎬 Reel</h3>
 
    <input
-     id="reelFile"
-     type="file"
-     accept="video/*"
-     onchange="previewReel()"
+    id="reelFile"
+    type="file"
+    accept="video/*"
+    onchange="previewReel()"
    >
 
    <div id="reelPreview"></div>
 
+
    <textarea
-     id="reelCaption"
-     placeholder="Reel caption..."
-   ></textarea>
+    id="reelCaption"
+    placeholder="Reel caption... @username #hashtag">
+   </textarea>
+
 
    <input
-     id="reelSong"
-     type="file"
-     accept="audio/*"
+    id="reelSong"
+    type="file"
+    accept="audio/*"
    >
 
-   <button class="primary"
-   onclick="uploadReel()">
-   🎬 Reel Upload
-   </button>
 
-   <small>
-   Cloudinary account की upload limit के अनुसार file upload होगी।
-   </small>
+   <button
+    class="primary"
+    onclick="uploadReel()">
+
+    🎬 Reel Upload
+
+   </button>
 
   </div>
 
@@ -1803,116 +3055,200 @@ function createPage(){
 }
 
 
-/* =========================
+/* =====================================================
    FILTER SELECT
-========================= */
+===================================================== */
 
 window.selectFilter=function(f){
 
  selectedFilter=f;
- render();
+
+ document
+ .querySelectorAll(
+  "#app .filter-row .filter-btn"
+ )
+ .forEach(btn=>{
+
+  btn.classList.toggle(
+   "selected",
+   btn.textContent.trim()===
+   filterNames[f]
+  );
+
+ });
+
+ updatePostPreview();
 
 };
+
 
 window.selectStoryFilter=function(f){
 
  selectedStoryFilter=f;
- render();
+
+ document
+ .querySelectorAll(
+  "#app .filter-row .filter-btn"
+ )
+ .forEach(btn=>{
+
+  btn.classList.toggle(
+   "selected",
+   btn.textContent.trim()===
+   filterNames[f]
+  );
+
+ });
+
+ updateStoryPreview();
 
 };
 
 
-/* =========================
-   PREVIEW POSTS
-========================= */
+/* =====================================================
+   POST PREVIEW
+===================================================== */
 
 window.previewPosts=function(){
 
- const files=
- document.getElementById("postFiles").files;
+ const input=
+ document.getElementById("postFiles");
 
- postFiles=[...files].slice(0,10);
+ if(!input)return;
+
+ postFiles=
+ [...input.files]
+ .slice(0,10);
+
+ updatePostPreview();
+
+ if(input.files.length>10){
+
+  alert(
+   "अधिकतम 10 photos select कर सकते हैं"
+  );
+
+ }
+
+};
+
+
+function updatePostPreview(){
 
  const box=
- document.getElementById("postPreview");
+ document.getElementById(
+  "postPreview"
+ );
+
+ if(!box)return;
 
  box.innerHTML="";
 
  postFiles.forEach(file=>{
 
-   const url=
-   URL.createObjectURL(file);
+  const url=
+  URL.createObjectURL(file);
 
-   box.innerHTML+=`
+  box.innerHTML+=`
+
    <img
     class="preview"
-    style="filter:${filters[selectedFilter]}"
-    src="${url}"
-   >
-   `;
+    style="filter:${
+     filters[selectedFilter]
+    }"
+    src="${url}">
+
+  `;
 
  });
 
- if(files.length>10){
-
-   alert("अधिकतम 10 photos select कर सकते हैं");
-
- }
-
-};
+}
 
 
-/* =========================
-   PREVIEW STORY
-========================= */
+/* =====================================================
+   STORY PREVIEW
+===================================================== */
 
 window.previewStory=function(){
 
+ const input=
+ document.getElementById("storyFile");
+
+ if(!input)return;
+
  const file=
- document.getElementById("storyFile").files[0];
+ input.files[0];
 
  if(!file)return;
 
  storyFileData=file;
 
- const url=
- URL.createObjectURL(file);
-
- const box=
- document.getElementById("storyPreview");
-
- if(file.type.startsWith("video/")){
-
-   box.innerHTML=`
-   <video
-    class="preview"
-    controls
-    src="${url}">
-   </video>
-   `;
-
- }else{
-
-   box.innerHTML=`
-   <img
-    class="preview"
-    style="filter:${filters[selectedStoryFilter]}"
-    src="${url}">
-   `;
-
- }
+ updateStoryPreview();
 
 };
 
 
-/* =========================
-   PREVIEW REEL
-========================= */
+function updateStoryPreview(){
+
+ const box=
+ document.getElementById(
+  "storyPreview"
+ );
+
+ if(!box||!storyFileData)return;
+
+ const url=
+ URL.createObjectURL(
+  storyFileData
+ );
+
+ if(
+  storyFileData.type
+  .startsWith("video/")
+ ){
+
+  box.innerHTML=`
+
+   <video
+    class="preview"
+    controls
+    playsinline
+    src="${url}">
+   </video>
+
+  `;
+
+ }else{
+
+  box.innerHTML=`
+
+   <img
+    class="preview"
+    style="filter:${
+     filters[selectedStoryFilter]
+    }"
+    src="${url}">
+
+  `;
+
+ }
+
+}
+
+
+/* =====================================================
+   REEL PREVIEW
+===================================================== */
 
 window.previewReel=function(){
 
+ const input=
+ document.getElementById("reelFile");
+
+ if(!input)return;
+
  const file=
- document.getElementById("reelFile").files[0];
+ input.files[0];
 
  if(!file)return;
 
@@ -1921,288 +3257,467 @@ window.previewReel=function(){
  const url=
  URL.createObjectURL(file);
 
- document.getElementById("reelPreview")
- .innerHTML=`
+ document.getElementById(
+  "reelPreview"
+ ).innerHTML=`
+
  <video
   class="preview"
   controls
+  playsinline
   src="${url}">
  </video>
+
  `;
 
 };
 
 
-/* =========================
-   CLOUDINARY UPLOAD
-========================= */
+/* =====================================================
+   CLOUDINARY
+===================================================== */
 
-async function cloudinaryUpload(file,resourceType="auto"){
+async function cloudinaryUpload(
+ file,
+ resourceType="auto"
+){
 
- const fd=new FormData();
+ const fd=
+ new FormData();
 
- fd.append("file",file);
- fd.append("upload_preset",UPLOAD_PRESET);
+ fd.append(
+  "file",
+  file
+ );
+
+ fd.append(
+  "upload_preset",
+  UPLOAD_PRESET
+ );
+
 
  const endpoint=
- `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`;
+ `https://api.cloudinary.com/v1_1/`+
+ `${CLOUD_NAME}/`+
+ `${resourceType}/upload`;
+
 
  const res=
- await fetch(endpoint,{
+ await fetch(
+  endpoint,
+  {
    method:"POST",
    body:fd
- });
+  }
+ );
 
- const data=await res.json();
 
- if(!res.ok||!data.secure_url){
+ const data=
+ await res.json();
 
-   throw new Error(
-     data.error?.message||
-     "Cloudinary upload failed"
-   );
+
+ if(
+  !res.ok||
+  !data.secure_url
+ ){
+
+  throw new Error(
+   data.error?.message||
+   "Cloudinary upload failed"
+  );
 
  }
+
 
  return data.secure_url;
 
 }
 
 
-/* =========================
+/* =====================================================
    UPLOAD POST
-========================= */
+===================================================== */
 
 window.uploadPost=async function(){
 
  if(!postFiles.length){
 
-   alert("Photo select करें");
-   return;
+  alert(
+   "Photo select करें"
+  );
+
+  return;
 
  }
 
  const caption=
- document.getElementById("postCaption")
- .value.trim();
+ document.getElementById(
+  "postCaption"
+ ).value.trim();
 
  const songFile=
- document.getElementById("postSong").files[0];
+ document.getElementById(
+  "postSong"
+ ).files[0];
+
 
  try{
 
-   alert("Photo upload हो रही है...");
+  alert(
+   "Photo upload हो रही है..."
+  );
 
-   const urls=[];
 
-   for(const file of postFiles){
+  const urls=[];
 
-     const url=
-     await cloudinaryUpload(file,"image");
 
-     urls.push(url);
+  for(
+   const file of postFiles
+  ){
+
+   const url=
+   await cloudinaryUpload(
+    file,
+    "image"
+   );
+
+   urls.push(url);
+
+  }
+
+
+  let song="";
+
+
+  if(songFile){
+
+   song=
+   await cloudinaryUpload(
+    songFile,
+    "video"
+   );
+
+  }
+
+
+  const postRef=
+  push(ref(db,"posts"));
+
+
+  await set(
+   postRef,
+   {
+
+    uid:me.uid,
+
+    images:urls,
+
+    caption:caption,
+
+    filter:selectedFilter,
+
+    song:song,
+
+    likes:{},
+
+    comments:{},
+
+    createdAt:Date.now()
 
    }
+  );
 
-   let song="";
 
-   if(songFile){
+  await notifyMentions(
+   caption,
+   "post",
+   postRef.key
+  );
 
-     song=
-     await cloudinaryUpload(songFile,"video");
 
-   }
+  postFiles=[];
 
-   const postRef=
-   push(ref(db,"posts"));
 
-   await set(postRef,{
+  alert(
+   "✅ Post uploaded"
+  );
 
-     uid:me.uid,
-     images:urls,
-     caption:caption,
-     filter:selectedFilter,
-     song:song,
-     likes:{},
-     comments:{},
-     createdAt:Date.now()
 
-   });
+  page("home");
 
-   postFiles=[];
-
-   alert("✅ Post uploaded");
-
-   page("home");
 
  }catch(e){
 
-   console.error(e);
+  console.error(e);
 
-   alert(
-     "❌ Upload Error:\n"+
-     e.message
-   );
+  alert(
+   "❌ Upload Error:\n"+
+   e.message
+  );
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    UPLOAD STORY
-========================= */
+===================================================== */
 
 window.uploadStory=async function(){
 
  if(!storyFileData){
 
-   alert("Story photo/video select करें");
-   return;
+  alert(
+   "Story photo/video select करें"
+  );
+
+  return;
 
  }
 
+
  try{
 
-   alert("Story upload हो रही है...");
+  alert(
+   "Story upload हो रही है..."
+  );
 
-   const isVideo=
-   storyFileData.type.startsWith("video/");
 
-   const url=
+  const isVideo=
+  storyFileData.type
+  .startsWith("video/");
+
+
+  const url=
+  await cloudinaryUpload(
+   storyFileData,
+   isVideo
+   ?"video"
+   :"image"
+  );
+
+
+  const songFile=
+  document.getElementById(
+   "storySong"
+  ).files[0];
+
+
+  let song="";
+
+
+  if(songFile){
+
+   song=
    await cloudinaryUpload(
-     storyFileData,
-     isVideo?"video":"image"
+    songFile,
+    "video"
    );
 
-   const storyRef=
-   push(ref(db,"stories"));
+  }
 
-   await set(storyRef,{
 
-     uid:me.uid,
-     url:url,
-     type:isVideo?"video":"image",
-     filter:selectedStoryFilter,
-     createdAt:Date.now(),
-     views:{},
-     likes:{}
+  const storyRef=
+  push(ref(db,"stories"));
 
-   });
 
-   storyFileData=null;
+  await set(
+   storyRef,
+   {
 
-   alert("✅ Story uploaded");
+    uid:me.uid,
 
-   page("home");
+    url:url,
+
+    type:
+    isVideo
+    ?"video"
+    :"image",
+
+    filter:
+    selectedStoryFilter,
+
+    song:song,
+
+    createdAt:Date.now(),
+
+    views:{},
+
+    likes:{}
+
+   }
+  );
+
+
+  storyFileData=null;
+
+
+  alert(
+   "✅ Story uploaded"
+  );
+
+
+  page("home");
+
 
  }catch(e){
 
-   console.error(e);
+  console.error(e);
 
-   alert(
-     "❌ Story Upload Error:\n"+
-     e.message
-   );
+  alert(
+   "❌ Story Upload Error:\n"+
+   e.message
+  );
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    UPLOAD REEL
-========================= */
+===================================================== */
 
 window.uploadReel=async function(){
 
  if(!reelFileData){
 
-   alert("Reel video select करें");
-   return;
+  alert(
+   "Reel video select करें"
+  );
+
+  return;
 
  }
 
+
  try{
 
-   alert("Reel upload हो रही है...");
+  alert(
+   "Reel upload हो रही है..."
+  );
 
-   const url=
+
+  const url=
+  await cloudinaryUpload(
+   reelFileData,
+   "video"
+  );
+
+
+  const caption=
+  document.getElementById(
+   "reelCaption"
+  ).value.trim();
+
+
+  const songFile=
+  document.getElementById(
+   "reelSong"
+  ).files[0];
+
+
+  let song="";
+
+
+  if(songFile){
+
+   song=
    await cloudinaryUpload(
-     reelFileData,
-     "video"
+    songFile,
+    "video"
    );
 
-   const caption=
-   document.getElementById("reelCaption")
-   .value.trim();
+  }
 
-   const songFile=
-   document.getElementById("reelSong")
-   .files[0];
 
-   let song="";
+  const reelRef=
+  push(ref(db,"reels"));
 
-   if(songFile){
 
-     song=
-     await cloudinaryUpload(songFile,"video");
+  await set(
+   reelRef,
+   {
+
+    uid:me.uid,
+
+    url:url,
+
+    caption:caption,
+
+    song:song,
+
+    likes:{},
+
+    comments:{},
+
+    createdAt:Date.now()
 
    }
+  );
 
-   const reelRef=
-   push(ref(db,"reels"));
 
-   await set(reelRef,{
+  await notifyMentions(
+   caption,
+   "reel",
+   reelRef.key
+  );
 
-     uid:me.uid,
-     url:url,
-     caption:caption,
-     song:song,
-     createdAt:Date.now()
 
-   });
+  reelFileData=null;
 
-   reelFileData=null;
 
-   alert("✅ Reel uploaded");
+  alert(
+   "✅ Reel uploaded"
+  );
 
-   page("reels");
+
+  page("reels");
+
 
  }catch(e){
 
-   console.error(e);
+  console.error(e);
 
-   alert(
-     "❌ Reel Upload Error:\n"+
-     e.message
-   );
+  alert(
+   "❌ Reel Upload Error:\n"+
+   e.message
+  );
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    PROFILE
-========================= */
+===================================================== */
 
 function profilePage(){
 
  const p=
  profiles[me.uid]||{};
 
+
  const followerCount=
- p.followers?
- Object.keys(p.followers).length:0;
+ Object.keys(
+  p.followers||{}
+ ).length;
+
 
  const followingCount=
- p.following?
- Object.keys(p.following).length:0;
+ Object.keys(
+  p.following||{}
+ ).length;
+
 
  const postCount=
  Object.values(posts)
- .filter(x=>x.uid===me.uid).length;
+ .filter(
+  x=>x.uid===me.uid
+ ).length;
+
 
  return`
 
@@ -2212,41 +3727,78 @@ function profilePage(){
 
    <img
     class="profile-photo"
-    src="${p.photo||me.photoURL||avatar(me.uid)}"
+    src="${
+     p.photo||
+     me.photoURL||
+     avatar(me.uid)
+    }"
    >
 
-   <h2>${escapeHTML(p.name||"Rechod User")}</h2>
+
+   <h2>
+    ${escapeHTML(
+     p.name||"Rechod User"
+    )}
+   </h2>
+
 
    <div>
-    @${escapeHTML(p.username||"user")}
+    @${escapeHTML(
+     p.username||"user"
+    )}
    </div>
 
+
    <p>
-    ${escapeHTML(p.bio||"")}
+    ${escapeHTML(
+     p.bio||""
+    )}
    </p>
+
 
    <div class="stats">
 
     <div class="stat">
-     <b>${postCount}</b>
+
+     <b>
+      ${postCount}
+     </b>
+
      Posts
+
     </div>
 
+
     <div class="stat">
-     <b>${followerCount}</b>
+
+     <b>
+      ${followerCount}
+     </b>
+
      Followers
+
     </div>
 
+
     <div class="stat">
-     <b>${followingCount}</b>
+
+     <b>
+      ${followingCount}
+     </b>
+
      Following
+
     </div>
 
    </div>
 
-   <button class="secondary"
-   onclick="editProfile()">
-   ✏️ Edit Profile
+
+   <button
+    class="secondary"
+    onclick="editProfile()">
+
+    ✏️ Edit Profile
+
    </button>
 
   </div>
@@ -2254,14 +3806,29 @@ function profilePage(){
 
   <div class="card">
 
-   <h3>📷 My Posts</h3>
+   <h3>
+    📷 My Posts
+   </h3>
+
 
    ${
-     Object.entries(posts)
-     .filter(([id,x])=>x.uid===me.uid)
-     .map(([id,x])=>postCard(id,x))
-     .join("")||
-     "<p>अभी कोई post नहीं है।</p>"
+    Object.entries(posts)
+    .filter(
+     ([id,x])=>
+     x.uid===me.uid
+    )
+    .sort(
+     (a,b)=>
+     (b[1].createdAt||0)-
+     (a[1].createdAt||0)
+    )
+    .map(
+     ([id,x])=>
+     postCard(id,x)
+    )
+    .join("")
+    ||
+    "<p>अभी कोई post नहीं है।</p>"
    }
 
   </div>
@@ -2273,81 +3840,118 @@ function profilePage(){
 }
 
 
-/* =========================
+/* =====================================================
    EDIT PROFILE
-========================= */
+===================================================== */
 
 window.editProfile=function(){
 
- const p=profiles[me.uid]||{};
+ const p=
+ profiles[me.uid]||{};
+
 
  const name=
- prompt("Name",p.name||"");
+ prompt(
+  "Name",
+  p.name||""
+ );
 
  if(name===null)return;
 
+
  const username=
- prompt("Username",p.username||"");
+ prompt(
+  "Username",
+  p.username||""
+ );
 
  if(username===null)return;
 
+
  const bio=
- prompt("Bio",p.bio||"");
+ prompt(
+  "Bio",
+  p.bio||""
+ );
 
  if(bio===null)return;
 
- update(ref(db,"profiles/"+me.uid),{
+
+ update(
+  ref(db,"profiles/"+me.uid),
+  {
 
    name:name,
-   username:username
-    .toLowerCase()
-    .replace(/\s/g,""),
+
+   username:
+   username
+   .toLowerCase()
+   .replace(/\s/g,""),
+
    bio:bio
 
- });
+  }
+ );
 
 };
 
 
-/* =========================
+/* =====================================================
    PROFILE PHOTO
-========================= */
+===================================================== */
 
-window.uploadProfilePhoto=async function(file){
+window.uploadProfilePhoto=
+async function(file){
 
  if(!file)return;
 
+
  try{
 
-   const url=
-   await cloudinaryUpload(file,"image");
+  const url=
+  await cloudinaryUpload(
+   file,
+   "image"
+  );
 
-   await update(
-     ref(db,"profiles/"+me.uid),
-     {photo:url}
-   );
 
-   alert("✅ Profile photo updated");
+  await update(
+   ref(
+    db,
+    "profiles/"+me.uid
+   ),
+   {
+    photo:url
+   }
+  );
 
-   render();
+
+  alert(
+   "✅ Profile photo updated"
+  );
+
 
  }catch(e){
 
-   alert("❌ "+e.message);
+  alert(
+   "❌ "+e.message
+  );
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    VIEW PROFILE
-========================= */
+===================================================== */
 
 window.openProfile=function(uid){
 
  viewingProfileId=uid;
+
  current="viewProfile";
+
  render();
 
 };
@@ -2355,14 +3959,20 @@ window.openProfile=function(uid){
 
 function viewProfilePage(){
 
- const uid=viewingProfileId;
+ const uid=
+ viewingProfileId;
 
- const p=profiles[uid]||{};
+ const p=
+ profiles[uid]||{};
 
- const isMe=uid===me.uid;
+ const isMe=
+ uid===me.uid;
+
 
  const following=
- p.followers&&p.followers[me.uid];
+ p.followers&&
+ p.followers[me.uid];
+
 
  return`
 
@@ -2371,63 +3981,124 @@ function viewProfilePage(){
   <button
    class="secondary"
    onclick="page('search')">
+
    ← Back
+
   </button>
+
 
   <div class="card profile-head">
 
    <img
     class="profile-photo"
-    src="${p.photo||avatar(uid)}"
+    src="${
+     p.photo||
+     avatar(uid)
+    }"
    >
 
-   <h2>${escapeHTML(p.name||"User")}</h2>
+
+   <h2>
+    ${escapeHTML(
+     p.name||"User"
+    )}
+   </h2>
+
 
    <div>
-    @${escapeHTML(p.username||"user")}
+    @${escapeHTML(
+     p.username||"user"
+    )}
    </div>
 
+
    <p>
-    ${escapeHTML(p.bio||"")}
+    ${escapeHTML(
+     p.bio||""
+    )}
    </p>
+
 
    <div class="stats">
 
     <div class="stat">
-     <b>${Object.keys(p.followers||{}).length}</b>
+
+     <b>
+      ${Object.keys(
+       p.followers||{}
+      ).length}
+     </b>
+
      Followers
+
     </div>
 
+
     <div class="stat">
-     <b>${Object.keys(p.following||{}).length}</b>
+
+     <b>
+      ${Object.keys(
+       p.following||{}
+      ).length}
+     </b>
+
      Following
+
     </div>
 
    </div>
 
+
    ${
-     !isMe?
-     `<button
-       class="primary"
-       onclick="followUser('${uid}')">
-       ${following?"Following":"Follow"}
-      </button>
-      <button
-       class="secondary"
-       style="width:100%"
-       onclick="startChat('${uid}')">
-       💬 Message
-      </button>`
-     :""
+    !isMe
+    ?
+    `
+
+    <button
+     class="primary"
+     onclick="followUser('${uid}')">
+
+     ${
+      following
+      ?"Following"
+      :"Follow"
+     }
+
+    </button>
+
+
+    <button
+     class="secondary"
+     style="width:100%"
+     onclick="startChat('${uid}')">
+
+     💬 Message
+
+    </button>
+
+    `
+    :""
    }
 
   </div>
 
+
   ${
-    Object.entries(posts)
-    .filter(([id,x])=>x.uid===uid)
-    .map(([id,x])=>postCard(id,x))
-    .join("")
+   Object.entries(posts)
+   .filter(
+    ([id,x])=>
+    x.uid===uid
+   )
+   .sort(
+    (a,b)=>
+    (b[1].createdAt||0)-
+    (a[1].createdAt||0)
+   )
+   .map(
+    ([id,x])=>
+    postCard(id,x)
+   )
+   .join("")
   }
 
  </div>
@@ -2437,38 +4108,68 @@ function viewProfilePage(){
 }
 
 
-/* =========================
+/* =====================================================
    FOLLOW
-========================= */
+===================================================== */
 
-window.followUser=async function(uid){
+window.followUser=
+async function(uid){
+
+ if(uid===me.uid)return;
+
 
  const myRef=
- ref(db,`profiles/${me.uid}/following/${uid}`);
+ ref(
+  db,
+  `profiles/${me.uid}/following/${uid}`
+ );
+
 
  const theirRef=
- ref(db,`profiles/${uid}/followers/${me.uid}`);
+ ref(
+  db,
+  `profiles/${uid}/followers/${me.uid}`
+ );
 
- const snap=await get(myRef);
+
+ const snap=
+ await get(myRef);
+
 
  if(snap.exists()){
 
-   await remove(myRef);
-   await remove(theirRef);
+  await remove(myRef);
+
+  await remove(theirRef);
 
  }else{
 
-   await set(myRef,true);
-   await set(theirRef,true);
+  await set(
+   myRef,
+   true
+  );
 
-   await push(ref(db,`notifs/${uid}`),{
+  await set(
+   theirRef,
+   true
+  );
 
-     type:"follow",
-     sender:me.uid,
-     text:"ने आपको follow किया",
-     createdAt:Date.now()
 
-   });
+  await push(
+   ref(db,`notifs/${uid}`),
+   {
+
+    type:"follow",
+
+    sender:me.uid,
+
+    text:
+    "ने आपको follow किया",
+
+    createdAt:Date.now()
+
+   }
+  );
 
  }
 
@@ -2477,13 +4178,18 @@ window.followUser=async function(uid){
 };
 
 
-/* =========================
+/* =====================================================
    MESSAGES
-========================= */
+===================================================== */
 
 function conversationId(a,b){
 
- return [a,b].sort().join("_");
+ return [
+  a,
+  b
+ ]
+ .sort()
+ .join("_");
 
 }
 
@@ -2491,68 +4197,123 @@ function conversationId(a,b){
 function messagesPage(){
 
  let html=`
+
  <div class="page">
 
- <h2>💬 Messages</h2>
+  <h2>💬 Messages</h2>
+
  `;
+
 
  if(chatUserId){
 
-   html+=chatPage();
+  html+=
+  chatPage();
 
  }else{
 
-   const userIds=new Set();
+  const userIds=
+  new Set();
 
-   Object.values(messages).forEach(conv=>{
 
-     Object.values(conv||{}).forEach(m=>{
+  Object.values(messages)
+  .forEach(conv=>{
 
-       if(m.sender===me.uid)
-         userIds.add(m.receiver);
+   Object.values(conv||{})
+   .forEach(m=>{
 
-       if(m.receiver===me.uid)
-         userIds.add(m.sender);
+    if(
+     m.sender===me.uid
+    ){
 
-     });
+     userIds.add(
+      m.receiver
+     );
 
-   });
+    }
 
-   if(!userIds.size){
 
-     html+=`
-     <div class="card">
-      अभी कोई chat नहीं है।
-     </div>
-     `;
+    if(
+     m.receiver===me.uid
+    ){
 
-   }
+     userIds.add(
+      m.sender
+     );
 
-   userIds.forEach(uid=>{
-
-     const p=profiles[uid]||{};
-
-     html+=`
-     <div
-      class="search-result"
-      onclick="startChat('${uid}')">
-
-      <img
-       class="avatar"
-       src="${p.photo||avatar(uid)}">
-
-      <div>
-       <b>${escapeHTML(p.username||"user")}</b>
-       <br>
-       <small>${escapeHTML(p.name||"")}</small>
-      </div>
-
-     </div>
-     `;
+    }
 
    });
+
+  });
+
+
+  if(!userIds.size){
+
+   html+=`
+
+   <div class="card empty">
+
+    अभी कोई chat नहीं है।
+
+    <br><br>
+
+    Search से user खोलकर
+    Message करें।
+
+   </div>
+
+   `;
+
+  }
+
+
+  userIds.forEach(uid=>{
+
+   const p=
+   profiles[uid]||{};
+
+
+   html+=`
+
+   <div
+    class="search-result"
+    onclick="startChat('${uid}')">
+
+    <img
+     class="avatar"
+     src="${
+      p.photo||
+      avatar(uid)
+     }">
+
+
+    <div>
+
+     <b>
+      ${escapeHTML(
+       p.username||"user"
+      )}
+     </b>
+
+     <br>
+
+     <small>
+      ${escapeHTML(
+       p.name||""
+      )}
+     </small>
+
+    </div>
+
+   </div>
+
+   `;
+
+  });
 
  }
+
 
  html+=`</div>`;
 
@@ -2561,27 +4322,40 @@ function messagesPage(){
 }
 
 
-/* =========================
+/* =====================================================
    CHAT
-========================= */
+===================================================== */
 
 function chatPage(){
 
- const p=profiles[chatUserId]||{};
+ const p=
+ profiles[chatUserId]||{};
+
 
  const cid=
- conversationId(me.uid,chatUserId);
+ conversationId(
+  me.uid,
+  chatUserId
+ );
+
 
  const conv=
  messages[cid]||{};
+
 
  let html=`
 
  <button
   class="secondary"
-  onclick="chatUserId=null;render()">
+  onclick="
+   chatUserId=null;
+   render();
+  ">
+
   ← Chats
+
  </button>
+
 
  <div class="card">
 
@@ -2589,51 +4363,85 @@ function chatPage(){
 
    <img
     class="avatar"
-    src="${p.photo||avatar(chatUserId)}">
+    src="${
+     p.photo||
+     avatar(chatUserId)
+    }">
+
 
    <b>
-    ${escapeHTML(p.username||"user")}
+    ${escapeHTML(
+     p.username||"user"
+    )}
    </b>
 
   </div>
 
-  <div class="chat-box" id="chatBox">
+
+  <div
+   class="chat-box"
+   id="chatBox">
 
  `;
 
+
  Object.entries(conv)
- .sort((a,b)=>
-   (a[1].createdAt||0)-(b[1].createdAt||0)
+ .sort(
+  (a,b)=>
+  (a[1].createdAt||0)-
+  (b[1].createdAt||0)
  )
  .forEach(([id,m])=>{
 
-   html+=`
-   <div class="msg ${m.sender===me.uid?"me":"other"}">
-    ${escapeHTML(m.text||"")}
-   </div>
-   `;
+  html+=`
+
+  <div
+   class="msg ${
+    m.sender===me.uid
+    ?"me"
+    :"other"
+   }">
+
+   ${formatText(
+    m.text||""
+   )}
+
+  </div>
+
+  `;
 
  });
+
 
  html+=`
 
   </div>
+
 
   <div class="chat-input">
 
    <input
     id="chatText"
     placeholder="Message..."
-    onkeydown="if(event.key==='Enter')sendMessage()"
+    onkeydown="
+     if(event.key==='Enter')
+     sendMessage()
+    "
    >
 
-   <button onclick="sendMessage()">➤</button>
+   <button
+    onclick="sendMessage()">
+
+    ➤
+
+   </button>
 
   </div>
 
  </div>
 
  `;
+
 
  return html;
 
@@ -2643,46 +4451,83 @@ function chatPage(){
 window.startChat=function(uid){
 
  chatUserId=uid;
+
  current="messages";
+
  render();
 
 };
 
 
-window.sendMessage=async function(){
+window.sendMessage=
+async function(){
 
  const input=
- document.getElementById("chatText");
+ document.getElementById(
+  "chatText"
+ );
+
 
  const text=
  input.value.trim();
 
- if(!text||!chatUserId)return;
+
+ if(
+  !text||
+  !chatUserId
+ )return;
+
 
  const cid=
- conversationId(me.uid,chatUserId);
+ conversationId(
+  me.uid,
+  chatUserId
+ );
+
 
  const msgRef=
- push(ref(db,`messages/${cid}`));
+ push(
+  ref(
+   db,
+   `messages/${cid}`
+  )
+ );
 
- await set(msgRef,{
+
+ await set(
+  msgRef,
+  {
 
    sender:me.uid,
+
    receiver:chatUserId,
+
    text:text,
+
    createdAt:Date.now()
 
- });
+  }
+ );
+
 
  await push(
-   ref(db,`notifs/${chatUserId}`),
-   {
-     type:"message",
-     sender:me.uid,
-     text:text,
-     createdAt:Date.now()
-   }
+  ref(
+   db,
+   `notifs/${chatUserId}`
+  ),
+  {
+
+   type:"message",
+
+   sender:me.uid,
+
+   text:text,
+
+   createdAt:Date.now()
+
+  }
  );
+
 
  input.value="";
 
@@ -2691,9 +4536,9 @@ window.sendMessage=async function(){
 };
 
 
-/* =========================
+/* =====================================================
    SETTINGS
-========================= */
+===================================================== */
 
 function settingsPage(){
 
@@ -2703,37 +4548,51 @@ function settingsPage(){
 
   <h2>⚙️ Settings</h2>
 
+
   <div class="card">
 
-   <h3>👤 Profile Photo</h3>
+   <h3>
+    👤 Profile Photo
+   </h3>
 
    <input
     type="file"
     accept="image/*"
-    onchange="uploadProfilePhoto(this.files[0])"
+    onchange="
+     uploadProfilePhoto(
+      this.files[0]
+     )
+    "
    >
 
   </div>
 
+
   <div class="card">
 
-   <h3>🌙 Appearance</h3>
+   <h3>
+    🌙 Appearance
+   </h3>
 
    <button
     class="primary"
     onclick="toggleDark()">
+
     Toggle Dark Mode
+
    </button>
 
   </div>
 
+
   <div class="card">
 
    <button
-    class="primary"
-    style="background:#e53935"
+    class="primary danger"
     onclick="logoutNow()">
+
     🚪 Logout
+
    </button>
 
   </div>
@@ -2745,99 +4604,146 @@ function settingsPage(){
 }
 
 
-/* =========================
+/* =====================================================
    DARK MODE
-========================= */
+===================================================== */
 
 window.toggleDark=function(){
 
- document.body.classList.toggle("dark");
+ document.body
+ .classList
+ .toggle("dark");
+
 
  localStorage.setItem(
-   "rechodDark",
-   document.body.classList.contains("dark")
+  "rechodDark",
+  document.body
+  .classList
+  .contains("dark")
  );
 
 };
 
 
-if(localStorage.getItem("rechodDark")==="true"){
+if(
+ localStorage.getItem(
+  "rechodDark"
+ )==="true"
+){
 
- document.body.classList.add("dark");
+ document.body
+ .classList
+ .add("dark");
 
 }
 
 
-/* =========================
+/* =====================================================
    LOGOUT
-========================= */
+===================================================== */
 
-window.logoutNow=async function(){
+window.logoutNow=
+async function(){
 
  try{
 
-   await signOut(auth);
+  await signOut(auth);
+
+  dataListenersStarted=false;
+
+  profiles={};
+  posts={};
+  reels={};
+  stories={};
+  messages={};
+  notifs={};
 
  }catch(e){
 
-   alert("Logout Error:\n"+e.message);
+  alert(
+   "Logout Error:\n"+
+   e.message
+  );
 
  }
 
 };
 
 
-/* =========================
+/* =====================================================
    NOTIFICATIONS
-========================= */
+===================================================== */
 
 function notificationsPage(){
 
  let html=`
+
  <div class="page">
 
- <h2>🔔 Notifications</h2>
+  <h2>🔔 Notifications</h2>
+
  `;
 
+
  const arr=
- Object.values(notifs)
- .sort((a,b)=>
-   (b.createdAt||0)-(a.createdAt||0)
+ Object.entries(notifs)
+ .sort(
+  (a,b)=>
+  (b[1].createdAt||0)-
+  (a[1].createdAt||0)
  );
+
 
  if(!arr.length){
 
-   html+=`
-   <div class="card">
-    कोई notification नहीं है।
-   </div>
-   `;
+  html+=`
+
+  <div class="card empty">
+
+   कोई notification नहीं है।
+
+  </div>
+
+  `;
 
  }
 
- arr.forEach(n=>{
 
-   const p=profiles[n.sender]||{};
+ arr.forEach(
+ ([id,n])=>{
 
-   html+=`
-   <div class="notif">
+  const p=
+  profiles[n.sender]||{};
 
-    <b>
-     ${escapeHTML(p.username||"user")}
-    </b>
 
-    ${escapeHTML(n.text||"")}
+  html+=`
 
-    <br>
+  <div class="notif">
 
-    <small>
-     ${timeAgo(n.createdAt)}
-    </small>
+   <b>
+    @${escapeHTML(
+     p.username||"user"
+    )}
+   </b>
 
-   </div>
-   `;
+   ${formatText(
+    n.text||""
+   )}
+
+   <br>
+
+   <small>
+    ${timeAgo(
+     n.createdAt
+    )}
+   </small>
+
+  </div>
+
+  `;
 
  });
+
 
  html+=`</div>`;
 
@@ -2846,46 +4752,136 @@ function notificationsPage(){
 }
 
 
-/* =========================
+/* =====================================================
+   NOTIFICATION BADGE
+===================================================== */
+
+function updateNotificationBadge(){
+
+ const badge=
+ document.getElementById(
+  "notifBadge"
+ );
+
+ if(!badge)return;
+
+
+ const count=
+ Object.keys(
+  notifs||{}
+ ).length;
+
+
+ if(count){
+
+  badge.textContent=
+  count>99
+  ?"99+"
+  :count;
+
+  badge.classList
+  .remove("hidden");
+
+ }else{
+
+  badge.classList
+  .add("hidden");
+
+ }
+
+}
+
+
+/* =====================================================
    STORY VIEW
-========================= */
+===================================================== */
 
 window.viewStory=function(id){
 
- const s=stories[id];
+ const s=
+ stories[id];
 
  if(!s)return;
 
+
+ if(
+  s.createdAt &&
+  Date.now()-s.createdAt>
+  86400000
+ ){
+
+  remove(
+   ref(db,"stories/"+id)
+  );
+
+  alert(
+   "यह Story expire हो गई।"
+  );
+
+  page("home");
+
+  return;
+
+ }
+
+
  currentStoryId=id;
 
- const p=profiles[s.uid]||{};
 
- const content=
- s.type==="video"
- ?
- `<video
+ const p=
+ profiles[s.uid]||{};
+
+
+ let content="";
+
+
+ if(
+  s.type==="video"
+ ){
+
+  content=`
+
+   <video
     class="preview"
     controls
     autoplay
     playsinline
     src="${s.url}">
-  </video>`
- :
- `<img
-    class="preview"
-    style="filter:${filters[s.filter]||"none"}"
-    src="${s.url}">
- `;
+   </video>
 
- document.getElementById("app").innerHTML=`
+  `;
+
+ }else{
+
+  content=`
+
+   <img
+    class="preview"
+    style="filter:${
+     filters[s.filter]||
+     "none"
+    }"
+    src="${s.url}">
+
+  `;
+
+ }
+
+
+ document.getElementById(
+  "app"
+ ).innerHTML=`
 
  <div class="page">
 
   <button
    class="secondary"
    onclick="page('home')">
+
    ← Back
+
   </button>
+
 
   <div class="card">
 
@@ -2893,27 +4889,77 @@ window.viewStory=function(id){
 
     <img
      class="avatar"
-     src="${p.photo||avatar(s.uid)}">
+     src="${
+      p.photo||
+      avatar(s.uid)
+     }">
+
 
     <b>
-     @${escapeHTML(p.username||"user")}
+     @${escapeHTML(
+      p.username||"user"
+     )}
     </b>
 
    </div>
 
+
    ${content}
+
+
+   ${
+    s.song
+    ?
+    `<audio
+      controls
+      src="${s.song}">
+     </audio>`
+    :""
+   }
+
 
    <div class="actions">
 
     <button
      class="action"
      onclick="likeStory('${id}')">
-     ❤️ ${Object.keys(s.likes||{}).length}
+
+     ${
+      s.likes&&
+      s.likes[me.uid]
+      ?"❤️"
+      :"🤍"
+     }
+
+     ${
+      Object.keys(
+       s.likes||{}
+      ).length
+     }
+
     </button>
 
+
     <span>
-     👁️ ${Object.keys(s.views||{}).length}
+     👁️
+     ${
+      Object.keys(
+       s.views||{}
+      ).length
+     }
     </span>
+
+
+    ${
+     s.uid===me.uid
+     ?
+     `<button
+       class="action"
+       onclick="deleteStory('${id}')">
+       🗑️
+      </button>`
+     :""
+    }
 
    </div>
 
@@ -2923,67 +4969,244 @@ window.viewStory=function(id){
 
  `;
 
+
  set(
-   ref(db,`stories/${id}/views/${me.uid}`),
-   true
+  ref(
+   db,
+   `stories/${id}/views/${me.uid}`
+  ),
+  true
  );
 
 };
 
 
-/* =========================
+/* =====================================================
    STORY LIKE
-========================= */
+===================================================== */
 
-window.likeStory=async function(id){
+window.likeStory=
+async function(id){
 
  const likeRef=
- ref(db,`stories/${id}/likes/${me.uid}`);
+ ref(
+  db,
+  `stories/${id}/likes/${me.uid}`
+ );
+
 
  await runTransaction(
-   likeRef,
-   value=>value?null:true
+  likeRef,
+  value=>
+  value?null:true
  );
+
 
  viewStory(id);
 
 };
 
 
-/* =========================
+/* =====================================================
+   DELETE STORY
+===================================================== */
+
+window.deleteStory=
+async function(id){
+
+ const s=
+ stories[id];
+
+ if(!s||s.uid!==me.uid)return;
+
+
+ if(
+  !confirm(
+   "Story delete करना है?"
+  )
+ )return;
+
+
+ await remove(
+  ref(
+   db,
+   "stories/"+id
+  )
+ );
+
+
+ page("home");
+
+};
+
+
+/* =====================================================
+   MENTIONS
+===================================================== */
+
+async function notifyMentions(
+ text,
+ type,
+ contentId
+){
+
+ if(!text)return;
+
+
+ const matches=
+ text.match(
+  /@([a-zA-Z0-9_.]+)/g
+ );
+
+
+ if(!matches)return;
+
+
+ const names=
+ [...new Set(
+  matches.map(
+   x=>
+   x.substring(1)
+   .toLowerCase()
+  )
+ )];
+
+
+ const snap=
+ await get(
+  ref(db,"profiles")
+ );
+
+
+ const data=
+ snap.val()||{};
+
+
+ for(
+  const uid in data
+ ){
+
+  const p=data[uid];
+
+
+  if(
+   names.includes(
+    String(
+     p.username||""
+    ).toLowerCase()
+   )
+  ){
+
+   if(uid===me.uid)continue;
+
+
+   await push(
+    ref(
+     db,
+     `notifs/${uid}`
+    ),
+    {
+
+     type:type,
+
+     sender:me.uid,
+
+     text:
+     "ने आपको mention किया",
+
+     contentId:
+     contentId,
+
+     createdAt:
+     Date.now()
+
+    }
+   );
+
+  }
+
+ }
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+window.closeModal=
+function(event){
+
+ if(
+  event &&
+  event.target &&
+  !event.target.classList
+  .contains("modal")
+ ){
+
+  return;
+
+ }
+
+ document.getElementById(
+  "modal"
+ ).innerHTML="";
+
+};
+
+
+/* =====================================================
    HELPERS
-========================= */
+===================================================== */
 
 function avatar(uid){
 
+ const name=
+ profiles[uid]?.name||
+ profiles[uid]?.username||
+ "User";
+
+
  return "https://ui-avatars.com/api/?name="+
- encodeURIComponent(
-   profiles[uid]?.name||
-   profiles[uid]?.username||
-   "User"
- );
+ encodeURIComponent(name)+
+ "&background=1877f2&color=fff";
 
 }
 
 
 function timeAgo(t){
 
- if(!t)return "";
+ if(!t)return"";
 
  const sec=
- Math.floor((Date.now()-t)/1000);
+ Math.floor(
+  (Date.now()-t)/1000
+ );
 
- if(sec<60)return "अभी";
 
- const min=Math.floor(sec/60);
+ if(sec<60)
+  return"अभी";
 
- if(min<60)return min+" min";
 
- const hr=Math.floor(min/60);
+ const min=
+ Math.floor(sec/60);
 
- if(hr<24)return hr+" घंटे";
 
- const day=Math.floor(hr/24);
+ if(min<60)
+  return min+" min";
+
+
+ const hr=
+ Math.floor(min/60);
+
+
+ if(hr<24)
+  return hr+" घंटे";
+
+
+ const day=
+ Math.floor(hr/24);
+
 
  return day+" दिन";
 
@@ -2993,66 +5216,133 @@ function timeAgo(t){
 function escapeHTML(str){
 
  return String(str||"")
- .replace(/&/g,"&amp;")
- .replace(/</g,"&lt;")
- .replace(/>/g,"&gt;")
- .replace(/"/g,"&quot;")
- .replace(/'/g,"&#039;");
+ .replace(
+  /&/g,
+  "&amp;"
+ )
+ .replace(
+  /</g,
+  "&lt;"
+ )
+ .replace(
+  />/g,
+  "&gt;"
+ )
+ .replace(
+  /"/g,
+  "&quot;"
+ )
+ .replace(
+  /'/g,
+  "&#039;"
+ );
 
 }
 
 
-/* =========================
-   AUTO CLEAN OLD STORIES
-========================= */
+/* =====================================================
+   FORMAT TEXT
+===================================================== */
 
-setInterval(async()=>{
+function formatText(text){
 
- if(!me)return;
+ let safe=
+ escapeHTML(text);
 
- Object.entries(stories).forEach(
- async([id,s])=>{
 
-   if(
+ safe=
+ safe.replace(
+  /(@[a-zA-Z0-9_.]+)/g,
+  '<span class="tag">$1</span>'
+ );
+
+
+ safe=
+ safe.replace(
+  /(#[_a-zA-Z0-9]+)/g,
+  '<span class="tag">$1</span>'
+ );
+
+
+ safe=
+ safe.replace(
+  /\n/g,
+  "<br>"
+ );
+
+
+ return safe;
+
+}
+
+
+/* =====================================================
+   OLD STORIES CLEANUP
+===================================================== */
+
+setInterval(
+ async()=>{
+
+  if(!me)return;
+
+
+  Object.entries(
+   stories
+  ).forEach(
+   async([id,s])=>{
+
+    if(
      s.createdAt &&
-     Date.now()-s.createdAt>86400000
-   ){
+     Date.now()-s.createdAt>
+     86400000
+    ){
 
      try{
 
-       await remove(
-         ref(db,"stories/"+id)
-       );
+      await remove(
+       ref(
+        db,
+        "stories/"+id
+       )
+      );
 
      }catch(e){}
 
+    }
+
    }
+  );
 
- });
+ },
+ 60000
+);
 
-},60000);
 
+/* =====================================================
+   INITIAL
+===================================================== */
 
-/* =========================
-   INITIAL PAGE
-========================= */
+window.addEventListener(
+ "load",
+ ()=>{
 
-window.addEventListener("load",()=>{
+  if(auth.currentUser){
 
- if(auth.currentUser){
+   me=
+   auth.currentUser;
 
-   me=auth.currentUser;
    page("home");
 
- }else{
+  }else{
 
    authScreen();
 
- }
+  }
 
-});
+ }
+);
 
 </script>
 
 </body>
-  </html>
+ </html>
