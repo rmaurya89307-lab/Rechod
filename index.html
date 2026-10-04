@@ -7,763 +7,137 @@
 <title>Rechod</title>
 
 <style>
-*{
- box-sizing:border-box;
-}
-
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#eef2f7;
- color:#172033;
-}
-
-body.dark{
- background:#10141c;
- color:#fff;
-}
-
-button,input,select,textarea{
- font:inherit;
-}
-
-button{
- cursor:pointer;
-}
-
-.wrap{
- max-width:520px;
- margin:auto;
- min-height:100vh;
- background:#fff;
- position:relative;
-}
-
-.dark .wrap{
- background:#151a23;
-}
-
-.hidden{
- display:none!important;
-}
-
-/* HEADER */
-
-header{
- position:sticky;
- top:0;
- z-index:50;
- background:#fff;
- border-bottom:1px solid #ddd;
- padding:10px 12px;
- display:flex;
- align-items:center;
- justify-content:space-between;
-}
-
-.dark header{
- background:#151a23;
- border-color:#333;
-}
-
-.logo{
- font-size:26px;
- font-weight:bold;
- color:#1877f2;
-}
-
-.header-actions{
- display:flex;
- align-items:center;
- gap:4px;
-}
-
-.topbtn{
- border:0;
- background:transparent;
- font-size:22px;
- padding:7px;
- position:relative;
-}
-
-.badge{
- position:absolute;
- top:1px;
- right:0;
- background:#e53935;
- color:#fff;
- width:17px;
- height:17px;
- border-radius:50%;
- font-size:10px;
- display:flex;
- align-items:center;
- justify-content:center;
-}
-
-/* PAGE */
-
-.page{
- padding:15px;
- padding-bottom:90px;
-}
-
-.card{
- background:#fff;
- border:1px solid #ddd;
- border-radius:14px;
- padding:14px;
- margin-bottom:12px;
-}
-
-.dark .card{
- background:#1d2430;
- border-color:#343c49;
-}
-
-input,
-select,
-textarea{
- width:100%;
- padding:12px;
- border:1px solid #ccc;
- border-radius:10px;
- outline:none;
- margin:6px 0;
- background:#fff;
- color:#111;
-}
-
-.dark input,
-.dark select,
-.dark textarea{
- background:#252d39;
- color:#fff;
- border-color:#48515f;
-}
-
-textarea{
- min-height:90px;
- resize:vertical;
-}
-
-button.primary{
- width:100%;
- border:0;
- background:#1877f2;
- color:#fff;
- padding:12px;
- border-radius:10px;
- font-weight:bold;
- margin:5px 0;
-}
-
-button.secondary{
- border:1px solid #1877f2;
- background:transparent;
- color:#1877f2;
- padding:9px 12px;
- border-radius:9px;
-}
-
-.dark button.secondary{
- color:#6ea8ff;
- border-color:#6ea8ff;
-}
-
-.danger{
- background:#e53935!important;
- color:#fff!important;
- border:0!important;
-}
-
-.err{
- color:#e53935;
- margin:8px 0;
- font-size:14px;
-}
-
-.success{
- color:#18a558;
- margin:8px 0;
-}
-
-small{
- color:#777;
-}
-
-.dark small{
- color:#aab2c0;
-}
-
-hr{
- border:0;
- border-top:1px solid #ddd;
- margin:15px 0;
-}
-
-/* AUTH */
-
-.auth-title{
- text-align:center;
- font-size:34px;
- color:#1877f2;
- font-weight:bold;
- margin:30px 0 8px;
-}
-
-.auth-sub{
- text-align:center;
- color:#777;
- margin-bottom:20px;
-}
-
-.country-row{
- display:flex;
- gap:7px;
- align-items:center;
-}
-
-.country-row select{
- width:43%;
- margin:0;
-}
-
-.country-row input{
- width:57%;
- margin:0;
-}
-
-.recaptcha{
- margin:10px 0;
-}
-
-/* BOTTOM */
-
-.bottom{
- position:fixed;
- bottom:0;
- left:50%;
- transform:translateX(-50%);
- width:100%;
- max-width:520px;
- height:66px;
- background:#fff;
- border-top:1px solid #ddd;
- display:flex;
- justify-content:space-around;
- align-items:center;
- z-index:100;
-}
-
-.dark .bottom{
- background:#151a23;
- border-color:#333;
-}
-
-.nav{
- border:0;
- background:transparent;
- color:#777;
- font-size:10px;
- display:flex;
- flex-direction:column;
- align-items:center;
- gap:2px;
- padding:4px;
-}
-
-.nav b{
- font-size:21px;
-}
-
-.nav.active{
- color:#1877f2;
-}
-
-/* STORIES */
-
-.story-row{
- display:flex;
- gap:12px;
- overflow-x:auto;
- padding:5px 0 12px;
- scrollbar-width:none;
-}
-
-.story-row::-webkit-scrollbar{
- display:none;
-}
-
-.story{
- min-width:72px;
- text-align:center;
- font-size:12px;
-}
-
-.story-img{
- width:62px;
- height:62px;
- border-radius:50%;
- object-fit:cover;
- border:3px solid #1877f2;
- padding:2px;
- background:#fff;
-}
-
-.story-add{
- width:62px;
- height:62px;
- border-radius:50%;
- background:#eef2f7;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:32px;
- color:#1877f2;
- border:2px dashed #1877f2;
-}
-
-.dark .story-add{
- background:#252d39;
-}
-
-/* USER */
-
-.avatar{
- width:45px;
- height:45px;
- border-radius:50%;
- object-fit:cover;
- background:#ddd;
-}
-
-.userline{
- display:flex;
- align-items:center;
- gap:10px;
-}
-
-.username{
- font-weight:bold;
-}
-
-.post-time{
- font-size:11px;
- color:#777;
-}
-
-/* POSTS */
-
-.post-img{
- width:100%;
- max-height:520px;
- object-fit:cover;
- border-radius:10px;
- margin-top:10px;
-}
-
-.multi-grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:4px;
- margin-top:10px;
-}
-
-.multi-grid img{
- width:100%;
- height:190px;
- object-fit:cover;
- border-radius:6px;
-}
-
-.actions{
- display:flex;
- align-items:center;
- gap:18px;
- padding:10px 0 2px;
-}
-
-.action{
- border:0;
- background:transparent;
- font-size:15px;
- padding:5px;
- color:inherit;
-}
-
-.caption{
- white-space:pre-wrap;
- word-break:break-word;
-}
-
-/* REELS */
-
-.reel{
- position:relative;
- background:#000;
- border-radius:12px;
- overflow:hidden;
- margin-bottom:14px;
-}
-
-.reel video{
- width:100%;
- display:block;
- max-height:680px;
-}
-
-.reel-info{
- position:absolute;
- bottom:12px;
- left:12px;
- color:#fff;
- right:12px;
- text-shadow:0 1px 4px #000;
- z-index:2;
-}
-
-.reel-actions{
- display:flex;
- gap:8px;
- margin-top:8px;
-}
-
-.reel-action{
- border:0;
- border-radius:20px;
- background:rgba(0,0,0,.55);
- color:#fff;
- padding:7px 10px;
-}
-
-/* PROFILE */
-
-.profile-head{
- text-align:center;
- padding:15px;
-}
-
-.profile-photo{
- width:100px;
- height:100px;
- border-radius:50%;
- object-fit:cover;
- border:3px solid #1877f2;
- background:#ddd;
-}
-
-.stats{
- display:flex;
- justify-content:center;
- gap:35px;
- margin:15px 0;
-}
-
-.stat b{
- display:block;
- font-size:20px;
-}
-
-/* CHAT */
-
-.chat-box{
- height:58vh;
- overflow-y:auto;
- padding:10px;
- background:#f3f5f8;
- border-radius:12px;
-}
-
-.dark .chat-box{
- background:#10151d;
-}
-
-.msg{
- max-width:75%;
- padding:9px 12px;
- border-radius:15px;
- margin:6px 0;
- clear:both;
- word-break:break-word;
-}
-
-.msg.me{
- float:right;
- background:#1877f2;
- color:#fff;
- border-bottom-right-radius:3px;
-}
-
-.msg.other{
- float:left;
- background:#ddd;
- color:#111;
- border-bottom-left-radius:3px;
-}
-
-.dark .msg.other{
- background:#303947;
- color:#fff;
-}
-
-.chat-input{
- display:flex;
- gap:6px;
- margin-top:8px;
-}
-
-.chat-input input{
- margin:0;
-}
-
-.chat-input button{
- width:55px;
- border:0;
- background:#1877f2;
- color:#fff;
- border-radius:10px;
-}
-
-/* FILTER */
-
-.filter-row{
- display:flex;
- gap:7px;
- overflow-x:auto;
- padding:5px 0;
- scrollbar-width:none;
-}
-
-.filter-row::-webkit-scrollbar{
- display:none;
-}
-
-.filter-btn{
- white-space:nowrap;
- border:1px solid #ccc;
- background:#fff;
- padding:7px 10px;
- border-radius:20px;
-}
-
-.dark .filter-btn{
- background:#252d39;
- color:#fff;
- border-color:#48515f;
-}
-
-.filter-btn.selected{
- background:#1877f2;
- color:#fff;
- border-color:#1877f2;
-}
-
-/* PREVIEW */
-
-.preview{
- width:100%;
- max-height:380px;
- object-fit:contain;
- background:#111;
- border-radius:10px;
- margin:10px 0;
-}
-
-/* SEARCH */
-
-.search-result{
- display:flex;
- align-items:center;
- gap:10px;
- padding:10px 0;
- border-bottom:1px solid #ddd;
-}
-
-.search-result:last-child{
- border-bottom:0;
-}
-
-/* NOTIFICATION */
-
-.notif{
- padding:12px 5px;
- border-bottom:1px solid #ddd;
-}
-
-/* AUDIO */
-
-audio{
- width:100%;
- margin-top:8px;
-}
-
-/* COMMENT */
-
-.comment{
- padding:7px 0;
- border-bottom:1px solid #eee;
-}
-
-.dark .comment{
- border-color:#333;
-}
-
-/* MODAL */
-
-.modal{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.65);
- z-index:500;
- display:flex;
- align-items:flex-end;
- justify-content:center;
-}
-
-.modal-box{
- width:100%;
- max-width:520px;
- max-height:80vh;
- overflow:auto;
- background:#fff;
- border-radius:18px 18px 0 0;
- padding:16px;
-}
-
-.dark .modal-box{
- background:#1d2430;
- color:#fff;
-}
-
-.modal-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
-}
-
-.close-btn{
- border:0;
- background:transparent;
- font-size:24px;
-}
-
-.tag{
- color:#1877f2;
- font-weight:bold;
-}
-
-/* EMPTY */
-
-.empty{
- text-align:center;
- padding:30px 10px;
- color:#777;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033}
+body.dark{background:#10141c;color:#fff}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:520px;margin:auto;min-height:100vh;background:#fff;position:relative}
+.dark .wrap{background:#151a23}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #ddd;padding:12px 15px;display:flex;align-items:center;justify-content:space-between}
+.dark header{background:#151a23;border-color:#333}
+.logo{font-size:25px;font-weight:bold;color:#1877f2}
+.topbtn{border:0;background:transparent;font-size:22px}
+.page{padding:15px;padding-bottom:90px}
+.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:14px;margin-bottom:12px}
+.dark .card{background:#1d2430;border-color:#343c49}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;outline:none;margin:6px 0;background:#fff;color:#111}
+.dark input,.dark select,.dark textarea{background:#252d39;color:#fff;border-color:#48515f}
+button.primary{width:100%;border:0;background:#1877f2;color:#fff;padding:12px;border-radius:10px;font-weight:bold;margin:5px 0}
+button.secondary{border:1px solid #1877f2;background:transparent;color:#1877f2;padding:9px 12px;border-radius:9px}
+.hidden{display:none!important}
+.err{color:#e53935;margin:8px 0;font-size:14px}
+.success{color:#18a558}
+.auth-title{text-align:center;font-size:34px;color:#1877f2;font-weight:bold;margin:25px 0 10px}
+.auth-sub{text-align:center;color:#777;margin-bottom:20px}
+.country-row{display:flex;gap:7px}
+.country-row select{width:43%}
+.country-row input{width:57%}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;height:65px;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:space-around;align-items:center;z-index:100}
+.dark .bottom{background:#151a23;border-color:#333}
+.nav{border:0;background:transparent;color:#777;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nav b{font-size:21px}.nav.active{color:#1877f2}
+.story-row{display:flex;gap:12px;overflow-x:auto;padding:5px 0 12px}
+.story{min-width:72px;text-align:center;font-size:12px}
+.story-img{width:62px;height:62px;border-radius:50%;object-fit:cover;border:3px solid #1877f2;padding:2px;background:#fff}
+.avatar{width:45px;height:45px;border-radius:50%;object-fit:cover;background:#ddd}
+.userline{display:flex;align-items:center;gap:10px}
+.username{font-weight:bold}
+.post-img{width:100%;max-height:500px;object-fit:cover;border-radius:10px;margin-top:10px}
+.multi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
+.multi-grid img{width:100%;height:190px;object-fit:cover;border-radius:6px}
+.actions{display:flex;gap:15px;padding:10px 0;flex-wrap:wrap}
+.action{border:0;background:transparent;font-size:16px}
+.reel{position:relative;background:#000;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.reel video{width:100%;display:block;max-height:650px}
+.reel-info{padding:10px;color:#fff;background:#111}
+.profile-head{text-align:center;padding:15px}
+.profile-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #1877f2}
+.stats{display:flex;justify-content:center;gap:35px;margin:15px 0}
+.stat b{display:block;font-size:20px}
+.chat-box{height:55vh;overflow-y:auto;padding:10px;background:#f3f5f8;border-radius:12px}
+.dark .chat-box{background:#10151d}
+.msg{max-width:75%;padding:9px 12px;border-radius:15px;margin:6px 0;clear:both}
+.msg.me{float:right;background:#1877f2;color:#fff;border-bottom-right-radius:3px}
+.msg.other{float:left;background:#ddd;color:#111;border-bottom-left-radius:3px}
+.dark .msg.other{background:#303947;color:#fff}
+.chat-input{display:flex;gap:6px;margin-top:8px}
+.chat-input input{margin:0}.chat-input button{width:55px;border:0;background:#1877f2;color:#fff;border-radius:10px}
+.filter-row{display:flex;gap:7px;overflow-x:auto;padding:5px 0}
+.filter-btn{white-space:nowrap;border:1px solid #ccc;background:#fff;padding:7px 10px;border-radius:20px}
+.filter-btn.selected{background:#1877f2;color:#fff;border-color:#1877f2}
+.preview{width:100%;max-height:350px;object-fit:contain;background:#111;border-radius:10px;margin:10px 0}
+.search-result{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #ddd}
+.notif{padding:10px;border-bottom:1px solid #ddd}
+.setting{display:flex;align-items:center;gap:12px;padding:15px 4px;border-bottom:1px solid #ddd;cursor:pointer}
+.setting:last-child{border-bottom:0}
+.setting .ico{font-size:23px;width:32px}
+.setting .txt{flex:1}.setting small{display:block}
+.switch{width:48px;height:26px;border-radius:20px;background:#aaa;position:relative}
+.switch.on{background:#1877f2}
+.switch:after{content:"";position:absolute;width:22px;height:22px;top:2px;left:2px;background:#fff;border-radius:50%;transition:.2s}
+.switch.on:after{left:24px}
+.modal{position:fixed;inset:0;background:#0008;z-index:300;display:flex;align-items:flex-end;justify-content:center}
+.modal-box{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:#fff;border-radius:20px 20px 0 0;padding:18px}
+.dark .modal-box{background:#151a23;color:#fff}
+.call-screen{position:fixed;inset:0;background:#080b10;z-index:500;color:#fff;display:flex;flex-direction:column}
+.remote-video{width:100%;height:100%;object-fit:cover;background:#111}
+.local-video{position:absolute;right:15px;top:15px;width:120px;height:170px;object-fit:cover;border-radius:12px;border:2px solid #fff;background:#222}
+.call-info{position:absolute;top:15px;left:15px;right:150px}
+.call-controls{position:absolute;bottom:30px;left:0;right:0;display:flex;justify-content:center;gap:15px}
+.call-btn{width:58px;height:58px;border-radius:50%;border:0;background:#333;color:#fff;font-size:23px}
+.call-end{background:#e53935}
+.incoming{position:fixed;inset:0;background:#111e;z-index:600;display:flex;align-items:center;justify-content:center;padding:20px}
+.incoming-box{width:100%;max-width:400px;background:#fff;color:#111;border-radius:20px;padding:25px;text-align:center}
+.dark .incoming-box{background:#202733;color:#fff}
+hr{border:0;border-top:1px solid #ddd;margin:15px 0}
+small{color:#777}
+audio{width:100%;margin-top:8px}
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
 
 <header id="header" class="hidden">
-
  <div class="logo">Rechod</div>
-
- <div class="header-actions">
-
-  <button class="topbtn" onclick="page('notifications')">
-   🔔
-   <span id="notifBadge" class="badge hidden">0</span>
-  </button>
-
-  <button class="topbtn" onclick="page('settings')">
-   ⚙️
-  </button>
-
+ <div>
+  <button class="topbtn" onclick="page('notifications')">🔔</button>
+  <button class="topbtn" onclick="page('messages')">💬</button>
+  <button class="topbtn" onclick="page('settings')">⚙️</button>
  </div>
-
 </header>
-
 
 <div id="app"></div>
 
-
 <div id="bottom" class="bottom hidden">
-
- <button class="nav active" data-page="home" onclick="page('home')">
-  <b>⌂</b>
-  Home
- </button>
-
- <button class="nav" data-page="reels" onclick="page('reels')">
-  <b>▶</b>
-  Reels
- </button>
-
- <button class="nav" data-page="search" onclick="page('search')">
-  <b>⌕</b>
-  Search
- </button>
-
- <button class="nav" data-page="create" onclick="page('create')">
-  <b>＋</b>
-  Create
- </button>
-
- <button class="nav" data-page="messages" onclick="page('messages')">
-  <b>✉</b>
-  Chat
- </button>
-
- <button class="nav" data-page="profile" onclick="page('profile')">
-  <b>◉</b>
-  Profile
- </button>
-
+ <button class="nav active" data-page="home" onclick="page('home')"><b>⌂</b>Home</button>
+ <button class="nav" data-page="reels" onclick="page('reels')"><b>▶</b>Reels</button>
+ <button class="nav" data-page="search" onclick="page('search')"><b>⌕</b>Search</button>
+ <button class="nav" data-page="create" onclick="page('create')"><b>＋</b>Create</button>
+ <button class="nav" data-page="messages" onclick="page('messages')"><b>✉</b>Chat</button>
+ <button class="nav" data-page="profile" onclick="page('profile')"><b>◉</b>Profile</button>
 </div>
 
-<div id="modal"></div>
-
 </div>
-
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE
-===================================================== */
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
- initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{
+ getAuth,onAuthStateChanged,createUserWithEmailAndPassword,
+ signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider,
+ signInWithPhoneNumber,RecaptchaVerifier,signOut,updateProfile
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
- getAuth,
- onAuthStateChanged,
- createUserWithEmailAndPassword,
- signInWithEmailAndPassword,
- signInWithPopup,
- GoogleAuthProvider,
- signInWithPhoneNumber,
- RecaptchaVerifier,
- signOut,
- updateProfile
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import{
+ getDatabase,ref,push,set,update,get,remove,
+ onValue,runTransaction,onDisconnect
+}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-import {
- getDatabase,
- ref,
- push,
- set,
- update,
- onValue,
- get,
- remove,
- runTransaction
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
+/* ================= FIREBASE ================= */
 
 const firebaseConfig={
  apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
@@ -776,4573 +150,2135 @@ const firebaseConfig={
  measurementId:"G-DKZQ133PSN"
 };
 
-const appFirebase=initializeApp(firebaseConfig);
-
-const auth=getAuth(appFirebase);
-
-const db=getDatabase(appFirebase);
-
-
-/* =====================================================
-   CLOUDINARY
-===================================================== */
+const firebaseApp=initializeApp(firebaseConfig);
+const auth=getAuth(firebaseApp);
+const db=getDatabase(firebaseApp);
 
 const CLOUD_NAME="ut6gs93p";
-
 const UPLOAD_PRESET="rechod_upload";
 
 
-/* =====================================================
-   STATE
-===================================================== */
+/* ================= STATE ================= */
 
-let me=null;
-
-let current="home";
-
-let profiles={};
-let posts={};
-let reels={};
-let stories={};
-let messages={};
-let notifs={};
-
+let me=null,current="home";
+let profiles={},posts={},reels={},stories={},messages={},notifs={};
 let selectedFilter="normal";
 let selectedStoryFilter="normal";
+let postFiles=[],storyFileData=null,reelFileData=null;
+let chatUserId=null,viewingProfileId=null;
+let phoneConfirmation=null,recaptchaVerifier=null;
 
-let postFiles=[];
-let storyFileData=null;
-let reelFileData=null;
-
-let currentStoryId=null;
-let viewingProfileId=null;
-let chatUserId=null;
-
-let recaptchaVerifier=null;
-let phoneConfirmation=null;
-
-let dataListenersStarted=false;
-
-
-/* =====================================================
-   FILTERS
-===================================================== */
+let callPC=null;
+let callStream=null;
+let remoteStream=null;
+let currentCallId=null;
+let currentCallType="video";
+let callRole=null;
+let callListenerStarted=false;
 
 const filters={
-
- normal:"none",
-
- bright:"brightness(1.25)",
-
- vivid:"saturate(1.5)",
-
- vintage:"sepia(.45) contrast(.9)",
-
- warm:"sepia(.25) saturate(1.25)",
-
- cool:"hue-rotate(15deg) saturate(.9)",
-
- bw:"grayscale(1)",
-
+ normal:"none",bright:"brightness(1.25)",vivid:"saturate(1.5)",
+ vintage:"sepia(.45) contrast(.9)",warm:"sepia(.25) saturate(1.25)",
+ cool:"hue-rotate(15deg) saturate(.9)",bw:"grayscale(1)",
  sunset:"sepia(.35) saturate(1.5) contrast(1.1)",
-
- cinematic:"contrast(1.2) saturate(.8)",
-
- glow:"brightness(1.2) saturate(1.2)",
-
- pink:"hue-rotate(320deg) saturate(1.3)",
-
- nature:"saturate(1.7) hue-rotate(5deg)",
-
- dramatic:"contrast(1.5) brightness(.9)",
-
- fade:"contrast(.8) brightness(1.1)",
-
+ cinematic:"contrast(1.2) saturate(.8)",glow:"brightness(1.2) saturate(1.2)",
+ pink:"hue-rotate(320deg) saturate(1.3)",nature:"saturate(1.7)",
+ dramatic:"contrast(1.5) brightness(.9)",fade:"contrast(.8) brightness(1.1)",
  dark:"brightness(.7) contrast(1.2)"
-
 };
-
 
 const filterNames={
-
- normal:"Normal",
- bright:"Bright",
- vivid:"Vivid",
- vintage:"Vintage",
- warm:"Warm",
- cool:"Cool",
- bw:"B&W",
- sunset:"Sunset",
- cinematic:"Cinematic",
- glow:"Glow",
- pink:"Pink",
- nature:"Nature",
- dramatic:"Dramatic",
- fade:"Fade",
- dark:"Dark"
-
+ normal:"Normal",bright:"Bright",vivid:"Vivid",vintage:"Vintage",
+ warm:"Warm",cool:"Cool",bw:"B&W",sunset:"Sunset",
+ cinematic:"Cinematic",glow:"Glow",pink:"Pink",nature:"Nature",
+ dramatic:"Dramatic",fade:"Fade",dark:"Dark"
 };
 
-
-/* =====================================================
-   COUNTRIES
-===================================================== */
-
 const countries=[
-
- ["+91","🇮🇳 India"],
- ["+1","🇺🇸 USA"],
- ["+44","🇬🇧 UK"],
- ["+971","🇦🇪 UAE"],
- ["+61","🇦🇺 Australia"],
- ["+81","🇯🇵 Japan"],
- ["+49","🇩🇪 Germany"],
- ["+33","🇫🇷 France"],
- ["+39","🇮🇹 Italy"],
- ["+7","🇷🇺 Russia"],
- ["+86","🇨🇳 China"],
- ["+92","🇵🇰 Pakistan"],
- ["+880","🇧🇩 Bangladesh"],
- ["+977","🇳🇵 Nepal"],
- ["+94","🇱🇰 Sri Lanka"],
- ["+966","🇸🇦 Saudi Arabia"],
- ["+974","🇶🇦 Qatar"],
- ["+965","🇰🇼 Kuwait"],
- ["+968","🇴🇲 Oman"],
- ["+27","🇿🇦 South Africa"],
- ["+93","🇦🇫 Afghanistan"],
- ["+355","🇦🇱 Albania"],
- ["+213","🇩🇿 Algeria"],
- ["+54","🇦🇷 Argentina"],
- ["+374","🇦🇲 Armenia"],
- ["+43","🇦🇹 Austria"],
- ["+973","🇧🇭 Bahrain"],
- ["+32","🇧🇪 Belgium"],
- ["+975","🇧🇹 Bhutan"],
- ["+55","🇧🇷 Brazil"],
- ["+359","🇧🇬 Bulgaria"],
- ["+855","🇰🇭 Cambodia"],
- ["+237","🇨🇲 Cameroon"],
- ["+1","🇨🇦 Canada"],
- ["+56","🇨🇱 Chile"],
- ["+57","🇨🇴 Colombia"],
- ["+385","🇭🇷 Croatia"],
- ["+357","🇨🇾 Cyprus"],
- ["+420","🇨🇿 Czech Republic"],
- ["+45","🇩🇰 Denmark"],
- ["+20","🇪🇬 Egypt"],
- ["+372","🇪🇪 Estonia"],
- ["+358","🇫🇮 Finland"],
- ["+30","🇬🇷 Greece"],
- ["+852","🇭🇰 Hong Kong"],
- ["+36","🇭🇺 Hungary"],
- ["+62","🇮🇩 Indonesia"],
- ["+98","🇮🇷 Iran"],
- ["+964","🇮🇶 Iraq"],
- ["+353","🇮🇪 Ireland"],
- ["+972","🇮🇱 Israel"],
- ["+82","🇰🇷 South Korea"],
- ["+371","🇱🇻 Latvia"],
- ["+370","🇱🇹 Lithuania"],
- ["+352","🇱🇺 Luxembourg"],
- ["+60","🇲🇾 Malaysia"],
- ["+356","🇲🇹 Malta"],
- ["+52","🇲🇽 Mexico"],
- ["+377","🇲🇨 Monaco"],
- ["+976","🇲🇳 Mongolia"],
- ["+212","🇲🇦 Morocco"],
- ["+95","🇲🇲 Myanmar"],
- ["+31","🇳🇱 Netherlands"],
- ["+64","🇳🇿 New Zealand"],
- ["+234","🇳🇬 Nigeria"],
- ["+47","🇳🇴 Norway"],
- ["+63","🇵🇭 Philippines"],
- ["+48","🇵🇱 Poland"],
- ["+351","🇵🇹 Portugal"],
- ["+40","🇷🇴 Romania"],
- ["+966","🇸🇦 Saudi Arabia"],
- ["+65","🇸🇬 Singapore"],
- ["+421","🇸🇰 Slovakia"],
- ["+386","🇸🇮 Slovenia"],
- ["+34","🇪🇸 Spain"],
- ["+46","🇸🇪 Sweden"],
- ["+41","🇨🇭 Switzerland"],
- ["+66","🇹🇭 Thailand"],
- ["+90","🇹🇷 Turkey"],
- ["+380","🇺🇦 Ukraine"],
- ["+598","🇺🇾 Uruguay"],
- ["+58","🇻🇪 Venezuela"],
- ["+84","🇻🇳 Vietnam"]
-
+["+91","🇮🇳 India"],["+1","🇺🇸 USA"],["+44","🇬🇧 UK"],
+["+971","🇦🇪 UAE"],["+61","🇦🇺 Australia"],["+81","🇯🇵 Japan"],
+["+49","🇩🇪 Germany"],["+33","🇫🇷 France"],["+39","🇮🇹 Italy"],
+["+7","🇷🇺 Russia"],["+86","🇨🇳 China"],["+92","🇵🇰 Pakistan"],
+["+880","🇧🇩 Bangladesh"],["+977","🇳🇵 Nepal"],["+94","🇱🇰 Sri Lanka"],
+["+966","🇸🇦 Saudi Arabia"],["+974","🇶🇦 Qatar"],["+965","🇰🇼 Kuwait"],
+["+968","🇴🇲 Oman"],["+27","🇿🇦 South Africa"],["+55","🇧🇷 Brazil"],
+["+62","🇮🇩 Indonesia"],["+98","🇮🇷 Iran"],["+82","🇰🇷 South Korea"],
+["+60","🇲🇾 Malaysia"],["+65","🇸🇬 Singapore"],["+66","🇹🇭 Thailand"],
+["+90","🇹🇷 Turkey"],["+84","🇻🇳 Vietnam"]
 ];
 
 
-/* =====================================================
-   AUTH SCREEN
-===================================================== */
+/* ================= AUTH ================= */
 
 function authScreen(){
 
- let countryOptions=countries.map((c,i)=>`
+ const opts=countries.map((x,i)=>
+ `<option value="${x[0]}" ${i===0?"selected":""}>${x[1]} (${x[0]})</option>`
+ ).join("");
 
- <option value="${c[0]}" ${i===0?"selected":""}>
- ${c[1]} (${c[0]})
- </option>
-
- `).join("");
-
- document.getElementById("header")
- .classList.add("hidden");
-
- document.getElementById("bottom")
- .classList.add("hidden");
+ document.getElementById("header").classList.add("hidden");
+ document.getElementById("bottom").classList.add("hidden");
 
  document.getElementById("app").innerHTML=`
 
  <div class="page">
-
-  <div class="auth-title">
-   Rechod
-  </div>
-
-  <div class="auth-sub">
-   Connect • Share • Chat
-  </div>
-
+  <div class="auth-title">Rechod</div>
+  <div class="auth-sub">Connect • Share • Chat</div>
 
   <div class="card">
 
-   <h3>Create Account</h3>
+   <input id="name" placeholder="Name">
+   <input id="username" placeholder="Username">
+   <input id="email" placeholder="Email या Username">
+   <input id="password" type="password" placeholder="Password">
 
-   <input
-    id="name"
-    placeholder="Name"
-   >
-
-   <input
-    id="username"
-    placeholder="Username"
-   >
-
-   <input
-    id="email"
-    type="email"
-    placeholder="Email"
-   >
-
-   <input
-    id="password"
-    type="password"
-    placeholder="Password"
-   >
-
-   <button
-    class="primary"
-    onclick="signup()">
-    Create Account
-   </button>
-
-   <hr>
-
-   <h3>Login</h3>
-
-   <input
-    id="loginId"
-    placeholder="Email या Username"
-   >
-
-   <input
-    id="loginPassword"
-    type="password"
-    placeholder="Password"
-   >
-
-   <button
-    class="primary"
-    onclick="login()">
-    Login
-   </button>
-
-   <button
-    class="secondary"
-    style="width:100%;margin:5px 0"
-    onclick="googleLogin()">
-    🔵 Continue with Google
-   </button>
+   <button class="primary" onclick="signup()">Create Account</button>
+   <button class="secondary" style="width:100%" onclick="login()">Login</button>
+   <button class="primary" onclick="googleLogin()">🔵 Google Login</button>
 
    <hr>
 
    <h3>📱 Phone Login</h3>
 
    <div class="country-row">
-
-    <select id="countryCode">
-     ${countryOptions}
-    </select>
-
-    <input
-     id="phone"
-     type="tel"
-     inputmode="numeric"
-     autocomplete="tel"
-     placeholder="Phone Number"
-    >
-
+    <select id="countryCode">${opts}</select>
+    <input id="phone" type="tel" inputmode="numeric" placeholder="Phone Number">
    </div>
 
-   <small>
-    केवल अपना phone number डालें।
-    Country code अपने आप जुड़ जाएगा।
-   </small>
+   <div id="recaptcha-container"></div>
 
-   <button
-    class="primary"
-    onclick="sendOTP()">
-    📱 Send OTP
-   </button>
-
-   <div
-    id="recaptcha-container"
-    class="recaptcha">
-   </div>
+   <button class="primary" onclick="sendOTP()">📱 Send OTP</button>
 
    <div id="otpArea" class="hidden">
-
-    <input
-     id="otp"
-     type="tel"
-     inputmode="numeric"
-     maxlength="6"
-     placeholder="6 Digit OTP"
-    >
-
-    <button
-     class="primary"
-     onclick="verifyOTP()">
-     Verify OTP
-    </button>
-
+    <input id="otp" maxlength="6" inputmode="numeric" placeholder="6 Digit OTP">
+    <button class="primary" onclick="verifyOTP()">Verify OTP</button>
    </div>
 
    <div id="err" class="err"></div>
 
   </div>
-
- </div>
-
- `;
-
+ </div>`;
 }
 
 
-/* =====================================================
-   SIGNUP
-===================================================== */
+/* ================= SIGNUP ================= */
 
-window.signup=async function(){
+window.signup=async()=>{
 
- const name=
- document.getElementById("name").value.trim();
-
- const username=
- document.getElementById("username")
- .value.trim()
- .toLowerCase()
- .replace(/\s/g,"");
-
- const email=
- document.getElementById("email").value.trim();
-
- const password=
- document.getElementById("password").value;
-
- const err=
- document.getElementById("err");
+ const name=document.getElementById("name").value.trim();
+ const username=document.getElementById("username").value.trim().toLowerCase().replace(/\s/g,"");
+ const email=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+ const err=document.getElementById("err");
 
  if(!name||!username||!email||!password){
-
-  err.textContent=
-  "सभी details भरें";
-
+  err.textContent="सभी details भरें";
   return;
-
  }
 
- if(password.length<6){
-
-  err.textContent=
-  "Password कम से कम 6 characters का होना चाहिए";
-
+ if(!/^[a-z0-9_.]{3,20}$/.test(username)){
+  err.textContent="Username 3-20 characters का रखें";
   return;
-
  }
 
  try{
 
-  const all=
-  await get(ref(db,"profiles"));
+  const existing=await get(ref(db,"profiles"));
 
-  const data=
-  all.val()||{};
+  if(existing.exists()){
+   const all=existing.val();
+   const used=Object.values(all).some(p=>
+    String(p.username||"").toLowerCase()===username
+   );
 
-  const exists=
-  Object.values(data).some(
-   p=>
-   String(p.username||"").toLowerCase()===
-   username
-  );
-
-  if(exists){
-
-   err.textContent=
-   "यह username पहले से मौजूद है";
-
-   return;
-
+   if(used){
+    err.textContent="यह username पहले से मौजूद है";
+    return;
+   }
   }
 
-  const result=
-  await createUserWithEmailAndPassword(
-   auth,
-   email,
-   password
-  );
+  const r=await createUserWithEmailAndPassword(auth,email,password);
 
-  const u=result.user;
+  await updateProfile(r.user,{displayName:name});
 
-  await updateProfile(u,{
-   displayName:name
+  await set(ref(db,"profiles/"+r.user.uid),{
+   uid:r.user.uid,name,username,email,phone:"",
+   photo:"",bio:"",followers:{},following:{},
+   settings:{},createdAt:Date.now()
   });
 
-  await set(
-   ref(db,"profiles/"+u.uid),
-   {
-    uid:u.uid,
-    name:name,
-    username:username,
-    email:email,
-    phone:"",
-    photo:"",
-    bio:"",
-    followers:{},
-    following:{},
-    createdAt:Date.now()
-   }
-  );
-
-  err.innerHTML=
-  '<div class="success">✅ Account बन गया</div>';
-
  }catch(e){
-
-  console.error(e);
-
-  err.textContent=
-  "❌ "+(e.code||e.message);
-
+  err.textContent="❌ "+(e.code||e.message);
  }
-
 };
 
 
-/* =====================================================
-   LOGIN EMAIL / USERNAME
-===================================================== */
+/* ================= LOGIN EMAIL/USERNAME ================= */
 
-window.login=async function(){
+window.login=async()=>{
 
- const loginId=
- document.getElementById("loginId")
- .value.trim();
+ const value=document.getElementById("email").value.trim();
+ const password=document.getElementById("password").value;
+ const err=document.getElementById("err");
 
- const password=
- document.getElementById("loginPassword")
- .value;
-
- const err=
- document.getElementById("err");
-
- if(!loginId||!password){
-
-  err.textContent=
-  "Email/Username और Password डालें";
-
+ if(!value||!password){
+  err.textContent="Login details भरें";
   return;
-
  }
 
  try{
 
-  let email=loginId;
+  let email=value;
 
-  if(!loginId.includes("@")){
+  if(!value.includes("@")){
 
-   const snap=
-   await get(ref(db,"profiles"));
+   const snap=await get(ref(db,"profiles"));
+   const all=snap.val()||{};
 
-   const data=
-   snap.val()||{};
-
-   let found=null;
-
-   Object.values(data).forEach(p=>{
-
-    if(
-     String(p.username||"")
-     .toLowerCase()===
-     loginId.toLowerCase()
-    ){
-
-     found=p;
-
-    }
-
-   });
+   const found=Object.values(all).find(p=>
+    String(p.username||"").toLowerCase()===value.toLowerCase()
+   );
 
    if(!found){
-
-    err.textContent=
-    "Username नहीं मिला";
-
+    err.textContent="Username नहीं मिला";
     return;
-
    }
 
    email=found.email;
 
+   if(!email){
+    err.textContent="इस account में email login उपलब्ध नहीं है";
+    return;
+   }
   }
 
-  await signInWithEmailAndPassword(
-   auth,
-   email,
-   password
-  );
+  await signInWithEmailAndPassword(auth,email,password);
 
  }catch(e){
-
-  console.error(e);
-
-  err.textContent=
-  "❌ "+(e.code||e.message);
-
+  err.textContent="❌ "+(e.code||e.message);
  }
-
 };
 
 
-/* =====================================================
-   GOOGLE LOGIN
-===================================================== */
+/* ================= GOOGLE ================= */
 
-window.googleLogin=async function(){
+window.googleLogin=async()=>{
 
  try{
 
-  const provider=
-  new GoogleAuthProvider();
-
-  const result=
-  await signInWithPopup(
-   auth,
-   provider
-  );
-
+  const result=await signInWithPopup(auth,new GoogleAuthProvider());
   const u=result.user;
-
-  const profileRef=
-  ref(db,"profiles/"+u.uid);
-
-  const snap=
-  await get(profileRef);
+  const pr=ref(db,"profiles/"+u.uid);
+  const snap=await get(pr);
 
   if(!snap.exists()){
 
-   let base=
-   (u.displayName||"user")
-   .toLowerCase()
-   .replace(/[^a-z0-9]/g,"")
-   .slice(0,12);
+   let base=(u.displayName||"user")
+    .toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,12);
 
-   if(!base){
+   if(!base)base="user";
 
-    base="user";
+   let username=base;
+   let n=1;
 
+   const all=(await get(ref(db,"profiles"))).val()||{};
+
+   while(Object.values(all).some(p=>p.username===username)){
+    username=base+n++;
    }
 
-   let username=
-   base+String(u.uid).slice(0,5);
-
-   await set(
-    profileRef,
-    {
-     uid:u.uid,
-     name:u.displayName||"Rechod User",
-     username:username,
-     email:u.email||"",
-     phone:"",
-     photo:u.photoURL||"",
-     bio:"",
-     followers:{},
-     following:{},
-     createdAt:Date.now()
-    }
-   );
-
+   await set(pr,{
+    uid:u.uid,name:u.displayName||"Rechod User",
+    username,email:u.email||"",phone:"",
+    photo:u.photoURL||"",bio:"",
+    followers:{},following:{},settings:{},
+    createdAt:Date.now()
+   });
   }
 
  }catch(e){
-
-  console.error(e);
-
-  alert(
-   "Google Login Error:\n"+
-   (e.code||e.message)
-  );
-
+  alert("Google Login Error:\n"+(e.code||e.message));
  }
-
 };
 
 
-/* =====================================================
-   PHONE OTP
-===================================================== */
+/* ================= PHONE OTP ================= */
 
-window.sendOTP=async function(){
+window.sendOTP=async()=>{
 
- const country=
- document.getElementById("countryCode")
- .value;
-
- let number=
- document.getElementById("phone")
- .value.trim();
-
- number=
- number.replace(/\D/g,"");
+ let number=document.getElementById("phone").value.replace(/\D/g,"");
+ const code=document.getElementById("countryCode").value;
 
  if(!number){
-
   alert("Phone number डालें");
-
   return;
-
  }
 
- number=
- number.replace(/^0+/,"");
-
- const phone=
- country+number;
+ number=number.replace(/^0+/,"");
 
  try{
 
   if(recaptchaVerifier){
-
-   try{
-    recaptchaVerifier.clear();
-   }catch(e){}
-
-   recaptchaVerifier=null;
-
+   try{recaptchaVerifier.clear()}catch(e){}
   }
 
-  recaptchaVerifier=
-  new RecaptchaVerifier(
-   auth,
-   "recaptcha-container",
-   {
-    size:"normal"
-   }
+  recaptchaVerifier=new RecaptchaVerifier(
+   auth,"recaptcha-container",{size:"normal"}
   );
 
   await recaptchaVerifier.render();
 
-  phoneConfirmation=
-  await signInWithPhoneNumber(
-   auth,
-   phone,
-   recaptchaVerifier
+  phoneConfirmation=await signInWithPhoneNumber(
+   auth,code+number,recaptchaVerifier
   );
 
-  document
-  .getElementById("otpArea")
-  .classList.remove("hidden");
-
-  alert(
-   "✅ OTP भेज दिया गया\n\n"+
-   "Number: "+phone
-  );
+  document.getElementById("otpArea").classList.remove("hidden");
+  alert("✅ OTP भेज दिया गया");
 
  }catch(e){
 
-  console.error(e);
+  alert("❌ OTP Error:\n"+(e.code||e.message));
 
-  alert(
-   "❌ OTP नहीं भेजा गया:\n"+
-   (e.code||e.message)
-  );
-
-  if(recaptchaVerifier){
-
-   try{
-    recaptchaVerifier.clear();
-   }catch(x){}
-
-   recaptchaVerifier=null;
-
-  }
-
+  try{recaptchaVerifier?.clear()}catch(x){}
+  recaptchaVerifier=null;
  }
-
 };
 
 
-/* =====================================================
-   VERIFY OTP
-===================================================== */
+window.verifyOTP=async()=>{
 
-window.verifyOTP=async function(){
-
- const otp=
- document.getElementById("otp")
- .value.trim();
-
- const err=
- document.getElementById("err");
+ const otp=document.getElementById("otp").value.trim();
 
  if(!phoneConfirmation){
-
-  err.textContent=
-  "पहले Send OTP दबाएँ";
-
+  alert("पहले OTP भेजें");
   return;
-
- }
-
- if(!/^\d{6}$/.test(otp)){
-
-  err.textContent=
-  "6 digit OTP डालें";
-
-  return;
-
  }
 
  try{
 
-  const result=
-  await phoneConfirmation.confirm(otp);
-
+  const result=await phoneConfirmation.confirm(otp);
   const u=result.user;
-
-  const profileRef=
-  ref(db,"profiles/"+u.uid);
-
-  const snap=
-  await get(profileRef);
+  const pr=ref(db,"profiles/"+u.uid);
+  const snap=await get(pr);
 
   if(!snap.exists()){
 
-   const username=
-   "user"+String(u.uid).slice(0,7);
-
-   await set(
-    profileRef,
-    {
-     uid:u.uid,
-     name:"Rechod User",
-     username:username,
-     email:u.email||"",
-     phone:u.phoneNumber||"",
-     photo:"",
-     bio:"",
-     followers:{},
-     following:{},
-     createdAt:Date.now()
-    }
-   );
-
+   await set(pr,{
+    uid:u.uid,name:"Rechod User",
+    username:"user"+u.uid.slice(0,6),
+    email:u.email||"",phone:u.phoneNumber||"",
+    photo:"",bio:"",followers:{},following:{},
+    settings:{},createdAt:Date.now()
+   });
   }
 
   phoneConfirmation=null;
-
-  if(recaptchaVerifier){
-
-   try{
-    recaptchaVerifier.clear();
-   }catch(e){}
-
-   recaptchaVerifier=null;
-
-  }
+  alert("✅ Login successful");
 
  }catch(e){
-
-  console.error(e);
-
-  if(
-   e.code===
-   "auth/invalid-verification-code"
-  ){
-
-   err.textContent=
-   "❌ OTP गलत है";
-
-  }else if(
-   e.code===
-   "auth/code-expired"
-  ){
-
-   err.textContent=
-   "❌ OTP expire हो गया। नया OTP भेजें";
-
-  }else{
-
-   err.textContent=
-   "❌ "+(e.code||e.message);
-
-  }
-
+  alert("❌ "+(e.code||e.message));
  }
-
 };
 
 
-/* =====================================================
-   AUTH STATE
-===================================================== */
+/* ================= AUTH STATE ================= */
 
-onAuthStateChanged(
- auth,
- async u=>{
+onAuthStateChanged(auth,async u=>{
 
-  if(u){
-
-   me=u;
-
-   await loadData();
-
-   document
-   .getElementById("header")
-   .classList.remove("hidden");
-
-   document
-   .getElementById("bottom")
-   .classList.remove("hidden");
-
-   page("home");
-
-  }else{
-
-   me=null;
-
-   authScreen();
-
-  }
-
+ if(!u){
+  me=null;
+  authScreen();
+  return;
  }
-);
+
+ me=u;
+
+ await loadData();
+
+ document.getElementById("header").classList.remove("hidden");
+ document.getElementById("bottom").classList.remove("hidden");
+
+ startIncomingCallListener();
+
+ page("home");
+});
 
 
-/* =====================================================
-   LOAD DATABASE
-===================================================== */
+/* ================= DATA ================= */
 
 async function loadData(){
 
- if(dataListenersStarted)return;
+ onValue(ref(db,"profiles"),s=>{
+  profiles=s.val()||{};
+  render();
+ });
 
- dataListenersStarted=true;
+ onValue(ref(db,"posts"),s=>{
+  posts=s.val()||{};
+  render();
+ });
 
+ onValue(ref(db,"reels"),s=>{
+  reels=s.val()||{};
+  render();
+ });
 
- onValue(
-  ref(db,"profiles"),
-  snap=>{
+ onValue(ref(db,"stories"),s=>{
+  stories=s.val()||{};
+  render();
+ });
 
-   profiles=
-   snap.val()||{};
+ onValue(ref(db,"messages"),s=>{
+  messages=s.val()||{};
+  render();
+ });
 
-   updateNotificationBadge();
-
-   render();
-
-  }
- );
-
-
- onValue(
-  ref(db,"posts"),
-  snap=>{
-
-   posts=
-   snap.val()||{};
-
-   render();
-
-  }
- );
-
-
- onValue(
-  ref(db,"reels"),
-  snap=>{
-
-   reels=
-   snap.val()||{};
-
-   render();
-
-  }
- );
-
-
- onValue(
-  ref(db,"stories"),
-  snap=>{
-
-   stories=
-   snap.val()||{};
-
-   render();
-
-  }
- );
-
-
- onValue(
-  ref(db,"messages"),
-  snap=>{
-
-   messages=
-   snap.val()||{};
-
-   render();
-
-  }
- );
-
-
- onValue(
-  ref(db,"notifs/"+me.uid),
-  snap=>{
-
-   notifs=
-   snap.val()||{};
-
-   updateNotificationBadge();
-
-   render();
-
-  }
- );
-
+ onValue(ref(db,"notifs/"+me.uid),s=>{
+  notifs=s.val()||{};
+  render();
+ });
 }
 
 
-/* =====================================================
-   PAGE
-===================================================== */
+/* ================= PAGE ================= */
 
-window.page=function(p){
+window.page=p=>{
 
  current=p;
 
- chatUserId=
- p==="messages"
- ?
- chatUserId
- :
- null;
-
- document
- .querySelectorAll(".nav")
- .forEach(btn=>{
-
-  btn.classList.toggle(
-   "active",
-   btn.dataset.page===p
-  );
-
+ document.querySelectorAll(".nav").forEach(x=>{
+  x.classList.toggle("active",x.dataset.page===p);
  });
 
  render();
-
- window.scrollTo({
-  top:0,
-  behavior:"smooth"
- });
-
+ window.scrollTo(0,0);
 };
 
 
-/* =====================================================
-   RENDER
-===================================================== */
+/* ================= RENDER ================= */
 
 function render(){
 
  if(!me)return;
 
- const app=
- document.getElementById("app");
+ const app=document.getElementById("app");
 
- if(current==="home")
-  app.innerHTML=homePage();
+ if(current==="home")app.innerHTML=homePage();
+ else if(current==="reels")app.innerHTML=reelsPage();
+ else if(current==="search")app.innerHTML=searchPage();
+ else if(current==="create")app.innerHTML=createPage();
+ else if(current==="messages")app.innerHTML=messagesPage();
+ else if(current==="profile")app.innerHTML=profilePage();
+ else if(current==="settings")app.innerHTML=settingsPage();
+ else if(current==="notifications")app.innerHTML=notificationsPage();
+ else if(current==="viewProfile")app.innerHTML=viewProfilePage();
 
- else if(current==="reels")
-  app.innerHTML=reelsPage();
-
- else if(current==="search")
-  app.innerHTML=searchPage();
-
- else if(current==="create")
-  app.innerHTML=createPage();
-
- else if(current==="messages")
-  app.innerHTML=messagesPage();
-
- else if(current==="profile")
-  app.innerHTML=profilePage();
-
- else if(current==="settings")
-  app.innerHTML=settingsPage();
-
- else if(current==="notifications")
-  app.innerHTML=notificationsPage();
-
- else if(current==="viewProfile")
-  app.innerHTML=viewProfilePage();
-
+ if(current==="messages"&&chatUserId){
+  setTimeout(()=>{
+   const b=document.getElementById("chatBox");
+   if(b)b.scrollTop=b.scrollHeight;
+  },30);
+ }
 }
 
 
-/* =====================================================
-   HOME
-===================================================== */
+/* ================= HOME ================= */
 
 function homePage(){
 
- let storyHTML=`
-
+ let storiesHTML=`
  <div class="story">
-
-  <div
-   class="story-add"
-   onclick="page('create')">
-   ＋
-  </div>
-
+  <div onclick="page('create')" style="font-size:42px">＋</div>
   <small>Your Story</small>
+ </div>`;
 
- </div>
+ Object.entries(stories).forEach(([id,s])=>{
 
- `;
+  if(Date.now()-(s.createdAt||0)>86400000)return;
 
+  const p=profiles[s.uid]||{};
 
- Object.entries(stories)
- .sort(
-  (a,b)=>
-  (b[1].createdAt||0)-
-  (a[1].createdAt||0)
- )
- .forEach(([id,s])=>{
-
-  if(
-   !s.createdAt||
-   Date.now()-s.createdAt>86400000
-  )return;
-
-  const p=
-  profiles[s.uid]||{};
-
-  storyHTML+=`
-
-  <div
-   class="story"
-   onclick="viewStory('${id}')">
-
-   <img
-    class="story-img"
-    src="${s.url||p.photo||avatar(s.uid)}">
-
-   <div>
-    ${escapeHTML(
-     p.username||"user"
-    )}
-   </div>
-
-  </div>
-
-  `;
-
+  storiesHTML+=`
+  <div class="story" onclick="viewStory('${id}')">
+   <img class="story-img" src="${s.url||p.photo||avatar(s.uid)}">
+   <div>${escapeHTML(p.username||"user")}</div>
+  </div>`;
  });
 
+ let html="";
 
- let postHTML="";
-
- const arr=
  Object.entries(posts)
- .sort(
-  (a,b)=>
-  (b[1].createdAt||0)-
-  (a[1].createdAt||0)
- );
-
-
- if(!arr.length){
-
-  postHTML=`
-
-  <div class="card empty">
-   अभी कोई post नहीं है।
-   <br>
-   Create से पहला post डालें।
-  </div>
-
-  `;
-
- }
-
-
- arr.forEach(([id,p])=>{
-
-  postHTML+=
-  postCard(id,p);
-
- });
-
+ .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0))
+ .forEach(([id,p])=>html+=postCard(id,p));
 
  return`
-
  <div class="page">
-
-  <div class="story-row">
-   ${storyHTML}
-  </div>
-
-  ${postHTML}
-
- </div>
-
- `;
-
+  <div class="story-row">${storiesHTML}</div>
+  ${html||`<div class="card">अभी कोई post नहीं है।</div>`}
+ </div>`;
 }
 
 
-/* =====================================================
-   POST CARD
-===================================================== */
+/* ================= POST ================= */
 
 function postCard(id,p){
 
- const owner=
- profiles[p.uid]||{};
+ const owner=profiles[p.uid]||{};
+ const images=Array.isArray(p.images)?p.images:[];
 
- let media="";
+ let media=images.length===1
+ ?`<img class="post-img" style="filter:${filters[p.filter]||"none"}" src="${images[0]}">`
+ :`<div class="multi-grid">${images.map(x=>
+   `<img style="filter:${filters[p.filter]||"none"}" src="${x}">`
+  ).join("")}</div>`;
 
-
- if(
-  Array.isArray(p.images)&&
-  p.images.length
- ){
-
-  if(p.images.length===1){
-
-   media=`
-
-   <img
-    class="post-img"
-    style="filter:${
-     filters[p.filter]||"none"
-    }"
-    src="${p.images[0]}">
-
-   `;
-
-  }else{
-
-   media=`
-
-   <div class="multi-grid">
-
-    ${
-     p.images.map(x=>`
-
-      <img
-       style="filter:${
-        filters[p.filter]||"none"
-       }"
-       src="${x}">
-
-     `).join("")
-    }
-
-   </div>
-
-   `;
-
-  }
-
- }
-
-
- const likeCount=
- p.likes?
- Object.keys(p.likes).length:
- 0;
-
-
- const liked=
- p.likes&&p.likes[me.uid];
-
-
- const commentCount=
- p.comments?
- Object.keys(p.comments).length:
- 0;
-
-
- let commentsHTML="";
-
-
- if(p.comments){
-
-  commentsHTML=
-  Object.values(p.comments)
-  .sort(
-   (a,b)=>
-   (a.createdAt||0)-
-   (b.createdAt||0)
-  )
-  .slice(-3)
-  .map(c=>{
-
-   const cp=
-   profiles[c.uid]||{};
-
-   return`
-
-   <div class="comment">
-
-    <b>
-     @${escapeHTML(
-      cp.username||"user"
-     )}
-    </b>
-
-    ${formatText(c.text)}
-
-   </div>
-
-   `;
-
-  }).join("");
-
- }
-
+ const likes=Object.keys(p.likes||{}).length;
+ const liked=!!p.likes?.[me.uid];
+ const comments=Object.keys(p.comments||{}).length;
 
  return`
-
  <div class="card">
 
   <div class="userline">
-
-   <img
-    class="avatar"
-    src="${
-     owner.photo||
-     avatar(p.uid)
-    }">
-
-   <div style="flex:1">
-
-    <div
-     class="username"
-     onclick="openProfile('${p.uid}')">
-
-     ${escapeHTML(
-      owner.username||
-      owner.name||
-      "user"
-     )}
-
-    </div>
-
-    <div class="post-time">
-     ${timeAgo(p.createdAt)}
-    </div>
-
+   <img class="avatar" src="${owner.photo||avatar(p.uid)}">
+   <div>
+    <b>${escapeHTML(owner.username||"user")}</b><br>
+    <small>${timeAgo(p.createdAt)}</small>
    </div>
-
-   ${
-    p.uid===me.uid
-    ?
-    `<button
-      class="topbtn"
-      onclick="deletePost('${id}')">
-      ⋮
-     </button>`
-    :""
-   }
-
   </div>
-
 
   ${media}
 
-
-  ${
-   p.caption
-   ?
-   `<p class="caption">
-     ${formatText(p.caption)}
-    </p>`
-   :""
-  }
-
-
-  ${
-   p.song
-   ?
-   `<audio
-     controls
-     src="${p.song}">
-    </audio>`
-   :""
-  }
-
+  ${p.caption?`<p>${escapeHTML(p.caption)}</p>`:""}
+  ${p.song?`<audio controls src="${p.song}"></audio>`:""}
 
   <div class="actions">
-
-   <button
-    class="action"
-    onclick="likePost('${id}')">
-
-    ${liked?"❤️":"🤍"}
-    ${likeCount}
-
+   <button class="action" onclick="likePost('${id}')">
+    ${liked?"❤️":"🤍"} ${likes}
    </button>
 
-
-   <button
-    class="action"
-    onclick="openComments('${id}')">
-
-    💬 ${commentCount}
-
+   <button class="action" onclick="commentPost('${id}')">
+    💬 ${comments}
    </button>
 
-
-   <button
-    class="action"
-    onclick="sharePost('${id}')">
-
-    ↗️ Share
-
-   </button>
-
+   <button class="action" onclick="sharePost('${id}')">↗️</button>
   </div>
 
-
-  ${
-   commentsHTML
-   ?
-   `<div>${commentsHTML}</div>`
-   :""
-  }
-
- </div>
-
- `;
-
+ </div>`;
 }
 
+window.likePost=async id=>{
 
-/* =====================================================
-   POST LIKE
-===================================================== */
+ const r=ref(db,`posts/${id}/likes/${me.uid}`);
 
-window.likePost=async function(id){
-
- const likeRef=
- ref(
-  db,
-  `posts/${id}/likes/${me.uid}`
- );
-
- await runTransaction(
-  likeRef,
-  value=>
-  value?null:true
- );
-
-};
-
-
-/* =====================================================
-   COMMENTS
-===================================================== */
-
-window.openComments=function(id){
-
- const p=
- posts[id]||{};
-
- let html="";
-
- Object.entries(
-  p.comments||{}
- )
- .sort(
-  (a,b)=>
-  (a[1].createdAt||0)-
-  (b[1].createdAt||0)
- )
- .forEach(([cid,c])=>{
-
-  const cp=
-  profiles[c.uid]||{};
-
-  html+=`
-
-  <div class="comment">
-
-   <b>
-    @${escapeHTML(
-     cp.username||"user"
-    )}
-   </b>
-
-   <br>
-
-   ${formatText(c.text)}
-
-   <br>
-
-   <small>
-    ${timeAgo(c.createdAt)}
-   </small>
-
-  </div>
-
-  `;
-
- });
-
-
- document.getElementById("modal").innerHTML=`
-
- <div
-  class="modal"
-  onclick="closeModal(event)">
-
-  <div
-   class="modal-box"
-   onclick="event.stopPropagation()">
-
-   <div class="modal-head">
-
-    <h3>💬 Comments</h3>
-
-    <button
-     class="close-btn"
-     onclick="closeModal()">
-     ×
-    </button>
-
-   </div>
-
-
-   <div>
-    ${html||"<p>अभी कोई comment नहीं है।</p>"}
-   </div>
-
-
-   <textarea
-    id="newComment"
-    placeholder="Comment लिखें...">
-   </textarea>
-
-   <button
-    class="primary"
-    onclick="addComment('${id}')">
-    Comment
-   </button>
-
-  </div>
-
- </div>
-
- `;
-
-};
-
-
-window.addComment=async function(id){
-
- const input=
- document.getElementById("newComment");
-
- const text=
- input.value.trim();
-
- if(!text)return;
-
- const cRef=
- push(
-  ref(db,`posts/${id}/comments`)
- );
-
- await set(
-  cRef,
-  {
-   uid:me.uid,
-   text:text,
-   createdAt:Date.now()
-  }
- );
-
- await notifyMentions(
-  text,
-  "comment",
-  id
- );
-
- closeModal();
-
-};
-
-
-/* =====================================================
-   SHARE
-===================================================== */
-
-window.sharePost=async function(id){
-
- const url=
- location.href+
- "#post-"+id;
-
- if(navigator.share){
-
-  try{
-
-   await navigator.share({
-    title:"Rechod",
-    text:"Rechod post",
-    url:url
-   });
-
-  }catch(e){}
-
- }else{
-
-  try{
-
-   await navigator.clipboard
-   .writeText(url);
-
-   alert(
-    "Post link copied"
-   );
-
-  }catch(e){
-
-   alert(url);
-
-  }
-
- }
-
-};
-
-
-/* =====================================================
-   DELETE POST
-===================================================== */
-
-window.deletePost=async function(id){
+ await runTransaction(r,v=>v?null:true);
 
  const p=posts[id];
 
- if(!p||p.uid!==me.uid)return;
-
- if(
-  !confirm(
-   "यह post delete करना है?"
-  )
- )return;
-
- await remove(
-  ref(db,"posts/"+id)
- );
-
-};
-
-
-/* =====================================================
-   REELS
-===================================================== */
-
-function reelsPage(){
-
- let html=`
-
- <div class="page">
-
-  <h2>🎬 Reels</h2>
-
- `;
-
-
- const arr=
- Object.entries(reels)
- .sort(
-  (a,b)=>
-  (b[1].createdAt||0)-
-  (a[1].createdAt||0)
- );
-
-
- if(!arr.length){
-
-  html+=`
-
-  <div class="card empty">
-   अभी कोई Reel नहीं है।
-  </div>
-
-  `;
-
+ if(p&&p.uid!==me.uid){
+  await push(ref(db,`notifs/${p.uid}`),{
+   type:"like",sender:me.uid,
+   text:"ने आपकी post को like किया",
+   createdAt:Date.now()
+  });
  }
-
-
- arr.forEach(
- ([id,r])=>{
-
-  const p=
-  profiles[r.uid]||{};
-
-  const likes=
-  Object.keys(
-   r.likes||{}
-  ).length;
-
-  const liked=
-  r.likes&&r.likes[me.uid];
-
-
-  html+=`
-
-  <div class="reel">
-
-   <video
-    src="${r.url}"
-    controls
-    playsinline
-    loop>
-   </video>
-
-
-   <div class="reel-info">
-
-    <b>
-     @${escapeHTML(
-      p.username||"user"
-     )}
-    </b>
-
-    <div>
-     ${formatText(
-      r.caption||""
-     )}
-    </div>
-
-
-    ${
-     r.song
-     ?
-     `<audio
-       controls
-       src="${r.song}">
-      </audio>`
-     :""
-    }
-
-
-    <div class="reel-actions">
-
-     <button
-      class="reel-action"
-      onclick="likeReel('${id}')">
-
-      ${liked?"❤️":"🤍"}
-      ${likes}
-
-     </button>
-
-
-     <button
-      class="reel-action"
-      onclick="openReelComments('${id}')">
-
-      💬
-      ${Object.keys(
-       r.comments||{}
-      ).length}
-
-     </button>
-
-
-     <button
-      class="reel-action"
-      onclick="shareReel('${id}')">
-
-      ↗️
-
-     </button>
-
-
-     ${
-      r.uid===me.uid
-      ?
-      `<button
-       class="reel-action"
-       onclick="deleteReel('${id}')">
-       🗑️
-       </button>`
-      :""
-     }
-
-    </div>
-
-   </div>
-
-  </div>
-
-  `;
-
- });
-
-
- html+=`</div>`;
-
- return html;
-
-}
-
-
-/* =====================================================
-   REEL LIKE
-===================================================== */
-
-window.likeReel=async function(id){
-
- const likeRef=
- ref(
-  db,
-  `reels/${id}/likes/${me.uid}`
- );
-
- await runTransaction(
-  likeRef,
-  value=>
-  value?null:true
- );
-
 };
 
+window.commentPost=async id=>{
 
-/* =====================================================
-   REEL COMMENTS
-===================================================== */
-
-window.openReelComments=function(id){
-
- const r=
- reels[id]||{};
-
- let html="";
-
-
- Object.values(
-  r.comments||{}
- )
- .sort(
-  (a,b)=>
-  (a.createdAt||0)-
-  (b.createdAt||0)
- )
- .forEach(c=>{
-
-  const p=
-  profiles[c.uid]||{};
-
-  html+=`
-
-  <div class="comment">
-
-   <b>
-    @${escapeHTML(
-     p.username||"user"
-    )}
-   </b>
-
-   <br>
-
-   ${formatText(c.text)}
-
-  </div>
-
-  `;
-
- });
-
-
- document.getElementById("modal").innerHTML=`
-
- <div
-  class="modal"
-  onclick="closeModal(event)">
-
-  <div
-   class="modal-box"
-   onclick="event.stopPropagation()">
-
-   <div class="modal-head">
-
-    <h3>💬 Reel Comments</h3>
-
-    <button
-     class="close-btn"
-     onclick="closeModal()">
-     ×
-    </button>
-
-   </div>
-
-   ${html||"<p>कोई comment नहीं है।</p>"}
-
-   <textarea
-    id="newReelComment"
-    placeholder="Comment लिखें...">
-   </textarea>
-
-   <button
-    class="primary"
-    onclick="addReelComment('${id}')">
-    Comment
-   </button>
-
-  </div>
-
- </div>
-
- `;
-
-};
-
-
-window.addReelComment=async function(id){
-
- const input=
- document.getElementById(
-  "newReelComment"
- );
-
- const text=
- input.value.trim();
-
+ const text=prompt("Comment लिखें");
  if(!text)return;
 
- const rRef=
- push(
-  ref(db,`reels/${id}/comments`)
- );
-
- await set(
-  rRef,
-  {
-   uid:me.uid,
-   text:text,
-   createdAt:Date.now()
-  }
- );
-
- await notifyMentions(
-  text,
-  "reel",
-  id
- );
-
- closeModal();
-
-};
-
-
-/* =====================================================
-   REEL SHARE
-===================================================== */
-
-window.shareReel=async function(id){
-
- const url=
- location.href+
- "#reel-"+id;
-
- if(navigator.share){
-
-  try{
-
-   await navigator.share({
-    title:"Rechod Reel",
-    text:"Rechod Reel",
-    url:url
-   });
-
-  }catch(e){}
-
- }else{
-
-  try{
-
-   await navigator.clipboard
-   .writeText(url);
-
-   alert(
-    "Reel link copied"
-   );
-
-  }catch(e){
-
-   alert(url);
-
-  }
-
- }
-
-};
-
-
-/* =====================================================
-   DELETE REEL
-===================================================== */
-
-window.deleteReel=async function(id){
-
- const r=reels[id];
-
- if(!r||r.uid!==me.uid)return;
-
- if(
-  !confirm(
-   "यह Reel delete करना है?"
-  )
- )return;
-
- await remove(
-  ref(db,"reels/"+id)
- );
-
-};
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-function searchPage(){
-
- return`
-
- <div class="page">
-
-  <h2>🔎 Search</h2>
-
-  <input
-   id="searchInput"
-   placeholder="Username या name search करें"
-   oninput="doSearch()"
-  >
-
-  <div id="searchResults"></div>
-
- </div>
-
- `;
-
-}
-
-
-window.doSearch=function(){
-
- const q=
- document.getElementById(
-  "searchInput"
- ).value
- .trim()
- .toLowerCase();
-
- const box=
- document.getElementById(
-  "searchResults"
- );
-
- if(!q){
-
-  box.innerHTML="";
-
-  return;
-
- }
-
- let html="";
-
-
- Object.entries(profiles)
- .forEach(([uid,p])=>{
-
-  if(
-   String(p.username||"")
-   .toLowerCase()
-   .includes(q)||
-   String(p.name||"")
-   .toLowerCase()
-   .includes(q)
-  ){
-
-   html+=`
-
-   <div class="search-result">
-
-    <img
-     class="avatar"
-     src="${
-      p.photo||
-      avatar(uid)
-     }"
-    >
-
-    <div style="flex:1">
-
-     <b>
-      ${escapeHTML(
-       p.username||"user"
-      )}
-     </b>
-
-     <br>
-
-     <small>
-      ${escapeHTML(
-       p.name||""
-      )}
-     </small>
-
-    </div>
-
-    <button
-     class="secondary"
-     onclick="openProfile('${uid}')">
-     View
-    </button>
-
-   </div>
-
-   `;
-
-  }
-
+ await set(push(ref(db,`posts/${id}/comments`)),{
+  uid:me.uid,text,createdAt:Date.now()
  });
 
+ const p=posts[id];
 
- box.innerHTML=
- html||
- "<p>कोई user नहीं मिला</p>";
+ if(p&&p.uid!==me.uid){
+  await push(ref(db,`notifs/${p.uid}`),{
+   type:"comment",sender:me.uid,
+   text:"ने आपकी post पर comment किया",
+   createdAt:Date.now()
+  });
+ }
+};
 
+window.sharePost=async id=>{
+
+ const url=location.href+"#post-"+id;
+
+ try{
+  if(navigator.share)
+   await navigator.share({title:"Rechod",text:"Rechod Post",url});
+  else{
+   await navigator.clipboard.writeText(url);
+   alert("Link copied");
+  }
+ }catch(e){}
 };
 
 
-/* =====================================================
-   CREATE PAGE
-===================================================== */
+/* ================= CREATE ================= */
 
 function createPage(){
 
  return`
-
  <div class="page">
 
-  <h2>＋ Create</h2>
+ <h2>＋ Create</h2>
 
+ <div class="card">
 
-  <!-- POST -->
+  <h3>📸 Post</h3>
 
-  <div class="card">
+  <input id="postFiles" type="file"
+   accept="image/*" multiple onchange="previewPosts()">
 
-   <h3>📸 Post</h3>
+  <div id="postPreview"></div>
 
-   <small>
-    एक बार में अधिकतम 10 photos
-   </small>
-
-   <input
-    id="postFiles"
-    type="file"
-    accept="image/*"
-    multiple
-    onchange="previewPosts()"
-   >
-
-   <div id="postPreview"></div>
-
-
-   <div class="filter-row">
-
-    ${
-     Object.entries(filterNames)
-     .map(([k,n])=>`
-
-      <button
-       type="button"
-       class="filter-btn ${
-        k===selectedFilter
-        ?"selected":""
-       }"
-       onclick="selectFilter('${k}')">
-
-       ${n}
-
-      </button>
-
-     `).join("")
-    }
-
-   </div>
-
-
-   <textarea
-    id="postCaption"
-    placeholder="Caption लिखें... @username #hashtag">
-   </textarea>
-
-
-   <input
-    id="postSong"
-    type="file"
-    accept="audio/*"
-   >
-
-
-   <button
-    class="primary"
-    onclick="uploadPost()">
-
-    📤 Post Upload
-
-   </button>
-
+  <div class="filter-row">
+   ${Object.entries(filterNames).map(([k,n])=>
+    `<button class="filter-btn ${k===selectedFilter?"selected":""}"
+     onclick="selectFilter('${k}')">${n}</button>`
+   ).join("")}
   </div>
 
+  <textarea id="postCaption" placeholder="Caption..."></textarea>
 
-  <!-- STORY -->
+  <input id="postSong" type="file" accept="audio/*">
 
-  <div class="card">
-
-   <h3>⭕ Story</h3>
-
-   <input
-    id="storyFile"
-    type="file"
-    accept="image/*,video/*"
-    onchange="previewStory()"
-   >
-
-   <div id="storyPreview"></div>
-
-
-   <div class="filter-row">
-
-    ${
-     Object.entries(filterNames)
-     .map(([k,n])=>`
-
-      <button
-       type="button"
-       class="filter-btn ${
-        k===selectedStoryFilter
-        ?"selected":""
-       }"
-       onclick="selectStoryFilter('${k}')">
-
-       ${n}
-
-      </button>
-
-     `).join("")
-    }
-
-   </div>
-
-
-   <input
-    id="storySong"
-    type="file"
-    accept="audio/*"
-   >
-
-
-   <button
-    class="primary"
-    onclick="uploadStory()">
-
-    ⭕ Story Upload
-
-   </button>
-
-
-   <small>
-    Story 24 घंटे बाद hide होगी।
-   </small>
-
-  </div>
-
-
-  <!-- REEL -->
-
-  <div class="card">
-
-   <h3>🎬 Reel</h3>
-
-   <input
-    id="reelFile"
-    type="file"
-    accept="video/*"
-    onchange="previewReel()"
-   >
-
-   <div id="reelPreview"></div>
-
-
-   <textarea
-    id="reelCaption"
-    placeholder="Reel caption... @username #hashtag">
-   </textarea>
-
-
-   <input
-    id="reelSong"
-    type="file"
-    accept="audio/*"
-   >
-
-
-   <button
-    class="primary"
-    onclick="uploadReel()">
-
-    🎬 Reel Upload
-
-   </button>
-
-  </div>
+  <button class="primary" onclick="uploadPost()">📤 Upload Post</button>
 
  </div>
 
- `;
+ <div class="card">
 
+  <h3>⭕ Story</h3>
+
+  <input id="storyFile" type="file"
+   accept="image/*,video/*" onchange="previewStory()">
+
+  <div id="storyPreview"></div>
+
+  <div class="filter-row">
+   ${Object.entries(filterNames).map(([k,n])=>
+    `<button class="filter-btn ${k===selectedStoryFilter?"selected":""}"
+     onclick="selectStoryFilter('${k}')">${n}</button>`
+   ).join("")}
+  </div>
+
+  <input id="storySong" type="file" accept="audio/*">
+
+  <button class="primary" onclick="uploadStory()">⭕ Upload Story</button>
+
+  <small>Story 24 घंटे बाद automatically hide होगी।</small>
+
+ </div>
+
+ <div class="card">
+
+  <h3>🎬 Reel</h3>
+
+  <input id="reelFile" type="file"
+   accept="video/*" onchange="previewReel()">
+
+  <div id="reelPreview"></div>
+
+  <textarea id="reelCaption" placeholder="Reel caption..."></textarea>
+
+  <input id="reelSong" type="file" accept="audio/*">
+
+  <button class="primary" onclick="uploadReel()">🎬 Upload Reel</button>
+
+ </div>
+
+ </div>`;
+}
+
+window.selectFilter=f=>{selectedFilter=f;render()};
+window.selectStoryFilter=f=>{selectedStoryFilter=f;render()};
+
+window.previewPosts=()=>{
+
+ const files=[...document.getElementById("postFiles").files];
+
+ postFiles=files.slice(0,10);
+
+ if(files.length>10)alert("अधिकतम 10 photos");
+
+ document.getElementById("postPreview").innerHTML=
+ postFiles.map(f=>
+ `<img class="preview" style="filter:${filters[selectedFilter]}"
+ src="${URL.createObjectURL(f)}">`
+ ).join("");
+};
+
+window.previewStory=()=>{
+
+ const f=document.getElementById("storyFile").files[0];
+
+ if(!f)return;
+
+ storyFileData=f;
+
+ const url=URL.createObjectURL(f);
+
+ document.getElementById("storyPreview").innerHTML=
+ f.type.startsWith("video/")
+ ?`<video class="preview" controls src="${url}"></video>`
+ :`<img class="preview" style="filter:${filters[selectedStoryFilter]}" src="${url}">`;
+};
+
+window.previewReel=()=>{
+
+ const f=document.getElementById("reelFile").files[0];
+
+ if(!f)return;
+
+ reelFileData=f;
+
+ document.getElementById("reelPreview").innerHTML=
+ `<video class="preview" controls src="${URL.createObjectURL(f)}"></video>`;
+};
+
+
+/* ================= CLOUDINARY ================= */
+
+async function cloudinaryUpload(file,type="auto"){
+
+ const fd=new FormData();
+
+ fd.append("file",file);
+ fd.append("upload_preset",UPLOAD_PRESET);
+
+ const r=await fetch(
+  `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${type}/upload`,
+  {method:"POST",body:fd}
+ );
+
+ const d=await r.json();
+
+ if(!r.ok||!d.secure_url)
+  throw new Error(d.error?.message||"Cloudinary upload failed");
+
+ return d.secure_url;
 }
 
 
-/* =====================================================
-   FILTER SELECT
-===================================================== */
+/* ================= UPLOAD POST ================= */
 
-window.selectFilter=function(f){
-
- selectedFilter=f;
-
- document
- .querySelectorAll(
-  "#app .filter-row .filter-btn"
- )
- .forEach(btn=>{
-
-  btn.classList.toggle(
-   "selected",
-   btn.textContent.trim()===
-   filterNames[f]
-  );
-
- });
-
- updatePostPreview();
-
-};
-
-
-window.selectStoryFilter=function(f){
-
- selectedStoryFilter=f;
-
- document
- .querySelectorAll(
-  "#app .filter-row .filter-btn"
- )
- .forEach(btn=>{
-
-  btn.classList.toggle(
-   "selected",
-   btn.textContent.trim()===
-   filterNames[f]
-  );
-
- });
-
- updateStoryPreview();
-
-};
-
-
-/* =====================================================
-   POST PREVIEW
-===================================================== */
-
-window.previewPosts=function(){
-
- const input=
- document.getElementById("postFiles");
-
- if(!input)return;
-
- postFiles=
- [...input.files]
- .slice(0,10);
-
- updatePostPreview();
-
- if(input.files.length>10){
-
-  alert(
-   "अधिकतम 10 photos select कर सकते हैं"
-  );
-
- }
-
-};
-
-
-function updatePostPreview(){
-
- const box=
- document.getElementById(
-  "postPreview"
- );
-
- if(!box)return;
-
- box.innerHTML="";
-
- postFiles.forEach(file=>{
-
-  const url=
-  URL.createObjectURL(file);
-
-  box.innerHTML+=`
-
-   <img
-    class="preview"
-    style="filter:${
-     filters[selectedFilter]
-    }"
-    src="${url}">
-
-  `;
-
- });
-
-}
-
-
-/* =====================================================
-   STORY PREVIEW
-===================================================== */
-
-window.previewStory=function(){
-
- const input=
- document.getElementById("storyFile");
-
- if(!input)return;
-
- const file=
- input.files[0];
-
- if(!file)return;
-
- storyFileData=file;
-
- updateStoryPreview();
-
-};
-
-
-function updateStoryPreview(){
-
- const box=
- document.getElementById(
-  "storyPreview"
- );
-
- if(!box||!storyFileData)return;
-
- const url=
- URL.createObjectURL(
-  storyFileData
- );
-
- if(
-  storyFileData.type
-  .startsWith("video/")
- ){
-
-  box.innerHTML=`
-
-   <video
-    class="preview"
-    controls
-    playsinline
-    src="${url}">
-   </video>
-
-  `;
-
- }else{
-
-  box.innerHTML=`
-
-   <img
-    class="preview"
-    style="filter:${
-     filters[selectedStoryFilter]
-    }"
-    src="${url}">
-
-  `;
-
- }
-
-}
-
-
-/* =====================================================
-   REEL PREVIEW
-===================================================== */
-
-window.previewReel=function(){
-
- const input=
- document.getElementById("reelFile");
-
- if(!input)return;
-
- const file=
- input.files[0];
-
- if(!file)return;
-
- reelFileData=file;
-
- const url=
- URL.createObjectURL(file);
-
- document.getElementById(
-  "reelPreview"
- ).innerHTML=`
-
- <video
-  class="preview"
-  controls
-  playsinline
-  src="${url}">
- </video>
-
- `;
-
-};
-
-
-/* =====================================================
-   CLOUDINARY
-===================================================== */
-
-async function cloudinaryUpload(
- file,
- resourceType="auto"
-){
-
- const fd=
- new FormData();
-
- fd.append(
-  "file",
-  file
- );
-
- fd.append(
-  "upload_preset",
-  UPLOAD_PRESET
- );
-
-
- const endpoint=
- `https://api.cloudinary.com/v1_1/`+
- `${CLOUD_NAME}/`+
- `${resourceType}/upload`;
-
-
- const res=
- await fetch(
-  endpoint,
-  {
-   method:"POST",
-   body:fd
-  }
- );
-
-
- const data=
- await res.json();
-
-
- if(
-  !res.ok||
-  !data.secure_url
- ){
-
-  throw new Error(
-   data.error?.message||
-   "Cloudinary upload failed"
-  );
-
- }
-
-
- return data.secure_url;
-
-}
-
-
-/* =====================================================
-   UPLOAD POST
-===================================================== */
-
-window.uploadPost=async function(){
+window.uploadPost=async()=>{
 
  if(!postFiles.length){
-
-  alert(
-   "Photo select करें"
-  );
-
+  alert("Photo select करें");
   return;
-
  }
-
- const caption=
- document.getElementById(
-  "postCaption"
- ).value.trim();
-
- const songFile=
- document.getElementById(
-  "postSong"
- ).files[0];
-
 
  try{
 
-  alert(
-   "Photo upload हो रही है..."
-  );
-
+  alert("Photos upload हो रही हैं...");
 
   const urls=[];
 
-
-  for(
-   const file of postFiles
-  ){
-
-   const url=
-   await cloudinaryUpload(
-    file,
-    "image"
-   );
-
-   urls.push(url);
-
-  }
-
+  for(const f of postFiles)
+   urls.push(await cloudinaryUpload(f,"image"));
 
   let song="";
 
+  const sf=document.getElementById("postSong").files[0];
 
-  if(songFile){
+  if(sf)song=await cloudinaryUpload(sf,"video");
 
-   song=
-   await cloudinaryUpload(
-    songFile,
-    "video"
-   );
-
-  }
-
-
-  const postRef=
-  push(ref(db,"posts"));
-
-
-  await set(
-   postRef,
-   {
-
-    uid:me.uid,
-
-    images:urls,
-
-    caption:caption,
-
-    filter:selectedFilter,
-
-    song:song,
-
-    likes:{},
-
-    comments:{},
-
-    createdAt:Date.now()
-
-   }
-  );
-
-
-  await notifyMentions(
-   caption,
-   "post",
-   postRef.key
-  );
-
+  await set(push(ref(db,"posts")),{
+   uid:me.uid,images:urls,
+   caption:document.getElementById("postCaption").value.trim(),
+   filter:selectedFilter,song,
+   likes:{},comments:{},createdAt:Date.now()
+  });
 
   postFiles=[];
-
-
-  alert(
-   "✅ Post uploaded"
-  );
-
-
+  alert("✅ Post uploaded");
   page("home");
 
-
  }catch(e){
-
-  console.error(e);
-
-  alert(
-   "❌ Upload Error:\n"+
-   e.message
-  );
-
+  alert("❌ "+e.message);
  }
-
 };
 
 
-/* =====================================================
-   UPLOAD STORY
-===================================================== */
+/* ================= STORY ================= */
 
-window.uploadStory=async function(){
+window.uploadStory=async()=>{
 
  if(!storyFileData){
-
-  alert(
-   "Story photo/video select करें"
-  );
-
+  alert("Story select करें");
   return;
-
  }
-
 
  try{
 
-  alert(
-   "Story upload हो रही है..."
+  const video=storyFileData.type.startsWith("video/");
+  const url=await cloudinaryUpload(
+   storyFileData,video?"video":"image"
   );
-
-
-  const isVideo=
-  storyFileData.type
-  .startsWith("video/");
-
-
-  const url=
-  await cloudinaryUpload(
-   storyFileData,
-   isVideo
-   ?"video"
-   :"image"
-  );
-
-
-  const songFile=
-  document.getElementById(
-   "storySong"
-  ).files[0];
-
 
   let song="";
 
+  const sf=document.getElementById("storySong").files[0];
 
-  if(songFile){
+  if(sf)song=await cloudinaryUpload(sf,"video");
 
-   song=
-   await cloudinaryUpload(
-    songFile,
-    "video"
-   );
-
-  }
-
-
-  const storyRef=
-  push(ref(db,"stories"));
-
-
-  await set(
-   storyRef,
-   {
-
-    uid:me.uid,
-
-    url:url,
-
-    type:
-    isVideo
-    ?"video"
-    :"image",
-
-    filter:
-    selectedStoryFilter,
-
-    song:song,
-
-    createdAt:Date.now(),
-
-    views:{},
-
-    likes:{}
-
-   }
-  );
-
+  await set(push(ref(db,"stories")),{
+   uid:me.uid,url,
+   type:video?"video":"image",
+   filter:selectedStoryFilter,
+   song,views:{},likes:{},
+   createdAt:Date.now()
+  });
 
   storyFileData=null;
 
-
-  alert(
-   "✅ Story uploaded"
-  );
-
-
+  alert("✅ Story uploaded");
   page("home");
 
-
  }catch(e){
-
-  console.error(e);
-
-  alert(
-   "❌ Story Upload Error:\n"+
-   e.message
-  );
-
+  alert("❌ "+e.message);
  }
-
 };
 
 
-/* =====================================================
-   UPLOAD REEL
-===================================================== */
+/* ================= REEL ================= */
 
-window.uploadReel=async function(){
+window.uploadReel=async()=>{
 
  if(!reelFileData){
-
-  alert(
-   "Reel video select करें"
-  );
-
+  alert("Reel select करें");
   return;
-
  }
-
 
  try{
 
-  alert(
-   "Reel upload हो रही है..."
-  );
-
-
-  const url=
-  await cloudinaryUpload(
-   reelFileData,
-   "video"
-  );
-
-
-  const caption=
-  document.getElementById(
-   "reelCaption"
-  ).value.trim();
-
-
-  const songFile=
-  document.getElementById(
-   "reelSong"
-  ).files[0];
-
+  const url=await cloudinaryUpload(reelFileData,"video");
 
   let song="";
 
+  const sf=document.getElementById("reelSong").files[0];
 
-  if(songFile){
+  if(sf)song=await cloudinaryUpload(sf,"video");
 
-   song=
-   await cloudinaryUpload(
-    songFile,
-    "video"
-   );
-
-  }
-
-
-  const reelRef=
-  push(ref(db,"reels"));
-
-
-  await set(
-   reelRef,
-   {
-
-    uid:me.uid,
-
-    url:url,
-
-    caption:caption,
-
-    song:song,
-
-    likes:{},
-
-    comments:{},
-
-    createdAt:Date.now()
-
-   }
-  );
-
-
-  await notifyMentions(
-   caption,
-   "reel",
-   reelRef.key
-  );
-
+  await set(push(ref(db,"reels")),{
+   uid:me.uid,url,
+   caption:document.getElementById("reelCaption").value.trim(),
+   song,likes:{},comments:{},
+   createdAt:Date.now()
+  });
 
   reelFileData=null;
 
-
-  alert(
-   "✅ Reel uploaded"
-  );
-
-
+  alert("✅ Reel uploaded");
   page("reels");
 
-
  }catch(e){
-
-  console.error(e);
-
-  alert(
-   "❌ Reel Upload Error:\n"+
-   e.message
-  );
-
+  alert("❌ "+e.message);
  }
-
 };
 
 
-/* =====================================================
-   PROFILE
-===================================================== */
+/* ================= REELS ================= */
+
+function reelsPage(){
+
+ let html=`<div class="page"><h2>🎬 Reels</h2>`;
+
+ Object.entries(reels)
+ .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0))
+ .forEach(([id,r])=>{
+
+  const p=profiles[r.uid]||{};
+
+  html+=`
+  <div class="card">
+
+   <div class="userline">
+    <img class="avatar" src="${p.photo||avatar(r.uid)}">
+    <b>@${escapeHTML(p.username||"user")}</b>
+   </div>
+
+   <div class="reel">
+    <video src="${r.url}" controls playsinline loop></video>
+    <div class="reel-info">${escapeHTML(r.caption||"")}</div>
+   </div>
+
+   ${r.song?`<audio controls src="${r.song}"></audio>`:""}
+
+   <div class="actions">
+    <button class="action" onclick="likeReel('${id}')">
+     ${r.likes?.[me.uid]?"❤️":"🤍"}
+     ${Object.keys(r.likes||{}).length}
+    </button>
+
+    <button class="action" onclick="commentReel('${id}')">
+     💬 ${Object.keys(r.comments||{}).length}
+    </button>
+
+    <button class="action" onclick="shareReel('${id}')">↗️</button>
+   </div>
+
+  </div>`;
+ });
+
+ html+=`</div>`;
+ return html;
+}
+
+window.likeReel=async id=>{
+ await runTransaction(
+  ref(db,`reels/${id}/likes/${me.uid}`),
+  v=>v?null:true
+ );
+};
+
+window.commentReel=async id=>{
+
+ const text=prompt("Reel comment");
+ if(!text)return;
+
+ await set(push(ref(db,`reels/${id}/comments`)),{
+  uid:me.uid,text,createdAt:Date.now()
+ });
+};
+
+window.shareReel=async id=>{
+
+ const url=location.href+"#reel-"+id;
+
+ try{
+  if(navigator.share)await navigator.share({title:"Rechod Reel",url});
+  else{
+   await navigator.clipboard.writeText(url);
+   alert("Link copied");
+  }
+ }catch(e){}
+};
+
+
+/* ================= SEARCH ================= */
+
+function searchPage(){
+
+ return`
+ <div class="page">
+  <h2>🔎 Search</h2>
+  <input id="searchInput"
+   placeholder="Username या name"
+   oninput="doSearch()">
+  <div id="searchResults"></div>
+ </div>`;
+}
+
+window.doSearch=()=>{
+
+ const q=document.getElementById("searchInput").value.trim().toLowerCase();
+ const box=document.getElementById("searchResults");
+
+ if(!q){
+  box.innerHTML="";
+  return;
+ }
+
+ box.innerHTML=Object.entries(profiles)
+ .filter(([uid,p])=>
+  String(p.username||"").toLowerCase().includes(q)||
+  String(p.name||"").toLowerCase().includes(q)
+ )
+ .map(([uid,p])=>`
+  <div class="search-result">
+   <img class="avatar" src="${p.photo||avatar(uid)}">
+   <div style="flex:1">
+    <b>@${escapeHTML(p.username||"user")}</b><br>
+    <small>${escapeHTML(p.name||"")}</small>
+   </div>
+   <button class="secondary" onclick="openProfile('${uid}')">View</button>
+  </div>
+ `).join("")||"<p>कोई user नहीं मिला</p>";
+};
+
+
+/* ================= PROFILE ================= */
 
 function profilePage(){
 
- const p=
- profiles[me.uid]||{};
-
-
- const followerCount=
- Object.keys(
-  p.followers||{}
- ).length;
-
-
- const followingCount=
- Object.keys(
-  p.following||{}
- ).length;
-
-
- const postCount=
- Object.values(posts)
- .filter(
-  x=>x.uid===me.uid
- ).length;
-
+ const p=profiles[me.uid]||{};
 
  return`
-
  <div class="page">
 
-  <div class="card profile-head">
+ <div class="card profile-head">
 
-   <img
-    class="profile-photo"
-    src="${
-     p.photo||
-     me.photoURL||
-     avatar(me.uid)
-    }"
-   >
+  <img class="profile-photo"
+   src="${p.photo||me.photoURL||avatar(me.uid)}">
 
+  <h2>${escapeHTML(p.name||"Rechod User")}</h2>
+  <div>@${escapeHTML(p.username||"user")}</div>
+  <p>${escapeHTML(p.bio||"")}</p>
 
-   <h2>
-    ${escapeHTML(
-     p.name||"Rechod User"
-    )}
-   </h2>
-
-
-   <div>
-    @${escapeHTML(
-     p.username||"user"
-    )}
-   </div>
-
-
-   <p>
-    ${escapeHTML(
-     p.bio||""
-    )}
-   </p>
-
-
-   <div class="stats">
-
-    <div class="stat">
-
-     <b>
-      ${postCount}
-     </b>
-
-     Posts
-
-    </div>
-
-
-    <div class="stat">
-
-     <b>
-      ${followerCount}
-     </b>
-
-     Followers
-
-    </div>
-
-
-    <div class="stat">
-
-     <b>
-      ${followingCount}
-     </b>
-
-     Following
-
-    </div>
-
-   </div>
-
-
-   <button
-    class="secondary"
-    onclick="editProfile()">
-
-    ✏️ Edit Profile
-
-   </button>
-
+  <div class="stats">
+   <div class="stat"><b>${Object.keys(p.followers||{}).length}</b>Followers</div>
+   <div class="stat"><b>${Object.keys(p.following||{}).length}</b>Following</div>
+   <div class="stat"><b>${Object.values(posts).filter(x=>x.uid===me.uid).length}</b>Posts</div>
   </div>
 
-
-  <div class="card">
-
-   <h3>
-    📷 My Posts
-   </h3>
-
-
-   ${
-    Object.entries(posts)
-    .filter(
-     ([id,x])=>
-     x.uid===me.uid
-    )
-    .sort(
-     (a,b)=>
-     (b[1].createdAt||0)-
-     (a[1].createdAt||0)
-    )
-    .map(
-     ([id,x])=>
-     postCard(id,x)
-    )
-    .join("")
-    ||
-    "<p>अभी कोई post नहीं है।</p>"
-   }
-
-  </div>
+  <button class="secondary" onclick="editProfile()">✏️ Edit Profile</button>
 
  </div>
 
- `;
+ <div class="card">
+  <h3>📷 Profile Photo</h3>
+  <input type="file" accept="image/*"
+   onchange="uploadProfilePhoto(this.files[0])">
+ </div>
 
+ </div>`;
 }
 
+window.editProfile=async()=>{
 
-/* =====================================================
-   EDIT PROFILE
-===================================================== */
+ const p=profiles[me.uid]||{};
 
-window.editProfile=function(){
-
- const p=
- profiles[me.uid]||{};
-
-
- const name=
- prompt(
-  "Name",
-  p.name||""
- );
-
+ const name=prompt("Name",p.name||"");
  if(name===null)return;
 
-
- const username=
- prompt(
-  "Username",
-  p.username||""
- );
-
+ const username=prompt("Username",p.username||"");
  if(username===null)return;
 
-
- const bio=
- prompt(
-  "Bio",
-  p.bio||""
- );
-
+ const bio=prompt("Bio",p.bio||"");
  if(bio===null)return;
 
+ await update(ref(db,"profiles/"+me.uid),{
+  name,
+  username:username.toLowerCase().replace(/\s/g,""),
+  bio
+ });
 
- update(
-  ref(db,"profiles/"+me.uid),
-  {
-
-   name:name,
-
-   username:
-   username
-   .toLowerCase()
-   .replace(/\s/g,""),
-
-   bio:bio
-
-  }
- );
-
+ alert("✅ Profile updated");
 };
 
-
-/* =====================================================
-   PROFILE PHOTO
-===================================================== */
-
-window.uploadProfilePhoto=
-async function(file){
+window.uploadProfilePhoto=async file=>{
 
  if(!file)return;
 
-
  try{
+  const url=await cloudinaryUpload(file,"image");
 
-  const url=
-  await cloudinaryUpload(
-   file,
-   "image"
-  );
+  await update(ref(db,"profiles/"+me.uid),{photo:url});
 
-
-  await update(
-   ref(
-    db,
-    "profiles/"+me.uid
-   ),
-   {
-    photo:url
-   }
-  );
-
-
-  alert(
-   "✅ Profile photo updated"
-  );
-
-
+  alert("✅ Profile photo updated");
  }catch(e){
-
-  alert(
-   "❌ "+e.message
-  );
-
+  alert("❌ "+e.message);
  }
-
 };
 
 
-/* =====================================================
-   VIEW PROFILE
-===================================================== */
+/* ================= VIEW PROFILE / FOLLOW ================= */
 
-window.openProfile=function(uid){
-
+window.openProfile=uid=>{
  viewingProfileId=uid;
-
  current="viewProfile";
-
  render();
-
 };
-
 
 function viewProfilePage(){
 
- const uid=
- viewingProfileId;
-
- const p=
- profiles[uid]||{};
-
- const isMe=
- uid===me.uid;
-
-
- const following=
- p.followers&&
- p.followers[me.uid];
-
+ const uid=viewingProfileId;
+ const p=profiles[uid]||{};
+ const following=!!p.followers?.[me.uid];
 
  return`
-
  <div class="page">
 
-  <button
-   class="secondary"
-   onclick="page('search')">
+ <button class="secondary" onclick="page('search')">← Back</button>
 
-   ← Back
+ <div class="card profile-head">
 
-  </button>
+  <img class="profile-photo" src="${p.photo||avatar(uid)}">
 
+  <h2>${escapeHTML(p.name||"User")}</h2>
+  <div>@${escapeHTML(p.username||"user")}</div>
+  <p>${escapeHTML(p.bio||"")}</p>
 
-  <div class="card profile-head">
-
-   <img
-    class="profile-photo"
-    src="${
-     p.photo||
-     avatar(uid)
-    }"
-   >
-
-
-   <h2>
-    ${escapeHTML(
-     p.name||"User"
-    )}
-   </h2>
-
-
-   <div>
-    @${escapeHTML(
-     p.username||"user"
-    )}
-   </div>
-
-
-   <p>
-    ${escapeHTML(
-     p.bio||""
-    )}
-   </p>
-
-
-   <div class="stats">
-
-    <div class="stat">
-
-     <b>
-      ${Object.keys(
-       p.followers||{}
-      ).length}
-     </b>
-
-     Followers
-
-    </div>
-
-
-    <div class="stat">
-
-     <b>
-      ${Object.keys(
-       p.following||{}
-      ).length}
-     </b>
-
-     Following
-
-    </div>
-
-   </div>
-
-
-   ${
-    !isMe
-    ?
-    `
-
-    <button
-     class="primary"
-     onclick="followUser('${uid}')">
-
-     ${
-      following
-      ?"Following"
-      :"Follow"
-     }
-
-    </button>
-
-
-    <button
-     class="secondary"
-     style="width:100%"
-     onclick="startChat('${uid}')">
-
-     💬 Message
-
-    </button>
-
-    `
-    :""
-   }
-
+  <div class="stats">
+   <div class="stat"><b>${Object.keys(p.followers||{}).length}</b>Followers</div>
+   <div class="stat"><b>${Object.keys(p.following||{}).length}</b>Following</div>
   </div>
 
+  ${uid!==me.uid?`
+   <button class="primary" onclick="followUser('${uid}')">
+    ${following?"Following":"Follow"}
+   </button>
 
-  ${
-   Object.entries(posts)
-   .filter(
-    ([id,x])=>
-    x.uid===uid
-   )
-   .sort(
-    (a,b)=>
-    (b[1].createdAt||0)-
-    (a[1].createdAt||0)
-   )
-   .map(
-    ([id,x])=>
-    postCard(id,x)
-   )
-   .join("")
-  }
+   <button class="secondary" style="width:100%"
+    onclick="startChat('${uid}')">💬 Message</button>
+
+   <button class="secondary" style="width:100%"
+    onclick="startCall('${uid}','audio')">📞 Audio Call</button>
+
+   <button class="secondary" style="width:100%"
+    onclick="startCall('${uid}','video')">📹 Video Call</button>
+  `:""}
 
  </div>
 
- `;
+ ${Object.entries(posts)
+ .filter(([id,x])=>x.uid===uid)
+ .map(([id,x])=>postCard(id,x)).join("")}
 
+ </div>`;
 }
 
+window.followUser=async uid=>{
 
-/* =====================================================
-   FOLLOW
-===================================================== */
+ const mine=ref(db,`profiles/${me.uid}/following/${uid}`);
+ const theirs=ref(db,`profiles/${uid}/followers/${me.uid}`);
 
-window.followUser=
-async function(uid){
+ const exists=await get(mine);
 
- if(uid===me.uid)return;
-
-
- const myRef=
- ref(
-  db,
-  `profiles/${me.uid}/following/${uid}`
- );
-
-
- const theirRef=
- ref(
-  db,
-  `profiles/${uid}/followers/${me.uid}`
- );
-
-
- const snap=
- await get(myRef);
-
-
- if(snap.exists()){
-
-  await remove(myRef);
-
-  await remove(theirRef);
-
+ if(exists.exists()){
+  await remove(mine);
+  await remove(theirs);
  }else{
+  await set(mine,true);
+  await set(theirs,true);
 
-  await set(
-   myRef,
-   true
-  );
-
-  await set(
-   theirRef,
-   true
-  );
-
-
-  await push(
-   ref(db,`notifs/${uid}`),
-   {
-
-    type:"follow",
-
-    sender:me.uid,
-
-    text:
-    "ने आपको follow किया",
-
-    createdAt:Date.now()
-
-   }
-  );
-
+  await push(ref(db,`notifs/${uid}`),{
+   type:"follow",sender:me.uid,
+   text:"ने आपको follow किया",
+   createdAt:Date.now()
+  });
  }
 
  render();
-
 };
 
 
-/* =====================================================
-   MESSAGES
-===================================================== */
+/* ================= CHAT ================= */
 
 function conversationId(a,b){
-
- return [
-  a,
-  b
- ]
- .sort()
- .join("_");
-
+ return [a,b].sort().join("_");
 }
-
 
 function messagesPage(){
 
- let html=`
-
+ if(chatUserId)return`
  <div class="page">
+  ${chatPage()}
+ </div>`;
 
+ const ids=new Set();
+
+ Object.values(messages).forEach(c=>{
+  Object.values(c||{}).forEach(m=>{
+   if(m.sender===me.uid)ids.add(m.receiver);
+   if(m.receiver===me.uid)ids.add(m.sender);
+  });
+ });
+
+ return`
+ <div class="page">
   <h2>💬 Messages</h2>
 
- `;
-
-
- if(chatUserId){
-
-  html+=
-  chatPage();
-
- }else{
-
-  const userIds=
-  new Set();
-
-
-  Object.values(messages)
-  .forEach(conv=>{
-
-   Object.values(conv||{})
-   .forEach(m=>{
-
-    if(
-     m.sender===me.uid
-    ){
-
-     userIds.add(
-      m.receiver
-     );
-
-    }
-
-
-    if(
-     m.receiver===me.uid
-    ){
-
-     userIds.add(
-      m.sender
-     );
-
-    }
-
-   });
-
-  });
-
-
-  if(!userIds.size){
-
-   html+=`
-
-   <div class="card empty">
-
-    अभी कोई chat नहीं है।
-
-    <br><br>
-
-    Search से user खोलकर
-    Message करें।
-
-   </div>
-
-   `;
-
-  }
-
-
-  userIds.forEach(uid=>{
-
-   const p=
-   profiles[uid]||{};
-
-
-   html+=`
-
-   <div
-    class="search-result"
-    onclick="startChat('${uid}')">
-
-    <img
-     class="avatar"
-     src="${
-      p.photo||
-      avatar(uid)
-     }">
-
-
-    <div>
-
-     <b>
-      ${escapeHTML(
-       p.username||"user"
-      )}
-     </b>
-
-     <br>
-
-     <small>
-      ${escapeHTML(
-       p.name||""
-      )}
-     </small>
-
+  ${[...ids].map(uid=>{
+   const p=profiles[uid]||{};
+   return`
+   <div class="search-result" onclick="startChat('${uid}')">
+    <img class="avatar" src="${p.photo||avatar(uid)}">
+    <div style="flex:1">
+     <b>@${escapeHTML(p.username||"user")}</b><br>
+     <small>${escapeHTML(p.name||"")}</small>
     </div>
+    <button class="secondary"
+     onclick="event.stopPropagation();startCall('${uid}','audio')">📞</button>
+    <button class="secondary"
+     onclick="event.stopPropagation();startCall('${uid}','video')">📹</button>
+   </div>`;
+  }).join("")||
+  `<div class="card">अभी कोई chat नहीं है। Search से user खोलकर Message करें।</div>`}
 
-   </div>
-
-   `;
-
-  });
-
- }
-
-
- html+=`</div>`;
-
- return html;
-
+ </div>`;
 }
 
-
-/* =====================================================
-   CHAT
-===================================================== */
+window.startChat=uid=>{
+ chatUserId=uid;
+ current="messages";
+ render();
+};
 
 function chatPage(){
 
- const p=
- profiles[chatUserId]||{};
+ const p=profiles[chatUserId]||{};
+ const cid=conversationId(me.uid,chatUserId);
+ const conv=messages[cid]||{};
 
-
- const cid=
- conversationId(
-  me.uid,
-  chatUserId
- );
-
-
- const conv=
- messages[cid]||{};
-
-
- let html=`
-
- <button
-  class="secondary"
-  onclick="
-   chatUserId=null;
-   render();
-  ">
-
-  ← Chats
-
- </button>
-
+ return`
+ <button class="secondary" onclick="chatUserId=null;render()">← Chats</button>
 
  <div class="card">
 
   <div class="userline">
-
-   <img
-    class="avatar"
-    src="${
-     p.photo||
-     avatar(chatUserId)
-    }">
-
-
-   <b>
-    ${escapeHTML(
-     p.username||"user"
-    )}
-   </b>
-
+   <img class="avatar" src="${p.photo||avatar(chatUserId)}">
+   <div style="flex:1"><b>@${escapeHTML(p.username||"user")}</b></div>
+   <button class="secondary" onclick="startCall('${chatUserId}','audio')">📞</button>
+   <button class="secondary" onclick="startCall('${chatUserId}','video')">📹</button>
   </div>
 
+  <div class="chat-box" id="chatBox">
 
-  <div
-   class="chat-box"
-   id="chatBox">
-
- `;
-
-
- Object.entries(conv)
- .sort(
-  (a,b)=>
-  (a[1].createdAt||0)-
-  (b[1].createdAt||0)
- )
- .forEach(([id,m])=>{
-
-  html+=`
-
-  <div
-   class="msg ${
-    m.sender===me.uid
-    ?"me"
-    :"other"
-   }">
-
-   ${formatText(
-    m.text||""
-   )}
+   ${Object.values(conv)
+   .sort((a,b)=>(a.createdAt||0)-(b.createdAt||0))
+   .map(m=>`
+    <div class="msg ${m.sender===me.uid?"me":"other"}">
+     ${escapeHTML(m.text)}
+    </div>
+   `).join("")}
 
   </div>
-
-  `;
-
- });
-
-
- html+=`
-
-  </div>
-
 
   <div class="chat-input">
-
-   <input
-    id="chatText"
-    placeholder="Message..."
-    onkeydown="
-     if(event.key==='Enter')
-     sendMessage()
-    "
-   >
-
-   <button
-    onclick="sendMessage()">
-
-    ➤
-
-   </button>
-
+   <input id="chatText" placeholder="Message..."
+    onkeydown="if(event.key==='Enter')sendMessage()">
+   <button onclick="sendMessage()">➤</button>
   </div>
 
- </div>
-
- `;
-
-
- return html;
-
+ </div>`;
 }
 
+window.sendMessage=async()=>{
 
-window.startChat=function(uid){
+ const input=document.getElementById("chatText");
+ const text=input.value.trim();
 
- chatUserId=uid;
+ if(!text||!chatUserId)return;
 
- current="messages";
+ const cid=conversationId(me.uid,chatUserId);
 
- render();
+ await set(push(ref(db,`messages/${cid}`)),{
+  sender:me.uid,receiver:chatUserId,text,
+  createdAt:Date.now()
+ });
 
-};
-
-
-window.sendMessage=
-async function(){
-
- const input=
- document.getElementById(
-  "chatText"
- );
-
-
- const text=
- input.value.trim();
-
-
- if(
-  !text||
-  !chatUserId
- )return;
-
-
- const cid=
- conversationId(
-  me.uid,
-  chatUserId
- );
-
-
- const msgRef=
- push(
-  ref(
-   db,
-   `messages/${cid}`
-  )
- );
-
-
- await set(
-  msgRef,
-  {
-
-   sender:me.uid,
-
-   receiver:chatUserId,
-
-   text:text,
-
-   createdAt:Date.now()
-
-  }
- );
-
-
- await push(
-  ref(
-   db,
-   `notifs/${chatUserId}`
-  ),
-  {
-
-   type:"message",
-
-   sender:me.uid,
-
-   text:text,
-
-   createdAt:Date.now()
-
-  }
- );
-
+ await push(ref(db,`notifs/${chatUserId}`),{
+  type:"message",sender:me.uid,
+  text:"ने आपको message भेजा",
+  createdAt:Date.now()
+ });
 
  input.value="";
-
- render();
-
 };
 
 
-/* =====================================================
-   SETTINGS
-===================================================== */
+/* =========================================================
+   SETTINGS — सभी rows में REAL onclick
+========================================================= */
 
 function settingsPage(){
 
- return`
+ const s=profiles[me.uid]?.settings||{};
 
+ return`
  <div class="page">
 
-  <h2>⚙️ Settings</h2>
+ <button class="secondary" onclick="page('home')">← Back</button>
+ <h2>⚙️ Settings</h2>
 
+ <div class="card">
 
-  <div class="card">
-
-   <h3>
-    👤 Profile Photo
-   </h3>
-
-   <input
-    type="file"
-    accept="image/*"
-    onchange="
-     uploadProfilePhoto(
-      this.files[0]
-     )
-    "
-   >
-
-  </div>
-
-
-  <div class="card">
-
-   <h3>
-    🌙 Appearance
-   </h3>
-
-   <button
-    class="primary"
-    onclick="toggleDark()">
-
-    Toggle Dark Mode
-
-   </button>
-
-  </div>
-
-
-  <div class="card">
-
-   <button
-    class="primary danger"
-    onclick="logoutNow()">
-
-    🚪 Logout
-
-   </button>
-
-  </div>
+  ${setting("👤","Edit Profile","Name, username, bio","editProfile()")}
+  ${setting("🖼️","Profile Photo","Change profile picture","chooseProfilePhoto()")}
+  ${setting("🔔","Notifications","Notification preferences","openNotificationSettings()")}
+  ${setting("🔒","Privacy","Account privacy","openPrivacySettings()")}
+  ${setting("👥","Followers & Following","Manage followers","openFollowersSettings()")}
+  ${setting("🚫","Blocked Accounts","Blocked users","openUserList('blocked')")}
+  ${setting("⚠️","Restricted Accounts","Restricted users","openUserList('restricted')")}
+  ${setting("⭐","Close Friends","Close friends list","openUserList('closeFriends')")}
+  ${setting("💬","Messages & Story Replies","Message controls","openMessageSettings()")}
+  ${setting("@","Tags & Mentions","Who can tag/mention you","openTagSettings()")}
+  ${setting("❤️","Likes & Comments","Interaction controls","openInteractionSettings()")}
+  ${setting("↗️","Sharing","Sharing controls","openSharingSettings()")}
+  ${setting("🙈","Hidden Words","Hide unwanted content","openHiddenWords()")}
+  ${setting("⭕","Story Settings","Story privacy & replies","openStorySettings()")}
+  ${setting("🎵","Music & Audio","Music settings","openMusicSettings()")}
+  ${setting("📞","Audio Calls","Audio call settings","openCallSettings('audio')")}
+  ${setting("📹","Video Calls","Video call settings","openCallSettings('video')")}
+  ${setting("🌙","Dark Mode","Appearance",`toggleDark();`)}
+  ${setting("🌐","Language","App language","openLanguage()")}
 
  </div>
 
- `;
+ <div class="card">
+  <button class="primary" style="background:#e53935"
+   onclick="logoutNow()">🚪 Logout</button>
+ </div>
 
+ </div>`;
+}
+
+function setting(icon,title,sub,click){
+
+ return`
+ <div class="setting" onclick="${click}">
+  <div class="ico">${icon}</div>
+  <div class="txt">
+   <b>${title}</b>
+   <small>${sub}</small>
+  </div>
+  <b>›</b>
+ </div>`;
 }
 
 
-/* =====================================================
-   DARK MODE
-===================================================== */
+/* ================= SETTINGS MODAL SYSTEM ================= */
 
-window.toggleDark=function(){
+function modal(title,html){
 
- document.body
- .classList
- .toggle("dark");
+ document.body.insertAdjacentHTML("beforeend",`
+ <div class="modal" id="settingsModal"
+  onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+   <button class="secondary" onclick="closeModal()">← Close</button>
+   <h2>${title}</h2>
+   ${html}
+  </div>
+ </div>`);
+}
 
+window.closeModal=()=>{
+ document.getElementById("settingsModal")?.remove();
+};
+
+window.chooseProfilePhoto=()=>{
+
+ modal("🖼️ Profile Photo",`
+  <input type="file" accept="image/*"
+   onchange="uploadProfilePhoto(this.files[0]);closeModal()">
+ `);
+};
+
+window.openNotificationSettings=()=>{
+
+ const s=profiles[me.uid]?.settings||{};
+
+ modal("🔔 Notifications",`
+  ${settingToggle("pushNotifications","Push Notifications",s.pushNotifications!==false)}
+  ${settingToggle("messageNotifications","Messages",s.messageNotifications!==false)}
+  ${settingToggle("likeNotifications","Likes",s.likeNotifications!==false)}
+  ${settingToggle("followNotifications","Followers",s.followNotifications!==false)}
+ `);
+};
+
+window.openPrivacySettings=()=>{
+
+ const p=profiles[me.uid]||{};
+
+ modal("🔒 Privacy",`
+  ${settingToggle("privateAccount","Private Account",!!p.private)}
+  ${settingToggle("activityStatus","Activity Status",p.settings?.activityStatus!==false)}
+  ${settingToggle("readReceipts","Read Receipts",p.settings?.readReceipts!==false)}
+ `);
+};
+
+window.openFollowersSettings=()=>{
+
+ const p=profiles[me.uid]||{};
+
+ modal("👥 Followers & Following",`
+  <p>Followers: <b>${Object.keys(p.followers||{}).length}</b></p>
+  <p>Following: <b>${Object.keys(p.following||{}).length}</b></p>
+  <button class="primary" onclick="showPeople('followers')">View Followers</button>
+  <button class="primary" onclick="showPeople('following')">View Following</button>
+ `);
+};
+
+window.showPeople=type=>{
+
+ const p=profiles[me.uid]||{};
+ const ids=Object.keys(type==="followers"?p.followers||{}:p.following||{});
+
+ modal(type==="followers"?"Followers":"Following",
+ ids.map(uid=>{
+  const x=profiles[uid]||{};
+  return`
+   <div class="search-result">
+    <img class="avatar" src="${x.photo||avatar(uid)}">
+    <b>@${escapeHTML(x.username||"user")}</b>
+    <button class="secondary" onclick="openProfile('${uid}');closeModal()">View</button>
+   </div>`;
+ }).join("")||"<p>कोई user नहीं है।</p>");
+};
+
+window.openUserList=async type=>{
+
+ const title=type==="blocked"?"🚫 Blocked Accounts":
+ type==="restricted"?"⚠️ Restricted Accounts":"⭐ Close Friends";
+
+ const list=(await get(ref(db,`userLists/${me.uid}/${type}`))).val()||{};
+
+ modal(title,`
+  <input id="listSearch" placeholder="User search करें"
+   oninput="filterListUsers('${type}')">
+  <div id="listUsers"></div>
+ `);
+
+ renderListUsers(type,list);
+};
+
+async function renderListUsers(type,list){
+
+ const box=document.getElementById("listUsers");
+ if(!box)return;
+
+ box.innerHTML=Object.entries(profiles)
+ .filter(([uid])=>uid!==me.uid)
+ .map(([uid,p])=>{
+  const on=!!list[uid];
+  return`
+   <div class="search-result list-user" data-name="${escapeHTML((p.username||"")+" "+(p.name||""))}">
+    <img class="avatar" src="${p.photo||avatar(uid)}">
+    <div style="flex:1">
+     <b>@${escapeHTML(p.username||"user")}</b>
+    </div>
+    <button class="${on?"primary":"secondary"}"
+     onclick="toggleUserList('${type}','${uid}',${on})">
+     ${on?"Remove":"Add"}
+    </button>
+   </div>`;
+ }).join("");
+}
+
+window.filterListUsers=q=>{
+
+ const x=q.toLowerCase();
+
+ document.querySelectorAll(".list-user").forEach(e=>{
+  e.style.display=e.dataset.name.toLowerCase().includes(x)?"flex":"none";
+ });
+};
+
+window.toggleUserList=async(type,uid,on)=>{
+
+ const r=ref(db,`userLists/${me.uid}/${type}/${uid}`);
+
+ if(on)await remove(r);
+ else await set(r,true);
+
+ closeModal();
+ openUserList(type);
+};
+
+window.openMessageSettings=()=>{
+
+ modal("💬 Messages & Story Replies",`
+  ${settingToggle("messageRequests","Message Requests",true)}
+  ${settingToggle("storyReplies","Story Replies",true)}
+  ${settingToggle("groupMessages","Group Messages",true)}
+ `);
+};
+
+window.openTagSettings=()=>{
+
+ modal("@ Tags & Mentions",`
+  ${settingToggle("allowTags","Allow Tags",true)}
+  ${settingToggle("allowMentions","Allow Mentions",true)}
+ `);
+};
+
+window.openInteractionSettings=()=>{
+
+ modal("❤️ Likes & Comments",`
+  ${settingToggle("likeNotifications","Like Notifications",true)}
+  ${settingToggle("commentNotifications","Comment Notifications",true)}
+ `);
+};
+
+window.openSharingSettings=()=>{
+
+ modal("↗️ Sharing",`
+  ${settingToggle("allowSharing","Allow Post Sharing",true)}
+  ${settingToggle("allowRemix","Allow Reel Remix",true)}
+ `);
+};
+
+window.openHiddenWords=()=>{
+
+ const old=profiles[me.uid]?.settings?.hiddenWords||"";
+
+ modal("🙈 Hidden Words",`
+  <textarea id="hiddenWords" placeholder="Words comma से अलग करें">${escapeHTML(old)}</textarea>
+  <button class="primary" onclick="
+   saveSetting('hiddenWords',document.getElementById('hiddenWords').value);
+   closeModal();
+  ">Save</button>
+ `);
+};
+
+window.openStorySettings=()=>{
+
+ modal("⭕ Story Settings",`
+  ${settingToggle("storyReplies","Allow Story Replies",true)}
+  ${settingToggle("storySharing","Allow Story Sharing",true)}
+  ${settingToggle("storyMentions","Allow Story Mentions",true)}
+ `);
+};
+
+window.openMusicSettings=()=>{
+
+ modal("🎵 Music & Audio",`
+  ${settingToggle("musicPosts","Music on Posts",true)}
+  ${settingToggle("musicStories","Music on Stories",true)}
+  ${settingToggle("musicReels","Music on Reels",true)}
+ `);
+};
+
+window.openCallSettings=type=>{
+
+ modal(type==="video"?"📹 Video Calls":"📞 Audio Calls",`
+  ${settingToggle(type+"Calls","Allow "+(type==="video"?"Video":"Audio")+" Calls",true)}
+  ${settingToggle("callNotifications","Call Notifications",true)}
+ `);
+};
+
+window.openLanguage=()=>{
+
+ const currentLang=profiles[me.uid]?.settings?.language||"hi";
+
+ modal("🌐 Language",`
+  <select id="languageSelect">
+   <option value="hi" ${currentLang==="hi"?"selected":""}>हिन्दी</option>
+   <option value="en" ${currentLang==="en"?"selected":""}>English</option>
+  </select>
+  <button class="primary" onclick="
+   saveSetting('language',document.getElementById('languageSelect').value);
+   closeModal();
+  ">Save</button>
+ `);
+};
+
+function settingToggle(key,label,on){
+
+ return`
+ <div class="setting" onclick="toggleSetting('${key}')">
+  <div class="txt"><b>${label}</b></div>
+  <div id="switch-${key}" class="switch ${on?"on":""}"></div>
+ </div>`;
+}
+
+window.toggleSetting=async key=>{
+
+ const currentValue=profiles[me.uid]?.settings?.[key]??true;
+
+ await saveSetting(key,!currentValue);
+
+ closeModal();
+};
+
+window.saveSetting=async(key,value)=>{
+
+ await update(ref(db,"profiles/"+me.uid+"/settings"),{
+  [key]:value
+ });
+
+ if(key==="privateAccount"){
+  await update(ref(db,"profiles/"+me.uid),{private:value});
+ }
+};
+
+
+/* ================= DARK / LOGOUT ================= */
+
+window.toggleDark=()=>{
+
+ document.body.classList.toggle("dark");
 
  localStorage.setItem(
   "rechodDark",
-  document.body
-  .classList
-  .contains("dark")
+  document.body.classList.contains("dark")
  );
 
 };
 
+window.logoutNow=async()=>{
 
-if(
- localStorage.getItem(
-  "rechodDark"
- )==="true"
-){
-
- document.body
- .classList
- .add("dark");
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-window.logoutNow=
-async function(){
-
- try{
-
+ if(confirm("Logout करना है?")){
   await signOut(auth);
-
-  dataListenersStarted=false;
-
-  profiles={};
-  posts={};
-  reels={};
-  stories={};
-  messages={};
-  notifs={};
-
- }catch(e){
-
-  alert(
-   "Logout Error:\n"+
-   e.message
-  );
-
  }
-
 };
 
+if(localStorage.getItem("rechodDark")==="true")
+ document.body.classList.add("dark");
 
-/* =====================================================
-   NOTIFICATIONS
-===================================================== */
+
+/* ================= NOTIFICATIONS ================= */
 
 function notificationsPage(){
 
- let html=`
+ const arr=Object.values(notifs)
+ .sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
 
+ return`
  <div class="page">
-
+  <button class="secondary" onclick="page('home')">← Back</button>
   <h2>🔔 Notifications</h2>
 
- `;
+  ${arr.map(n=>{
+   const p=profiles[n.sender]||{};
+   return`
+    <div class="notif">
+     <b>@${escapeHTML(p.username||"user")}</b>
+     ${escapeHTML(n.text||"")}
+     <br><small>${timeAgo(n.createdAt)}</small>
+    </div>`;
+  }).join("")||
+  `<div class="card">कोई notification नहीं है।</div>`}
+
+ </div>`;
+}
 
 
- const arr=
- Object.entries(notifs)
- .sort(
-  (a,b)=>
-  (b[1].createdAt||0)-
-  (a[1].createdAt||0)
- );
+/* =========================================================
+   REAL WEBRTC AUDIO / VIDEO CALL
+========================================================= */
 
+const rtcConfig={
+ iceServers:[
+  {urls:"stun:stun.l.google.com:19302"},
+  {urls:"stun:stun1.l.google.com:19302"}
+ ]
+};
 
- if(!arr.length){
+function callUI(name,type,incoming=false){
 
-  html+=`
+ document.getElementById("callScreen")?.remove();
 
-  <div class="card empty">
+ document.body.insertAdjacentHTML("beforeend",`
+ <div id="callScreen" class="call-screen">
 
-   कोई notification नहीं है।
+  <video id="remoteVideo"
+   class="remote-video"
+   autoplay playsinline></video>
+
+  <video id="localVideo"
+   class="local-video"
+   autoplay muted playsinline></video>
+
+  <div class="call-info">
+   <b>${escapeHTML(name)}</b>
+   <div id="callStatus">${incoming?"Incoming call...":"Calling..."}</div>
+  </div>
+
+  <div class="call-controls">
+
+   <button class="call-btn"
+    onclick="toggleMic()">🎤</button>
+
+   ${type==="video"?`
+   <button class="call-btn"
+    onclick="toggleCamera()">📷</button>`:""}
+
+   <button class="call-btn call-end"
+    onclick="hangupCall()">📵</button>
 
   </div>
 
-  `;
+ </div>`);
+}
 
+function setCallStatus(x){
+
+ const e=document.getElementById("callStatus");
+
+ if(e)e.textContent=x;
+}
+
+window.startCall=async(uid,type)=>{
+
+ if(!me)return;
+
+ if(uid===me.uid){
+  alert("खुद को call नहीं कर सकते");
+  return;
  }
 
+ try{
 
- arr.forEach(
- ([id,n])=>{
+  currentCallType=type;
+  callRole="caller";
 
-  const p=
-  profiles[n.sender]||{};
+  currentCallId=push(ref(db,"calls")).key;
+
+  callUI(
+   profiles[uid]?.name||
+   profiles[uid]?.username||
+   "User",
+   type
+  );
+
+  callStream=await navigator.mediaDevices.getUserMedia({
+   audio:true,
+   video:type==="video"
+  });
+
+  document.getElementById("localVideo").srcObject=callStream;
+
+  callPC=new RTCPeerConnection(rtcConfig);
+
+  callStream.getTracks().forEach(t=>
+   callPC.addTrack(t,callStream)
+  );
+
+  callPC.ontrack=e=>{
+
+   remoteStream=e.streams[0];
+
+   const v=document.getElementById("remoteVideo");
+
+   if(v)v.srcObject=remoteStream;
+  };
+
+  callPC.onicecandidate=async e=>{
+
+   if(!e.candidate)return;
+
+   await set(
+    push(ref(db,`calls/${currentCallId}/callerCandidates`)),
+    e.candidate.toJSON()
+   );
+  };
+
+  const callRef=ref(db,`calls/${currentCallId}`);
+
+  await set(callRef,{
+   callerId:me.uid,
+   calleeId:uid,
+   callerName:profiles[me.uid]?.name||me.displayName||"Rechod User",
+   callerUsername:profiles[me.uid]?.username||"user",
+   type,
+   status:"ringing",
+   createdAt:Date.now()
+  });
+
+  await set(ref(db,`incomingCalls/${uid}/${currentCallId}`),{
+   callerId:me.uid,
+   callerName:profiles[me.uid]?.name||"Rechod User",
+   callerUsername:profiles[me.uid]?.username||"user",
+   type,
+   createdAt:Date.now()
+  });
+
+  onDisconnect(callRef).update({status:"ended"});
+
+  const offer=await callPC.createOffer();
+
+  await callPC.setLocalDescription(offer);
+
+  await update(callRef,{
+   offer:{
+    type:offer.type,
+    sdp:offer.sdp
+   }
+  });
+
+  onValue(callRef,snap=>{
+
+   const data=snap.val();
+
+   if(!data||data.status==="ended"||data.status==="rejected"){
+    cleanupCall(false);
+    return;
+   }
+
+   if(data.answer&&!callPC.currentRemoteDescription){
+
+    callPC.setRemoteDescription(
+     new RTCSessionDescription(data.answer)
+    );
+
+    setCallStatus("Connected");
+   }
+  });
+
+  onValue(
+   ref(db,`calls/${currentCallId}/calleeCandidates`),
+   snap=>{
+    snap.forEach(c=>{
+     if(callPC)
+      callPC.addIceCandidate(
+       new RTCIceCandidate(c.val())
+      ).catch(()=>{});
+    });
+   }
+  );
+
+ }catch(e){
+
+  console.error(e);
+  alert("Call start error:\n"+e.message);
+  cleanupCall(false);
+ }
+};
 
 
-  html+=`
+/* ================= INCOMING CALL ================= */
 
-  <div class="notif">
+function startIncomingCallListener(){
 
-   <b>
-    @${escapeHTML(
-     p.username||"user"
-    )}
-   </b>
+ if(callListenerStarted||!me)return;
 
-   ${formatText(
-    n.text||""
-   )}
+ callListenerStarted=true;
 
-   <br>
+ onValue(ref(db,`incomingCalls/${me.uid}`),snap=>{
 
-   <small>
-    ${timeAgo(
-     n.createdAt
-    )}
-   </small>
+  const all=snap.val()||{};
+
+  const entries=Object.entries(all);
+
+  if(!entries.length)return;
+
+  const [id,c]=entries[entries.length-1];
+
+  if(c&&id!==currentCallId)
+   showIncomingCall(id,c);
+ });
+}
+
+function showIncomingCall(id,c){
+
+ document.getElementById("incomingCall")?.remove();
+
+ document.body.insertAdjacentHTML("beforeend",`
+ <div id="incomingCall" class="incoming">
+
+  <div class="incoming-box">
+
+   <h2>${c.type==="video"?"📹":"📞"}</h2>
+
+   <h3>${escapeHTML(c.callerName||"Rechod User")}</h3>
+
+   <p>@${escapeHTML(c.callerUsername||"user")}</p>
+
+   <p>Incoming ${c.type} call...</p>
+
+   <button class="primary"
+    onclick="acceptCall('${id}')">
+    ✅ Accept
+   </button>
+
+   <button class="primary"
+    style="background:#e53935"
+    onclick="rejectCall('${id}')">
+    ❌ Reject
+   </button>
 
   </div>
 
-  `;
+ </div>`);
+}
 
+window.acceptCall=async id=>{
+
+ document.getElementById("incomingCall")?.remove();
+
+ try{
+
+  const snap=await get(ref(db,`calls/${id}`));
+  const c=snap.val();
+
+  if(!c){
+   alert("Call समाप्त हो चुकी है");
+   return;
+  }
+
+  currentCallId=id;
+  currentCallType=c.type;
+  callRole="callee";
+
+  callUI(c.callerName,c.type);
+
+  callStream=await navigator.mediaDevices.getUserMedia({
+   audio:true,
+   video:c.type==="video"
+  });
+
+  document.getElementById("localVideo").srcObject=callStream;
+
+  callPC=new RTCPeerConnection(rtcConfig);
+
+  callStream.getTracks().forEach(t=>
+   callPC.addTrack(t,callStream)
+  );
+
+  callPC.ontrack=e=>{
+   remoteStream=e.streams[0];
+   document.getElementById("remoteVideo").srcObject=remoteStream;
+  };
+
+  callPC.onicecandidate=async e=>{
+
+   if(!e.candidate)return;
+
+   await set(
+    push(ref(db,`calls/${id}/calleeCandidates`)),
+    e.candidate.toJSON()
+   );
+  };
+
+  await callPC.setRemoteDescription(
+   new RTCSessionDescription(c.offer)
+  );
+
+  const answer=await callPC.createAnswer();
+
+  await callPC.setLocalDescription(answer);
+
+  await update(ref(db,`calls/${id}`),{
+   answer:{
+    type:answer.type,
+    sdp:answer.sdp
+   },
+   status:"accepted"
+  });
+
+  setCallStatus("Connected");
+
+  onValue(
+   ref(db,`calls/${id}/callerCandidates`),
+   snap=>{
+    snap.forEach(x=>{
+     if(callPC)
+      callPC.addIceCandidate(
+       new RTCIceCandidate(x.val())
+      ).catch(()=>{});
+    });
+   }
+  );
+
+  onValue(ref(db,`calls/${id}`),s=>{
+   const d=s.val();
+
+   if(!d||d.status==="ended"){
+    cleanupCall(false);
+   }
+  });
+
+  await remove(ref(db,`incomingCalls/${me.uid}/${id}`));
+
+ }catch(e){
+
+  alert("Call accept error:\n"+e.message);
+  cleanupCall(false);
+ }
+};
+
+window.rejectCall=async id=>{
+
+ await update(ref(db,`calls/${id}`),{
+  status:"rejected"
  });
 
+ await remove(ref(db,`incomingCalls/${me.uid}/${id}`));
+ document.getElementById("incomingCall")?.remove();
+};
 
- html+=`</div>`;
+window.toggleMic=()=>{
 
- return html;
+ if(!callStream)return;
 
-}
+ const t=callStream.getAudioTracks()[0];
 
+ if(t)t.enabled=!t.enabled;
 
-/* =====================================================
-   NOTIFICATION BADGE
-===================================================== */
+};
 
-function updateNotificationBadge(){
+window.toggleCamera=()=>{
 
- const badge=
- document.getElementById(
-  "notifBadge"
- );
+ if(!callStream)return;
 
- if(!badge)return;
+ const t=callStream.getVideoTracks()[0];
 
+ if(t)t.enabled=!t.enabled;
 
- const count=
- Object.keys(
-  notifs||{}
- ).length;
+};
 
+window.hangupCall=async()=>{
 
- if(count){
+ if(currentCallId){
 
-  badge.textContent=
-  count>99
-  ?"99+"
-  :count;
-
-  badge.classList
-  .remove("hidden");
-
- }else{
-
-  badge.classList
-  .add("hidden");
-
+  try{
+   await update(ref(db,`calls/${currentCallId}`),{
+    status:"ended",endedAt:Date.now()
+   });
+  }catch(e){}
  }
 
+ cleanupCall(false);
+};
+
+function cleanupCall(removeRemote=true){
+
+ try{
+  callPC?.close();
+ }catch(e){}
+
+ callPC=null;
+
+ if(callStream){
+
+  callStream.getTracks().forEach(t=>t.stop());
+  callStream=null;
+ }
+
+ remoteStream=null;
+
+ document.getElementById("callScreen")?.remove();
+ document.getElementById("incomingCall")?.remove();
+
+ if(removeRemote&&currentCallId){
+  remove(ref(db,`incomingCalls/${me.uid}/${currentCallId}`)).catch(()=>{});
+ }
+
+ currentCallId=null;
+ callRole=null;
 }
 
 
-/* =====================================================
-   STORY VIEW
-===================================================== */
+/* ================= STORY ================= */
 
-window.viewStory=function(id){
+window.viewStory=id=>{
 
- const s=
- stories[id];
+ const s=stories[id];
 
  if(!s)return;
 
+ const p=profiles[s.uid]||{};
 
- if(
-  s.createdAt &&
-  Date.now()-s.createdAt>
-  86400000
- ){
+ const content=s.type==="video"
+ ?`<video class="preview" style="filter:${filters[s.filter]||"none"}"
+ controls autoplay playsinline src="${s.url}"></video>`
+ :`<img class="preview" style="filter:${filters[s.filter]||"none"}"
+ src="${s.url}">`;
 
-  remove(
-   ref(db,"stories/"+id)
-  );
-
-  alert(
-   "यह Story expire हो गई।"
-  );
-
-  page("home");
-
-  return;
-
- }
-
-
- currentStoryId=id;
-
-
- const p=
- profiles[s.uid]||{};
-
-
- let content="";
-
-
- if(
-  s.type==="video"
- ){
-
-  content=`
-
-   <video
-    class="preview"
-    controls
-    autoplay
-    playsinline
-    src="${s.url}">
-   </video>
-
-  `;
-
- }else{
-
-  content=`
-
-   <img
-    class="preview"
-    style="filter:${
-     filters[s.filter]||
-     "none"
-    }"
-    src="${s.url}">
-
-  `;
-
- }
-
-
- document.getElementById(
-  "app"
- ).innerHTML=`
-
+ document.getElementById("app").innerHTML=`
  <div class="page">
 
-  <button
-   class="secondary"
-   onclick="page('home')">
-
-   ← Back
-
-  </button>
-
+  <button class="secondary" onclick="page('home')">← Back</button>
 
   <div class="card">
 
    <div class="userline">
-
-    <img
-     class="avatar"
-     src="${
-      p.photo||
-      avatar(s.uid)
-     }">
-
-
-    <b>
-     @${escapeHTML(
-      p.username||"user"
-     )}
-    </b>
-
+    <img class="avatar" src="${p.photo||avatar(s.uid)}">
+    <b>@${escapeHTML(p.username||"user")}</b>
    </div>
-
 
    ${content}
 
-
-   ${
-    s.song
-    ?
-    `<audio
-      controls
-      src="${s.song}">
-     </audio>`
-    :""
-   }
-
+   ${s.song?`<audio controls src="${s.song}"></audio>`:""}
 
    <div class="actions">
-
-    <button
-     class="action"
-     onclick="likeStory('${id}')">
-
-     ${
-      s.likes&&
-      s.likes[me.uid]
-      ?"❤️"
-      :"🤍"
-     }
-
-     ${
-      Object.keys(
-       s.likes||{}
-      ).length
-     }
-
+    <button class="action" onclick="likeStory('${id}')">
+     ❤️ ${Object.keys(s.likes||{}).length}
     </button>
 
-
-    <span>
-     👁️
-     ${
-      Object.keys(
-       s.views||{}
-      ).length
-     }
-    </span>
-
-
-    ${
-     s.uid===me.uid
-     ?
-     `<button
-       class="action"
-       onclick="deleteStory('${id}')">
-       🗑️
-      </button>`
-     :""
-    }
-
+    <span>👁️ ${Object.keys(s.views||{}).length}</span>
    </div>
 
   </div>
+ </div>`;
 
- </div>
-
- `;
-
-
- set(
-  ref(
-   db,
-   `stories/${id}/views/${me.uid}`
-  ),
-  true
- );
-
+ set(ref(db,`stories/${id}/views/${me.uid}`),true);
 };
 
-
-/* =====================================================
-   STORY LIKE
-===================================================== */
-
-window.likeStory=
-async function(id){
-
- const likeRef=
- ref(
-  db,
-  `stories/${id}/likes/${me.uid}`
- );
-
+window.likeStory=async id=>{
 
  await runTransaction(
-  likeRef,
-  value=>
-  value?null:true
+  ref(db,`stories/${id}/likes/${me.uid}`),
+  v=>v?null:true
  );
-
 
  viewStory(id);
-
 };
 
 
-/* =====================================================
-   DELETE STORY
-===================================================== */
-
-window.deleteStory=
-async function(id){
-
- const s=
- stories[id];
-
- if(!s||s.uid!==me.uid)return;
-
-
- if(
-  !confirm(
-   "Story delete करना है?"
-  )
- )return;
-
-
- await remove(
-  ref(
-   db,
-   "stories/"+id
-  )
- );
-
-
- page("home");
-
-};
-
-
-/* =====================================================
-   MENTIONS
-===================================================== */
-
-async function notifyMentions(
- text,
- type,
- contentId
-){
-
- if(!text)return;
-
-
- const matches=
- text.match(
-  /@([a-zA-Z0-9_.]+)/g
- );
-
-
- if(!matches)return;
-
-
- const names=
- [...new Set(
-  matches.map(
-   x=>
-   x.substring(1)
-   .toLowerCase()
-  )
- )];
-
-
- const snap=
- await get(
-  ref(db,"profiles")
- );
-
-
- const data=
- snap.val()||{};
-
-
- for(
-  const uid in data
- ){
-
-  const p=data[uid];
-
-
-  if(
-   names.includes(
-    String(
-     p.username||""
-    ).toLowerCase()
-   )
-  ){
-
-   if(uid===me.uid)continue;
-
-
-   await push(
-    ref(
-     db,
-     `notifs/${uid}`
-    ),
-    {
-
-     type:type,
-
-     sender:me.uid,
-
-     text:
-     "ने आपको mention किया",
-
-     contentId:
-     contentId,
-
-     createdAt:
-     Date.now()
-
-    }
-   );
-
-  }
-
- }
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-window.closeModal=
-function(event){
-
- if(
-  event &&
-  event.target &&
-  !event.target.classList
-  .contains("modal")
- ){
-
-  return;
-
- }
-
- document.getElementById(
-  "modal"
- ).innerHTML="";
-
-};
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
+/* ================= HELPERS ================= */
 
 function avatar(uid){
 
- const name=
- profiles[uid]?.name||
- profiles[uid]?.username||
- "User";
-
-
  return "https://ui-avatars.com/api/?name="+
- encodeURIComponent(name)+
- "&background=1877f2&color=fff";
-
+ encodeURIComponent(
+  profiles[uid]?.name||
+  profiles[uid]?.username||
+  "User"
+ );
 }
-
 
 function timeAgo(t){
 
- if(!t)return"";
+ if(!t)return "";
 
- const sec=
- Math.floor(
-  (Date.now()-t)/1000
- );
+ const s=Math.floor((Date.now()-t)/1000);
 
+ if(s<60)return"अभी";
 
- if(sec<60)
-  return"अभी";
+ const m=Math.floor(s/60);
 
+ if(m<60)return m+" min";
 
- const min=
- Math.floor(sec/60);
+ const h=Math.floor(m/60);
 
+ if(h<24)return h+" घंटे";
 
- if(min<60)
-  return min+" min";
+ return Math.floor(h/24)+" दिन";
+}
 
+function escapeHTML(s){
 
- const hr=
- Math.floor(min/60);
-
-
- if(hr<24)
-  return hr+" घंटे";
-
-
- const day=
- Math.floor(hr/24);
-
-
- return day+" दिन";
-
+ return String(s??"")
+ .replace(/&/g,"&amp;")
+ .replace(/</g,"&lt;")
+ .replace(/>/g,"&gt;")
+ .replace(/"/g,"&quot;")
+ .replace(/'/g,"&#039;");
 }
 
 
-function escapeHTML(str){
+/* ================= OLD STORIES CLEAN ================= */
 
- return String(str||"")
- .replace(
-  /&/g,
-  "&amp;"
- )
- .replace(
-  /</g,
-  "&lt;"
- )
- .replace(
-  />/g,
-  "&gt;"
- )
- .replace(
-  /"/g,
-  "&quot;"
- )
- .replace(
-  /'/g,
-  "&#039;"
- );
+setInterval(()=>{
 
-}
+ if(!me)return;
+
+ Object.entries(stories).forEach(([id,s])=>{
+
+  if(s.createdAt&&Date.now()-s.createdAt>86400000)
+   remove(ref(db,"stories/"+id)).catch(()=>{});
+
+ });
+
+},60000);
 
 
-/* =====================================================
-   FORMAT TEXT
-===================================================== */
+/* ================= START ================= */
 
-function formatText(text){
+window.addEventListener("load",()=>{
 
- let safe=
- escapeHTML(text);
+ if(localStorage.getItem("rechodDark")==="true")
+  document.body.classList.add("dark");
 
-
- safe=
- safe.replace(
-  /(@[a-zA-Z0-9_.]+)/g,
-  '<span class="tag">$1</span>'
- );
-
-
- safe=
- safe.replace(
-  /(#[_a-zA-Z0-9]+)/g,
-  '<span class="tag">$1</span>'
- );
-
-
- safe=
- safe.replace(
-  /\n/g,
-  "<br>"
- );
-
-
- return safe;
-
-}
-
-
-/* =====================================================
-   OLD STORIES CLEANUP
-===================================================== */
-
-setInterval(
- async()=>{
-
-  if(!me)return;
-
-
-  Object.entries(
-   stories
-  ).forEach(
-   async([id,s])=>{
-
-    if(
-     s.createdAt &&
-     Date.now()-s.createdAt>
-     86400000
-    ){
-
-     try{
-
-      await remove(
-       ref(
-        db,
-        "stories/"+id
-       )
-      );
-
-     }catch(e){}
-
-    }
-
-   }
-  );
-
- },
- 60000
-);
-
-
-/* =====================================================
-   INITIAL
-===================================================== */
-
-window.addEventListener(
- "load",
- ()=>{
-
-  if(auth.currentUser){
-
-   me=
-   auth.currentUser;
-
-   page("home");
-
-  }else{
-
-   authScreen();
-
-  }
-
+ if(auth.currentUser){
+  me=auth.currentUser;
+  page("home");
+ }else{
+  authScreen();
  }
-);
+});
 
 </script>
-
 </body>
  </html>
