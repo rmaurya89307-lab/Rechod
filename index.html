@@ -18,12 +18,8 @@ body.dark{
   background:#10141c;
   color:#fff;
 }
-button,input,textarea,select{
-  font:inherit;
-}
-button{
-  cursor:pointer;
-}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
 .hidden{display:none!important}
 
 .app{
@@ -59,10 +55,7 @@ body.dark .header{
   font-weight:900;
   color:#1877f2;
 }
-.header-actions{
-  display:flex;
-  gap:8px;
-}
+.header-actions{display:flex;gap:8px}
 .icon-btn{
   border:0;
   background:transparent;
@@ -79,16 +72,10 @@ body.dark .header{
   padding-bottom:65px;
   min-height:100vh;
 }
+.page{display:none}
+.page.active{display:block}
 
-.page{
-  display:none;
-}
-.page.active{
-  display:block;
-}
-
-/* ---------- AUTH ---------- */
-
+/* AUTH */
 .auth{
   min-height:100vh;
   display:flex;
@@ -120,9 +107,7 @@ body.dark .header{
   margin:7px 0;
   outline:none;
 }
-.field:focus{
-  border-color:#1877f2;
-}
+.field:focus{border-color:#1877f2}
 .primary{
   width:100%;
   border:0;
@@ -148,8 +133,7 @@ body.dark .header{
   cursor:pointer;
 }
 
-/* ---------- STORIES ---------- */
-
+/* STORIES */
 .stories{
   display:flex;
   gap:12px;
@@ -182,8 +166,7 @@ body.dark .header{
   font-size:30px;
 }
 
-/* ---------- POSTS ---------- */
-
+/* POSTS */
 .post{
   background:#fff;
   border-bottom:8px solid #eef2f7;
@@ -208,13 +191,8 @@ body.dark .post{
   flex:1;
   margin-left:9px;
 }
-.username{
-  font-weight:bold;
-}
-.post-time{
-  color:#777;
-  font-size:11px;
-}
+.username{font-weight:bold}
+.post-time{color:#777;font-size:11px}
 .follow-small{
   border:1px solid #1877f2;
   color:#1877f2;
@@ -239,39 +217,23 @@ body.dark .post{
   font-size:23px;
   color:inherit;
 }
-.save{
-  margin-left:auto;
-}
-.post-body{
-  padding:0 10px 12px;
-}
-.caption{
-  margin-top:6px;
-}
-.count{
-  font-size:13px;
-  color:#777;
-}
+.save{margin-left:auto}
+.post-body{padding:0 10px 12px}
+.caption{margin-top:6px}
+.count{font-size:13px;color:#777}
 
-/* ---------- REELS ---------- */
-
+/* REELS */
 .reels-page{
   background:#000;
   height:calc(100vh - 58px - 62px);
   min-height:500px;
   overflow-y:auto;
   overflow-x:hidden;
-
-  /* REAL REEL SCROLL */
   scroll-snap-type:y mandatory;
   scroll-behavior:smooth;
   overscroll-behavior:contain;
 }
-
-.reels-page::-webkit-scrollbar{
-  width:0;
-}
-
+.reels-page::-webkit-scrollbar{width:0}
 .reel{
   width:100%;
   height:calc(100vh - 58px - 62px);
@@ -282,7 +244,6 @@ body.dark .post{
   scroll-snap-stop:always;
   overflow:hidden;
 }
-
 .reel-video{
   position:absolute;
   inset:0;
@@ -291,7 +252,6 @@ body.dark .post{
   object-fit:cover;
   background:#000;
 }
-
 .reel-gradient{
   position:absolute;
   inset:0;
@@ -300,7 +260,6 @@ body.dark .post{
     linear-gradient(to bottom,#0005,transparent 25%);
   pointer-events:none;
 }
-
 .reel-top{
   position:absolute;
   top:12px;
@@ -311,12 +270,7 @@ body.dark .post{
   z-index:5;
   color:white;
 }
-
-.reel-title{
-  font-weight:bold;
-  font-size:18px;
-}
-
+.reel-title{font-weight:bold;font-size:18px}
 .reel-mute{
   width:40px;
   height:40px;
@@ -326,7 +280,6 @@ body.dark .post{
   color:white;
   font-size:20px;
 }
-
 .reel-side{
   position:absolute;
   right:8px;
@@ -338,7 +291,6 @@ body.dark .post{
   gap:17px;
   color:white;
 }
-
 .reel-side button{
   border:0;
   background:transparent;
@@ -349,12 +301,10 @@ body.dark .post{
   font-size:26px;
   text-shadow:0 1px 5px #000;
 }
-
 .reel-side span{
   font-size:12px;
   margin-top:-12px;
 }
-
 .reel-info{
   position:absolute;
   left:12px;
@@ -363,14 +313,12 @@ body.dark .post{
   z-index:6;
   color:white;
 }
-
 .reel-user{
   display:flex;
   align-items:center;
   gap:8px;
   margin-bottom:10px;
 }
-
 .reel-avatar{
   width:42px;
   height:42px;
@@ -378,7 +326,6 @@ body.dark .post{
   object-fit:cover;
   border:2px solid white;
 }
-
 .reel-follow{
   border:1px solid white;
   background:transparent;
@@ -387,20 +334,17 @@ body.dark .post{
   padding:5px 12px;
   margin-left:6px;
 }
-
 .reel-caption{
   font-size:14px;
   line-height:1.4;
   margin-bottom:8px;
 }
-
 .reel-music{
   font-size:13px;
   display:flex;
   gap:5px;
   align-items:center;
 }
-
 .reel-progress{
   position:absolute;
   bottom:0;
@@ -410,7 +354,6 @@ body.dark .post{
   background:#ffffff55;
   z-index:8;
 }
-
 .reel-progress i{
   display:block;
   width:0;
@@ -418,8 +361,7 @@ body.dark .post{
   background:#fff;
 }
 
-/* ---------- BOTTOM NAV ---------- */
-
+/* BOTTOM NAV */
 .bottom-nav{
   position:fixed;
   bottom:0;
@@ -454,11 +396,8 @@ body.dark .nav-btn{color:#aaa}
   margin-top:2px;
 }
 
-/* ---------- CREATE ---------- */
-
-.create-card{
-  padding:15px;
-}
+/* CREATE */
+.create-card{padding:15px}
 .preview{
   width:100%;
   max-height:450px;
@@ -485,11 +424,8 @@ body.dark .nav-btn{color:#aaa}
   color:#fff;
 }
 
-/* ---------- PROFILE ---------- */
-
-.profile-top{
-  padding:18px 15px;
-}
+/* PROFILE */
+.profile-top{padding:18px 15px}
 .profile-main{
   display:flex;
   align-items:center;
@@ -546,14 +482,9 @@ body.dark .nav-btn{color:#aaa}
   object-fit:cover;
 }
 
-/* ---------- SEARCH ---------- */
-
-.search-box{
-  padding:12px;
-}
-.search-results{
-  padding:0 12px;
-}
+/* SEARCH */
+.search-box{padding:12px}
+.search-results{padding:0 12px}
 .person{
   display:flex;
   align-items:center;
@@ -565,11 +496,8 @@ body.dark .nav-btn{color:#aaa}
   margin-left:10px;
 }
 
-/* ---------- CHAT ---------- */
-
-.chat-list{
-  padding:10px;
-}
+/* CHAT */
+.chat-list{padding:10px}
 .chat-user{
   display:flex;
   align-items:center;
@@ -610,9 +538,7 @@ body.dark .chat-box{background:#10141c}
   background:#1877f2;
   color:white;
 }
-.msg.theirs{
-  background:#eee;
-}
+.msg.theirs{background:#eee}
 .chat-input{
   display:flex;
   padding:8px;
@@ -633,8 +559,7 @@ body.dark .chat-box{background:#10141c}
   color:white;
 }
 
-/* ---------- MODALS ---------- */
-
+/* MODALS */
 .modal{
   position:fixed;
   inset:0;
@@ -684,8 +609,7 @@ body.dark .modal-card{
 }
 body.dark .comment-body{background:#252c37}
 
-/* ---------- TOAST ---------- */
-
+/* TOAST */
 .toast{
   position:fixed;
   left:50%;
@@ -700,8 +624,7 @@ body.dark .comment-body{background:#252c37}
 }
 .toast.show{display:block}
 
-/* ---------- FILTERS ---------- */
-
+/* FILTERS */
 .f-normal{filter:none}
 .f-bright{filter:brightness(1.2)}
 .f-vivid{filter:saturate(1.6) contrast(1.08)}
@@ -718,6 +641,205 @@ body.dark .comment-body{background:#252c37}
 .f-fade{filter:contrast(.85) brightness(1.08) saturate(.75)}
 .f-dark{filter:brightness(.7) contrast(1.15)}
 
+/* ================= SETTINGS ================= */
+
+.settings-page{
+  min-height:100vh;
+  background:#fff;
+  color:#172033;
+  padding-bottom:30px;
+}
+
+body.dark .settings-page{
+  background:#10141c;
+  color:#fff;
+}
+
+.settings-top{
+  height:60px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:0 15px;
+  border-bottom:1px solid #ddd;
+  font-size:20px;
+  position:sticky;
+  top:58px;
+  background:inherit;
+  z-index:20;
+}
+
+.settings-top button{
+  border:0;
+  background:transparent;
+  color:inherit;
+  font-size:30px;
+  width:38px;
+}
+
+.settings-section-title{
+  background:#f4f5f7;
+  color:#707780;
+  font-size:14px;
+  font-weight:bold;
+  padding:15px 18px 10px;
+}
+
+body.dark .settings-section-title{
+  background:#080b10;
+  color:#aeb4bf;
+}
+
+.setting-item{
+  min-height:64px;
+  padding:11px 18px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  border-bottom:1px solid #e5e5e5;
+  cursor:pointer;
+}
+
+body.dark .setting-item{
+  border-color:#242a33;
+}
+
+.setting-item>span{
+  width:30px;
+  text-align:center;
+  font-size:22px;
+  flex:none;
+}
+
+.setting-item>div{
+  flex:1;
+  font-size:16px;
+}
+
+.setting-item small{
+  display:block;
+  color:#888;
+  font-size:12px;
+  line-height:17px;
+  margin-top:2px;
+}
+
+.setting-item i{
+  font-style:normal;
+  font-size:30px;
+  color:#999;
+}
+
+.setting-item strong{
+  color:#888;
+  font-size:13px;
+  font-weight:normal;
+}
+
+.setting-link{
+  padding:17px 24px;
+  color:#1877f2;
+  font-size:16px;
+  cursor:pointer;
+  border-bottom:1px solid #e5e5e5;
+}
+
+body.dark .setting-link{
+  border-color:#242a33;
+}
+
+.logout-link{
+  color:#e53935;
+  padding-bottom:30px;
+}
+
+.settings-toggle{
+  width:48px;
+  height:28px;
+  border:0;
+  border-radius:20px;
+  background:#aaa;
+  position:relative;
+}
+.settings-toggle.on{
+  background:#1877f2;
+}
+.settings-toggle:after{
+  content:"";
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#fff;
+  transition:.2s;
+}
+.settings-toggle.on:after{
+  left:23px;
+}
+
+/* SETTINGS SUB PAGE */
+.setting-sub{
+  min-height:100vh;
+  background:#fff;
+  color:#172033;
+}
+body.dark .setting-sub{
+  background:#10141c;
+  color:#fff;
+}
+.setting-sub-head{
+  height:60px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:0 15px;
+  border-bottom:1px solid #ddd;
+  font-size:19px;
+}
+.setting-sub-head button{
+  border:0;
+  background:transparent;
+  color:inherit;
+  font-size:28px;
+}
+.setting-description{
+  padding:15px 18px;
+  color:#777;
+  line-height:1.5;
+  font-size:14px;
+}
+.setting-option{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:16px 18px;
+  border-bottom:1px solid #e5e5e5;
+}
+body.dark .setting-option{
+  border-color:#292f38;
+}
+.setting-option>div{
+  flex:1;
+}
+.setting-option small{
+  display:block;
+  color:#888;
+  margin-top:3px;
+}
+
+/* language */
+.language-option{
+  padding:16px 20px;
+  border-bottom:1px solid #ddd;
+  cursor:pointer;
+}
+.language-option.active{
+  color:#1877f2;
+  font-weight:bold;
+}
+
 @media(max-width:380px){
   .reel-side{right:3px}
   .reel-info{right:65px}
@@ -730,90 +852,92 @@ body.dark .comment-body{background:#252c37}
 <!-- ================= AUTH ================= -->
 
 <div id="authScreen" class="auth">
-  <div class="auth-card">
 
-    <div class="auth-logo">Rechod</div>
+<div class="auth-card">
 
-    <div id="loginBox">
+<div class="auth-logo">Rechod</div>
 
-      <input id="loginEmail"
-             class="field"
-             placeholder="Email">
+<div id="loginBox">
 
-      <input id="loginPassword"
-             class="field"
-             type="password"
-             placeholder="Password">
+<input id="loginEmail"
+class="field"
+placeholder="Email">
 
-      <button class="primary" onclick="emailLogin()">
-        Login
-      </button>
+<input id="loginPassword"
+class="field"
+type="password"
+placeholder="Password">
 
-      <button class="google" onclick="googleLogin()">
-        🔵 Continue with Google
-      </button>
+<button class="primary" onclick="emailLogin()">
+Login
+</button>
 
-      <hr>
+<button class="google" onclick="googleLogin()">
+🔵 Continue with Google
+</button>
 
-      <input id="phone"
-             class="field"
-             placeholder="+91XXXXXXXXXX">
+<hr>
 
-      <div id="recaptcha-container"></div>
+<input id="phone"
+class="field"
+placeholder="+91XXXXXXXXXX">
 
-      <button class="primary"
-              onclick="sendOTP()">
-        📱 Send OTP
-      </button>
+<div id="recaptcha-container"></div>
 
-      <input id="otp"
-             class="field hidden"
-             placeholder="Enter OTP">
+<button class="primary" onclick="sendOTP()">
+📱 Send OTP
+</button>
 
-      <button id="verifyOtpBtn"
-              class="primary hidden"
-              onclick="verifyOTP()">
-        Verify OTP
-      </button>
+<input id="otp"
+class="field hidden"
+placeholder="Enter OTP">
 
-      <div class="auth-switch"
-           onclick="showSignup()">
-        Create new account
-      </div>
-    </div>
+<button id="verifyOtpBtn"
+class="primary hidden"
+onclick="verifyOTP()">
+Verify OTP
+</button>
 
-    <div id="signupBox" class="hidden">
+<div class="auth-switch"
+onclick="showSignup()">
+Create new account
+</div>
 
-      <input id="signupUsername"
-             class="field"
-             placeholder="Username">
+</div>
 
-      <input id="signupEmail"
-             class="field"
-             placeholder="Email">
+<div id="signupBox" class="hidden">
 
-      <input id="signupPassword"
-             class="field"
-             type="password"
-             placeholder="Password">
+<input id="signupUsername"
+class="field"
+placeholder="Username">
 
-      <input id="signupAge"
-             class="field"
-             type="number"
-             placeholder="Age">
+<input id="signupEmail"
+class="field"
+placeholder="Email">
 
-      <button class="primary"
-              onclick="signup()">
-        Sign Up
-      </button>
+<input id="signupPassword"
+class="field"
+type="password"
+placeholder="Password">
 
-      <div class="auth-switch"
-           onclick="showLogin()">
-        Already have an account?
-      </div>
-    </div>
+<input id="signupAge"
+class="field"
+type="number"
+placeholder="Age">
 
-  </div>
+<button class="primary"
+onclick="signup()">
+Sign Up
+</button>
+
+<div class="auth-switch"
+onclick="showLogin()">
+Already have an account?
+</div>
+
+</div>
+
+</div>
 </div>
 
 
@@ -822,19 +946,23 @@ body.dark .comment-body{background:#252c37}
 <div id="app" class="app hidden">
 
 <header class="header">
-  <div class="logo">Rechod</div>
 
-  <div class="header-actions">
-    <button class="icon-btn"
-            onclick="openNotifications()">
-      🔔
-    </button>
+<div class="logo">Rechod</div>
 
-    <button class="icon-btn"
-            onclick="openMessages()">
-      💬
-    </button>
-  </div>
+<div class="header-actions">
+
+<button class="icon-btn"
+onclick="openNotifications()">
+🔔
+</button>
+
+<button class="icon-btn"
+onclick="openMessages()">
+💬
+</button>
+
+</div>
+
 </header>
 
 <main class="main">
@@ -843,9 +971,9 @@ body.dark .comment-body{background:#252c37}
 
 <section id="homePage" class="page active">
 
-  <div id="stories" class="stories"></div>
+<div id="stories" class="stories"></div>
 
-  <div id="feed"></div>
+<div id="feed"></div>
 
 </section>
 
@@ -853,12 +981,12 @@ body.dark .comment-body{background:#252c37}
 <!-- REELS -->
 
 <section id="reelsPage"
-         class="page"
-         style="padding:0;background:#000">
+class="page"
+style="padding:0;background:#000">
 
-  <div id="reelsContainer"
-       class="reels-page">
-  </div>
+<div id="reelsContainer"
+class="reels-page">
+</div>
 
 </section>
 
@@ -867,16 +995,18 @@ body.dark .comment-body{background:#252c37}
 
 <section id="searchPage" class="page">
 
-  <div class="search-box">
-    <input id="searchInput"
-           class="field"
-           placeholder="🔍 Search username..."
-           oninput="searchUsers()">
-  </div>
+<div class="search-box">
 
-  <div id="searchResults"
-       class="search-results">
-  </div>
+<input id="searchInput"
+class="field"
+placeholder="🔍 Search username..."
+oninput="searchUsers()">
+
+</div>
+
+<div id="searchResults"
+class="search-results">
+</div>
 
 </section>
 
@@ -885,144 +1015,83 @@ body.dark .comment-body{background:#252c37}
 
 <section id="createPage" class="page">
 
-  <div class="create-card">
+<div class="create-card">
 
-    <h2>Create</h2>
+<h2>Create</h2>
 
-    <select id="createType"
-            class="field"
-            onchange="updateCreateType()">
+<select id="createType"
+class="field"
+onchange="updateCreateType()">
 
-      <option value="post">
-        📷 Photo / Video Post
-      </option>
+<option value="post">
+📷 Photo / Video Post
+</option>
 
-      <option value="reel">
-        🎬 Reel
-      </option>
+<option value="reel">
+🎬 Reel
+</option>
 
-      <option value="story">
-        ⭕ Story
-      </option>
+<option value="story">
+⭕ Story
+</option>
 
-    </select>
+</select>
 
-    <input id="mediaFile"
-           class="field"
-           type="file"
-           accept="image/*,video/*"
-           onchange="previewMedia()">
+<input id="mediaFile"
+class="field"
+type="file"
+accept="image/*,video/*"
+onchange="previewMedia()">
 
-    <img id="mediaPreview"
-         class="preview hidden">
+<img id="mediaPreview"
+class="preview hidden">
 
-    <video id="videoPreview"
-           class="preview hidden"
-           controls
-           playsinline>
-    </video>
+<video id="videoPreview"
+class="preview hidden"
+controls
+playsinline>
+</video>
 
-    <div id="filterArea">
+<div id="filterArea">
 
-      <b>Filters</b>
+<b>Filters</b>
 
-      <div class="filter-row">
+<div class="filter-row">
 
-        <button class="filter-btn"
-                onclick="selectFilter('normal')">
-          Normal
-        </button>
+<button class="filter-btn" onclick="selectFilter('normal')">Normal</button>
+<button class="filter-btn" onclick="selectFilter('bright')">Bright</button>
+<button class="filter-btn" onclick="selectFilter('vivid')">Vivid</button>
+<button class="filter-btn" onclick="selectFilter('vintage')">Vintage</button>
+<button class="filter-btn" onclick="selectFilter('warm')">Warm</button>
+<button class="filter-btn" onclick="selectFilter('cool')">Cool</button>
+<button class="filter-btn" onclick="selectFilter('bw')">B&W</button>
+<button class="filter-btn" onclick="selectFilter('sunset')">Sunset</button>
+<button class="filter-btn" onclick="selectFilter('cinematic')">Cinematic</button>
+<button class="filter-btn" onclick="selectFilter('glow')">Glow</button>
+<button class="filter-btn" onclick="selectFilter('pink')">Pink</button>
+<button class="filter-btn" onclick="selectFilter('nature')">Nature</button>
+<button class="filter-btn" onclick="selectFilter('dramatic')">Dramatic</button>
+<button class="filter-btn" onclick="selectFilter('fade')">Fade</button>
+<button class="filter-btn" onclick="selectFilter('dark')">Dark</button>
 
-        <button class="filter-btn"
-                onclick="selectFilter('bright')">
-          Bright
-        </button>
+</div>
+</div>
 
-        <button class="filter-btn"
-                onclick="selectFilter('vivid')">
-          Vivid
-        </button>
+<input id="musicName"
+class="field"
+placeholder="🎵 Song / Music name">
 
-        <button class="filter-btn"
-                onclick="selectFilter('vintage')">
-          Vintage
-        </button>
+<textarea id="caption"
+class="field"
+rows="4"
+placeholder="Write caption... @mention #hashtag"></textarea>
 
-        <button class="filter-btn"
-                onclick="selectFilter('warm')">
-          Warm
-        </button>
+<button class="primary"
+onclick="uploadContent()">
+🚀 Publish
+</button>
 
-        <button class="filter-btn"
-                onclick="selectFilter('cool')">
-          Cool
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('bw')">
-          B&W
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('sunset')">
-          Sunset
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('cinematic')">
-          Cinematic
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('glow')">
-          Glow
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('pink')">
-          Pink
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('nature')">
-          Nature
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('dramatic')">
-          Dramatic
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('fade')">
-          Fade
-        </button>
-
-        <button class="filter-btn"
-                onclick="selectFilter('dark')">
-          Dark
-        </button>
-
-      </div>
-
-    </div>
-
-    <input id="musicName"
-           class="field"
-           placeholder="🎵 Song / Music name">
-
-    <textarea id="caption"
-              class="field"
-              rows="4"
-              placeholder="Write caption... @mention #hashtag">
-    </textarea>
-
-    <button class="primary"
-            onclick="uploadContent()">
-      🚀 Publish
-    </button>
-
-  </div>
+</div>
 
 </section>
 
@@ -1031,85 +1100,348 @@ body.dark .comment-body{background:#252c37}
 
 <section id="profilePage" class="page">
 
-  <div class="profile-top">
+<div class="profile-top">
 
-    <div class="profile-main">
+<div class="profile-main">
 
-      <img id="profilePhoto"
-           class="profile-photo"
-           src="https://via.placeholder.com/100">
+<img id="profilePhoto"
+class="profile-photo"
+src="https://via.placeholder.com/100">
 
-      <div class="stats">
+<div class="stats">
 
-        <div class="stat">
-          <b id="profilePosts">0</b>
-          <small>Posts</small>
-        </div>
+<div class="stat">
+<b id="profilePosts">0</b>
+<small>Posts</small>
+</div>
 
-        <div class="stat">
-          <b id="profileFollowers">0</b>
-          <small>Followers</small>
-        </div>
+<div class="stat">
+<b id="profileFollowers">0</b>
+<small>Followers</small>
+</div>
 
-        <div class="stat">
-          <b id="profileFollowing">0</b>
-          <small>Following</small>
-        </div>
+<div class="stat">
+<b id="profileFollowing">0</b>
+<small>Following</small>
+</div>
 
-      </div>
+</div>
+</div>
 
-    </div>
+<div id="profileName"
+class="profile-name">
+User
+</div>
 
-    <div id="profileName"
-         class="profile-name">
-      User
-    </div>
+<div class="profile-actions">
 
-    <div class="profile-actions">
+<button onclick="editProfile()">
+Edit Profile
+</button>
 
-      <button onclick="editProfile()">
-        Edit Profile
-      </button>
+<button onclick="shareProfile()">
+Share Profile
+</button>
 
-      <button onclick="shareProfile()">
-        Share Profile
-      </button>
+</div>
 
-    </div>
+</div>
 
-  </div>
-
-  <div id="profileGrid"
-       class="profile-grid">
-  </div>
+<div id="profileGrid"
+class="profile-grid">
+</div>
 
 </section>
 
 
-<!-- SETTINGS -->
+<!-- ================= SETTINGS ================= -->
 
 <section id="settingsPage" class="page">
 
-  <div style="padding:15px">
+<div class="settings-page">
 
-    <h2>Settings</h2>
+<div class="settings-top">
 
-    <button class="field"
-            onclick="toggleDarkMode()">
-      🌙 Dark Mode
-    </button>
+<button onclick="showPage('profilePage')">
+←
+</button>
 
-    <button class="field"
-            onclick="showPage('profilePage')">
-      👤 Profile
-    </button>
+<b>Settings and activity</b>
 
-    <button class="field"
-            onclick="logoutNow()">
-      🚪 Logout
-    </button>
+</div>
 
-  </div>
+
+<div class="settings-section-title">
+Your account
+</div>
+
+<div class="setting-item"
+onclick="openSetting('account')">
+
+<span>⚙️</span>
+
+<div>
+<b>Rechod Account</b>
+<small>Password, security and personal details</small>
+</div>
+
+<i>›</i>
+
+</div>
+
+
+<div class="settings-section-title">
+How you use Rechod
+</div>
+
+<div class="setting-item" onclick="openSetting('saved')">
+<span>🔖</span>
+<div>Saved</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('archive')">
+<span>🕘</span>
+<div>Archive</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('activity')">
+<span>📊</span>
+<div>Your activity</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('notifications')">
+<span>🔔</span>
+<div>Notifications</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+More info and support
+</div>
+
+<div class="setting-item" onclick="openSetting('report')">
+<span>⚠️</span>
+<div>Report a problem</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('help')">
+<span>🛟</span>
+<div>Help</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('about')">
+<span>ⓘ</span>
+<div>About</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+Who can see your content
+</div>
+
+<div class="setting-item"
+onclick="openSetting('privacy')">
+
+<span>🔒</span>
+
+<div>Account privacy</div>
+
+<strong id="privacyStatus">
+Public
+</strong>
+
+<i>›</i>
+
+</div>
+
+<div class="setting-item" onclick="openSetting('closefriends')">
+<span>⭐</span>
+<div>Close friends</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('blocked')">
+<span>🚫</span>
+<div>Blocked</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('hidestory')">
+<span>🙈</span>
+<div>Hide story</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('visibility')">
+<span>👁️</span>
+<div>Visibility of Rechod</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+How others can interact with you
+</div>
+
+<div class="setting-item" onclick="openSetting('messages')">
+<span>✈️</span>
+<div>Messages and story replies</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('tags')">
+<span>@</span>
+<div>Tags and mentions</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('comments')">
+<span>💬</span>
+<div>Comments</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('sharing')">
+<span>🔁</span>
+<div>Sharing and reuse</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('restricted')">
+<span>🚷</span>
+<div>Restricted</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('hiddenwords')">
+<span>Aa</span>
+<div>Hidden Words</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('contacts')">
+<span>👥</span>
+<div>Contacts syncing</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('invite')">
+<span>👤+</span>
+<div>Follow and invite friends</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+What you see
+</div>
+
+<div class="setting-item" onclick="openSetting('muted')">
+<span>🔇</span>
+<div>Muted accounts</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('content')">
+<span>🎞️</span>
+<div>Content preferences</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('likecounts')">
+<span>♡</span>
+<div>Like and share counts</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+Your app and media
+</div>
+
+<div class="setting-item" onclick="openSetting('download')">
+<span>⬇️</span>
+<div>Archiving and downloading</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('theme')">
+<span>🎨</span>
+<div>Theme</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('language')">
+<span>🌐</span>
+<div>Language</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('datasaver')">
+<span>⇅</span>
+<div>Data saver</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('apps')">
+<span>📱</span>
+<div>Apps and websites</div>
+<i>›</i>
+</div>
+
+<div class="setting-item" onclick="openSetting('downloadData')">
+<span>⬇️</span>
+<div>Download data</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+Family Center
+</div>
+
+<div class="setting-item" onclick="openSetting('supervision')">
+<span>🏠</span>
+<div>Supervision</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+Your insights and tools
+</div>
+
+<div class="setting-item" onclick="openSetting('verified')">
+<span>✓</span>
+<div>Rechod Verified</div>
+<i>›</i>
+</div>
+
+
+<div class="settings-section-title">
+Login
+</div>
+
+<div class="setting-link" onclick="addProfile()">
+Add profile
+</div>
+
+<div class="setting-link" onclick="switchProfile()">
+Switch profile
+</div>
+
+<div class="setting-link logout-link" onclick="logoutNow()">
+Log out
+</div>
+
+</div>
 
 </section>
 
@@ -1120,158 +1452,160 @@ body.dark .comment-body{background:#252c37}
 
 <nav class="bottom-nav">
 
-  <button class="nav-btn active"
-          onclick="showPage('homePage',this)">
-    🏠
-    <span class="nav-text">Home</span>
-  </button>
+<button class="nav-btn active"
+onclick="showPage('homePage',this)">
+🏠
+<span class="nav-text">Home</span>
+</button>
 
-  <button class="nav-btn"
-          onclick="showPage('searchPage',this)">
-    🔍
-    <span class="nav-text">Search</span>
-  </button>
+<button class="nav-btn"
+onclick="showPage('searchPage',this)">
+🔍
+<span class="nav-text">Search</span>
+</button>
 
-  <button class="nav-btn"
-          onclick="showPage('createPage',this)">
-    ➕
-    <span class="nav-text">Create</span>
-  </button>
+<button class="nav-btn"
+onclick="showPage('createPage',this)">
+➕
+<span class="nav-text">Create</span>
+</button>
 
-  <button class="nav-btn"
-          onclick="showPage('reelsPage',this)">
-    ▶️
-    <span class="nav-text">Reels</span>
-  </button>
+<button class="nav-btn"
+onclick="showPage('reelsPage',this)">
+▶️
+<span class="nav-text">Reels</span>
+</button>
 
-  <button class="nav-btn"
-          onclick="showPage('profilePage',this)">
-    👤
-    <span class="nav-text">Profile</span>
-  </button>
+<button class="nav-btn"
+onclick="showPage('profilePage',this)">
+👤
+<span class="nav-text">Profile</span>
+</button>
+
+<button class="nav-btn"
+onclick="showPage('settingsPage',this)">
+⚙️
+<span class="nav-text">Settings</span>
+</button>
 
 </nav>
 
 </div>
 
 
-<!-- ================= COMMENTS MODAL ================= -->
+<!-- COMMENTS -->
 
 <div id="commentModal"
-     class="modal hidden">
+class="modal hidden">
 
-  <div class="modal-card">
+<div class="modal-card">
 
-    <div class="modal-head">
-      <h3>Comments</h3>
+<div class="modal-head">
+<h3>Comments</h3>
 
-      <button class="close"
-              onclick="closeModal('commentModal')">
-        ×
-      </button>
-    </div>
+<button class="close"
+onclick="closeModal('commentModal')">
+×
+</button>
+</div>
 
-    <div id="commentsList"></div>
+<div id="commentsList"></div>
 
-    <input id="commentInput"
-           class="field"
-           placeholder="Write a comment...">
+<input id="commentInput"
+class="field"
+placeholder="Write a comment...">
 
-    <button class="primary"
-            onclick="addComment()">
-      Comment
-    </button>
+<button class="primary"
+onclick="addComment()">
+Comment
+</button>
 
-  </div>
-
+</div>
 </div>
 
 
-<!-- ================= EDIT PROFILE ================= -->
+<!-- EDIT PROFILE -->
 
 <div id="editModal"
-     class="modal hidden">
+class="modal hidden">
 
-  <div class="modal-card">
+<div class="modal-card">
 
-    <div class="modal-head">
+<div class="modal-head">
 
-      <h3>Edit Profile</h3>
+<h3>Edit Profile</h3>
 
-      <button class="close"
-              onclick="closeModal('editModal')">
-        ×
-      </button>
-
-    </div>
-
-    <input id="editName"
-           class="field"
-           placeholder="Name">
-
-    <input id="editUsername"
-           class="field"
-           placeholder="Username">
-
-    <textarea id="editBio"
-              class="field"
-              placeholder="Bio"></textarea>
-
-    <input id="avatarFile"
-           class="field"
-           type="file"
-           accept="image/*">
-
-    <button class="primary"
-            onclick="saveProfile()">
-      Save Profile
-    </button>
-
-  </div>
+<button class="close"
+onclick="closeModal('editModal')">
+×
+</button>
 
 </div>
 
+<input id="editName"
+class="field"
+placeholder="Name">
 
-<!-- ================= CHAT ================= -->
+<input id="editUsername"
+class="field"
+placeholder="Username">
+
+<textarea id="editBio"
+class="field"
+placeholder="Bio"></textarea>
+
+<input id="avatarFile"
+class="field"
+type="file"
+accept="image/*">
+
+<button class="primary"
+onclick="saveProfile()">
+Save Profile
+</button>
+
+</div>
+</div>
+
+
+<!-- CHAT -->
 
 <div id="chatBox"
-     class="chat-box hidden">
+class="chat-box hidden">
 
-  <div class="chat-head">
+<div class="chat-head">
 
-    <button class="close"
-            onclick="closeChat()">
-      ←
-    </button>
+<button class="close"
+onclick="closeChat()">
+←
+</button>
 
-    <img id="chatAvatar"
-         class="avatar">
+<img id="chatAvatar"
+class="avatar">
 
-    <b id="chatName">Chat</b>
+<b id="chatName">Chat</b>
 
-  </div>
+</div>
 
-  <div id="chatMessages"
-       class="chat-messages">
-  </div>
+<div id="chatMessages"
+class="chat-messages"></div>
 
-  <div class="chat-input">
+<div class="chat-input">
 
-    <input id="chatText"
-           placeholder="Message...">
+<input id="chatText"
+placeholder="Message...">
 
-    <button onclick="sendMessage()">
-      ➤
-    </button>
+<button onclick="sendMessage()">
+➤
+</button>
 
-  </div>
+</div>
 
 </div>
 
 
 <div id="toast"
-     class="toast">
-</div>
+class="toast"></div>
 
 
 <script type="module">
@@ -1311,44 +1645,44 @@ import {
 
 
 /* =========================================================
-   YOUR FIREBASE CONFIG
+   FIREBASE CONFIG
 ========================================================= */
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
-  authDomain: "vibe-social-app-6750d.firebaseapp.com",
-  databaseURL: "https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "vibe-social-app-6750d",
-  storageBucket: "vibe-social-app-6750d.firebasestorage.app",
-  messagingSenderId: "897864313569",
-  appId: "1:897864313569:web:738169cb0e6694d3d2a5a0",
-  measurementId: "G-DKZQ133PSN"
+const firebaseConfig={
+  apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
+  authDomain:"vibe-social-app-6750d.firebaseapp.com",
+  databaseURL:"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"vibe-social-app-6750d",
+  storageBucket:"vibe-social-app-6750d.firebasestorage.app",
+  messagingSenderId:"897864313569",
+  appId:"1:897864313569:web:738169cb0e6694d3d2a5a0",
+  measurementId:"G-DKZQ133PSN"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getDatabase(app);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getDatabase(app);
 
 
 /* =========================================================
    CLOUDINARY
 ========================================================= */
 
-const CLOUD_NAME = "ut6gs93p";
-const UPLOAD_PRESET = "rechod_upload";
+const CLOUD_NAME="ut6gs93p";
+const UPLOAD_PRESET="rechod_upload";
 
 
 /* =========================================================
    GLOBAL
 ========================================================= */
 
-let currentUser = null;
-let currentProfile = null;
-let confirmationResult = null;
-let currentPostId = null;
-let currentChatUid = null;
-let selectedFilter = "normal";
-let storyTimer = null;
+let currentUser=null;
+let currentProfile=null;
+let confirmationResult=null;
+let currentPostId=null;
+let currentChatUid=null;
+let selectedFilter="normal";
+let viewedReels={};
 
 
 /* =========================================================
@@ -1360,7 +1694,8 @@ function $(id){
 }
 
 function toast(message){
-  $("toast").textContent = message;
+
+  $("toast").textContent=message;
   $("toast").classList.add("show");
 
   setTimeout(()=>{
@@ -1369,7 +1704,8 @@ function toast(message){
 }
 
 function esc(value){
-  return String(value || "")
+
+  return String(value||"")
     .replaceAll("&","&amp;")
     .replaceAll("<","&lt;")
     .replaceAll(">","&gt;")
@@ -1380,21 +1716,19 @@ function timeAgo(ts){
 
   if(!ts)return "";
 
-  const sec = Math.floor((Date.now()-ts)/1000);
+  const sec=Math.floor((Date.now()-ts)/1000);
 
   if(sec<60)return "now";
 
-  const min = Math.floor(sec/60);
+  const min=Math.floor(sec/60);
 
   if(min<60)return min+"m";
 
-  const hour = Math.floor(min/60);
+  const hour=Math.floor(min/60);
 
   if(hour<24)return hour+"h";
 
-  const day = Math.floor(hour/24);
-
-  return day+"d";
+  return Math.floor(hour/24)+"d";
 }
 
 
@@ -1402,32 +1736,32 @@ function timeAgo(ts){
    AUTH
 ========================================================= */
 
-window.showSignup = ()=>{
+window.showSignup=()=>{
   $("loginBox").classList.add("hidden");
   $("signupBox").classList.remove("hidden");
 };
 
-window.showLogin = ()=>{
+window.showLogin=()=>{
   $("signupBox").classList.add("hidden");
   $("loginBox").classList.remove("hidden");
 };
 
 
-window.signup = async ()=>{
+window.signup=async()=>{
 
-  const username = $("signupUsername").value.trim();
-  const email = $("signupEmail").value.trim();
-  const password = $("signupPassword").value;
-  const age = Number($("signupAge").value || 0);
+  const username=$("signupUsername").value.trim();
+  const email=$("signupEmail").value.trim();
+  const password=$("signupPassword").value;
+  const age=Number($("signupAge").value||0);
 
-  if(!username || !email || password.length<6){
+  if(!username||!email||password.length<6){
     toast("Username, email aur 6+ character password डालें");
     return;
   }
 
   try{
 
-    const result =
+    const result=
       await createUserWithEmailAndPassword(
         auth,email,password
       );
@@ -1444,88 +1778,81 @@ window.signup = async ()=>{
         photo:"",
         followers:0,
         following:0,
+        privacy:false,
         createdAt:Date.now()
       }
     );
 
-    await updateAuthProfile(result.user,{
-      displayName:username
-    });
+    await updateAuthProfile(
+      result.user,
+      {displayName:username}
+    );
 
     toast("Account created");
 
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
 
-window.emailLogin = async ()=>{
+window.emailLogin=async()=>{
 
-  const email = $("loginEmail").value.trim();
-  const password = $("loginPassword").value;
+  const email=$("loginEmail").value.trim();
+  const password=$("loginPassword").value;
 
-  if(!email || !password){
+  if(!email||!password){
     toast("Email aur password डालें");
     return;
   }
 
   try{
-
     await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
+      auth,email,password
     );
-
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
 
-window.googleLogin = async ()=>{
+window.googleLogin=async()=>{
 
   try{
 
-    const provider = new GoogleAuthProvider();
+    const provider=new GoogleAuthProvider();
 
-    const result =
+    const result=
       await signInWithPopup(auth,provider);
 
-    const profileRef =
+    const profileRef=
       ref(db,"profiles/"+result.user.uid);
 
-    const snap = await get(profileRef);
+    const snap=await get(profileRef);
 
     if(!snap.exists()){
 
       await set(profileRef,{
         uid:result.user.uid,
         username:
-          result.user.displayName ||
+          result.user.displayName||
           "user"+Date.now(),
         name:
-          result.user.displayName ||
+          result.user.displayName||
           "User",
-        email:result.user.email || "",
-        photo:result.user.photoURL || "",
+        email:result.user.email||"",
+        photo:result.user.photoURL||"",
         bio:"",
         followers:0,
         following:0,
+        privacy:false,
         createdAt:Date.now()
       });
 
     }
 
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
@@ -1536,28 +1863,27 @@ window.googleLogin = async ()=>{
 
 function normalizePhone(value){
 
-  let v = value.trim();
+  let v=value.trim();
 
-  v = v.replace(/[\s\-()]/g,"");
+  v=v.replace(/[\s\-()]/g,"");
 
   if(v.startsWith("0")){
-    v = "+91"+v.substring(1);
+    v="+91"+v.substring(1);
   }
 
   if(/^[6-9]\d{9}$/.test(v)){
-    v = "+91"+v;
+    v="+91"+v;
   }
 
   return v;
 }
 
 
-window.sendOTP = async ()=>{
+window.sendOTP=async()=>{
 
   try{
 
-    const phone =
-      normalizePhone($("phone").value);
+    const phone=normalizePhone($("phone").value);
 
     if(!/^\+[1-9]\d{7,14}$/.test(phone)){
       toast("सही international phone number डालें");
@@ -1570,18 +1896,16 @@ window.sendOTP = async ()=>{
       }catch(e){}
     }
 
-    window.recaptchaVerifier =
+    window.recaptchaVerifier=
       new RecaptchaVerifier(
         auth,
         "recaptcha-container",
-        {
-          size:"normal"
-        }
+        {size:"normal"}
       );
 
     await window.recaptchaVerifier.render();
 
-    confirmationResult =
+    confirmationResult=
       await signInWithPhoneNumber(
         auth,
         phone,
@@ -1594,18 +1918,16 @@ window.sendOTP = async ()=>{
     toast("OTP भेज दिया गया");
 
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
 
-window.verifyOTP = async ()=>{
+window.verifyOTP=async()=>{
 
   try{
 
-    const code = $("otp").value.trim();
+    const code=$("otp").value.trim();
 
     if(!confirmationResult){
       toast("पहले OTP भेजें");
@@ -1617,9 +1939,7 @@ window.verifyOTP = async ()=>{
     toast("Phone login successful");
 
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
@@ -1630,12 +1950,13 @@ window.verifyOTP = async ()=>{
 
 onAuthStateChanged(auth,async user=>{
 
-  currentUser = user;
+  currentUser=user;
 
   if(!user){
 
     $("authScreen").classList.remove("hidden");
     $("app").classList.add("hidden");
+
     return;
   }
 
@@ -1648,6 +1969,7 @@ onAuthStateChanged(auth,async user=>{
   loadStories();
   loadReels();
   loadProfilePage();
+  loadPrivacyStatus();
 
 });
 
@@ -1660,30 +1982,31 @@ async function loadProfile(){
 
   if(!currentUser)return;
 
-  const profileRef =
+  const profileRef=
     ref(db,"profiles/"+currentUser.uid);
 
-  const snap = await get(profileRef);
+  const snap=await get(profileRef);
 
   if(snap.exists()){
 
-    currentProfile = snap.val();
+    currentProfile=snap.val();
 
   }else{
 
-    currentProfile = {
+    currentProfile={
       uid:currentUser.uid,
       username:
-        currentUser.displayName ||
+        currentUser.displayName||
         "user"+Date.now(),
       name:
-        currentUser.displayName ||
+        currentUser.displayName||
         "User",
       photo:
-        currentUser.photoURL || "",
+        currentUser.photoURL||"",
       bio:"",
       followers:0,
-      following:0
+      following:0,
+      privacy:false
     };
 
     await set(profileRef,currentProfile);
@@ -1694,53 +2017,48 @@ async function loadProfile(){
 
 async function refreshProfile(){
 
-  const snap =
-    await get(ref(db,"profiles/"+currentUser.uid));
+  const snap=
+    await get(
+      ref(db,"profiles/"+currentUser.uid)
+    );
 
   if(snap.exists()){
-    currentProfile = snap.val();
+    currentProfile=snap.val();
   }
 }
 
 
-window.editProfile = async ()=>{
+window.editProfile=async()=>{
 
   await refreshProfile();
 
-  $("editName").value =
-    currentProfile.name || "";
+  $("editName").value=
+    currentProfile.name||"";
 
-  $("editUsername").value =
-    currentProfile.username || "";
+  $("editUsername").value=
+    currentProfile.username||"";
 
-  $("editBio").value =
-    currentProfile.bio || "";
+  $("editBio").value=
+    currentProfile.bio||"";
 
   $("editModal").classList.remove("hidden");
 };
 
 
-window.saveProfile = async ()=>{
+window.saveProfile=async()=>{
 
   try{
 
-    const name =
-      $("editName").value.trim();
+    const name=$("editName").value.trim();
+    const username=$("editUsername").value.trim();
+    const bio=$("editBio").value.trim();
 
-    const username =
-      $("editUsername").value.trim();
+    let photo=currentProfile.photo||"";
 
-    const bio =
-      $("editBio").value.trim();
-
-    let photo =
-      currentProfile.photo || "";
-
-    const file =
-      $("avatarFile").files[0];
+    const file=$("avatarFile").files[0];
 
     if(file){
-      photo = await uploadCloudinary(file);
+      photo=await uploadCloudinary(file);
     }
 
     await update(
@@ -1772,18 +2090,16 @@ window.saveProfile = async ()=>{
     toast("Profile updated");
 
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
 
-window.shareProfile = async ()=>{
+window.shareProfile=async()=>{
 
-  const text =
+  const text=
     "Rechod profile: @"+
-    (currentProfile?.username || "");
+    (currentProfile?.username||"");
 
   if(navigator.share){
 
@@ -1809,36 +2125,35 @@ window.shareProfile = async ()=>{
 
 async function uploadCloudinary(file){
 
-  const type =
+  const type=
     file.type.startsWith("video")
-      ? "video"
-      : "image";
+      ?"video"
+      :"image";
 
-  const url =
+  const url=
     "https://api.cloudinary.com/v1_1/"+
     CLOUD_NAME+
     "/"+type+"/upload";
 
-  const form = new FormData();
+  const form=new FormData();
 
   form.append("file",file);
   form.append("upload_preset",UPLOAD_PRESET);
 
-  const response =
+  const response=
     await fetch(url,{
       method:"POST",
       body:form
     });
 
-  const data = await response.json();
+  const data=await response.json();
 
-  if(!response.ok || !data.secure_url){
+  if(!response.ok||!data.secure_url){
 
     throw new Error(
-      data.error?.message ||
+      data.error?.message||
       "Cloudinary upload failed"
     );
-
   }
 
   return data.secure_url;
@@ -1846,101 +2161,99 @@ async function uploadCloudinary(file){
 
 
 /* =========================================================
-   CREATE PREVIEW
+   PREVIEW
 ========================================================= */
 
-window.previewMedia = ()=>{
+window.previewMedia=()=>{
 
-  const file =
-    $("mediaFile").files[0];
+  const file=$("mediaFile").files[0];
 
   if(!file)return;
 
-  $("mediaPreview").className =
-    "preview hidden";
+  $("mediaPreview").className="preview hidden";
+  $("videoPreview").className="preview hidden";
 
-  $("videoPreview").className =
-    "preview hidden";
-
-  const url =
-    URL.createObjectURL(file);
+  const url=URL.createObjectURL(file);
 
   if(file.type.startsWith("video")){
 
-    $("videoPreview").src = url;
+    $("videoPreview").src=url;
     $("videoPreview").classList.remove("hidden");
 
   }else{
 
-    $("mediaPreview").src = url;
+    $("mediaPreview").src=url;
     $("mediaPreview").classList.remove("hidden");
 
   }
 };
 
 
-window.selectFilter = filter=>{
+window.selectFilter=filter=>{
 
-  selectedFilter = filter;
+  selectedFilter=filter;
 
-  $("mediaPreview").className =
+  $("mediaPreview").className=
     "preview f-"+filter;
 
   document
     .querySelectorAll(".filter-btn")
-    .forEach(btn=>btn.classList.remove("active"));
+    .forEach(btn=>
+      btn.classList.remove("active")
+    );
 
   [...document.querySelectorAll(".filter-btn")]
-    .find(x=>x.textContent.trim().toLowerCase()===filter)
+    .find(x=>
+      x.textContent.trim().toLowerCase()===filter
+    )
     ?.classList.add("active");
-
 };
 
 
 /* =========================================================
-   UPLOAD POST / REEL / STORY
+   UPLOAD
 ========================================================= */
 
-window.uploadContent = async ()=>{
+window.uploadContent=async()=>{
 
   if(!currentUser){
     toast("Login required");
     return;
   }
 
-  const file =
-    $("mediaFile").files[0];
+  const file=$("mediaFile").files[0];
 
   if(!file){
     toast("Photo/video select करें");
     return;
   }
 
-  const type =
-    $("createType").value;
+  const type=$("createType").value;
 
   try{
 
+    if(type==="reel"&&!file.type.startsWith("video")){
+      toast("Reel के लिए video select करें");
+      return;
+    }
+
     toast("Uploading...");
 
-    const mediaUrl =
+    const mediaUrl=
       await uploadCloudinary(file);
 
-    const caption =
-      $("caption").value.trim();
+    const caption=$("caption").value.trim();
+    const music=$("musicName").value.trim();
 
-    const music =
-      $("musicName").value.trim();
-
-    const base = {
+    const base={
       uid:currentUser.uid,
-      username:currentProfile?.username || "User",
-      photo:currentProfile?.photo || "",
+      username:currentProfile?.username||"User",
+      photo:currentProfile?.photo||"",
       media:mediaUrl,
       mediaType:
         file.type.startsWith("video")
-          ? "video"
-          : "image",
+          ?"video"
+          :"image",
       caption:caption,
       music:music,
       filter:selectedFilter,
@@ -1952,8 +2265,7 @@ window.uploadContent = async ()=>{
 
     if(type==="post"){
 
-      const postRef =
-        push(ref(db,"posts"));
+      const postRef=push(ref(db,"posts"));
 
       await set(postRef,{
         ...base,
@@ -1961,18 +2273,11 @@ window.uploadContent = async ()=>{
       });
 
       toast("Post published");
-
     }
 
     if(type==="reel"){
 
-      if(!file.type.startsWith("video")){
-        toast("Reel के लिए video select करें");
-        return;
-      }
-
-      const reelRef =
-        push(ref(db,"reels"));
+      const reelRef=push(ref(db,"reels"));
 
       await set(reelRef,{
         ...base,
@@ -1980,15 +2285,12 @@ window.uploadContent = async ()=>{
       });
 
       toast("Reel published");
-
       loadReels();
-
     }
 
     if(type==="story"){
 
-      const storyRef =
-        push(ref(db,"stories"));
+      const storyRef=push(ref(db,"stories"));
 
       await set(storyRef,{
         ...base,
@@ -1997,23 +2299,20 @@ window.uploadContent = async ()=>{
       });
 
       toast("Story added");
-
       loadStories();
-
     }
 
     $("mediaFile").value="";
     $("caption").value="";
     $("musicName").value="";
+
     $("mediaPreview").classList.add("hidden");
     $("videoPreview").classList.add("hidden");
 
     loadHome();
 
   }catch(error){
-
     toast(error.message);
-
   }
 };
 
@@ -2026,10 +2325,9 @@ function loadHome(){
 
   onValue(
     ref(db,"posts"),
-    async snapshot=>{
+    snapshot=>{
 
-      const posts =
-        [];
+      const posts=[];
 
       snapshot.forEach(child=>{
         posts.push({
@@ -2044,10 +2342,7 @@ function loadHome(){
           (a.createdAt||0)
       );
 
-      const feed =
-        $("feed");
-
-      feed.innerHTML =
+      $("feed").innerHTML=
         posts.map(postHTML).join("");
 
     }
@@ -2058,7 +2353,7 @@ function loadHome(){
 
 function postHTML(post){
 
-  const isVideo =
+  const isVideo=
     post.mediaType==="video";
 
   return `
@@ -2067,20 +2362,23 @@ function postHTML(post){
     <div class="post-head">
 
       <img class="avatar"
-           src="${esc(post.photo || "https://via.placeholder.com/100")}">
+      src="${esc(post.photo||"https://via.placeholder.com/100")}">
 
       <div class="user-info">
+
         <div class="username">
-          @${esc(post.username || "user")}
+          @${esc(post.username||"user")}
         </div>
+
         <div class="post-time">
           ${timeAgo(post.createdAt)}
         </div>
+
       </div>
 
       <button class="follow-small"
-              onclick="followUser('${post.uid}')">
-        Follow
+      onclick="followUser('${post.uid}')">
+      Follow
       </button>
 
     </div>
@@ -2089,33 +2387,33 @@ function postHTML(post){
       isVideo
       ?
       `<video class="post-media"
-              src="${esc(post.media)}"
-              controls
-              playsinline></video>`
+      src="${esc(post.media)}"
+      controls
+      playsinline></video>`
       :
       `<img class="post-media"
-            src="${esc(post.media)}">`
+      src="${esc(post.media)}">`
     }
 
     <div class="post-actions">
 
       <button class="action"
-              onclick="likePost('${post.id}')">
-        ❤️
+      onclick="likePost('${post.id}')">
+      ❤️
       </button>
 
       <button class="action"
-              onclick="openComments('${post.id}')">
-        💬
+      onclick="openComments('${post.id}')">
+      💬
       </button>
 
       <button class="action"
-              onclick="sharePost('${post.id}')">
-        ✈️
+      onclick="sharePost('${post.id}')">
+      ✈️
       </button>
 
       <button class="action save">
-        🔖
+      🔖
       </button>
 
     </div>
@@ -2123,17 +2421,17 @@ function postHTML(post){
     <div class="post-body">
 
       <b>
-        ${Number(post.likes||0)} likes
+      ${Number(post.likes||0)} likes
       </b>
 
       <div class="caption">
-        <b>@${esc(post.username || "user")}</b>
-        ${esc(post.caption || "")}
+      <b>@${esc(post.username||"user")}</b>
+      ${esc(post.caption||"")}
       </div>
 
       <div class="count"
-           onclick="openComments('${post.id}')">
-        View ${Number(post.comments||0)} comments
+      onclick="openComments('${post.id}')">
+      View ${Number(post.comments||0)} comments
       </div>
 
     </div>
@@ -2142,29 +2440,20 @@ function postHTML(post){
 }
 
 
-/* =========================================================
-   LIKE POST
-========================================================= */
-
-window.likePost = async id=>{
-
-  const postRef =
-    ref(db,"posts/"+id);
+window.likePost=async id=>{
 
   await runTransaction(
-    postRef,
+    ref(db,"posts/"+id),
     post=>{
 
       if(!post)return post;
 
-      post.likes =
+      post.likes=
         Number(post.likes||0)+1;
 
       return post;
-
     }
   );
-
 };
 
 
@@ -2172,20 +2461,19 @@ window.likePost = async id=>{
    COMMENTS
 ========================================================= */
 
-window.openComments = async id=>{
+window.openComments=async id=>{
 
-  currentPostId = id;
+  currentPostId=id;
 
   $("commentModal")
     .classList.remove("hidden");
 
-  const snap =
+  const snap=
     await get(
       ref(db,"comments/"+id)
     );
 
-  const box =
-    $("commentsList");
+  const box=$("commentsList");
 
   box.innerHTML="";
 
@@ -2199,38 +2487,39 @@ window.openComments = async id=>{
 
     comments.forEach(comment=>{
 
-      box.innerHTML += `
+      box.innerHTML+=`
       <div class="comment">
 
         <img src="${esc(
-          comment.photo ||
+          comment.photo||
           "https://via.placeholder.com/50"
         )}">
 
         <div class="comment-body">
+
           <b>@${esc(comment.username)}</b><br>
+
           ${esc(comment.text)}
+
         </div>
 
       </div>`;
 
     });
-
   }
-
 };
 
 
-window.addComment = async ()=>{
+window.addComment=async()=>{
 
   if(!currentPostId)return;
 
-  const text =
+  const text=
     $("commentInput").value.trim();
 
   if(!text)return;
 
-  const commentRef =
+  const commentRef=
     push(
       ref(
         db,
@@ -2240,10 +2529,8 @@ window.addComment = async ()=>{
 
   await set(commentRef,{
     uid:currentUser.uid,
-    username:
-      currentProfile.username,
-    photo:
-      currentProfile.photo || "",
+    username:currentProfile.username,
+    photo:currentProfile.photo||"",
     text:text,
     createdAt:Date.now()
   });
@@ -2259,7 +2546,6 @@ window.addComment = async ()=>{
   $("commentInput").value="";
 
   openComments(currentPostId);
-
 };
 
 
@@ -2267,20 +2553,21 @@ window.addComment = async ()=>{
    SHARE
 ========================================================= */
 
-window.sharePost = async id=>{
+window.sharePost=async id=>{
 
-  const url =
-    location.href+
-    "#post-"+id;
+  const url=
+    location.href+"#post-"+id;
 
   if(navigator.share){
 
     try{
+
       await navigator.share({
         title:"Rechod",
         text:"Check this on Rechod",
         url:url
       });
+
     }catch(e){}
 
   }else{
@@ -2288,7 +2575,6 @@ window.sharePost = async id=>{
     await navigator.clipboard?.writeText(url);
 
     toast("Link copied");
-
   }
 };
 
@@ -2297,21 +2583,20 @@ window.sharePost = async id=>{
    FOLLOW
 ========================================================= */
 
-window.followUser = async uid=>{
+window.followUser=async uid=>{
 
   if(uid===currentUser.uid){
     toast("This is your profile");
     return;
   }
 
-  const followRef =
+  const followRef=
     ref(
       db,
       "followers/"+uid+"/"+currentUser.uid
     );
 
-  const snap =
-    await get(followRef);
+  const snap=await get(followRef);
 
   if(snap.exists()){
 
@@ -2319,12 +2604,18 @@ window.followUser = async uid=>{
 
     await runTransaction(
       ref(db,"profiles/"+uid+"/followers"),
-      n=>Math.max(0,(Number(n)||0)-1)
+      n=>Math.max(
+        0,
+        (Number(n)||0)-1
+      )
     );
 
     await runTransaction(
       ref(db,"profiles/"+currentUser.uid+"/following"),
-      n=>Math.max(0,(Number(n)||0)-1)
+      n=>Math.max(
+        0,
+        (Number(n)||0)-1
+      )
     );
 
     toast("Unfollowed");
@@ -2347,9 +2638,7 @@ window.followUser = async uid=>{
     );
 
     toast("Following");
-
   }
-
 };
 
 
@@ -2366,12 +2655,10 @@ function loadReels(){
       const reels=[];
 
       snapshot.forEach(child=>{
-
         reels.push({
           id:child.key,
           ...child.val()
         });
-
       });
 
       reels.sort(
@@ -2380,17 +2667,12 @@ function loadReels(){
           (a.createdAt||0)
       );
 
-      const container =
-        $("reelsContainer");
-
-      container.innerHTML =
+      $("reelsContainer").innerHTML=
         reels.map(reelHTML).join("");
 
       setupReelObserver();
-
     }
   );
-
 }
 
 
@@ -2398,15 +2680,15 @@ function reelHTML(reel){
 
   return `
   <article class="reel"
-           data-reel-id="${esc(reel.id)}">
+  data-reel-id="${esc(reel.id)}">
 
     <video
-      class="reel-video"
-      src="${esc(reel.media)}"
-      playsinline
-      loop
-      muted
-      preload="metadata">
+    class="reel-video"
+    src="${esc(reel.media)}"
+    playsinline
+    loop
+    muted
+    preload="metadata">
     </video>
 
     <div class="reel-gradient"></div>
@@ -2414,12 +2696,12 @@ function reelHTML(reel){
     <div class="reel-top">
 
       <div class="reel-title">
-        Reels
+      Reels
       </div>
 
       <button class="reel-mute"
-              onclick="toggleMute(this)">
-        🔇
+      onclick="toggleMute(this)">
+      🔇
       </button>
 
     </div>
@@ -2427,32 +2709,32 @@ function reelHTML(reel){
     <div class="reel-side">
 
       <button onclick="likeReel('${esc(reel.id)}')">
-        ❤️
-        <span>${Number(reel.likes||0)}</span>
+      ❤️
+      <span>${Number(reel.likes||0)}</span>
       </button>
 
       <button onclick="openReelComments('${esc(reel.id)}')">
-        💬
-        <span>${Number(reel.comments||0)}</span>
+      💬
+      <span>${Number(reel.comments||0)}</span>
       </button>
 
       <button onclick="repostReel('${esc(reel.id)}')">
-        🔁
-        <span>${Number(reel.reposts||0)}</span>
+      🔁
+      <span>${Number(reel.reposts||0)}</span>
       </button>
 
       <button onclick="shareReel('${esc(reel.id)}')">
-        ✈️
-        <span>Share</span>
+      ✈️
+      <span>Share</span>
       </button>
 
       <button onclick="saveReel('${esc(reel.id)}')">
-        🔖
-        <span>Save</span>
+      🔖
+      <span>Save</span>
       </button>
 
       <button onclick="reelMore('${esc(reel.id)}')">
-        ⋮
+      ⋮
       </button>
 
     </div>
@@ -2462,29 +2744,28 @@ function reelHTML(reel){
       <div class="reel-user">
 
         <img class="reel-avatar"
-             src="${esc(
-               reel.photo ||
-               "https://via.placeholder.com/100"
-             )}">
+        src="${esc(
+          reel.photo||
+          "https://via.placeholder.com/100"
+        )}">
 
         <b>
-          @${esc(reel.username || "user")}
+        @${esc(reel.username||"user")}
         </b>
 
         <button class="reel-follow"
-                onclick="followUser('${esc(reel.uid)}')">
-          Follow
+        onclick="followUser('${esc(reel.uid)}')">
+        Follow
         </button>
 
       </div>
 
       <div class="reel-caption">
-        ${esc(reel.caption || "")}
+      ${esc(reel.caption||"")}
       </div>
 
       <div class="reel-music">
-        🎵
-        ${esc(reel.music || "Original audio")}
+      🎵 ${esc(reel.music||"Original audio")}
       </div>
 
     </div>
@@ -2497,47 +2778,37 @@ function reelHTML(reel){
 }
 
 
-/* =========================================================
-   REAL REEL SCROLL + AUTO PLAY
-========================================================= */
-
 function setupReelObserver(){
 
-  const container =
-    $("reelsContainer");
+  const container=$("reelsContainer");
 
-  const reels =
+  const reels=
     [...container.querySelectorAll(".reel")];
 
-  const observer =
+  const observer=
     new IntersectionObserver(
       entries=>{
 
         entries.forEach(entry=>{
 
-          const reel =
-            entry.target;
+          const reel=entry.target;
+          const video=reel.querySelector("video");
+          const progress=
+            reel.querySelector(
+              ".reel-progress i"
+            );
 
-          const video =
-            reel.querySelector("video");
-
-          const progress =
-            reel.querySelector(".reel-progress i");
-
-          if(entry.isIntersecting &&
-             entry.intersectionRatio>=0.65){
+          if(
+            entry.isIntersecting&&
+            entry.intersectionRatio>=0.65
+          ){
 
             reels.forEach(other=>{
 
               if(other!==reel){
 
-                const v =
-                  other.querySelector("video");
-
-                v.pause();
-                v.currentTime =
-                  Math.min(v.currentTime,v.duration||v.currentTime);
-
+                other.querySelector("video")
+                  .pause();
               }
 
             });
@@ -2552,18 +2823,17 @@ function setupReelObserver(){
 
               if(video.duration){
 
-                progress.style.width =
-                  (video.currentTime/
-                   video.duration*100)+"%";
-
+                progress.style.width=
+                  (
+                    video.currentTime/
+                    video.duration*100
+                  )+"%";
               }
-
             };
 
           }else{
 
             video.pause();
-
           }
 
         });
@@ -2575,14 +2845,11 @@ function setupReelObserver(){
       }
     );
 
-  reels.forEach(reel=>{
-    observer.observe(reel);
-  });
-
+  reels.forEach(reel=>
+    observer.observe(reel)
+  );
 }
 
-
-let viewedReels={};
 
 async function countReelView(id){
 
@@ -2594,42 +2861,34 @@ async function countReelView(id){
     ref(db,"reels/"+id+"/views"),
     n=>(Number(n)||0)+1
   );
-
 }
 
 
-/* =========================================================
-   REEL ACTIONS
-========================================================= */
+window.toggleMute=button=>{
 
-window.toggleMute = button=>{
-
-  const reel =
+  const reel=
     button.closest(".reel");
 
-  const video =
+  const video=
     reel.querySelector("video");
 
-  video.muted =
-    !video.muted;
+  video.muted=!video.muted;
 
-  button.textContent =
-    video.muted ? "🔇" : "🔊";
-
+  button.textContent=
+    video.muted?"🔇":"🔊";
 };
 
 
-window.likeReel = async id=>{
+window.likeReel=async id=>{
 
   await runTransaction(
     ref(db,"reels/"+id+"/likes"),
     n=>(Number(n)||0)+1
   );
-
 };
 
 
-window.repostReel = async id=>{
+window.repostReel=async id=>{
 
   await runTransaction(
     ref(db,"reels/"+id+"/reposts"),
@@ -2637,11 +2896,10 @@ window.repostReel = async id=>{
   );
 
   toast("Reposted");
-
 };
 
 
-window.saveReel = async id=>{
+window.saveReel=async id=>{
 
   await set(
     ref(
@@ -2655,15 +2913,13 @@ window.saveReel = async id=>{
   );
 
   toast("Reel saved");
-
 };
 
 
-window.shareReel = async id=>{
+window.shareReel=async id=>{
 
-  const url =
-    location.href+
-    "#reel-"+id;
+  const url=
+    location.href+"#reel-"+id;
 
   if(navigator.share){
 
@@ -2680,35 +2936,26 @@ window.shareReel = async id=>{
   }else{
 
     await navigator.clipboard?.writeText(url);
-
     toast("Reel link copied");
 
   }
-
 };
 
 
-window.reelMore = id=>{
+window.reelMore=id=>{
 
-  const choice =
-    confirm(
-      "Reel link copy करना है?"
-    );
-
-  if(choice){
+  if(confirm("Reel link copy करना है?")){
 
     navigator.clipboard?.writeText(
       location.href+"#reel-"+id
     );
 
     toast("Copied");
-
   }
-
 };
 
 
-window.openReelComments = id=>{
+window.openReelComments=id=>{
 
   currentPostId=id;
 
@@ -2716,7 +2963,6 @@ window.openReelComments = id=>{
     .classList.remove("hidden");
 
   openComments(id);
-
 };
 
 
@@ -2741,12 +2987,10 @@ function loadStories(){
         };
 
         if(
-          s.expiresAt &&
+          s.expiresAt&&
           s.expiresAt>now
         ){
-
           stories.push(s);
-
         }
 
       });
@@ -2758,86 +3002,87 @@ function loadStories(){
       );
 
       let html=`
-        <div class="story"
-             onclick="showPage('createPage')">
 
-          <div class="add-story">+</div>
-          <div>Add Story</div>
+      <div class="story"
+      onclick="showPage('createPage')">
 
-        </div>`;
+      <div class="add-story">+</div>
+      <div>Add Story</div>
 
-      html +=
-        stories.map(s=>`
+      </div>`;
 
-          <div class="story"
-               onclick='viewStory(${JSON.stringify(s)})'>
+      html+=stories.map(s=>`
 
-            <img class="story-avatar"
-                 src="${esc(
-                   s.photo ||
-                   "https://via.placeholder.com/100"
-                 )}">
+      <div class="story"
+      onclick='viewStory(${JSON.stringify(s)})'>
 
-            <div>
-              ${esc(s.username || "user")}
-            </div>
+      <img class="story-avatar"
+      src="${esc(
+        s.photo||
+        "https://via.placeholder.com/100"
+      )}">
 
-          </div>
+      <div>
+      ${esc(s.username||"user")}
+      </div>
 
-        `).join("");
+      </div>
+
+      `).join("");
 
       $("stories").innerHTML=html;
 
     }
   );
-
 }
 
 
-window.viewStory = story=>{
+window.viewStory=story=>{
 
-  const isVideo =
+  const isVideo=
     story.mediaType==="video";
 
-  const media =
+  const media=
     isVideo
-      ?
-      `<video src="${esc(story.media)}"
-              style="width:100%;max-height:75vh"
-              controls autoplay></video>`
-      :
-      `<img src="${esc(story.media)}"
-            style="width:100%;max-height:75vh;object-fit:contain">`;
+    ?
+    `<video
+    src="${esc(story.media)}"
+    style="width:100%;max-height:75vh"
+    controls autoplay></video>`
+    :
+    `<img
+    src="${esc(story.media)}"
+    style="width:100%;max-height:75vh;object-fit:contain">`;
 
-  const modal =
+  const modal=
     document.createElement("div");
 
   modal.className="modal";
 
   modal.innerHTML=`
-    <div class="modal-card"
-         style="background:#000;color:#fff">
 
-      <button class="close"
-              style="color:white"
-              onclick="this.closest('.modal').remove()">
-        ×
-      </button>
+  <div class="modal-card"
+  style="background:#000;color:#fff">
 
-      ${media}
+  <button class="close"
+  style="color:white"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
 
-      <h3>@${esc(story.username)}</h3>
+  ${media}
 
-      <p>${esc(story.caption || "")}</p>
+  <h3>@${esc(story.username)}</h3>
 
-      <div>
-        🎵 ${esc(story.music || "Original audio")}
-      </div>
+  <p>${esc(story.caption||"")}</p>
 
-    </div>`;
+  <div>
+  🎵 ${esc(story.music||"Original audio")}
+  </div>
+
+  </div>`;
 
   document.body.appendChild(modal);
-
 };
 
 
@@ -2845,9 +3090,9 @@ window.viewStory = story=>{
    SEARCH
 ========================================================= */
 
-window.searchUsers = async ()=>{
+window.searchUsers=async()=>{
 
-  const q =
+  const q=
     $("searchInput")
       .value
       .trim()
@@ -2857,10 +3102,9 @@ window.searchUsers = async ()=>{
 
     $("searchResults").innerHTML="";
     return;
-
   }
 
-  const snap =
+  const snap=
     await get(ref(db,"profiles"));
 
   const users=[];
@@ -2873,49 +3117,46 @@ window.searchUsers = async ()=>{
 
       if(
         String(p.username||"")
-          .toLowerCase()
-          .includes(q) ||
+        .toLowerCase()
+        .includes(q)||
         String(p.name||"")
-          .toLowerCase()
-          .includes(q)
+        .toLowerCase()
+        .includes(q)
       ){
 
         users.push(p);
-
       }
 
     });
-
   }
 
-  $("searchResults").innerHTML =
+  $("searchResults").innerHTML=
     users.map(p=>`
 
-      <div class="person">
+    <div class="person">
 
-        <img class="avatar"
-             src="${esc(
-               p.photo ||
-               "https://via.placeholder.com/100"
-             )}">
+    <img class="avatar"
+    src="${esc(
+      p.photo||
+      "https://via.placeholder.com/100"
+    )}">
 
-        <div class="person-info">
+    <div class="person-info">
 
-          <b>@${esc(p.username)}</b>
+    <b>@${esc(p.username)}</b>
 
-          <div>${esc(p.name||"")}</div>
+    <div>${esc(p.name||"")}</div>
 
-        </div>
+    </div>
 
-        <button class="follow-small"
-                onclick="followUser('${esc(p.uid)}')">
-          Follow
-        </button>
+    <button class="follow-small"
+    onclick="followUser('${esc(p.uid)}')">
+    Follow
+    </button>
 
-      </div>
+    </div>
 
     `).join("");
-
 };
 
 
@@ -2929,23 +3170,25 @@ async function loadProfilePage(){
 
   if(!currentProfile)return;
 
-  $("profilePhoto").src =
-    currentProfile.photo ||
+  $("profilePhoto").src=
+    currentProfile.photo||
     "https://via.placeholder.com/100";
 
-  $("profileName").innerHTML =
-    "@"+esc(currentProfile.username||"user");
+  $("profileName").innerHTML=
+    "@"+esc(
+      currentProfile.username||"user"
+    );
 
-  $("profileFollowers").textContent =
+  $("profileFollowers").textContent=
     currentProfile.followers||0;
 
-  $("profileFollowing").textContent =
+  $("profileFollowing").textContent=
     currentProfile.following||0;
 
-  const postsSnap =
+  const postsSnap=
     await get(ref(db,"posts"));
 
-  const reelsSnap =
+  const reelsSnap=
     await get(ref(db,"reels"));
 
   const items=[];
@@ -2961,7 +3204,6 @@ async function loadProfilePage(){
       }
 
     });
-
   }
 
   if(reelsSnap.exists()){
@@ -2975,33 +3217,34 @@ async function loadProfilePage(){
       }
 
     });
-
   }
 
-  $("profilePosts").textContent =
+  $("profilePosts").textContent=
     items.length;
 
-  $("profileGrid").innerHTML =
+  $("profileGrid").innerHTML=
     items.map(item=>{
 
       if(item.mediaType==="video"){
 
         return `
         <div class="grid-item">
-          <video src="${esc(item.media)}"
-                 muted
-                 playsinline></video>
+
+        <video
+        src="${esc(item.media)}"
+        muted
+        playsinline></video>
+
         </div>`;
 
       }
 
       return `
       <div class="grid-item">
-        <img src="${esc(item.media)}">
+      <img src="${esc(item.media)}">
       </div>`;
 
     }).join("");
-
 }
 
 
@@ -3009,9 +3252,9 @@ async function loadProfilePage(){
    CHAT
 ========================================================= */
 
-window.openMessages = async ()=>{
+window.openMessages=async()=>{
 
-  const snap =
+  const snap=
     await get(ref(db,"profiles"));
 
   const users=[];
@@ -3030,94 +3273,92 @@ window.openMessages = async ()=>{
       }
 
     });
-
   }
 
-  const box =
-    document.createElement("div");
+  const box=document.createElement("div");
 
   box.className="modal";
 
   box.innerHTML=`
 
-    <div class="modal-card">
+  <div class="modal-card">
 
-      <div class="modal-head">
+  <div class="modal-head">
 
-        <h3>Messages</h3>
+  <h3>Messages</h3>
 
-        <button class="close"
-                onclick="this.closest('.modal').remove()">
-          ×
-        </button>
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
 
-      </div>
+  </div>
 
-      <div class="chat-list">
+  <div class="chat-list">
 
-        ${
-          users.map(u=>`
+  ${
+    users.map(u=>`
 
-          <div class="chat-user"
-               onclick='openChat(${JSON.stringify(u)})'>
+    <div class="chat-user"
+    onclick='openChat(${JSON.stringify(u)})'>
 
-            <img class="avatar"
-                 src="${esc(
-                   u.photo ||
-                   "https://via.placeholder.com/100"
-                 )}">
+    <img class="avatar"
+    src="${esc(
+      u.photo||
+      "https://via.placeholder.com/100"
+    )}">
 
-            <div>
-              <b>@${esc(u.username)}</b>
-              <div>${esc(u.name||"")}</div>
-            </div>
+    <div>
 
-          </div>
+    <b>@${esc(u.username)}</b>
 
-          `).join("")
-        }
+    <div>${esc(u.name||"")}</div>
 
-      </div>
+    </div>
 
-    </div>`;
+    </div>
+
+    `).join("")
+  }
+
+  </div>
+
+  </div>`;
 
   document.body.appendChild(box);
-
 };
 
 
-window.openChat = user=>{
+window.openChat=user=>{
 
-  document.querySelectorAll(".modal")
+  document
+    .querySelectorAll(".modal")
     .forEach(m=>m.remove());
 
   currentChatUid=user.uid;
 
-  $("chatName").textContent =
+  $("chatName").textContent=
     "@"+(user.username||"user");
 
-  $("chatAvatar").src =
-    user.photo ||
+  $("chatAvatar").src=
+    user.photo||
     "https://via.placeholder.com/100";
 
   $("chatBox")
     .classList.remove("hidden");
 
   loadMessages();
-
 };
 
 
 function conversationId(a,b){
-
   return [a,b].sort().join("_");
-
 }
 
 
 function loadMessages(){
 
-  const id =
+  const id=
     conversationId(
       currentUser.uid,
       currentChatUid
@@ -3144,45 +3385,42 @@ function loadMessages(){
           (b.timestamp||0)
       );
 
-      $("chatMessages").innerHTML =
+      $("chatMessages").innerHTML=
         messages.map(m=>`
 
-          <div class="msg ${
-            m.senderUid===currentUser.uid
-              ? "mine"
-              : "theirs"
-          }">
-            ${esc(m.text)}
-          </div>
+        <div class="msg ${
+          m.senderUid===currentUser.uid
+          ?"mine"
+          :"theirs"
+        }">
+
+        ${esc(m.text)}
+
+        </div>
 
         `).join("");
 
-      const box =
-        $("chatMessages");
-
-      box.scrollTop =
-        box.scrollHeight;
-
+      $("chatMessages").scrollTop=
+        $("chatMessages").scrollHeight;
     }
   );
-
 }
 
 
-window.sendMessage = async ()=>{
+window.sendMessage=async()=>{
 
-  const text =
+  const text=
     $("chatText").value.trim();
 
-  if(!text || !currentChatUid)return;
+  if(!text||!currentChatUid)return;
 
-  const id =
+  const id=
     conversationId(
       currentUser.uid,
       currentChatUid
     );
 
-  const msgRef =
+  const msgRef=
     push(ref(db,"messages/"+id));
 
   await set(msgRef,{
@@ -3193,15 +3431,11 @@ window.sendMessage = async ()=>{
   });
 
   $("chatText").value="";
-
 };
 
 
-window.closeChat = ()=>{
-
-  $("chatBox")
-    .classList.add("hidden");
-
+window.closeChat=()=>{
+  $("chatBox").classList.add("hidden");
 };
 
 
@@ -3209,9 +3443,9 @@ window.closeChat = ()=>{
    NOTIFICATIONS
 ========================================================= */
 
-window.openNotifications = async ()=>{
+window.openNotifications=async()=>{
 
-  const snap =
+  const snap=
     await get(
       ref(
         db,
@@ -3229,18 +3463,16 @@ window.openNotifications = async ()=>{
       arr.push(child.val());
     });
 
-    text +=
+    text+=
       "\n\n"+
       arr.map(x=>x.text).join("\n");
 
   }else{
 
-    text += "\n\nNo notifications";
-
+    text+="\n\nNo notifications";
   }
 
   alert(text);
-
 };
 
 
@@ -3248,18 +3480,21 @@ window.openNotifications = async ()=>{
    NAVIGATION
 ========================================================= */
 
-window.showPage = (pageId,button)=>{
+window.showPage=(pageId,button)=>{
 
   document
     .querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
+    .forEach(p=>
+      p.classList.remove("active")
+    );
 
-  $(pageId)
-    .classList.add("active");
+  $(pageId).classList.add("active");
 
   document
     .querySelectorAll(".nav-btn")
-    .forEach(b=>b.classList.remove("active"));
+    .forEach(b=>
+      b.classList.remove("active")
+    );
 
   if(button){
     button.classList.add("active");
@@ -3269,21 +3504,19 @@ window.showPage = (pageId,button)=>{
 
     setTimeout(()=>{
 
-      const first =
+      const first=
         $("reelsContainer")
-          .querySelector(".reel");
+        .querySelector(".reel");
 
       if(first){
 
-        const video =
-          first.querySelector("video");
-
-        video.play().catch(()=>{});
+        first.querySelector("video")
+          .play()
+          .catch(()=>{});
 
       }
 
     },100);
-
   }
 
 };
@@ -3293,7 +3526,7 @@ window.showPage = (pageId,button)=>{
    DARK MODE
 ========================================================= */
 
-window.toggleDarkMode = ()=>{
+window.toggleDarkMode=()=>{
 
   document.body.classList.toggle("dark");
 
@@ -3315,10 +3548,9 @@ if(
    MODAL
 ========================================================= */
 
-window.closeModal = id=>{
+window.closeModal=id=>{
 
   $(id).classList.add("hidden");
-
 };
 
 
@@ -3326,7 +3558,7 @@ window.closeModal = id=>{
    LOGOUT
 ========================================================= */
 
-window.logoutNow = async ()=>{
+window.logoutNow=async()=>{
 
   try{
 
@@ -3337,9 +3569,7 @@ window.logoutNow = async ()=>{
   }catch(error){
 
     toast(error.message);
-
   }
-
 };
 
 
@@ -3347,18 +3577,14 @@ window.logoutNow = async ()=>{
    CREATE TYPE
 ========================================================= */
 
-window.updateCreateType = ()=>{
+window.updateCreateType=()=>{
 
-  const type =
-    $("createType").value;
+  const type=$("createType").value;
 
   if(type==="reel"){
 
     $("mediaFile")
-      .setAttribute(
-        "accept",
-        "video/*"
-      );
+      .setAttribute("accept","video/*");
 
   }else{
 
@@ -3367,9 +3593,736 @@ window.updateCreateType = ()=>{
         "accept",
         "image/*,video/*"
       );
+  }
+};
 
+
+/* =========================================================
+   SETTINGS DATA
+========================================================= */
+
+const settingNames={
+
+account:{
+title:"Rechod Account",
+text:"Password, security aur personal details yahan manage karein."
+},
+
+saved:{
+title:"Saved",
+text:"Aapke saved posts aur reels yahan dikhenge."
+},
+
+archive:{
+title:"Archive",
+text:"Archived posts, reels aur stories yahan manage hongi."
+},
+
+activity:{
+title:"Your activity",
+text:"Likes, comments, follows aur aapki Rechod activity."
+},
+
+notifications:{
+title:"Notifications",
+text:"Push notifications aur Rechod notifications manage karein."
+},
+
+report:{
+title:"Report a problem",
+text:"Rechod mein kisi problem ko report karein."
+},
+
+help:{
+title:"Help",
+text:"Rechod Help aur support."
+},
+
+about:{
+title:"About Rechod",
+text:"Rechod Social App\nVersion 1.0"
+},
+
+closefriends:{
+title:"Close friends",
+text:"Close friends list manage karein."
+},
+
+blocked:{
+title:"Blocked",
+text:"Blocked accounts manage karein."
+},
+
+hidestory:{
+title:"Hide story",
+text:"Jin users se story hide karni hai unhe manage karein."
+},
+
+visibility:{
+title:"Visibility of Rechod",
+text:"Aapke Rechod profile aur content ki visibility."
+},
+
+messages:{
+title:"Messages and story replies",
+text:"Kaun aapko messages aur story replies bhej sakta hai."
+},
+
+tags:{
+title:"Tags and mentions",
+text:"Tags aur @mentions ki permission manage karein."
+},
+
+comments:{
+title:"Comments",
+text:"Comments aur comment permissions."
+},
+
+sharing:{
+title:"Sharing and reuse",
+text:"Posts aur Reels ke sharing options."
+},
+
+restricted:{
+title:"Restricted",
+text:"Restricted accounts manage karein."
+},
+
+hiddenwords:{
+title:"Hidden Words",
+text:"Unwanted words aur comments ko hide karein."
+},
+
+contacts:{
+title:"Contacts syncing",
+text:"Contacts syncing setting."
+},
+
+invite:{
+title:"Follow and invite friends",
+text:"Friends ko Rechod par invite karein."
+},
+
+muted:{
+title:"Muted accounts",
+text:"Muted accounts manage karein."
+},
+
+content:{
+title:"Content preferences",
+text:"Aapko kis type ka content dikhna chahiye."
+},
+
+likecounts:{
+title:"Like and share counts",
+text:"Like aur share count display settings."
+},
+
+download:{
+title:"Archiving and downloading",
+text:"Posts, Reels aur Stories archive/download options."
+},
+
+language:{
+title:"Language",
+text:"Rechod ki language select karein."
+},
+
+datasaver:{
+title:"Data saver",
+text:"Mobile data bachane ke liye media loading control karein."
+},
+
+apps:{
+title:"Apps and websites",
+text:"Connected apps aur websites."
+},
+
+downloadData:{
+title:"Download data",
+text:"Aapke Rechod data ko download karne ka option."
+},
+
+supervision:{
+title:"Supervision",
+text:"Family supervision settings."
+},
+
+verified:{
+title:"Rechod Verified",
+text:"Rechod verification information."
+}
+
+};
+
+
+/* =========================================================
+   SETTINGS OPEN
+========================================================= */
+
+window.openSetting=key=>{
+
+  if(key==="privacy"){
+    openPrivacySettings();
+    return;
   }
 
+  if(key==="theme"){
+    openThemeSettings();
+    return;
+  }
+
+  if(key==="language"){
+    openLanguageSettings();
+    return;
+  }
+
+  if(key==="datasaver"){
+    openDataSaverSettings();
+    return;
+  }
+
+  if(key==="notifications"){
+    openNotificationSettings();
+    return;
+  }
+
+  const item=settingNames[key];
+
+  if(!item)return;
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+  <div class="modal-head">
+
+  <h3>${esc(item.title)}</h3>
+
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
+
+  </div>
+
+  <p style="
+  color:#888;
+  line-height:1.6;
+  white-space:pre-line">
+  ${esc(item.text)}
+  </p>
+
+  <button class="primary"
+  onclick="this.closest('.modal').remove()">
+  Done
+  </button>
+
+  </div>`;
+
+  document.body.appendChild(modal);
+};
+
+
+/* =========================================================
+   PRIVACY
+========================================================= */
+
+async function loadPrivacyStatus(){
+
+  if(!currentUser)return;
+
+  const snap=
+    await get(
+      ref(
+        db,
+        "profiles/"+currentUser.uid+"/privacy"
+      )
+    );
+
+  const privateMode=
+    snap.exists()
+      ?snap.val()===true
+      :false;
+
+  if($("privacyStatus")){
+    $("privacyStatus").textContent=
+      privateMode?"Private":"Public";
+  }
+}
+
+
+async function openPrivacySettings(){
+
+  const snap=
+    await get(
+      ref(
+        db,
+        "profiles/"+currentUser.uid+"/privacy"
+      )
+    );
+
+  const isPrivate=
+    snap.exists()
+      ?snap.val()===true
+      :false;
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+  <div class="modal-head">
+
+  <h3>Account privacy</h3>
+
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
+
+  </div>
+
+  <div class="setting-option">
+
+  <div>
+
+  <b>Private account</b>
+
+  <small>
+  Private account होने पर केवल approved followers
+  आपका content देख पाएंगे।
+  </small>
+
+  </div>
+
+  <button
+  id="privateToggle"
+  class="settings-toggle ${isPrivate?"on":""}"
+  onclick="changePrivacy()">
+  </button>
+
+  </div>
+
+  </div>`;
+
+  document.body.appendChild(modal);
+}
+
+
+window.changePrivacy=async()=>{
+
+  const refPrivacy=
+    ref(
+      db,
+      "profiles/"+currentUser.uid+"/privacy"
+    );
+
+  const snap=await get(refPrivacy);
+
+  const old=
+    snap.exists()?snap.val()===true:false;
+
+  const value=!old;
+
+  await set(refPrivacy,value);
+
+  $("privacyStatus").textContent=
+    value?"Private":"Public";
+
+  const btn=
+    $("privateToggle");
+
+  if(btn){
+    btn.classList.toggle("on",value);
+  }
+
+  toast(
+    value
+      ?"Private account ON"
+      :"Account Public"
+  );
+};
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+window.openThemeSettings=()=>{
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+  <div class="modal-head">
+
+  <h3>Theme</h3>
+
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
+
+  </div>
+
+  <div class="setting-option">
+  <div>☀️ Light</div>
+  <button class="settings-toggle"
+  onclick="setTheme('light');this.closest('.modal').remove()">
+  </button>
+  </div>
+
+  <div class="setting-option">
+  <div>🌙 Dark</div>
+  <button class="settings-toggle"
+  onclick="setTheme('dark');this.closest('.modal').remove()">
+  </button>
+  </div>
+
+  <div class="setting-option">
+  <div>📱 System</div>
+  <button class="settings-toggle"
+  onclick="setTheme('system');this.closest('.modal').remove()">
+  </button>
+  </div>
+
+  </div>`;
+
+  document.body.appendChild(modal);
+};
+
+
+window.setTheme=mode=>{
+
+  if(mode==="dark"){
+
+    document.body.classList.add("dark");
+
+    localStorage.setItem(
+      "rechodDark",
+      "true"
+    );
+
+  }else if(mode==="light"){
+
+    document.body.classList.remove("dark");
+
+    localStorage.setItem(
+      "rechodDark",
+      "false"
+    );
+
+  }else{
+
+    const dark=
+      window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+    document.body.classList.toggle(
+      "dark",
+      dark
+    );
+
+    localStorage.setItem(
+      "rechodDark",
+      dark?"true":"false"
+    );
+  }
+
+  toast("Theme updated");
+};
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+window.openLanguageSettings=()=>{
+
+  const current=
+    localStorage.getItem(
+      "rechodLanguage"
+    )||"Hindi";
+
+  const languages=[
+    "Hindi",
+    "English",
+    "Hinglish"
+  ];
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+  <div class="modal-head">
+
+  <h3>Language</h3>
+
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
+
+  </div>
+
+  ${
+    languages.map(lang=>`
+
+    <div class="language-option
+    ${current===lang?"active":""}"
+    onclick="selectLanguage('${lang}');
+    this.closest('.modal').remove()">
+
+    ${lang}
+
+    ${current===lang?" ✓":""}
+
+    </div>
+
+  `).join("")
+  }
+
+  </div>`;
+
+  document.body.appendChild(modal);
+};
+
+
+window.selectLanguage=lang=>{
+
+  localStorage.setItem(
+    "rechodLanguage",
+    lang
+  );
+
+  toast("Language: "+lang);
+
+};
+
+
+/* =========================================================
+   DATA SAVER
+========================================================= */
+
+window.openDataSaverSettings=()=>{
+
+  const enabled=
+    localStorage.getItem(
+      "rechodDataSaver"
+    )==="true";
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+  <div class="modal-head">
+
+  <h3>Data saver</h3>
+
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
+
+  </div>
+
+  <div class="setting-option">
+
+  <div>
+
+  <b>Use less mobile data</b>
+
+  <small>
+  Media loading को कम करके mobile data बचाएं।
+  </small>
+
+  </div>
+
+  <button id="dataSaverToggle"
+  class="settings-toggle ${enabled?"on":""}"
+  onclick="toggleDataSaver()">
+  </button>
+
+  </div>
+
+  </div>`;
+
+  document.body.appendChild(modal);
+};
+
+
+window.toggleDataSaver=()=>{
+
+  const old=
+    localStorage.getItem(
+      "rechodDataSaver"
+    )==="true";
+
+  const value=!old;
+
+  localStorage.setItem(
+    "rechodDataSaver",
+    value
+  );
+
+  $("dataSaverToggle")
+    ?.classList.toggle("on",value);
+
+  toast(
+    value
+      ?"Data saver ON"
+      :"Data saver OFF"
+  );
+};
+
+
+/* =========================================================
+   NOTIFICATION SETTINGS
+========================================================= */
+
+window.openNotificationSettings=()=>{
+
+  const enabled=
+    localStorage.getItem(
+      "rechodNotifications"
+    )!=="false";
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+  <div class="modal-head">
+
+  <h3>Notifications</h3>
+
+  <button class="close"
+  onclick="this.closest('.modal').remove()">
+  ×
+  </button>
+
+  </div>
+
+  <div class="setting-option">
+
+  <div>
+
+  <b>Allow notifications</b>
+
+  <small>
+  Rechod notifications enable/disable करें।
+  </small>
+
+  </div>
+
+  <button id="notificationToggle"
+  class="settings-toggle ${enabled?"on":""}"
+  onclick="toggleNotifications()">
+  </button>
+
+  </div>
+
+  <div class="setting-option">
+
+  <div>
+  <b>Likes and comments</b>
+  <small>Likes और comments की notifications.</small>
+  </div>
+
+  <button class="settings-toggle on"></button>
+
+  </div>
+
+  <div class="setting-option">
+
+  <div>
+  <b>Messages</b>
+  <small>New message notifications.</small>
+  </div>
+
+  <button class="settings-toggle on"></button>
+
+  </div>
+
+  </div>`;
+
+  document.body.appendChild(modal);
+};
+
+
+window.toggleNotifications=()=>{
+
+  const old=
+    localStorage.getItem(
+      "rechodNotifications"
+    )!=="false";
+
+  const value=!old;
+
+  localStorage.setItem(
+    "rechodNotifications",
+    value
+  );
+
+  $("notificationToggle")
+    ?.classList.toggle("on",value);
+
+  toast(
+    value
+      ?"Notifications ON"
+      :"Notifications OFF"
+  );
+};
+
+
+/* =========================================================
+   ADD / SWITCH PROFILE
+========================================================= */
+
+window.addProfile=()=>{
+
+  showLogin();
+
+  $("authScreen").classList.remove("hidden");
+  $("app").classList.add("hidden");
+};
+
+
+window.switchProfile=()=>{
+
+  toast(
+    "Logout karke doosre Rechod account se login karein"
+  );
 };
 
 
@@ -3380,15 +4333,13 @@ window.updateCreateType = ()=>{
 $("chatText").addEventListener(
   "keydown",
   e=>{
-
     if(e.key==="Enter"){
       sendMessage();
     }
-
   }
 );
 
 </script>
 
 </body>
-     </html>
+  </html>
