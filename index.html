@@ -132,6 +132,12 @@ body.dark .header{
   color:#1877f2;
   cursor:pointer;
 }
+.auth-note{
+  font-size:12px;
+  color:#777;
+  margin-top:8px;
+  line-height:1.4;
+}
 
 /* STORIES */
 .stories{
@@ -230,10 +236,7 @@ body.dark .post{
   overflow-y:auto;
   overflow-x:hidden;
   scroll-snap-type:y mandatory;
-  scroll-behavior:smooth;
-  overscroll-behavior:contain;
 }
-.reels-page::-webkit-scrollbar{width:0}
 .reel{
   width:100%;
   height:calc(100vh - 58px - 62px);
@@ -241,7 +244,6 @@ body.dark .post{
   position:relative;
   background:#000;
   scroll-snap-align:start;
-  scroll-snap-stop:always;
   overflow:hidden;
 }
 .reel-video{
@@ -258,7 +260,6 @@ body.dark .post{
   background:
     linear-gradient(to top,#000b 0%,transparent 35%),
     linear-gradient(to bottom,#0005,transparent 25%);
-  pointer-events:none;
 }
 .reel-top{
   position:absolute;
@@ -332,7 +333,6 @@ body.dark .post{
   color:white;
   border-radius:7px;
   padding:5px 12px;
-  margin-left:6px;
 }
 .reel-caption{
   font-size:14px;
@@ -341,9 +341,6 @@ body.dark .post{
 }
 .reel-music{
   font-size:13px;
-  display:flex;
-  gap:5px;
-  align-items:center;
 }
 .reel-progress{
   position:absolute;
@@ -384,7 +381,7 @@ body.dark .bottom-nav{
   border:0;
   background:transparent;
   color:#555;
-  font-size:24px;
+  font-size:23px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -452,6 +449,11 @@ body.dark .nav-btn{color:#aaa}
   margin-top:12px;
   font-weight:bold;
 }
+.profile-bio{
+  margin-top:5px;
+  color:#777;
+  white-space:pre-line;
+}
 .profile-actions{
   display:flex;
   gap:7px;
@@ -464,6 +466,19 @@ body.dark .nav-btn{color:#aaa}
   border:1px solid #ccc;
   background:transparent;
   color:inherit;
+}
+.profile-follow-actions{
+  display:flex;
+  gap:7px;
+  margin-top:8px;
+}
+.profile-follow-actions button{
+  flex:1;
+  border:1px solid #1877f2;
+  background:transparent;
+  color:#1877f2;
+  border-radius:9px;
+  padding:9px;
 }
 .profile-grid{
   display:grid;
@@ -495,6 +510,17 @@ body.dark .nav-btn{color:#aaa}
   flex:1;
   margin-left:10px;
 }
+.person-buttons{
+  display:flex;
+  gap:4px;
+}
+.call-mini{
+  border:0;
+  border-radius:8px;
+  background:#1877f2;
+  color:white;
+  padding:7px;
+}
 
 /* CHAT */
 .chat-list{padding:10px}
@@ -521,6 +547,19 @@ body.dark .chat-box{background:#10141c}
   align-items:center;
   gap:10px;
   padding:8px;
+}
+.chat-head-info{flex:1}
+.chat-call-buttons{
+  display:flex;
+  gap:4px;
+}
+.chat-call-btn{
+  border:0;
+  border-radius:50%;
+  width:38px;
+  height:38px;
+  background:#1877f2;
+  color:#fff;
 }
 .chat-messages{
   flex:1;
@@ -609,6 +648,44 @@ body.dark .modal-card{
 }
 body.dark .comment-body{background:#252c37}
 
+/* FOLLOW LIST */
+.follow-tabs{
+  display:flex;
+  border-bottom:1px solid #ddd;
+  margin-bottom:8px;
+}
+.follow-tab{
+  flex:1;
+  border:0;
+  background:transparent;
+  padding:12px;
+  color:inherit;
+}
+.follow-tab.active{
+  color:#1877f2;
+  font-weight:bold;
+  border-bottom:2px solid #1877f2;
+}
+.follow-person{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid #ddd;
+}
+.follow-person-info{flex:1}
+.follow-call{
+  display:flex;
+  gap:4px;
+}
+.follow-call button{
+  border:0;
+  border-radius:8px;
+  padding:7px 9px;
+  background:#1877f2;
+  color:white;
+}
+
 /* TOAST */
 .toast{
   position:fixed;
@@ -619,8 +696,10 @@ body.dark .comment-body{background:#252c37}
   color:#fff;
   padding:10px 16px;
   border-radius:20px;
-  z-index:500;
+  z-index:1000;
   display:none;
+  max-width:90%;
+  text-align:center;
 }
 .toast.show{display:block}
 
@@ -641,20 +720,17 @@ body.dark .comment-body{background:#252c37}
 .f-fade{filter:contrast(.85) brightness(1.08) saturate(.75)}
 .f-dark{filter:brightness(.7) contrast(1.15)}
 
-/* ================= SETTINGS ================= */
-
+/* SETTINGS */
 .settings-page{
   min-height:100vh;
   background:#fff;
   color:#172033;
   padding-bottom:30px;
 }
-
 body.dark .settings-page{
   background:#10141c;
   color:#fff;
 }
-
 .settings-top{
   height:60px;
   display:flex;
@@ -668,7 +744,6 @@ body.dark .settings-page{
   background:inherit;
   z-index:20;
 }
-
 .settings-top button{
   border:0;
   background:transparent;
@@ -676,7 +751,6 @@ body.dark .settings-page{
   font-size:30px;
   width:38px;
 }
-
 .settings-section-title{
   background:#f4f5f7;
   color:#707780;
@@ -684,12 +758,10 @@ body.dark .settings-page{
   font-weight:bold;
   padding:15px 18px 10px;
 }
-
 body.dark .settings-section-title{
   background:#080b10;
   color:#aeb4bf;
 }
-
 .setting-item{
   min-height:64px;
   padding:11px 18px;
@@ -699,23 +771,14 @@ body.dark .settings-section-title{
   border-bottom:1px solid #e5e5e5;
   cursor:pointer;
 }
-
-body.dark .setting-item{
-  border-color:#242a33;
-}
-
+body.dark .setting-item{border-color:#242a33}
 .setting-item>span{
   width:30px;
   text-align:center;
   font-size:22px;
   flex:none;
 }
-
-.setting-item>div{
-  flex:1;
-  font-size:16px;
-}
-
+.setting-item>div{flex:1;font-size:16px}
 .setting-item small{
   display:block;
   color:#888;
@@ -723,19 +786,16 @@ body.dark .setting-item{
   line-height:17px;
   margin-top:2px;
 }
-
 .setting-item i{
   font-style:normal;
   font-size:30px;
   color:#999;
 }
-
 .setting-item strong{
   color:#888;
   font-size:13px;
   font-weight:normal;
 }
-
 .setting-link{
   padding:17px 24px;
   color:#1877f2;
@@ -743,16 +803,7 @@ body.dark .setting-item{
   cursor:pointer;
   border-bottom:1px solid #e5e5e5;
 }
-
-body.dark .setting-link{
-  border-color:#242a33;
-}
-
-.logout-link{
-  color:#e53935;
-  padding-bottom:30px;
-}
-
+.logout-link{color:#e53935}
 .settings-toggle{
   width:48px;
   height:28px;
@@ -761,9 +812,7 @@ body.dark .setting-link{
   background:#aaa;
   position:relative;
 }
-.settings-toggle.on{
-  background:#1877f2;
-}
+.settings-toggle.on{background:#1877f2}
 .settings-toggle:after{
   content:"";
   position:absolute;
@@ -775,81 +824,136 @@ body.dark .setting-link{
   background:#fff;
   transition:.2s;
 }
-.settings-toggle.on:after{
-  left:23px;
-}
+.settings-toggle.on:after{left:23px}
 
-/* SETTINGS SUB PAGE */
-.setting-sub{
-  min-height:100vh;
-  background:#fff;
-  color:#172033;
-}
-body.dark .setting-sub{
-  background:#10141c;
+/* CALL SYSTEM */
+.call-overlay{
+  position:fixed;
+  inset:0;
+  background:#050505;
+  z-index:900;
   color:#fff;
+  display:flex;
+  flex-direction:column;
 }
-.setting-sub-head{
+.call-header{
   height:60px;
   display:flex;
   align-items:center;
-  gap:15px;
-  padding:0 15px;
-  border-bottom:1px solid #ddd;
-  font-size:19px;
+  justify-content:center;
+  position:relative;
+  z-index:10;
 }
-.setting-sub-head button{
-  border:0;
-  background:transparent;
-  color:inherit;
-  font-size:28px;
+.call-header-info{text-align:center}
+.call-header-name{font-weight:bold;font-size:17px}
+.call-header-status{font-size:12px;color:#bbb;margin-top:3px}
+.remote-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:#111;
 }
-.setting-description{
-  padding:15px 18px;
-  color:#777;
-  line-height:1.5;
-  font-size:14px;
+.local-video{
+  position:absolute;
+  width:115px;
+  height:165px;
+  right:15px;
+  top:75px;
+  object-fit:cover;
+  border-radius:14px;
+  background:#222;
+  border:2px solid #fff;
+  z-index:5;
 }
-.setting-option{
+.call-avatar{
+  position:absolute;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  left:50%;
+  top:40%;
+  transform:translate(-50%,-50%);
+  border:3px solid #fff;
+}
+.call-bottom{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:35px;
   display:flex;
-  align-items:center;
-  gap:13px;
-  padding:16px 18px;
-  border-bottom:1px solid #e5e5e5;
+  justify-content:center;
+  gap:15px;
+  z-index:20;
 }
-body.dark .setting-option{
-  border-color:#292f38;
+.call-control{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:0;
+  background:#333;
+  color:#fff;
+  font-size:24px;
 }
-.setting-option>div{
+.call-control.end{
+  background:#e53935;
+}
+.call-control.accept{
+  background:#22b573;
+}
+.call-control.reject{
+  background:#e53935;
+}
+.incoming-card{
+  position:absolute;
+  left:20px;
+  right:20px;
+  top:50%;
+  transform:translateY(-50%);
+  background:#171717;
+  border-radius:24px;
+  padding:25px;
+  text-align:center;
+  z-index:30;
+  box-shadow:0 10px 50px #000;
+}
+.incoming-card img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.incoming-buttons{
+  display:flex;
+  gap:12px;
+  margin-top:20px;
+}
+.incoming-buttons button{
   flex:1;
-}
-.setting-option small{
-  display:block;
-  color:#888;
-  margin-top:3px;
-}
-
-/* language */
-.language-option{
-  padding:16px 20px;
-  border-bottom:1px solid #ddd;
-  cursor:pointer;
-}
-.language-option.active{
-  color:#1877f2;
+  border:0;
+  border-radius:14px;
+  padding:13px;
+  color:white;
   font-weight:bold;
 }
+.incoming-accept{background:#22b573}
+.incoming-reject{background:#e53935}
 
 @media(max-width:380px){
   .reel-side{right:3px}
   .reel-info{right:65px}
+  .local-video{width:95px;height:140px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= AUTH ================= -->
+<!-- =========================================================
+     AUTH
+========================================================= -->
 
 <div id="authScreen" class="auth">
 
@@ -859,9 +963,9 @@ body.dark .setting-option{
 
 <div id="loginBox">
 
-<input id="loginEmail"
+<input id="loginIdentity"
 class="field"
-placeholder="Email">
+placeholder="Username या Email">
 
 <input id="loginPassword"
 class="field"
@@ -898,12 +1002,16 @@ onclick="verifyOTP()">
 Verify OTP
 </button>
 
-<div class="auth-switch"
-onclick="showSignup()">
+<div class="auth-note">
+Username login के लिए वही username डालें जो account में save है।
+</div>
+
+<div class="auth-switch" onclick="showSignup()">
 Create new account
 </div>
 
 </div>
+
 
 <div id="signupBox" class="hidden">
 
@@ -925,13 +1033,11 @@ class="field"
 type="number"
 placeholder="Age">
 
-<button class="primary"
-onclick="signup()">
+<button class="primary" onclick="signup()">
 Sign Up
 </button>
 
-<div class="auth-switch"
-onclick="showLogin()">
+<div class="auth-switch" onclick="showLogin()">
 Already have an account?
 </div>
 
@@ -941,7 +1047,9 @@ Already have an account?
 </div>
 
 
-<!-- ================= APP ================= -->
+<!-- =========================================================
+     APP
+========================================================= -->
 
 <div id="app" class="app hidden">
 
@@ -951,19 +1059,18 @@ Already have an account?
 
 <div class="header-actions">
 
-<button class="icon-btn"
-onclick="openNotifications()">
+<button class="icon-btn" onclick="openNotifications()">
 🔔
 </button>
 
-<button class="icon-btn"
-onclick="openMessages()">
+<button class="icon-btn" onclick="openMessages()">
 💬
 </button>
 
 </div>
 
 </header>
+
 
 <main class="main">
 
@@ -984,9 +1091,7 @@ onclick="openMessages()">
 class="page"
 style="padding:0;background:#000">
 
-<div id="reelsContainer"
-class="reels-page">
-</div>
+<div id="reelsContainer" class="reels-page"></div>
 
 </section>
 
@@ -1004,9 +1109,7 @@ oninput="searchUsers()">
 
 </div>
 
-<div id="searchResults"
-class="search-results">
-</div>
+<div id="searchResults" class="search-results"></div>
 
 </section>
 
@@ -1023,17 +1126,9 @@ class="search-results">
 class="field"
 onchange="updateCreateType()">
 
-<option value="post">
-📷 Photo / Video Post
-</option>
-
-<option value="reel">
-🎬 Reel
-</option>
-
-<option value="story">
-⭕ Story
-</option>
+<option value="post">📷 Photo / Video Post</option>
+<option value="reel">🎬 Reel</option>
+<option value="story">⭕ Story</option>
 
 </select>
 
@@ -1043,16 +1138,14 @@ type="file"
 accept="image/*,video/*"
 onchange="previewMedia()">
 
-<img id="mediaPreview"
-class="preview hidden">
+<img id="mediaPreview" class="preview hidden">
 
 <video id="videoPreview"
 class="preview hidden"
 controls
-playsinline>
-</video>
+playsinline></video>
 
-<div id="filterArea">
+<div>
 
 <b>Filters</b>
 
@@ -1086,8 +1179,7 @@ class="field"
 rows="4"
 placeholder="Write caption... @mention #hashtag"></textarea>
 
-<button class="primary"
-onclick="uploadContent()">
+<button class="primary" onclick="uploadContent()">
 🚀 Publish
 </button>
 
@@ -1115,12 +1207,16 @@ src="https://via.placeholder.com/100">
 <small>Posts</small>
 </div>
 
-<div class="stat">
+<div class="stat"
+onclick="openFollowList('followers')"
+style="cursor:pointer">
 <b id="profileFollowers">0</b>
 <small>Followers</small>
 </div>
 
-<div class="stat">
+<div class="stat"
+onclick="openFollowList('following')"
+style="cursor:pointer">
 <b id="profileFollowing">0</b>
 <small>Following</small>
 </div>
@@ -1128,10 +1224,11 @@ src="https://via.placeholder.com/100">
 </div>
 </div>
 
-<div id="profileName"
-class="profile-name">
-User
+<div id="profileName" class="profile-name">
+@User
 </div>
+
+<div id="profileBio" class="profile-bio"></div>
 
 <div class="profile-actions">
 
@@ -1145,16 +1242,26 @@ Share Profile
 
 </div>
 
+<div class="profile-follow-actions">
+
+<button onclick="openFollowList('followers')">
+👥 Followers
+</button>
+
+<button onclick="openFollowList('following')">
+➕ Following
+</button>
+
 </div>
 
-<div id="profileGrid"
-class="profile-grid">
 </div>
+
+<div id="profileGrid" class="profile-grid"></div>
 
 </section>
 
 
-<!-- ================= SETTINGS ================= -->
+<!-- SETTINGS -->
 
 <section id="settingsPage" class="page">
 
@@ -1170,25 +1277,18 @@ class="profile-grid">
 
 </div>
 
-
 <div class="settings-section-title">
 Your account
 </div>
 
-<div class="setting-item"
-onclick="openSetting('account')">
-
+<div class="setting-item" onclick="openSetting('account')">
 <span>⚙️</span>
-
 <div>
 <b>Rechod Account</b>
 <small>Password, security and personal details</small>
 </div>
-
 <i>›</i>
-
 </div>
-
 
 <div class="settings-section-title">
 How you use Rechod
@@ -1218,47 +1318,15 @@ How you use Rechod
 <i>›</i>
 </div>
 
-
-<div class="settings-section-title">
-More info and support
-</div>
-
-<div class="setting-item" onclick="openSetting('report')">
-<span>⚠️</span>
-<div>Report a problem</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('help')">
-<span>🛟</span>
-<div>Help</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('about')">
-<span>ⓘ</span>
-<div>About</div>
-<i>›</i>
-</div>
-
-
 <div class="settings-section-title">
 Who can see your content
 </div>
 
-<div class="setting-item"
-onclick="openSetting('privacy')">
-
+<div class="setting-item" onclick="openSetting('privacy')">
 <span>🔒</span>
-
 <div>Account privacy</div>
-
-<strong id="privacyStatus">
-Public
-</strong>
-
+<strong id="privacyStatus">Public</strong>
 <i>›</i>
-
 </div>
 
 <div class="setting-item" onclick="openSetting('closefriends')">
@@ -1272,19 +1340,6 @@ Public
 <div>Blocked</div>
 <i>›</i>
 </div>
-
-<div class="setting-item" onclick="openSetting('hidestory')">
-<span>🙈</span>
-<div>Hide story</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('visibility')">
-<span>👁️</span>
-<div>Visibility of Rechod</div>
-<i>›</i>
-</div>
-
 
 <div class="settings-section-title">
 How others can interact with you
@@ -1314,62 +1369,8 @@ How others can interact with you
 <i>›</i>
 </div>
 
-<div class="setting-item" onclick="openSetting('restricted')">
-<span>🚷</span>
-<div>Restricted</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('hiddenwords')">
-<span>Aa</span>
-<div>Hidden Words</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('contacts')">
-<span>👥</span>
-<div>Contacts syncing</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('invite')">
-<span>👤+</span>
-<div>Follow and invite friends</div>
-<i>›</i>
-</div>
-
-
-<div class="settings-section-title">
-What you see
-</div>
-
-<div class="setting-item" onclick="openSetting('muted')">
-<span>🔇</span>
-<div>Muted accounts</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('content')">
-<span>🎞️</span>
-<div>Content preferences</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('likecounts')">
-<span>♡</span>
-<div>Like and share counts</div>
-<i>›</i>
-</div>
-
-
 <div class="settings-section-title">
 Your app and media
-</div>
-
-<div class="setting-item" onclick="openSetting('download')">
-<span>⬇️</span>
-<div>Archiving and downloading</div>
-<i>›</i>
 </div>
 
 <div class="setting-item" onclick="openSetting('theme')">
@@ -1389,41 +1390,6 @@ Your app and media
 <div>Data saver</div>
 <i>›</i>
 </div>
-
-<div class="setting-item" onclick="openSetting('apps')">
-<span>📱</span>
-<div>Apps and websites</div>
-<i>›</i>
-</div>
-
-<div class="setting-item" onclick="openSetting('downloadData')">
-<span>⬇️</span>
-<div>Download data</div>
-<i>›</i>
-</div>
-
-
-<div class="settings-section-title">
-Family Center
-</div>
-
-<div class="setting-item" onclick="openSetting('supervision')">
-<span>🏠</span>
-<div>Supervision</div>
-<i>›</i>
-</div>
-
-
-<div class="settings-section-title">
-Your insights and tools
-</div>
-
-<div class="setting-item" onclick="openSetting('verified')">
-<span>✓</span>
-<div>Rechod Verified</div>
-<i>›</i>
-</div>
-
 
 <div class="settings-section-title">
 Login
@@ -1495,18 +1461,14 @@ onclick="showPage('settingsPage',this)">
 
 <!-- COMMENTS -->
 
-<div id="commentModal"
-class="modal hidden">
+<div id="commentModal" class="modal hidden">
 
 <div class="modal-card">
 
 <div class="modal-head">
 <h3>Comments</h3>
-
 <button class="close"
-onclick="closeModal('commentModal')">
-×
-</button>
+onclick="closeModal('commentModal')">×</button>
 </div>
 
 <div id="commentsList"></div>
@@ -1515,8 +1477,7 @@ onclick="closeModal('commentModal')">
 class="field"
 placeholder="Write a comment...">
 
-<button class="primary"
-onclick="addComment()">
+<button class="primary" onclick="addComment()">
 Comment
 </button>
 
@@ -1526,8 +1487,7 @@ Comment
 
 <!-- EDIT PROFILE -->
 
-<div id="editModal"
-class="modal hidden">
+<div id="editModal" class="modal hidden">
 
 <div class="modal-card">
 
@@ -1559,8 +1519,7 @@ class="field"
 type="file"
 accept="image/*">
 
-<button class="primary"
-onclick="saveProfile()">
+<button class="primary" onclick="saveProfile()">
 Save Profile
 </button>
 
@@ -1570,25 +1529,37 @@ Save Profile
 
 <!-- CHAT -->
 
-<div id="chatBox"
-class="chat-box hidden">
+<div id="chatBox" class="chat-box hidden">
 
 <div class="chat-head">
 
-<button class="close"
-onclick="closeChat()">
+<button class="close" onclick="closeChat()">
 ←
 </button>
 
-<img id="chatAvatar"
-class="avatar">
+<img id="chatAvatar" class="avatar">
 
+<div class="chat-head-info">
 <b id="chatName">Chat</b>
+</div>
+
+<div class="chat-call-buttons">
+
+<button class="chat-call-btn"
+onclick="startCall('audio',currentChatUid)">
+📞
+</button>
+
+<button class="chat-call-btn"
+onclick="startCall('video',currentChatUid)">
+📹
+</button>
 
 </div>
 
-<div id="chatMessages"
-class="chat-messages"></div>
+</div>
+
+<div id="chatMessages" class="chat-messages"></div>
 
 <div class="chat-input">
 
@@ -1604,14 +1575,102 @@ placeholder="Message...">
 </div>
 
 
-<div id="toast"
-class="toast"></div>
+<!-- CALL UI -->
+
+<div id="callOverlay" class="call-overlay hidden">
+
+<video id="remoteVideo"
+class="remote-video"
+autoplay
+playsinline></video>
+
+<video id="localVideo"
+class="local-video"
+autoplay
+muted
+playsinline></video>
+
+<img id="callAvatar"
+class="call-avatar hidden">
+
+<div class="call-header">
+
+<div class="call-header-info">
+
+<div id="callName" class="call-header-name">
+Calling...
+</div>
+
+<div id="callStatus" class="call-header-status">
+Connecting...
+</div>
+
+</div>
+
+</div>
+
+<div class="call-bottom">
+
+<button id="callMuteBtn"
+class="call-control"
+onclick="toggleCallMute()">
+🎤
+</button>
+
+<button id="callCameraBtn"
+class="call-control"
+onclick="toggleCallCamera()">
+📹
+</button>
+
+<button class="call-control end"
+onclick="endCall()">
+📞
+</button>
+
+</div>
+
+
+<div id="incomingCard"
+class="incoming-card hidden">
+
+<img id="incomingAvatar"
+src="https://via.placeholder.com/100">
+
+<h2 id="incomingName">
+Incoming Call
+</h2>
+
+<p id="incomingType">
+Video call
+</p>
+
+<div class="incoming-buttons">
+
+<button class="incoming-reject"
+onclick="rejectIncomingCall()">
+❌ Reject
+</button>
+
+<button class="incoming-accept"
+onclick="acceptIncomingCall()">
+✅ Accept
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script type="module">
 
 /* =========================================================
-   FIREBASE
+   FIREBASE IMPORTS
 ========================================================= */
 
 import {
@@ -1640,6 +1699,7 @@ import {
   update,
   remove,
   onValue,
+  off,
   runTransaction
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
@@ -1659,9 +1719,9 @@ const firebaseConfig={
   measurementId:"G-DKZQ133PSN"
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getDatabase(app);
+const firebaseApp=initializeApp(firebaseConfig);
+const auth=getAuth(firebaseApp);
+const db=getDatabase(firebaseApp);
 
 
 /* =========================================================
@@ -1683,6 +1743,26 @@ let currentPostId=null;
 let currentChatUid=null;
 let selectedFilter="normal";
 let viewedReels={};
+
+let messageUnsubscribe=null;
+
+
+/* =========================================================
+   WEBRTC GLOBAL
+========================================================= */
+
+let peerConnection=null;
+let localStream=null;
+let remoteStream=null;
+
+let currentCallId=null;
+let currentCallType=null;
+let currentCallRole=null;
+let currentCallOtherUid=null;
+
+let incomingCallData=null;
+
+let callListeners=[];
 
 
 /* =========================================================
@@ -1731,9 +1811,16 @@ function timeAgo(ts){
   return Math.floor(hour/24)+"d";
 }
 
+function usernameKey(username){
+  return String(username||"")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g,"");
+}
+
 
 /* =========================================================
-   AUTH
+   AUTH SCREEN
 ========================================================= */
 
 window.showSignup=()=>{
@@ -1747,112 +1834,315 @@ window.showLogin=()=>{
 };
 
 
+/* =========================================================
+   SIGNUP
+========================================================= */
+
 window.signup=async()=>{
 
-  const username=$("signupUsername").value.trim();
-  const email=$("signupEmail").value.trim();
-  const password=$("signupPassword").value;
-  const age=Number($("signupAge").value||0);
+  const username=
+    $("signupUsername").value.trim();
+
+  const email=
+    $("signupEmail").value.trim();
+
+  const password=
+    $("signupPassword").value;
+
+  const age=
+    Number($("signupAge").value||0);
 
   if(!username||!email||password.length<6){
-    toast("Username, email aur 6+ character password डालें");
+
+    toast(
+      "Username, email aur 6+ character password डालें"
+    );
+
+    return;
+  }
+
+  const key=usernameKey(username);
+
+  if(!/^[a-zA-Z0-9._]+$/.test(key)){
+
+    toast(
+      "Username में केवल letters, numbers, dot और underscore रखें"
+    );
+
     return;
   }
 
   try{
 
+    const existing=
+      await get(
+        ref(db,"usernames/"+key)
+      );
+
+    if(existing.exists()){
+
+      toast("Ye username already use ho raha hai");
+      return;
+    }
+
     const result=
       await createUserWithEmailAndPassword(
-        auth,email,password
+        auth,
+        email,
+        password
       );
+
+    const profile={
+
+      uid:result.user.uid,
+
+      username:key,
+
+      name:username,
+
+      email:email,
+
+      age:age,
+
+      bio:"",
+
+      photo:"",
+
+      followers:0,
+
+      following:0,
+
+      privacy:false,
+
+      createdAt:Date.now()
+
+    };
 
     await set(
       ref(db,"profiles/"+result.user.uid),
-      {
-        uid:result.user.uid,
-        username:username,
-        name:username,
-        email:email,
-        age:age,
-        bio:"",
-        photo:"",
-        followers:0,
-        following:0,
-        privacy:false,
-        createdAt:Date.now()
-      }
+      profile
+    );
+
+    await set(
+      ref(db,"usernames/"+key),
+      result.user.uid
     );
 
     await updateAuthProfile(
       result.user,
-      {displayName:username}
+      {
+        displayName:key
+      }
     );
 
     toast("Account created");
 
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
 
+/* =========================================================
+   USERNAME / EMAIL LOGIN
+========================================================= */
+
 window.emailLogin=async()=>{
 
-  const email=$("loginEmail").value.trim();
-  const password=$("loginPassword").value;
+  const identity=
+    $("loginIdentity").value.trim();
 
-  if(!email||!password){
-    toast("Email aur password डालें");
+  const password=
+    $("loginPassword").value;
+
+  if(!identity||!password){
+
+    toast("Username/Email aur password डालें");
     return;
   }
 
   try{
+
+    let email=identity;
+
+    if(!identity.includes("@")){
+
+      const key=usernameKey(identity);
+
+      const usernameSnap=
+        await get(
+          ref(db,"usernames/"+key)
+        );
+
+      if(usernameSnap.exists()){
+
+        const uid=usernameSnap.val();
+
+        const profileSnap=
+          await get(
+            ref(db,"profiles/"+uid)
+          );
+
+        if(!profileSnap.exists()){
+
+          toast("Profile नहीं मिली");
+          return;
+        }
+
+        email=
+          profileSnap.val().email||"";
+
+      }else{
+
+        /* पुराने users के लिए fallback */
+
+        const profilesSnap=
+          await get(ref(db,"profiles"));
+
+        let found=null;
+
+        profilesSnap.forEach(child=>{
+
+          const p=child.val();
+
+          if(
+            usernameKey(p.username)===key
+          ){
+            found=p;
+          }
+
+        });
+
+        if(!found){
+
+          toast("Username नहीं मिला");
+          return;
+        }
+
+        email=found.email||"";
+      }
+    }
+
+    if(!email){
+
+      toast(
+        "Is account mein email available नहीं है"
+      );
+
+      return;
+    }
+
     await signInWithEmailAndPassword(
-      auth,email,password
+      auth,
+      email,
+      password
     );
+
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
+
+/* =========================================================
+   GOOGLE LOGIN
+========================================================= */
 
 window.googleLogin=async()=>{
 
   try{
 
-    const provider=new GoogleAuthProvider();
+    const provider=
+      new GoogleAuthProvider();
 
     const result=
-      await signInWithPopup(auth,provider);
+      await signInWithPopup(
+        auth,
+        provider
+      );
 
     const profileRef=
-      ref(db,"profiles/"+result.user.uid);
+      ref(
+        db,
+        "profiles/"+result.user.uid
+      );
 
-    const snap=await get(profileRef);
+    const snap=
+      await get(profileRef);
 
     if(!snap.exists()){
 
-      await set(profileRef,{
-        uid:result.user.uid,
-        username:
+      let username=
+        usernameKey(
           result.user.displayName||
-          "user"+Date.now(),
+          "user"+Date.now()
+        );
+
+      let original=username;
+      let i=1;
+
+      while(
+        (await get(
+          ref(db,"usernames/"+username)
+        )).exists()
+      ){
+
+        username=
+          original+i;
+        i++;
+      }
+
+      const profile={
+
+        uid:result.user.uid,
+
+        username:username,
+
         name:
           result.user.displayName||
           "User",
-        email:result.user.email||"",
-        photo:result.user.photoURL||"",
+
+        email:
+          result.user.email||"",
+
+        photo:
+          result.user.photoURL||"",
+
         bio:"",
+
         followers:0,
+
         following:0,
+
         privacy:false,
+
         createdAt:Date.now()
-      });
+
+      };
+
+      await set(
+        profileRef,
+        profile
+      );
+
+      await set(
+        ref(
+          db,
+          "usernames/"+username
+        ),
+        result.user.uid
+      );
 
     }
 
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
@@ -1883,24 +2173,37 @@ window.sendOTP=async()=>{
 
   try{
 
-    const phone=normalizePhone($("phone").value);
+    const phone=
+      normalizePhone(
+        $("phone").value
+      );
 
-    if(!/^\+[1-9]\d{7,14}$/.test(phone)){
-      toast("सही international phone number डालें");
+    if(
+      !/^\+[1-9]\d{7,14}$/.test(phone)
+    ){
+
+      toast(
+        "सही international phone number डालें"
+      );
+
       return;
     }
 
     if(window.recaptchaVerifier){
+
       try{
         window.recaptchaVerifier.clear();
       }catch(e){}
+
     }
 
     window.recaptchaVerifier=
       new RecaptchaVerifier(
         auth,
         "recaptcha-container",
-        {size:"normal"}
+        {
+          size:"normal"
+        }
       );
 
     await window.recaptchaVerifier.render();
@@ -1912,13 +2215,20 @@ window.sendOTP=async()=>{
         window.recaptchaVerifier
       );
 
-    $("otp").classList.remove("hidden");
-    $("verifyOtpBtn").classList.remove("hidden");
+    $("otp")
+      .classList
+      .remove("hidden");
+
+    $("verifyOtpBtn")
+      .classList
+      .remove("hidden");
 
     toast("OTP भेज दिया गया");
 
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
@@ -1927,9 +2237,11 @@ window.verifyOTP=async()=>{
 
   try{
 
-    const code=$("otp").value.trim();
+    const code=
+      $("otp").value.trim();
 
     if(!confirmationResult){
+
       toast("पहले OTP भेजें");
       return;
     }
@@ -1939,7 +2251,9 @@ window.verifyOTP=async()=>{
     toast("Phone login successful");
 
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
@@ -1948,30 +2262,47 @@ window.verifyOTP=async()=>{
    AUTH STATE
 ========================================================= */
 
-onAuthStateChanged(auth,async user=>{
+onAuthStateChanged(
+  auth,
+  async user=>{
 
-  currentUser=user;
+    currentUser=user;
 
-  if(!user){
+    if(!user){
 
-    $("authScreen").classList.remove("hidden");
-    $("app").classList.add("hidden");
+      $("authScreen")
+        .classList
+        .remove("hidden");
 
-    return;
+      $("app")
+        .classList
+        .add("hidden");
+
+      stopIncomingCallListener();
+
+      return;
+    }
+
+    $("authScreen")
+      .classList
+      .add("hidden");
+
+    $("app")
+      .classList
+      .remove("hidden");
+
+    await loadProfile();
+
+    loadHome();
+    loadStories();
+    loadReels();
+    loadProfilePage();
+    loadPrivacyStatus();
+
+    startIncomingCallListener();
+
   }
-
-  $("authScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-
-  await loadProfile();
-
-  loadHome();
-  loadStories();
-  loadReels();
-  loadProfilePage();
-  loadPrivacyStatus();
-
-});
+);
 
 
 /* =========================================================
@@ -1983,35 +2314,98 @@ async function loadProfile(){
   if(!currentUser)return;
 
   const profileRef=
-    ref(db,"profiles/"+currentUser.uid);
+    ref(
+      db,
+      "profiles/"+currentUser.uid
+    );
 
-  const snap=await get(profileRef);
+  const snap=
+    await get(profileRef);
 
   if(snap.exists()){
 
     currentProfile=snap.val();
 
-  }else{
+    /* Phone/Google users के लिए email update */
 
-    currentProfile={
-      uid:currentUser.uid,
-      username:
-        currentUser.displayName||
-        "user"+Date.now(),
-      name:
-        currentUser.displayName||
-        "User",
-      photo:
-        currentUser.photoURL||"",
-      bio:"",
-      followers:0,
-      following:0,
-      privacy:false
-    };
+    if(
+      !currentProfile.email &&
+      currentUser.email
+    ){
 
-    await set(profileRef,currentProfile);
+      await update(
+        profileRef,
+        {
+          email:currentUser.email
+        }
+      );
 
+      currentProfile.email=
+        currentUser.email;
+    }
+
+    return;
   }
+
+  let username=
+    usernameKey(
+      currentUser.displayName||
+      "user"+Date.now()
+    );
+
+  let original=username;
+  let i=1;
+
+  while(
+    (await get(
+      ref(db,"usernames/"+username)
+    )).exists()
+  ){
+
+    username=original+i;
+    i++;
+  }
+
+  currentProfile={
+
+    uid:currentUser.uid,
+
+    username:username,
+
+    name:
+      currentUser.displayName||
+      username,
+
+    email:
+      currentUser.email||"",
+
+    photo:
+      currentUser.photoURL||"",
+
+    bio:"",
+
+    followers:0,
+
+    following:0,
+
+    privacy:false,
+
+    createdAt:Date.now()
+
+  };
+
+  await set(
+    profileRef,
+    currentProfile
+  );
+
+  await set(
+    ref(
+      db,
+      "usernames/"+username
+    ),
+    currentUser.uid
+  );
 }
 
 
@@ -2019,14 +2413,24 @@ async function refreshProfile(){
 
   const snap=
     await get(
-      ref(db,"profiles/"+currentUser.uid)
+      ref(
+        db,
+        "profiles/"+currentUser.uid
+      )
     );
 
   if(snap.exists()){
-    currentProfile=snap.val();
+
+    currentProfile=
+      snap.val();
+
   }
 }
 
+
+/* =========================================================
+   EDIT PROFILE
+========================================================= */
 
 window.editProfile=async()=>{
 
@@ -2041,7 +2445,9 @@ window.editProfile=async()=>{
   $("editBio").value=
     currentProfile.bio||"";
 
-  $("editModal").classList.remove("hidden");
+  $("editModal")
+    .classList
+    .remove("hidden");
 };
 
 
@@ -2049,20 +2455,61 @@ window.saveProfile=async()=>{
 
   try{
 
-    const name=$("editName").value.trim();
-    const username=$("editUsername").value.trim();
-    const bio=$("editBio").value.trim();
+    const name=
+      $("editName").value.trim();
 
-    let photo=currentProfile.photo||"";
+    const username=
+      usernameKey(
+        $("editUsername").value
+      );
 
-    const file=$("avatarFile").files[0];
+    const bio=
+      $("editBio").value.trim();
+
+    if(!username){
+
+      toast("Username डालें");
+      return;
+    }
+
+    const oldUsername=
+      usernameKey(
+        currentProfile.username
+      );
+
+    if(username!==oldUsername){
+
+      const exists=
+        await get(
+          ref(db,"usernames/"+username)
+        );
+
+      if(exists.exists()){
+
+        toast("Username already taken");
+        return;
+      }
+
+    }
+
+    let photo=
+      currentProfile.photo||"";
+
+    const file=
+      $("avatarFile").files[0];
 
     if(file){
-      photo=await uploadCloudinary(file);
+
+      photo=
+        await uploadCloudinary(file);
+
     }
 
     await update(
-      ref(db,"profiles/"+currentUser.uid),
+      ref(
+        db,
+        "profiles/"+currentUser.uid
+      ),
       {
         name:name,
         username:username,
@@ -2070,6 +2517,24 @@ window.saveProfile=async()=>{
         photo:photo
       }
     );
+
+    if(username!==oldUsername){
+
+      await remove(
+        ref(
+          db,
+          "usernames/"+oldUsername
+        )
+      );
+
+      await set(
+        ref(
+          db,
+          "usernames/"+username
+        ),
+        currentUser.uid
+      );
+    }
 
     await updateAuthProfile(
       currentUser,
@@ -2090,7 +2555,9 @@ window.saveProfile=async()=>{
     toast("Profile updated");
 
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
@@ -2104,15 +2571,18 @@ window.shareProfile=async()=>{
   if(navigator.share){
 
     try{
+
       await navigator.share({
         title:"Rechod",
         text:text
       });
+
     }catch(e){}
 
   }else{
 
     await navigator.clipboard?.writeText(text);
+
     toast("Profile copied");
 
   }
@@ -2135,25 +2605,37 @@ async function uploadCloudinary(file){
     CLOUD_NAME+
     "/"+type+"/upload";
 
-  const form=new FormData();
+  const form=
+    new FormData();
 
   form.append("file",file);
-  form.append("upload_preset",UPLOAD_PRESET);
+  form.append(
+    "upload_preset",
+    UPLOAD_PRESET
+  );
 
   const response=
-    await fetch(url,{
-      method:"POST",
-      body:form
-    });
+    await fetch(
+      url,
+      {
+        method:"POST",
+        body:form
+      }
+    );
 
-  const data=await response.json();
+  const data=
+    await response.json();
 
-  if(!response.ok||!data.secure_url){
+  if(
+    !response.ok||
+    !data.secure_url
+  ){
 
     throw new Error(
       data.error?.message||
       "Cloudinary upload failed"
     );
+
   }
 
   return data.secure_url;
@@ -2166,24 +2648,39 @@ async function uploadCloudinary(file){
 
 window.previewMedia=()=>{
 
-  const file=$("mediaFile").files[0];
+  const file=
+    $("mediaFile").files[0];
 
   if(!file)return;
 
-  $("mediaPreview").className="preview hidden";
-  $("videoPreview").className="preview hidden";
+  $("mediaPreview")
+    .className=
+    "preview hidden";
 
-  const url=URL.createObjectURL(file);
+  $("videoPreview")
+    .className=
+    "preview hidden";
 
-  if(file.type.startsWith("video")){
+  const url=
+    URL.createObjectURL(file);
+
+  if(
+    file.type.startsWith("video")
+  ){
 
     $("videoPreview").src=url;
-    $("videoPreview").classList.remove("hidden");
+
+    $("videoPreview")
+      .classList
+      .remove("hidden");
 
   }else{
 
     $("mediaPreview").src=url;
-    $("mediaPreview").classList.remove("hidden");
+
+    $("mediaPreview")
+      .classList
+      .remove("hidden");
 
   }
 };
@@ -2193,47 +2690,60 @@ window.selectFilter=filter=>{
 
   selectedFilter=filter;
 
-  $("mediaPreview").className=
-    "preview f-"+filter;
+  if(!$("mediaPreview").classList.contains("hidden")){
+
+    $("mediaPreview").className=
+      "preview f-"+filter;
+
+  }
 
   document
     .querySelectorAll(".filter-btn")
-    .forEach(btn=>
-      btn.classList.remove("active")
+    .forEach(
+      btn=>
+        btn.classList.remove("active")
     );
 
-  [...document.querySelectorAll(".filter-btn")]
-    .find(x=>
-      x.textContent.trim().toLowerCase()===filter
-    )
-    ?.classList.add("active");
 };
 
 
 /* =========================================================
-   UPLOAD
+   UPLOAD CONTENT
 ========================================================= */
 
 window.uploadContent=async()=>{
 
   if(!currentUser){
+
     toast("Login required");
     return;
+
   }
 
-  const file=$("mediaFile").files[0];
+  const file=
+    $("mediaFile").files[0];
 
   if(!file){
+
     toast("Photo/video select करें");
     return;
+
   }
 
-  const type=$("createType").value;
+  const type=
+    $("createType").value;
 
   try{
 
-    if(type==="reel"&&!file.type.startsWith("video")){
-      toast("Reel के लिए video select करें");
+    if(
+      type==="reel"&&
+      !file.type.startsWith("video")
+    ){
+
+      toast(
+        "Reel के लिए video select करें"
+      );
+
       return;
     }
 
@@ -2242,77 +2752,128 @@ window.uploadContent=async()=>{
     const mediaUrl=
       await uploadCloudinary(file);
 
-    const caption=$("caption").value.trim();
-    const music=$("musicName").value.trim();
+    const caption=
+      $("caption").value.trim();
+
+    const music=
+      $("musicName").value.trim();
 
     const base={
+
       uid:currentUser.uid,
-      username:currentProfile?.username||"User",
-      photo:currentProfile?.photo||"",
+
+      username:
+        currentProfile?.username||
+        "User",
+
+      photo:
+        currentProfile?.photo||
+        "",
+
       media:mediaUrl,
+
       mediaType:
         file.type.startsWith("video")
           ?"video"
           :"image",
+
       caption:caption,
+
       music:music,
+
       filter:selectedFilter,
+
       likes:0,
+
       comments:0,
+
       views:0,
+
       createdAt:Date.now()
+
     };
 
     if(type==="post"){
 
-      const postRef=push(ref(db,"posts"));
+      const postRef=
+        push(
+          ref(db,"posts")
+        );
 
-      await set(postRef,{
-        ...base,
-        id:postRef.key
-      });
+      await set(
+        postRef,
+        {
+          ...base,
+          id:postRef.key
+        }
+      );
 
       toast("Post published");
+
     }
 
     if(type==="reel"){
 
-      const reelRef=push(ref(db,"reels"));
+      const reelRef=
+        push(
+          ref(db,"reels")
+        );
 
-      await set(reelRef,{
-        ...base,
-        id:reelRef.key
-      });
+      await set(
+        reelRef,
+        {
+          ...base,
+          id:reelRef.key
+        }
+      );
 
       toast("Reel published");
+
       loadReels();
+
     }
 
     if(type==="story"){
 
-      const storyRef=push(ref(db,"stories"));
+      const storyRef=
+        push(
+          ref(db,"stories")
+        );
 
-      await set(storyRef,{
-        ...base,
-        id:storyRef.key,
-        expiresAt:Date.now()+86400000
-      });
+      await set(
+        storyRef,
+        {
+          ...base,
+          id:storyRef.key,
+          expiresAt:
+            Date.now()+86400000
+        }
+      );
 
       toast("Story added");
+
       loadStories();
+
     }
 
     $("mediaFile").value="";
     $("caption").value="";
     $("musicName").value="";
 
-    $("mediaPreview").classList.add("hidden");
-    $("videoPreview").classList.add("hidden");
+    $("mediaPreview")
+      .classList
+      .add("hidden");
+
+    $("videoPreview")
+      .classList
+      .add("hidden");
 
     loadHome();
 
   }catch(error){
+
     toast(error.message);
+
   }
 };
 
@@ -2329,12 +2890,14 @@ function loadHome(){
 
       const posts=[];
 
-      snapshot.forEach(child=>{
-        posts.push({
-          id:child.key,
-          ...child.val()
-        });
-      });
+      snapshot.forEach(
+        child=>{
+          posts.push({
+            id:child.key,
+            ...child.val()
+          });
+        }
+      );
 
       posts.sort(
         (a,b)=>
@@ -2356,13 +2919,21 @@ function postHTML(post){
   const isVideo=
     post.mediaType==="video";
 
+  const self=
+    post.uid===currentUser?.uid;
+
   return `
+
   <article class="post">
 
     <div class="post-head">
 
-      <img class="avatar"
-      src="${esc(post.photo||"https://via.placeholder.com/100")}">
+      <img
+      class="avatar"
+      src="${esc(
+        post.photo||
+        "https://via.placeholder.com/100"
+      )}">
 
       <div class="user-info">
 
@@ -2376,39 +2947,51 @@ function postHTML(post){
 
       </div>
 
-      <button class="follow-small"
-      onclick="followUser('${post.uid}')">
-      Follow
-      </button>
+      ${
+        self
+        ?""
+        :`
+        <button
+        class="follow-small"
+        onclick="followUser('${esc(post.uid)}')">
+        Follow
+        </button>`
+      }
 
     </div>
 
     ${
       isVideo
+
       ?
-      `<video class="post-media"
+
+      `<video
+      class="post-media"
       src="${esc(post.media)}"
       controls
       playsinline></video>`
+
       :
-      `<img class="post-media"
+
+      `<img
+      class="post-media"
       src="${esc(post.media)}">`
     }
 
     <div class="post-actions">
 
       <button class="action"
-      onclick="likePost('${post.id}')">
+      onclick="likePost('${esc(post.id)}')">
       ❤️
       </button>
 
       <button class="action"
-      onclick="openComments('${post.id}')">
+      onclick="openComments('${esc(post.id)}')">
       💬
       </button>
 
       <button class="action"
-      onclick="sharePost('${post.id}')">
+      onclick="sharePost('${esc(post.id)}')">
       ✈️
       </button>
 
@@ -2425,13 +3008,21 @@ function postHTML(post){
       </b>
 
       <div class="caption">
-      <b>@${esc(post.username||"user")}</b>
+
+      <b>
+      @${esc(post.username||"user")}
+      </b>
+
       ${esc(post.caption||"")}
+
       </div>
 
-      <div class="count"
-      onclick="openComments('${post.id}')">
+      <div
+      class="count"
+      onclick="openComments('${esc(post.id)}')">
+
       View ${Number(post.comments||0)} comments
+
       </div>
 
     </div>
@@ -2443,17 +3034,10 @@ function postHTML(post){
 window.likePost=async id=>{
 
   await runTransaction(
-    ref(db,"posts/"+id),
-    post=>{
-
-      if(!post)return post;
-
-      post.likes=
-        Number(post.likes||0)+1;
-
-      return post;
-    }
+    ref(db,"posts/"+id+"/likes"),
+    n=>(Number(n)||0)+1
   );
+
 };
 
 
@@ -2466,14 +3050,19 @@ window.openComments=async id=>{
   currentPostId=id;
 
   $("commentModal")
-    .classList.remove("hidden");
+    .classList
+    .remove("hidden");
 
   const snap=
     await get(
-      ref(db,"comments/"+id)
+      ref(
+        db,
+        "comments/"+id
+      )
     );
 
-  const box=$("commentsList");
+  const box=
+    $("commentsList");
 
   box.innerHTML="";
 
@@ -2481,31 +3070,41 @@ window.openComments=async id=>{
 
     const comments=[];
 
-    snap.forEach(child=>{
-      comments.push(child.val());
-    });
+    snap.forEach(
+      child=>{
+        comments.push(child.val());
+      }
+    );
 
-    comments.forEach(comment=>{
+    comments.forEach(
+      comment=>{
 
-      box.innerHTML+=`
-      <div class="comment">
+        box.innerHTML+=`
 
-        <img src="${esc(
-          comment.photo||
-          "https://via.placeholder.com/50"
-        )}">
+        <div class="comment">
 
-        <div class="comment-body">
+          <img
+          src="${esc(
+            comment.photo||
+            "https://via.placeholder.com/50"
+          )}">
 
-          <b>@${esc(comment.username)}</b><br>
+          <div class="comment-body">
 
-          ${esc(comment.text)}
+            <b>
+            @${esc(comment.username)}
+            </b>
 
-        </div>
+            <br>
 
-      </div>`;
+            ${esc(comment.text)}
 
-    });
+          </div>
+
+        </div>`;
+
+      }
+    );
   }
 };
 
@@ -2515,7 +3114,9 @@ window.addComment=async()=>{
   if(!currentPostId)return;
 
   const text=
-    $("commentInput").value.trim();
+    $("commentInput")
+      .value
+      .trim();
 
   if(!text)return;
 
@@ -2527,13 +3128,18 @@ window.addComment=async()=>{
       )
     );
 
-  await set(commentRef,{
-    uid:currentUser.uid,
-    username:currentProfile.username,
-    photo:currentProfile.photo||"",
-    text:text,
-    createdAt:Date.now()
-  });
+  await set(
+    commentRef,
+    {
+      uid:currentUser.uid,
+      username:
+        currentProfile.username,
+      photo:
+        currentProfile.photo||"",
+      text:text,
+      createdAt:Date.now()
+    }
+  );
 
   await runTransaction(
     ref(
@@ -2556,7 +3162,8 @@ window.addComment=async()=>{
 window.sharePost=async id=>{
 
   const url=
-    location.href+"#post-"+id;
+    location.href+
+    "#post-"+id;
 
   if(navigator.share){
 
@@ -2575,35 +3182,52 @@ window.sharePost=async id=>{
     await navigator.clipboard?.writeText(url);
 
     toast("Link copied");
+
   }
 };
 
 
 /* =========================================================
-   FOLLOW
+   FOLLOW / UNFOLLOW
 ========================================================= */
 
 window.followUser=async uid=>{
 
+  if(!currentUser)return;
+
   if(uid===currentUser.uid){
+
     toast("This is your profile");
     return;
+
   }
 
-  const followRef=
+  const followerRef=
     ref(
       db,
       "followers/"+uid+"/"+currentUser.uid
     );
 
-  const snap=await get(followRef);
+  const followingRef=
+    ref(
+      db,
+      "following/"+currentUser.uid+"/"+uid
+    );
+
+  const snap=
+    await get(followerRef);
 
   if(snap.exists()){
 
-    await remove(followRef);
+    await remove(followerRef);
+
+    await remove(followingRef);
 
     await runTransaction(
-      ref(db,"profiles/"+uid+"/followers"),
+      ref(
+        db,
+        "profiles/"+uid+"/followers"
+      ),
       n=>Math.max(
         0,
         (Number(n)||0)-1
@@ -2611,7 +3235,10 @@ window.followUser=async uid=>{
     );
 
     await runTransaction(
-      ref(db,"profiles/"+currentUser.uid+"/following"),
+      ref(
+        db,
+        "profiles/"+currentUser.uid+"/following"
+      ),
       n=>Math.max(
         0,
         (Number(n)||0)-1
@@ -2622,24 +3249,246 @@ window.followUser=async uid=>{
 
   }else{
 
-    await set(followRef,{
-      uid:currentUser.uid,
-      createdAt:Date.now()
-    });
+    await set(
+      followerRef,
+      {
+        uid:currentUser.uid,
+        createdAt:Date.now()
+      }
+    );
+
+    await set(
+      followingRef,
+      {
+        uid:uid,
+        createdAt:Date.now()
+      }
+    );
 
     await runTransaction(
-      ref(db,"profiles/"+uid+"/followers"),
+      ref(
+        db,
+        "profiles/"+uid+"/followers"
+      ),
       n=>(Number(n)||0)+1
     );
 
     await runTransaction(
-      ref(db,"profiles/"+currentUser.uid+"/following"),
+      ref(
+        db,
+        "profiles/"+currentUser.uid+"/following"
+      ),
       n=>(Number(n)||0)+1
+    );
+
+    await set(
+      ref(
+        db,
+        "notifs/"+uid+"/"+currentUser.uid+"_"+Date.now()
+      ),
+      {
+        text:
+          "@"+currentProfile.username+
+          " started following you",
+        type:"follow",
+        senderUid:currentUser.uid,
+        createdAt:Date.now()
+      }
     );
 
     toast("Following");
+
   }
+
+  refreshProfile();
+  loadProfilePage();
 };
+
+
+/* =========================================================
+   FOLLOWERS / FOLLOWING LIST
+========================================================= */
+
+window.openFollowList=async type=>{
+
+  if(!currentUser)return;
+
+  const title=
+    type==="followers"
+      ?"Followers"
+      :"Following";
+
+  const modal=
+    document.createElement("div");
+
+  modal.className="modal";
+
+  modal.innerHTML=`
+
+  <div class="modal-card">
+
+    <div class="modal-head">
+
+      <h3>${title}</h3>
+
+      <button class="close"
+      onclick="this.closest('.modal').remove()">
+      ×
+      </button>
+
+    </div>
+
+    <div class="follow-tabs">
+
+      <button
+      class="follow-tab ${type==="followers"?"active":""}"
+      onclick="reloadFollowModal('followers',this)">
+      Followers
+      </button>
+
+      <button
+      class="follow-tab ${type==="following"?"active":""}"
+      onclick="reloadFollowModal('following',this)">
+      Following
+      </button>
+
+    </div>
+
+    <div id="followListBody">
+      Loading...
+    </div>
+
+  </div>`;
+
+  document.body.appendChild(modal);
+
+  loadFollowList(type,modal);
+
+};
+
+
+window.reloadFollowModal=async(type,button)=>{
+
+  const modal=
+    button.closest(".modal");
+
+  modal
+    .querySelectorAll(".follow-tab")
+    .forEach(
+      x=>x.classList.remove("active")
+    );
+
+  button.classList.add("active");
+
+  await loadFollowList(
+    type,
+    modal
+  );
+};
+
+
+async function loadFollowList(type,modal){
+
+  const body=
+    modal.querySelector(
+      "#followListBody"
+    );
+
+  body.innerHTML=
+    "Loading...";
+
+  const path=
+    type==="followers"
+      ?"followers/"+currentUser.uid
+      :"following/"+currentUser.uid;
+
+  const snap=
+    await get(ref(db,path));
+
+  body.innerHTML="";
+
+  if(!snap.exists()){
+
+    body.innerHTML=`
+      <div style="padding:25px;text-align:center;color:#888">
+      ${type==="followers"
+        ?"No followers yet"
+        :"No following yet"}
+      </div>`;
+
+    return;
+  }
+
+  const ids=[];
+
+  snap.forEach(
+    child=>{
+      ids.push(child.key);
+    }
+  );
+
+  for(const uid of ids){
+
+    const profileSnap=
+      await get(
+        ref(
+          db,
+          "profiles/"+uid
+        )
+      );
+
+    if(!profileSnap.exists())continue;
+
+    const p=
+      profileSnap.val();
+
+    const row=
+      document.createElement("div");
+
+    row.className=
+      "follow-person";
+
+    row.innerHTML=`
+
+      <img
+      class="avatar"
+      src="${esc(
+        p.photo||
+        "https://via.placeholder.com/100"
+      )}">
+
+      <div class="follow-person-info">
+
+        <b>
+        @${esc(p.username||"user")}
+        </b>
+
+        <div style="font-size:12px;color:#888">
+        ${esc(p.name||"")}
+        </div>
+
+      </div>
+
+      <div class="follow-call">
+
+        <button
+        title="Audio Call"
+        onclick="startCall('audio','${esc(uid)}')">
+        📞
+        </button>
+
+        <button
+        title="Video Call"
+        onclick="startCall('video','${esc(uid)}')">
+        📹
+        </button>
+
+      </div>`;
+
+    body.appendChild(row);
+
+  }
+}
 
 
 /* =========================================================
@@ -2654,12 +3503,14 @@ function loadReels(){
 
       const reels=[];
 
-      snapshot.forEach(child=>{
-        reels.push({
-          id:child.key,
-          ...child.val()
-        });
-      });
+      snapshot.forEach(
+        child=>{
+          reels.push({
+            id:child.key,
+            ...child.val()
+          });
+        }
+      );
 
       reels.sort(
         (a,b)=>
@@ -2667,10 +3518,12 @@ function loadReels(){
           (a.createdAt||0)
       );
 
-      $("reelsContainer").innerHTML=
+      $("reelsContainer")
+        .innerHTML=
         reels.map(reelHTML).join("");
 
       setupReelObserver();
+
     }
   );
 }
@@ -2679,7 +3532,9 @@ function loadReels(){
 function reelHTML(reel){
 
   return `
-  <article class="reel"
+
+  <article
+  class="reel"
   data-reel-id="${esc(reel.id)}">
 
     <video
@@ -2699,7 +3554,8 @@ function reelHTML(reel){
       Reels
       </div>
 
-      <button class="reel-mute"
+      <button
+      class="reel-mute"
       onclick="toggleMute(this)">
       🔇
       </button>
@@ -2708,33 +3564,40 @@ function reelHTML(reel){
 
     <div class="reel-side">
 
-      <button onclick="likeReel('${esc(reel.id)}')">
+      <button
+      onclick="likeReel('${esc(reel.id)}')">
       ❤️
-      <span>${Number(reel.likes||0)}</span>
+      <span>
+      ${Number(reel.likes||0)}
+      </span>
       </button>
 
-      <button onclick="openReelComments('${esc(reel.id)}')">
+      <button
+      onclick="openReelComments('${esc(reel.id)}')">
       💬
-      <span>${Number(reel.comments||0)}</span>
+      <span>
+      ${Number(reel.comments||0)}
+      </span>
       </button>
 
-      <button onclick="repostReel('${esc(reel.id)}')">
+      <button
+      onclick="repostReel('${esc(reel.id)}')">
       🔁
-      <span>${Number(reel.reposts||0)}</span>
+      <span>
+      ${Number(reel.reposts||0)}
+      </span>
       </button>
 
-      <button onclick="shareReel('${esc(reel.id)}')">
+      <button
+      onclick="shareReel('${esc(reel.id)}')">
       ✈️
       <span>Share</span>
       </button>
 
-      <button onclick="saveReel('${esc(reel.id)}')">
+      <button
+      onclick="saveReel('${esc(reel.id)}')">
       🔖
       <span>Save</span>
-      </button>
-
-      <button onclick="reelMore('${esc(reel.id)}')">
-      ⋮
       </button>
 
     </div>
@@ -2743,7 +3606,8 @@ function reelHTML(reel){
 
       <div class="reel-user">
 
-        <img class="reel-avatar"
+        <img
+        class="reel-avatar"
         src="${esc(
           reel.photo||
           "https://via.placeholder.com/100"
@@ -2753,7 +3617,8 @@ function reelHTML(reel){
         @${esc(reel.username||"user")}
         </b>
 
-        <button class="reel-follow"
+        <button
+        class="reel-follow"
         onclick="followUser('${esc(reel.uid)}')">
         Follow
         </button>
@@ -2780,7 +3645,8 @@ function reelHTML(reel){
 
 function setupReelObserver(){
 
-  const container=$("reelsContainer");
+  const container=
+    $("reelsContainer");
 
   const reels=
     [...container.querySelectorAll(".reel")];
@@ -2789,54 +3655,70 @@ function setupReelObserver(){
     new IntersectionObserver(
       entries=>{
 
-        entries.forEach(entry=>{
+        entries.forEach(
+          entry=>{
 
-          const reel=entry.target;
-          const video=reel.querySelector("video");
-          const progress=
-            reel.querySelector(
-              ".reel-progress i"
-            );
+            const reel=
+              entry.target;
 
-          if(
-            entry.isIntersecting&&
-            entry.intersectionRatio>=0.65
-          ){
+            const video=
+              reel.querySelector("video");
 
-            reels.forEach(other=>{
+            const progress=
+              reel.querySelector(
+                ".reel-progress i"
+              );
 
-              if(other!==reel){
+            if(
+              entry.isIntersecting&&
+              entry.intersectionRatio>=0.65
+            ){
 
-                other.querySelector("video")
-                  .pause();
-              }
+              reels.forEach(
+                other=>{
 
-            });
+                  if(other!==reel){
 
-            video.play().catch(()=>{});
+                    other
+                      .querySelector("video")
+                      .pause();
 
-            countReelView(
-              reel.dataset.reelId
-            );
+                  }
 
-            video.ontimeupdate=()=>{
+                }
+              );
 
-              if(video.duration){
+              video
+                .play()
+                .catch(()=>{});
 
-                progress.style.width=
-                  (
-                    video.currentTime/
-                    video.duration*100
-                  )+"%";
-              }
-            };
+              countReelView(
+                reel.dataset.reelId
+              );
 
-          }else{
+              video.ontimeupdate=()=>{
 
-            video.pause();
+                if(video.duration){
+
+                  progress.style.width=
+                    (
+                      video.currentTime/
+                      video.duration*
+                      100
+                    )+"%";
+
+                }
+
+              };
+
+            }else{
+
+              video.pause();
+
+            }
+
           }
-
-        });
+        );
 
       },
       {
@@ -2845,8 +3727,9 @@ function setupReelObserver(){
       }
     );
 
-  reels.forEach(reel=>
-    observer.observe(reel)
+  reels.forEach(
+    reel=>
+      observer.observe(reel)
   );
 }
 
@@ -2858,8 +3741,12 @@ async function countReelView(id){
   viewedReels[id]=true;
 
   await runTransaction(
-    ref(db,"reels/"+id+"/views"),
-    n=>(Number(n)||0)+1
+    ref(
+      db,
+      "reels/"+id+"/views"
+    ),
+    n=>
+      (Number(n)||0)+1
   );
 }
 
@@ -2872,18 +3759,25 @@ window.toggleMute=button=>{
   const video=
     reel.querySelector("video");
 
-  video.muted=!video.muted;
+  video.muted=
+    !video.muted;
 
   button.textContent=
-    video.muted?"🔇":"🔊";
+    video.muted
+      ?"🔇"
+      :"🔊";
 };
 
 
 window.likeReel=async id=>{
 
   await runTransaction(
-    ref(db,"reels/"+id+"/likes"),
-    n=>(Number(n)||0)+1
+    ref(
+      db,
+      "reels/"+id+"/likes"
+    ),
+    n=>
+      (Number(n)||0)+1
   );
 };
 
@@ -2891,8 +3785,12 @@ window.likeReel=async id=>{
 window.repostReel=async id=>{
 
   await runTransaction(
-    ref(db,"reels/"+id+"/reposts"),
-    n=>(Number(n)||0)+1
+    ref(
+      db,
+      "reels/"+id+"/reposts"
+    ),
+    n=>
+      (Number(n)||0)+1
   );
 
   toast("Reposted");
@@ -2919,7 +3817,8 @@ window.saveReel=async id=>{
 window.shareReel=async id=>{
 
   const url=
-    location.href+"#reel-"+id;
+    location.href+
+    "#reel-"+id;
 
   if(navigator.share){
 
@@ -2936,21 +3835,9 @@ window.shareReel=async id=>{
   }else{
 
     await navigator.clipboard?.writeText(url);
+
     toast("Reel link copied");
 
-  }
-};
-
-
-window.reelMore=id=>{
-
-  if(confirm("Reel link copy करना है?")){
-
-    navigator.clipboard?.writeText(
-      location.href+"#reel-"+id
-    );
-
-    toast("Copied");
   }
 };
 
@@ -2960,9 +3847,11 @@ window.openReelComments=id=>{
   currentPostId=id;
 
   $("commentModal")
-    .classList.remove("hidden");
+    .classList
+    .remove("hidden");
 
   openComments(id);
+
 };
 
 
@@ -2976,24 +3865,30 @@ function loadStories(){
     ref(db,"stories"),
     snapshot=>{
 
-      const now=Date.now();
+      const now=
+        Date.now();
+
       const stories=[];
 
-      snapshot.forEach(child=>{
+      snapshot.forEach(
+        child=>{
 
-        const s={
-          id:child.key,
-          ...child.val()
-        };
+          const s={
+            id:child.key,
+            ...child.val()
+          };
 
-        if(
-          s.expiresAt&&
-          s.expiresAt>now
-        ){
-          stories.push(s);
+          if(
+            s.expiresAt&&
+            s.expiresAt>now
+          ){
+
+            stories.push(s);
+
+          }
+
         }
-
-      });
+      );
 
       stories.sort(
         (a,b)=>
@@ -3003,34 +3898,42 @@ function loadStories(){
 
       let html=`
 
-      <div class="story"
+      <div
+      class="story"
       onclick="showPage('createPage')">
 
       <div class="add-story">+</div>
+
       <div>Add Story</div>
 
       </div>`;
 
-      html+=stories.map(s=>`
+      html+=
+        stories.map(
+          s=>`
 
-      <div class="story"
-      onclick='viewStory(${JSON.stringify(s)})'>
+          <div
+          class="story"
+          onclick='viewStory(${JSON.stringify(s)})'>
 
-      <img class="story-avatar"
-      src="${esc(
-        s.photo||
-        "https://via.placeholder.com/100"
-      )}">
+          <img
+          class="story-avatar"
+          src="${esc(
+            s.photo||
+            "https://via.placeholder.com/100"
+          )}">
 
-      <div>
-      ${esc(s.username||"user")}
-      </div>
+          <div>
+          ${esc(s.username||"user")}
+          </div>
 
-      </div>
+          </div>
 
-      `).join("");
+          `
+        ).join("");
 
-      $("stories").innerHTML=html;
+      $("stories").innerHTML=
+        html;
 
     }
   );
@@ -3044,12 +3947,17 @@ window.viewStory=story=>{
 
   const media=
     isVideo
+
     ?
+
     `<video
     src="${esc(story.media)}"
     style="width:100%;max-height:75vh"
-    controls autoplay></video>`
+    controls
+    autoplay></video>`
+
     :
+
     `<img
     src="${esc(story.media)}"
     style="width:100%;max-height:75vh;object-fit:contain">`;
@@ -3061,10 +3969,12 @@ window.viewStory=story=>{
 
   modal.innerHTML=`
 
-  <div class="modal-card"
+  <div
+  class="modal-card"
   style="background:#000;color:#fff">
 
-  <button class="close"
+  <button
+  class="close"
   style="color:white"
   onclick="this.closest('.modal').remove()">
   ×
@@ -3072,9 +3982,13 @@ window.viewStory=story=>{
 
   ${media}
 
-  <h3>@${esc(story.username)}</h3>
+  <h3>
+  @${esc(story.username)}
+  </h3>
 
-  <p>${esc(story.caption||"")}</p>
+  <p>
+  ${esc(story.caption||"")}
+  </p>
 
   <div>
   🎵 ${esc(story.music||"Original audio")}
@@ -3102,61 +4016,93 @@ window.searchUsers=async()=>{
 
     $("searchResults").innerHTML="";
     return;
+
   }
 
   const snap=
-    await get(ref(db,"profiles"));
+    await get(
+      ref(db,"profiles")
+    );
 
   const users=[];
 
   if(snap.exists()){
 
-    snap.forEach(child=>{
+    snap.forEach(
+      child=>{
 
-      const p=child.val();
+        const p=
+          child.val();
 
-      if(
-        String(p.username||"")
-        .toLowerCase()
-        .includes(q)||
-        String(p.name||"")
-        .toLowerCase()
-        .includes(q)
-      ){
+        if(
+          String(p.username||"")
+            .toLowerCase()
+            .includes(q)||
 
-        users.push(p);
+          String(p.name||"")
+            .toLowerCase()
+            .includes(q)
+        ){
+
+          users.push(p);
+
+        }
+
       }
-
-    });
+    );
   }
 
   $("searchResults").innerHTML=
-    users.map(p=>`
+    users.map(
+      p=>`
 
-    <div class="person">
+      <div class="person">
 
-    <img class="avatar"
-    src="${esc(
-      p.photo||
-      "https://via.placeholder.com/100"
-    )}">
+      <img
+      class="avatar"
+      src="${esc(
+        p.photo||
+        "https://via.placeholder.com/100"
+      )}">
 
-    <div class="person-info">
+      <div class="person-info">
 
-    <b>@${esc(p.username)}</b>
+      <b>
+      @${esc(p.username)}
+      </b>
 
-    <div>${esc(p.name||"")}</div>
+      <div>
+      ${esc(p.name||"")}
+      </div>
 
-    </div>
+      </div>
 
-    <button class="follow-small"
-    onclick="followUser('${esc(p.uid)}')">
-    Follow
-    </button>
+      <div class="person-buttons">
 
-    </div>
+      <button
+      class="call-mini"
+      onclick="startCall('audio','${esc(p.uid)}')">
+      📞
+      </button>
 
-    `).join("");
+      <button
+      class="call-mini"
+      onclick="startCall('video','${esc(p.uid)}')">
+      📹
+      </button>
+
+      <button
+      class="follow-small"
+      onclick="followUser('${esc(p.uid)}')">
+      Follow
+      </button>
+
+      </div>
+
+      </div>
+
+      `
+    ).join("");
 };
 
 
@@ -3174,10 +4120,15 @@ async function loadProfilePage(){
     currentProfile.photo||
     "https://via.placeholder.com/100";
 
-  $("profileName").innerHTML=
-    "@"+esc(
-      currentProfile.username||"user"
+  $("profileName").textContent=
+    "@"+
+    (
+      currentProfile.username||
+      "user"
     );
+
+  $("profileBio").textContent=
+    currentProfile.bio||"";
 
   $("profileFollowers").textContent=
     currentProfile.followers||0;
@@ -3186,65 +4137,96 @@ async function loadProfilePage(){
     currentProfile.following||0;
 
   const postsSnap=
-    await get(ref(db,"posts"));
+    await get(
+      ref(db,"posts")
+    );
 
   const reelsSnap=
-    await get(ref(db,"reels"));
+    await get(
+      ref(db,"reels")
+    );
 
   const items=[];
 
   if(postsSnap.exists()){
 
-    postsSnap.forEach(child=>{
+    postsSnap.forEach(
+      child=>{
 
-      const p=child.val();
+        const p=
+          child.val();
 
-      if(p.uid===currentUser.uid){
-        items.push(p);
+        if(
+          p.uid===
+          currentUser.uid
+        ){
+
+          items.push(p);
+
+        }
+
       }
+    );
 
-    });
   }
 
   if(reelsSnap.exists()){
 
-    reelsSnap.forEach(child=>{
+    reelsSnap.forEach(
+      child=>{
 
-      const p=child.val();
+        const p=
+          child.val();
 
-      if(p.uid===currentUser.uid){
-        items.push(p);
+        if(
+          p.uid===
+          currentUser.uid
+        ){
+
+          items.push(p);
+
+        }
+
       }
+    );
 
-    });
   }
 
   $("profilePosts").textContent=
     items.length;
 
   $("profileGrid").innerHTML=
-    items.map(item=>{
+    items.map(
+      item=>{
 
-      if(item.mediaType==="video"){
+        if(
+          item.mediaType==="video"
+        ){
+
+          return `
+
+          <div class="grid-item">
+
+          <video
+          src="${esc(item.media)}"
+          muted
+          playsinline></video>
+
+          </div>`;
+
+        }
 
         return `
+
         <div class="grid-item">
 
-        <video
-        src="${esc(item.media)}"
-        muted
-        playsinline></video>
+        <img
+        src="${esc(item.media)}">
 
         </div>`;
 
       }
-
-      return `
-      <div class="grid-item">
-      <img src="${esc(item.media)}">
-      </div>`;
-
-    }).join("");
+    ).join("");
 }
 
 
@@ -3255,27 +4237,36 @@ async function loadProfilePage(){
 window.openMessages=async()=>{
 
   const snap=
-    await get(ref(db,"profiles"));
+    await get(
+      ref(db,"profiles")
+    );
 
   const users=[];
 
   if(snap.exists()){
 
-    snap.forEach(child=>{
+    snap.forEach(
+      child=>{
 
-      if(child.key!==currentUser.uid){
+        if(
+          child.key!==
+          currentUser.uid
+        ){
 
-        users.push({
-          uid:child.key,
-          ...child.val()
-        });
+          users.push({
+            uid:child.key,
+            ...child.val()
+          });
+
+        }
 
       }
+    );
 
-    });
   }
 
-  const box=document.createElement("div");
+  const box=
+    document.createElement("div");
 
   box.className="modal";
 
@@ -3287,7 +4278,8 @@ window.openMessages=async()=>{
 
   <h3>Messages</h3>
 
-  <button class="close"
+  <button
+  class="close"
   onclick="this.closest('.modal').remove()">
   ×
   </button>
@@ -3297,28 +4289,36 @@ window.openMessages=async()=>{
   <div class="chat-list">
 
   ${
-    users.map(u=>`
+    users.map(
+      u=>`
 
-    <div class="chat-user"
-    onclick='openChat(${JSON.stringify(u)})'>
+      <div
+      class="chat-user"
+      onclick='openChat(${JSON.stringify(u)})'>
 
-    <img class="avatar"
-    src="${esc(
-      u.photo||
-      "https://via.placeholder.com/100"
-    )}">
+      <img
+      class="avatar"
+      src="${esc(
+        u.photo||
+        "https://via.placeholder.com/100"
+      )}">
 
-    <div>
+      <div>
 
-    <b>@${esc(u.username)}</b>
+      <b>
+      @${esc(u.username)}
+      </b>
 
-    <div>${esc(u.name||"")}</div>
+      <div>
+      ${esc(u.name||"")}
+      </div>
 
-    </div>
+      </div>
 
-    </div>
+      </div>
 
-    `).join("")
+      `
+    ).join("")
   }
 
   </div>
@@ -3333,26 +4333,39 @@ window.openChat=user=>{
 
   document
     .querySelectorAll(".modal")
-    .forEach(m=>m.remove());
+    .forEach(
+      m=>m.remove()
+    );
 
-  currentChatUid=user.uid;
+  currentChatUid=
+    user.uid;
 
   $("chatName").textContent=
-    "@"+(user.username||"user");
+    "@"+
+    (
+      user.username||
+      "user"
+    );
 
   $("chatAvatar").src=
     user.photo||
     "https://via.placeholder.com/100";
 
   $("chatBox")
-    .classList.remove("hidden");
+    .classList
+    .remove("hidden");
 
   loadMessages();
 };
 
 
 function conversationId(a,b){
-  return [a,b].sort().join("_");
+
+  return [
+    a,
+    b
+  ].sort().join("_");
+
 }
 
 
@@ -3364,55 +4377,85 @@ function loadMessages(){
       currentChatUid
     );
 
-  onValue(
-    ref(db,"messages/"+id),
-    snapshot=>{
+  if(messageUnsubscribe){
 
-      const messages=[];
+    messageUnsubscribe();
 
-      snapshot.forEach(child=>{
+    messageUnsubscribe=null;
 
-        messages.push({
-          id:child.key,
-          ...child.val()
-        });
+  }
 
-      });
+  const messageRef=
+    ref(
+      db,
+      "messages/"+id
+    );
 
-      messages.sort(
-        (a,b)=>
-          (a.timestamp||0)-
-          (b.timestamp||0)
-      );
+  const listener=
+    onValue(
+      messageRef,
+      snapshot=>{
 
-      $("chatMessages").innerHTML=
-        messages.map(m=>`
+        const messages=[];
 
-        <div class="msg ${
-          m.senderUid===currentUser.uid
-          ?"mine"
-          :"theirs"
-        }">
+        snapshot.forEach(
+          child=>{
 
-        ${esc(m.text)}
+            messages.push({
+              id:child.key,
+              ...child.val()
+            });
 
-        </div>
+          }
+        );
 
-        `).join("");
+        messages.sort(
+          (a,b)=>
+            (a.timestamp||0)-
+            (b.timestamp||0)
+        );
 
-      $("chatMessages").scrollTop=
-        $("chatMessages").scrollHeight;
-    }
-  );
+        $("chatMessages").innerHTML=
+          messages.map(
+            m=>`
+
+            <div
+            class="msg ${
+              m.senderUid===
+              currentUser.uid
+                ?"mine"
+                :"theirs"
+            }">
+
+            ${esc(m.text)}
+
+            </div>
+
+            `
+          ).join("");
+
+        $("chatMessages").scrollTop=
+          $("chatMessages").scrollHeight;
+
+      }
+    );
+
+  messageUnsubscribe=
+    ()=>off(messageRef,"value",listener);
 }
 
 
 window.sendMessage=async()=>{
 
   const text=
-    $("chatText").value.trim();
+    $("chatText")
+      .value
+      .trim();
 
-  if(!text||!currentChatUid)return;
+  if(
+    !text||
+    !currentChatUid
+  )return;
 
   const id=
     conversationId(
@@ -3421,21 +4464,45 @@ window.sendMessage=async()=>{
     );
 
   const msgRef=
-    push(ref(db,"messages/"+id));
+    push(
+      ref(
+        db,
+        "messages/"+id
+      )
+    );
 
-  await set(msgRef,{
-    senderUid:currentUser.uid,
-    receiverUid:currentChatUid,
-    text:text,
-    timestamp:Date.now()
-  });
+  await set(
+    msgRef,
+    {
+      senderUid:
+        currentUser.uid,
+
+      receiverUid:
+        currentChatUid,
+
+      text:text,
+
+      timestamp:
+        Date.now()
+    }
+  );
 
   $("chatText").value="";
 };
 
 
 window.closeChat=()=>{
-  $("chatBox").classList.add("hidden");
+
+  if(messageUnsubscribe){
+
+    messageUnsubscribe();
+    messageUnsubscribe=null;
+
+  }
+
+  $("chatBox")
+    .classList
+    .add("hidden");
 };
 
 
@@ -3453,23 +4520,30 @@ window.openNotifications=async()=>{
       )
     );
 
-  let text="Notifications";
+  let text=
+    "Notifications";
 
   if(snap.exists()){
 
     const arr=[];
 
-    snap.forEach(child=>{
-      arr.push(child.val());
-    });
+    snap.forEach(
+      child=>{
+        arr.push(child.val());
+      }
+    );
 
     text+=
       "\n\n"+
-      arr.map(x=>x.text).join("\n");
+      arr
+        .map(x=>x.text)
+        .join("\n");
 
   }else{
 
-    text+="\n\nNo notifications";
+    text+=
+      "\n\nNo notifications";
+
   }
 
   alert(text);
@@ -3484,20 +4558,28 @@ window.showPage=(pageId,button)=>{
 
   document
     .querySelectorAll(".page")
-    .forEach(p=>
-      p.classList.remove("active")
+    .forEach(
+      p=>
+        p.classList.remove("active")
     );
 
-  $(pageId).classList.add("active");
+  $(pageId)
+    .classList
+    .add("active");
 
   document
     .querySelectorAll(".nav-btn")
-    .forEach(b=>
-      b.classList.remove("active")
+    .forEach(
+      b=>
+        b.classList.remove("active")
     );
 
   if(button){
-    button.classList.add("active");
+
+    button
+      .classList
+      .add("active");
+
   }
 
   if(pageId==="reelsPage"){
@@ -3506,17 +4588,19 @@ window.showPage=(pageId,button)=>{
 
       const first=
         $("reelsContainer")
-        .querySelector(".reel");
+          .querySelector(".reel");
 
       if(first){
 
-        first.querySelector("video")
+        first
+          .querySelector("video")
           .play()
           .catch(()=>{});
 
       }
 
     },100);
+
   }
 
 };
@@ -3528,7 +4612,9 @@ window.showPage=(pageId,button)=>{
 
 window.toggleDarkMode=()=>{
 
-  document.body.classList.toggle("dark");
+  document.body
+    .classList
+    .toggle("dark");
 
   localStorage.setItem(
     "rechodDark",
@@ -3538,9 +4624,15 @@ window.toggleDarkMode=()=>{
 };
 
 if(
-  localStorage.getItem("rechodDark")==="true"
+  localStorage.getItem(
+    "rechodDark"
+  )==="true"
 ){
-  document.body.classList.add("dark");
+
+  document.body
+    .classList
+    .add("dark");
+
 }
 
 
@@ -3550,7 +4642,10 @@ if(
 
 window.closeModal=id=>{
 
-  $(id).classList.add("hidden");
+  $(id)
+    .classList
+    .add("hidden");
+
 };
 
 
@@ -3562,6 +4657,8 @@ window.logoutNow=async()=>{
 
   try{
 
+    await endCall(true);
+
     await signOut(auth);
 
     toast("Logged out");
@@ -3569,7 +4666,9 @@ window.logoutNow=async()=>{
   }catch(error){
 
     toast(error.message);
+
   }
+
 };
 
 
@@ -3579,12 +4678,16 @@ window.logoutNow=async()=>{
 
 window.updateCreateType=()=>{
 
-  const type=$("createType").value;
+  const type=
+    $("createType").value;
 
   if(type==="reel"){
 
     $("mediaFile")
-      .setAttribute("accept","video/*");
+      .setAttribute(
+        "accept",
+        "video/*"
+      );
 
   }else{
 
@@ -3593,12 +4696,14 @@ window.updateCreateType=()=>{
         "accept",
         "image/*,video/*"
       );
+
   }
+
 };
 
 
 /* =========================================================
-   SETTINGS DATA
+   SETTINGS
 ========================================================= */
 
 const settingNames={
@@ -3620,27 +4725,12 @@ text:"Archived posts, reels aur stories yahan manage hongi."
 
 activity:{
 title:"Your activity",
-text:"Likes, comments, follows aur aapki Rechod activity."
+text:"Likes, comments, follows aur Rechod activity."
 },
 
 notifications:{
 title:"Notifications",
 text:"Push notifications aur Rechod notifications manage karein."
-},
-
-report:{
-title:"Report a problem",
-text:"Rechod mein kisi problem ko report karein."
-},
-
-help:{
-title:"Help",
-text:"Rechod Help aur support."
-},
-
-about:{
-title:"About Rechod",
-text:"Rechod Social App\nVersion 1.0"
 },
 
 closefriends:{
@@ -3651,16 +4741,6 @@ text:"Close friends list manage karein."
 blocked:{
 title:"Blocked",
 text:"Blocked accounts manage karein."
-},
-
-hidestory:{
-title:"Hide story",
-text:"Jin users se story hide karni hai unhe manage karein."
-},
-
-visibility:{
-title:"Visibility of Rechod",
-text:"Aapke Rechod profile aur content ki visibility."
 },
 
 messages:{
@@ -3680,114 +4760,44 @@ text:"Comments aur comment permissions."
 
 sharing:{
 title:"Sharing and reuse",
-text:"Posts aur Reels ke sharing options."
-},
-
-restricted:{
-title:"Restricted",
-text:"Restricted accounts manage karein."
-},
-
-hiddenwords:{
-title:"Hidden Words",
-text:"Unwanted words aur comments ko hide karein."
-},
-
-contacts:{
-title:"Contacts syncing",
-text:"Contacts syncing setting."
-},
-
-invite:{
-title:"Follow and invite friends",
-text:"Friends ko Rechod par invite karein."
-},
-
-muted:{
-title:"Muted accounts",
-text:"Muted accounts manage karein."
-},
-
-content:{
-title:"Content preferences",
-text:"Aapko kis type ka content dikhna chahiye."
-},
-
-likecounts:{
-title:"Like and share counts",
-text:"Like aur share count display settings."
-},
-
-download:{
-title:"Archiving and downloading",
-text:"Posts, Reels aur Stories archive/download options."
-},
-
-language:{
-title:"Language",
-text:"Rechod ki language select karein."
-},
-
-datasaver:{
-title:"Data saver",
-text:"Mobile data bachane ke liye media loading control karein."
-},
-
-apps:{
-title:"Apps and websites",
-text:"Connected apps aur websites."
-},
-
-downloadData:{
-title:"Download data",
-text:"Aapke Rechod data ko download karne ka option."
-},
-
-supervision:{
-title:"Supervision",
-text:"Family supervision settings."
-},
-
-verified:{
-title:"Rechod Verified",
-text:"Rechod verification information."
+text:"Posts aur Reels sharing options."
 }
 
 };
 
 
-/* =========================================================
-   SETTINGS OPEN
-========================================================= */
-
 window.openSetting=key=>{
 
   if(key==="privacy"){
+
     openPrivacySettings();
     return;
+
   }
 
   if(key==="theme"){
+
     openThemeSettings();
     return;
+
   }
 
   if(key==="language"){
+
     openLanguageSettings();
     return;
+
   }
 
   if(key==="datasaver"){
+
     openDataSaverSettings();
     return;
+
   }
 
-  if(key==="notifications"){
-    openNotificationSettings();
-    return;
-  }
-
-  const item=settingNames[key];
+  const item=
+    settingNames[key];
 
   if(!item)return;
 
@@ -3813,8 +4823,7 @@ window.openSetting=key=>{
 
   <p style="
   color:#888;
-  line-height:1.6;
-  white-space:pre-line">
+  line-height:1.6">
   ${esc(item.text)}
   </p>
 
@@ -3826,6 +4835,7 @@ window.openSetting=key=>{
   </div>`;
 
   document.body.appendChild(modal);
+
 };
 
 
@@ -3851,8 +4861,12 @@ async function loadPrivacyStatus(){
       :false;
 
   if($("privacyStatus")){
+
     $("privacyStatus").textContent=
-      privateMode?"Private":"Public";
+      privateMode
+        ?"Private"
+        :"Public";
+
   }
 }
 
@@ -3916,41 +4930,48 @@ async function openPrivacySettings(){
   </div>`;
 
   document.body.appendChild(modal);
+
 }
 
 
 window.changePrivacy=async()=>{
 
-  const refPrivacy=
+  const privacyRef=
     ref(
       db,
       "profiles/"+currentUser.uid+"/privacy"
     );
 
-  const snap=await get(refPrivacy);
+  const snap=
+    await get(privacyRef);
 
   const old=
-    snap.exists()?snap.val()===true:false;
+    snap.exists()
+      ?snap.val()===true
+      :false;
 
   const value=!old;
 
-  await set(refPrivacy,value);
+  await set(
+    privacyRef,
+    value
+  );
 
   $("privacyStatus").textContent=
-    value?"Private":"Public";
+    value
+      ?"Private"
+      :"Public";
 
-  const btn=
-    $("privateToggle");
-
-  if(btn){
-    btn.classList.toggle("on",value);
-  }
+  $("privateToggle")
+    ?.classList
+    .toggle("on",value);
 
   toast(
     value
       ?"Private account ON"
       :"Account Public"
   );
+
 };
 
 
@@ -3982,28 +5003,34 @@ window.openThemeSettings=()=>{
 
   <div class="setting-option">
   <div>☀️ Light</div>
-  <button class="settings-toggle"
-  onclick="setTheme('light');this.closest('.modal').remove()">
+
+  <button
+  class="settings-toggle"
+  onclick="
+    setTheme('light');
+    this.closest('.modal').remove()
+  ">
   </button>
+
   </div>
 
   <div class="setting-option">
   <div>🌙 Dark</div>
-  <button class="settings-toggle"
-  onclick="setTheme('dark');this.closest('.modal').remove()">
-  </button>
-  </div>
 
-  <div class="setting-option">
-  <div>📱 System</div>
-  <button class="settings-toggle"
-  onclick="setTheme('system');this.closest('.modal').remove()">
+  <button
+  class="settings-toggle"
+  onclick="
+    setTheme('dark');
+    this.closest('.modal').remove()
+  ">
   </button>
+
   </div>
 
   </div>`;
 
   document.body.appendChild(modal);
+
 };
 
 
@@ -4018,7 +5045,7 @@ window.setTheme=mode=>{
       "true"
     );
 
-  }else if(mode==="light"){
+  }else{
 
     document.body.classList.remove("dark");
 
@@ -4027,25 +5054,10 @@ window.setTheme=mode=>{
       "false"
     );
 
-  }else{
-
-    const dark=
-      window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-
-    document.body.classList.toggle(
-      "dark",
-      dark
-    );
-
-    localStorage.setItem(
-      "rechodDark",
-      dark?"true":"false"
-    );
   }
 
   toast("Theme updated");
+
 };
 
 
@@ -4079,7 +5091,8 @@ window.openLanguageSettings=()=>{
 
   <h3>Language</h3>
 
-  <button class="close"
+  <button
+  class="close"
   onclick="this.closest('.modal').remove()">
   ×
   </button>
@@ -4087,25 +5100,34 @@ window.openLanguageSettings=()=>{
   </div>
 
   ${
-    languages.map(lang=>`
+    languages.map(
+      lang=>`
 
-    <div class="language-option
-    ${current===lang?"active":""}"
-    onclick="selectLanguage('${lang}');
-    this.closest('.modal').remove()">
+      <div
+      style="
+      padding:16px;
+      border-bottom:1px solid #ddd;
+      cursor:pointer;
+      color:${current===lang?"#1877f2":"inherit"};
+      "
+      onclick="
+      selectLanguage('${lang}');
+      this.closest('.modal').remove()
+      ">
 
-    ${lang}
+      ${lang}
+      ${current===lang?" ✓":""}
 
-    ${current===lang?" ✓":""}
+      </div>
 
-    </div>
-
-  `).join("")
+      `
+    ).join("")
   }
 
   </div>`;
 
   document.body.appendChild(modal);
+
 };
 
 
@@ -4116,7 +5138,9 @@ window.selectLanguage=lang=>{
     lang
   );
 
-  toast("Language: "+lang);
+  toast(
+    "Language: "+lang
+  );
 
 };
 
@@ -4145,7 +5169,8 @@ window.openDataSaverSettings=()=>{
 
   <h3>Data saver</h3>
 
-  <button class="close"
+  <button
+  class="close"
   onclick="this.closest('.modal').remove()">
   ×
   </button>
@@ -4164,7 +5189,8 @@ window.openDataSaverSettings=()=>{
 
   </div>
 
-  <button id="dataSaverToggle"
+  <button
+  id="dataSaverToggle"
   class="settings-toggle ${enabled?"on":""}"
   onclick="toggleDataSaver()">
   </button>
@@ -4174,6 +5200,7 @@ window.openDataSaverSettings=()=>{
   </div>`;
 
   document.body.appendChild(modal);
+
 };
 
 
@@ -4192,116 +5219,15 @@ window.toggleDataSaver=()=>{
   );
 
   $("dataSaverToggle")
-    ?.classList.toggle("on",value);
+    ?.classList
+    .toggle("on",value);
 
   toast(
     value
       ?"Data saver ON"
       :"Data saver OFF"
   );
-};
 
-
-/* =========================================================
-   NOTIFICATION SETTINGS
-========================================================= */
-
-window.openNotificationSettings=()=>{
-
-  const enabled=
-    localStorage.getItem(
-      "rechodNotifications"
-    )!=="false";
-
-  const modal=
-    document.createElement("div");
-
-  modal.className="modal";
-
-  modal.innerHTML=`
-
-  <div class="modal-card">
-
-  <div class="modal-head">
-
-  <h3>Notifications</h3>
-
-  <button class="close"
-  onclick="this.closest('.modal').remove()">
-  ×
-  </button>
-
-  </div>
-
-  <div class="setting-option">
-
-  <div>
-
-  <b>Allow notifications</b>
-
-  <small>
-  Rechod notifications enable/disable करें।
-  </small>
-
-  </div>
-
-  <button id="notificationToggle"
-  class="settings-toggle ${enabled?"on":""}"
-  onclick="toggleNotifications()">
-  </button>
-
-  </div>
-
-  <div class="setting-option">
-
-  <div>
-  <b>Likes and comments</b>
-  <small>Likes और comments की notifications.</small>
-  </div>
-
-  <button class="settings-toggle on"></button>
-
-  </div>
-
-  <div class="setting-option">
-
-  <div>
-  <b>Messages</b>
-  <small>New message notifications.</small>
-  </div>
-
-  <button class="settings-toggle on"></button>
-
-  </div>
-
-  </div>`;
-
-  document.body.appendChild(modal);
-};
-
-
-window.toggleNotifications=()=>{
-
-  const old=
-    localStorage.getItem(
-      "rechodNotifications"
-    )!=="false";
-
-  const value=!old;
-
-  localStorage.setItem(
-    "rechodNotifications",
-    value
-  );
-
-  $("notificationToggle")
-    ?.classList.toggle("on",value);
-
-  toast(
-    value
-      ?"Notifications ON"
-      :"Notifications OFF"
-  );
 };
 
 
@@ -4313,8 +5239,14 @@ window.addProfile=()=>{
 
   showLogin();
 
-  $("authScreen").classList.remove("hidden");
-  $("app").classList.add("hidden");
+  $("authScreen")
+    .classList
+    .remove("hidden");
+
+  $("app")
+    .classList
+    .add("hidden");
+
 };
 
 
@@ -4323,6 +5255,1186 @@ window.switchProfile=()=>{
   toast(
     "Logout karke doosre Rechod account se login karein"
   );
+
+};
+
+
+/* =========================================================
+   WEBRTC CALL SYSTEM
+========================================================= */
+
+/*
+CALL DATABASE STRUCTURE:
+
+calls/
+  callId/
+    callerUid
+    receiverUid
+    type
+    status
+    offer
+    answer
+    createdAt
+
+incomingCalls/
+  receiverUid/
+    callId: true
+
+callCandidates/
+  callId/
+    caller/
+    callee/
+*/
+
+
+const rtcConfig={
+
+  iceServers:[
+    {
+      urls:"stun:stun.l.google.com:19302"
+    },
+    {
+      urls:"stun:stun1.l.google.com:19302"
+    }
+  ]
+
+};
+
+
+function clearCallListeners(){
+
+  callListeners.forEach(
+    fn=>{
+      try{fn()}catch(e){}
+    }
+  );
+
+  callListeners=[];
+
+}
+
+
+async function getUserProfile(uid){
+
+  const snap=
+    await get(
+      ref(
+        db,
+        "profiles/"+uid
+      )
+    );
+
+  if(
+    snap.exists()
+  ){
+
+    return snap.val();
+
+  }
+
+  return {
+    uid:uid,
+    username:"user",
+    name:"User",
+    photo:""
+  };
+
+}
+
+
+async function createPeerConnection(){
+
+  peerConnection=
+    new RTCPeerConnection(
+      rtcConfig
+    );
+
+  remoteStream=
+    new MediaStream();
+
+  $("remoteVideo").srcObject=
+    remoteStream;
+
+  peerConnection.ontrack=
+    event=>{
+
+      event.streams[0]
+        .getTracks()
+        .forEach(
+          track=>
+            remoteStream.addTrack(track)
+        );
+
+    };
+
+  peerConnection.onconnectionstatechange=
+    ()=>{
+
+      const state=
+        peerConnection.connectionState;
+
+      if(state==="connected"){
+
+        $("callStatus").textContent=
+          currentCallType==="video"
+            ?"Video call connected"
+            :"Audio call connected";
+
+      }
+
+      if(
+        state==="failed"||
+        state==="disconnected"||
+        state==="closed"
+      ){
+
+        if(
+          currentCallId
+        ){
+
+          set(
+            ref(
+              db,
+              "calls/"+currentCallId+"/status"
+            ),
+            "ended"
+          ).catch(()=>{});
+
+        }
+
+      }
+
+    };
+
+  return peerConnection;
+
+}
+
+
+async function getCallMedia(type){
+
+  if(
+    !navigator.mediaDevices||
+    !navigator.mediaDevices.getUserMedia
+  ){
+
+    throw new Error(
+      "Camera/Microphone HTTPS पर ही काम करेगा"
+    );
+
+  }
+
+  const stream=
+    await navigator.mediaDevices.getUserMedia({
+
+      audio:true,
+
+      video:
+        type==="video"
+
+    });
+
+  localStream=stream;
+
+  $("localVideo").srcObject=
+    stream;
+
+  $("localVideo")
+    .classList
+    .toggle(
+      "hidden",
+      type!=="video"
+    );
+
+  $("callCameraBtn")
+    .classList
+    .toggle(
+      "hidden",
+      type!=="video"
+    );
+
+  return stream;
+
+}
+
+
+/* =========================================================
+   START OUTGOING CALL
+========================================================= */
+
+window.startCall=async(
+  type,
+  receiverUid
+)=>{
+
+  if(!currentUser){
+
+    toast("Login required");
+    return;
+
+  }
+
+  if(
+    !receiverUid||
+    receiverUid===currentUser.uid
+  ){
+
+    toast("Invalid user");
+    return;
+
+  }
+
+  try{
+
+    await cleanupCall(false);
+
+    currentCallType=type;
+    currentCallRole="caller";
+    currentCallOtherUid=
+      receiverUid;
+
+    const receiver=
+      await getUserProfile(
+        receiverUid
+      );
+
+    $("callName").textContent=
+      "@"+
+      (
+        receiver.username||
+        "user"
+      );
+
+    $("callStatus").textContent=
+      "Calling...";
+
+    $("callOverlay")
+      .classList
+      .remove("hidden");
+
+    $("incomingCard")
+      .classList
+      .add("hidden");
+
+    $("callAvatar").src=
+      receiver.photo||
+      "https://via.placeholder.com/100";
+
+    if(type==="audio"){
+
+      $("callAvatar")
+        .classList
+        .remove("hidden");
+
+    }else{
+
+      $("callAvatar")
+        .classList
+        .add("hidden");
+
+    }
+
+    await getCallMedia(type);
+
+    await createPeerConnection();
+
+    localStream
+      .getTracks()
+      .forEach(
+        track=>
+          peerConnection.addTrack(
+            track,
+            localStream
+          )
+      );
+
+    currentCallId=
+      push(
+        ref(db,"calls")
+      ).key;
+
+    const offer=
+      await peerConnection
+        .createOffer();
+
+    await peerConnection
+      .setLocalDescription(
+        offer
+      );
+
+    await set(
+      ref(
+        db,
+        "calls/"+currentCallId
+      ),
+      {
+
+        callerUid:
+          currentUser.uid,
+
+        receiverUid:
+          receiverUid,
+
+        type:
+          type,
+
+        status:
+          "ringing",
+
+        offer:{
+          type:offer.type,
+          sdp:offer.sdp
+        },
+
+        createdAt:
+          Date.now()
+
+      }
+    );
+
+    await set(
+      ref(
+        db,
+        "incomingCalls/"+
+        receiverUid+
+        "/"+
+        currentCallId
+      ),
+      true
+    );
+
+    /* Caller ICE */
+
+    peerConnection.onicecandidate=
+      async event=>{
+
+        if(
+          event.candidate
+        ){
+
+          const candidateRef=
+            push(
+              ref(
+                db,
+                "callCandidates/"+
+                currentCallId+
+                "/caller"
+              )
+            );
+
+          await set(
+            candidateRef,
+            event.candidate.toJSON()
+          );
+
+        }
+
+      };
+
+    /* Answer listener */
+
+    const answerRef=
+      ref(
+        db,
+        "calls/"+
+        currentCallId+
+        "/answer"
+      );
+
+    const answerListener=
+      onValue(
+        answerRef,
+        async snap=>{
+
+          if(
+            !snap.exists()||
+            !peerConnection
+          )return;
+
+          if(
+            peerConnection
+              .currentRemoteDescription
+          )return;
+
+          try{
+
+            await peerConnection
+              .setRemoteDescription(
+                new RTCSessionDescription(
+                  snap.val()
+                )
+              );
+
+            $("callStatus").textContent=
+              "Connecting...";
+
+          }catch(e){}
+
+        }
+      );
+
+    callListeners.push(
+      ()=>{
+        off(
+          answerRef,
+          "value",
+          answerListener
+        );
+      }
+    );
+
+    /* Callee ICE listener */
+
+    const calleeCandidateRef=
+      ref(
+        db,
+        "callCandidates/"+
+        currentCallId+
+        "/callee"
+      );
+
+    const candidateListener=
+      onValue(
+        calleeCandidateRef,
+        async snap=>{
+
+          snap.forEach(
+            child=>{
+
+              if(
+                !child.val()||
+                !peerConnection
+              )return;
+
+              peerConnection
+                .addIceCandidate(
+                  new RTCIceCandidate(
+                    child.val()
+                  )
+                )
+                .catch(()=>{});
+
+            }
+          );
+
+        }
+      );
+
+    callListeners.push(
+      ()=>{
+        off(
+          calleeCandidateRef,
+          "value",
+          candidateListener
+        );
+      }
+    );
+
+    /* Status listener */
+
+    const statusRef=
+      ref(
+        db,
+        "calls/"+
+        currentCallId+
+        "/status"
+      );
+
+    const statusListener=
+      onValue(
+        statusRef,
+        async snap=>{
+
+          const status=
+            snap.val();
+
+          if(
+            status==="rejected"
+          ){
+
+            toast(
+              "Call rejected"
+            );
+
+            await endCall(true);
+
+          }
+
+          if(
+            status==="ended"
+          ){
+
+            await endCall(true);
+
+          }
+
+        }
+      );
+
+    callListeners.push(
+      ()=>{
+        off(
+          statusRef,
+          "value",
+          statusListener
+        );
+      }
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      error.message||
+      "Call start नहीं हो पाई"
+    );
+
+    await endCall(true);
+
+  }
+
+};
+
+
+/* =========================================================
+   INCOMING CALL LISTENER
+========================================================= */
+
+function startIncomingCallListener(){
+
+  if(!currentUser)return;
+
+  stopIncomingCallListener();
+
+  const incomingRef=
+    ref(
+      db,
+      "incomingCalls/"+currentUser.uid
+    );
+
+  const listener=
+    onValue(
+      incomingRef,
+      async snapshot=>{
+
+        if(
+          !snapshot.exists()
+        )return;
+
+        const entries=[];
+
+        snapshot.forEach(
+          child=>{
+
+            entries.push({
+              callId:child.key,
+              value:child.val()
+            });
+
+          }
+        );
+
+        if(!entries.length)return;
+
+        const latest=
+          entries[entries.length-1];
+
+        const callSnap=
+          await get(
+            ref(
+              db,
+              "calls/"+latest.callId
+            )
+          );
+
+        if(!callSnap.exists()){
+
+          await remove(
+            ref(
+              db,
+              "incomingCalls/"+
+              currentUser.uid+
+              "/"+
+              latest.callId
+            )
+          );
+
+          return;
+
+        }
+
+        const call=
+          callSnap.val();
+
+        if(
+          call.status!=="ringing"
+        )return;
+
+        if(
+          currentCallId
+        )return;
+
+        incomingCallData={
+          callId:
+            latest.callId,
+          ...call
+        };
+
+        const caller=
+          await getUserProfile(
+            call.callerUid
+          );
+
+        $("incomingAvatar").src=
+          caller.photo||
+          "https://via.placeholder.com/100";
+
+        $("incomingName").textContent=
+          "@"+
+          (
+            caller.username||
+            "user"
+          );
+
+        $("incomingType").textContent=
+          call.type==="video"
+            ?"📹 Incoming video call"
+            :"📞 Incoming audio call";
+
+        $("callOverlay")
+          .classList
+          .remove("hidden");
+
+        $("incomingCard")
+          .classList
+          .remove("hidden");
+
+        $("localVideo")
+          .classList
+          .add("hidden");
+
+        $("remoteVideo")
+          .classList
+          .add("hidden");
+
+        $("callAvatar")
+          .classList
+          .add("hidden");
+
+        $("callName").textContent=
+          "@"+
+          (
+            caller.username||
+            "user"
+          );
+
+        $("callStatus").textContent=
+          "Incoming call";
+
+      }
+    );
+
+  callListeners.push(
+    ()=>{
+      off(
+        incomingRef,
+        "value",
+        listener
+      );
+    }
+  );
+
+}
+
+
+function stopIncomingCallListener(){
+
+  clearCallListeners();
+
+}
+
+
+/* =========================================================
+   ACCEPT INCOMING CALL
+========================================================= */
+
+window.acceptIncomingCall=async()=>{
+
+  if(!incomingCallData){
+
+    toast("Call unavailable");
+    return;
+
+  }
+
+  const call=
+    incomingCallData;
+
+  try{
+
+    currentCallId=
+      call.callId;
+
+    currentCallType=
+      call.type;
+
+    currentCallRole=
+      "callee";
+
+    currentCallOtherUid=
+      call.callerUid;
+
+    const caller=
+      await getUserProfile(
+        call.callerUid
+      );
+
+    $("incomingCard")
+      .classList
+      .add("hidden");
+
+    $("callName").textContent=
+      "@"+
+      (
+        caller.username||
+        "user"
+      );
+
+    $("callStatus").textContent=
+      "Connecting...";
+
+    if(call.type==="audio"){
+
+      $("callAvatar").src=
+        caller.photo||
+        "https://via.placeholder.com/100";
+
+      $("callAvatar")
+        .classList
+        .remove("hidden");
+
+    }
+
+    await getCallMedia(
+      call.type
+    );
+
+    await createPeerConnection();
+
+    localStream
+      .getTracks()
+      .forEach(
+        track=>
+          peerConnection.addTrack(
+            track,
+            localStream
+          )
+      );
+
+    /* Caller candidates */
+
+    peerConnection.onicecandidate=
+      async event=>{
+
+        if(
+          event.candidate
+        ){
+
+          const candidateRef=
+            push(
+              ref(
+                db,
+                "callCandidates/"+
+                currentCallId+
+                "/callee"
+              )
+            );
+
+          await set(
+            candidateRef,
+            event.candidate.toJSON()
+          );
+
+        }
+
+      };
+
+    /* Set caller offer */
+
+    await peerConnection
+      .setRemoteDescription(
+        new RTCSessionDescription(
+          call.offer
+        )
+      );
+
+    /* Create answer */
+
+    const answer=
+      await peerConnection
+        .createAnswer();
+
+    await peerConnection
+      .setLocalDescription(
+        answer
+      );
+
+    await set(
+      ref(
+        db,
+        "calls/"+
+        currentCallId+
+        "/answer"
+      ),
+      {
+        type:answer.type,
+        sdp:answer.sdp
+      }
+    );
+
+    await set(
+      ref(
+        db,
+        "calls/"+
+        currentCallId+
+        "/status"
+      ),
+      "accepted"
+    );
+
+    await remove(
+      ref(
+        db,
+        "incomingCalls/"+
+        currentUser.uid+
+        "/"+
+        currentCallId
+      )
+    );
+
+    /* Caller ICE */
+
+    const callerCandidateRef=
+      ref(
+        db,
+        "callCandidates/"+
+        currentCallId+
+        "/caller"
+      );
+
+    const candidateListener=
+      onValue(
+        callerCandidateRef,
+        async snap=>{
+
+          snap.forEach(
+            child=>{
+
+              if(
+                !child.val()||
+                !peerConnection
+              )return;
+
+              peerConnection
+                .addIceCandidate(
+                  new RTCIceCandidate(
+                    child.val()
+                  )
+                )
+                .catch(()=>{});
+
+            }
+          );
+
+        }
+      );
+
+    callListeners.push(
+      ()=>{
+        off(
+          callerCandidateRef,
+          "value",
+          candidateListener
+        );
+      }
+    );
+
+    $("remoteVideo")
+      .classList
+      .toggle(
+        "hidden",
+        call.type!=="video"
+      );
+
+    $("callCameraBtn")
+      .classList
+      .toggle(
+        "hidden",
+        call.type!=="video"
+      );
+
+    incomingCallData=null;
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      error.message||
+      "Call accept नहीं हुई"
+    );
+
+    await rejectIncomingCall();
+
+  }
+
+};
+
+
+/* =========================================================
+   REJECT CALL
+========================================================= */
+
+window.rejectIncomingCall=async()=>{
+
+  if(!incomingCallData){
+
+    $("callOverlay")
+      .classList
+      .add("hidden");
+
+    return;
+
+  }
+
+  const call=
+    incomingCallData;
+
+  try{
+
+    await set(
+      ref(
+        db,
+        "calls/"+call.callId+"/status"
+      ),
+      "rejected"
+    );
+
+    await remove(
+      ref(
+        db,
+        "incomingCalls/"+
+        currentUser.uid+
+        "/"+
+        call.callId
+      )
+    );
+
+  }catch(e){}
+
+  incomingCallData=null;
+
+  $("incomingCard")
+    .classList
+    .add("hidden");
+
+  $("callOverlay")
+    .classList
+    .add("hidden");
+
+};
+
+
+/* =========================================================
+   END CALL
+========================================================= */
+
+window.endCall=async silent=>{
+
+  const callId=
+    currentCallId;
+
+  try{
+
+    if(
+      callId&&
+      currentUser
+    ){
+
+      await set(
+        ref(
+          db,
+          "calls/"+callId+"/status"
+        ),
+        "ended"
+      ).catch(()=>{});
+
+      if(
+        currentCallOtherUid
+      ){
+
+        await remove(
+          ref(
+            db,
+            "incomingCalls/"+
+            currentCallOtherUid+
+            "/"+
+            callId
+          )
+        ).catch(()=>{});
+
+      }
+
+      await remove(
+        ref(
+          db,
+          "incomingCalls/"+
+          currentUser.uid+
+          "/"+
+          callId
+        )
+      ).catch(()=>{});
+
+    }
+
+  }catch(e){}
+
+  await cleanupCall(
+    silent===true
+  );
+
+};
+
+
+async function cleanupCall(silent){
+
+  clearCallListeners();
+
+  if(
+    peerConnection
+  ){
+
+    try{
+      peerConnection.close();
+    }catch(e){}
+
+  }
+
+  peerConnection=null;
+
+  if(
+    localStream
+  ){
+
+    localStream
+      .getTracks()
+      .forEach(
+        track=>{
+          try{
+            track.stop();
+          }catch(e){}
+        }
+      );
+
+  }
+
+  localStream=null;
+
+  if(remoteStream){
+
+    remoteStream
+      .getTracks()
+      .forEach(
+        track=>{
+          try{
+            track.stop();
+          }catch(e){}
+        }
+      );
+
+  }
+
+  remoteStream=null;
+
+  $("localVideo").srcObject=null;
+  $("remoteVideo").srcObject=null;
+
+  $("callOverlay")
+    .classList
+    .add("hidden");
+
+  $("incomingCard")
+    .classList
+    .add("hidden");
+
+  currentCallId=null;
+  currentCallType=null;
+  currentCallRole=null;
+  currentCallOtherUid=null;
+  incomingCallData=null;
+
+  $("callStatus").textContent=
+    "Connecting...";
+
+}
+
+
+/* =========================================================
+   CALL MUTE
+========================================================= */
+
+window.toggleCallMute=()=>{
+
+  if(!localStream)return;
+
+  const tracks=
+    localStream.getAudioTracks();
+
+  if(!tracks.length)return;
+
+  const enabled=
+    tracks[0].enabled;
+
+  tracks.forEach(
+    track=>
+      track.enabled=!enabled
+  );
+
+  $("callMuteBtn").textContent=
+    enabled
+      ?"🔇"
+      :"🎤";
+
+};
+
+
+/* =========================================================
+   CALL CAMERA
+========================================================= */
+
+window.toggleCallCamera=()=>{
+
+  if(!localStream)return;
+
+  const tracks=
+    localStream.getVideoTracks();
+
+  if(!tracks.length)return;
+
+  const enabled=
+    tracks[0].enabled;
+
+  tracks.forEach(
+    track=>
+      track.enabled=!enabled
+  );
+
+  $("callCameraBtn").textContent=
+    enabled
+      ?"🚫"
+      :"📹";
+
 };
 
 
@@ -4333,9 +6445,15 @@ window.switchProfile=()=>{
 $("chatText").addEventListener(
   "keydown",
   e=>{
+
     if(e.key==="Enter"){
+
+      e.preventDefault();
+
       sendMessage();
+
     }
+
   }
 );
 
