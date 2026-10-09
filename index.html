@@ -3,299 +3,393 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1877f2">
 <title>Rechod</title>
 <style>
-:root{--bg:#f2f4f8;--card:#fff;--text:#18202c;--muted:#737d8d;--line:#e2e6ed;--blue:#1877f2;--pink:#ff2d70}
-body.dark{--bg:#0c1018;--card:#151b26;--text:#f4f6fa;--muted:#a0aabc;--line:#293141}
+:root{--bg:#f4f6fb;--card:#fff;--text:#171923;--muted:#717789;--line:#e2e5ed;--blue:#1877f2}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px Arial,sans-serif}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+body.dark{--bg:#090c12;--card:#141923;--text:#f5f6fb;--muted:#a1a9b8;--line:#2a3040}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:75px}
-header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:12px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:24px;font-weight:900;background:linear-gradient(90deg,#08c9ff,#1877f2,#e42aff);color:transparent;background-clip:text}
-button{border:0}
-.icon{background:var(--bg);color:var(--text);border-radius:10px;padding:10px}
+header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);padding:12px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-size:24px;font-weight:900;letter-spacing:-1px;background:linear-gradient(90deg,#12cfff,#1877f2,#b629ff);color:transparent;background-clip:text}
+header button,.icon{border:0;background:var(--bg);color:var(--text);padding:9px 12px;border-radius:12px}
 main{padding:10px}
 .page{display:none}.page.active{display:block}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);height:66px;background:var(--card);border-top:1px solid var(--line);display:flex;z-index:10}
-.nav{flex:1;background:transparent;color:var(--muted);font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
-.nav span{font-size:21px}.nav.active{color:var(--blue);font-weight:bold}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:12px}
-.row{display:flex;align-items:center;gap:10px;padding:10px}
-.grow{flex:1;min-width:0}.muted,small{color:var(--muted)}
-.avatar{width:42px;height:42px;flex:none;border-radius:50%;background:linear-gradient(135deg,#00c9ff,#873bff,#ff2980);color:white;display:grid;place-items:center;font-weight:bold;overflow:hidden}
-.avatar img,.bigavatar img{width:100%;height:100%;object-fit:cover}
-.btn{padding:9px 13px;border-radius:9px;background:var(--blue);color:white;font-weight:bold}
-.secondary{padding:9px 12px;border-radius:9px;background:var(--bg);color:var(--text);border:1px solid var(--line)}
-.stories{display:flex;gap:12px;overflow:auto;padding:10px 0 16px}
-.story{min-width:65px;text-align:center;font-size:12px;cursor:pointer}
-.ring{width:61px;height:61px;margin:auto auto 5px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#ffb300,#e600a9,#6941ff)}
-.ring div{height:100%;border-radius:50%;border:2px solid var(--card);background:var(--bg);display:grid;place-items:center;overflow:hidden}
-.ring img{width:100%;height:100%;object-fit:cover}
-.media{background:#080b12;width:100%;aspect-ratio:1;position:relative;overflow:hidden}
-.media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
-.actions{display:flex;align-items:center;gap:7px;padding:9px 12px}
-.actions button{font-size:22px;background:transparent;color:var(--text);padding:2px}
-.liked{color:#ff245b!important}.saved{color:#e4a900!important}
-.caption{padding:0 12px 12px;line-height:1.5;overflow-wrap:anywhere}
-.field{width:100%;padding:12px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;margin:5px 0}
-textarea.field{min-height:80px}
-.filters{display:flex;gap:7px;overflow:auto;padding:8px 0}
-.filters button{white-space:nowrap;border-radius:20px;background:var(--card);border:1px solid var(--line);color:var(--text);padding:8px}
-.filters button.sel{background:var(--blue);color:white}
-.preview{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.preview img,.preview video{width:100%;aspect-ratio:1;object-fit:cover;background:#080b12}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.grid>div{aspect-ratio:1;background:#101522;overflow:hidden}
-.grid img,.grid video{width:100%;height:100%;object-fit:cover}
-.stats{display:flex;justify-content:space-around;text-align:center;padding:12px 0}
-.stats b{display:block;font-size:19px}.stats span{font-size:12px;color:var(--muted)}
-.bigavatar{width:85px;height:85px;border-radius:50%;background:linear-gradient(135deg,#00c9ff,#873bff,#ff2980);display:grid;place-items:center;color:white;font-size:28px;font-weight:bold;overflow:hidden}
-.profiletop{display:flex;align-items:center;gap:18px;padding:12px 3px}
-.pbuttons{display:flex;gap:7px;margin:12px 0}
-.pbuttons button{flex:1}
-.reel{height:calc(100vh - 155px);min-height:430px;max-height:750px;background:#05070c;border-radius:14px;overflow:hidden;position:relative;margin-bottom:12px;color:white}
+.card{background:var(--card);border:1px solid var(--line);border-radius:15px;margin-bottom:12px;overflow:hidden}
+.row{display:flex;align-items:center;gap:10px}
+.avatar{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;color:white;font-weight:bold;background:linear-gradient(135deg,#00cfff,#813bff,#ff3987);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.muted{color:var(--muted);font-size:12px}
+.stories{display:flex;gap:12px;overflow:auto;padding:6px 0 15px}
+.story{flex:none;width:66px;text-align:center;font-size:12px}
+.ring{padding:3px;border-radius:50%;background:linear-gradient(135deg,#00cfff,#853cff,#ff2e8b);margin-bottom:5px}
+.ring .avatar{width:58px;height:58px;border:2px solid var(--card)}
+.posthead{display:flex;align-items:center;gap:10px;padding:11px}
+.posthead .info{flex:1;min-width:0}
+.postmedia{width:100%;aspect-ratio:1;background:#080a10;overflow:hidden}
+.postmedia img,.postmedia video{width:100%;height:100%;object-fit:cover}
+.actions{display:flex;gap:7px;padding:9px 11px}
+.actions button{border:0;background:none;color:var(--text);font-size:22px}
+.actions .save{margin-left:auto}
+.caption{padding:0 12px 12px;line-height:1.5;font-size:14px}
+input,textarea,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--text);margin:4px 0}
+.primary{border:0;border-radius:11px;background:linear-gradient(120deg,#1877f2,#853bff);color:white;font-weight:bold;padding:12px}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);display:flex;background:var(--card);border-top:1px solid var(--line);height:66px;z-index:20}
+.nav{flex:1;border:0;background:none;color:var(--muted);font-size:11px}
+.nav span{display:block;font-size:21px;margin-bottom:3px}
+.nav.active{color:var(--blue);font-weight:bold}
+.searchrow{display:flex;gap:6px}
+.searchrow input{flex:1}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.griditem{aspect-ratio:1;background:#10131b;overflow:hidden}
+.griditem img,.griditem video{width:100%;height:100%;object-fit:cover}
+.stats{display:flex;justify-content:space-around;flex:1;text-align:center}
+.stats b{display:block;font-size:18px}
+.stats span{font-size:12px;color:var(--muted)}
+.profiletop{display:flex;align-items:center;gap:14px;padding:12px 2px}
+.bigavatar{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00cfff,#843cff,#ff3987);color:white;font-size:26px;font-weight:bold;overflow:hidden}
+.bigavatar img{width:100%;height:100%;object-fit:cover}
+.profilebuttons{display:flex;gap:7px;margin:10px 0}
+.profilebuttons button{flex:1}
+.reel{height:calc(100vh - 160px);min-height:450px;background:#080a10;position:relative;border-radius:14px;overflow:hidden;margin-bottom:12px;color:white}
 .reel>img,.reel>video{width:100%;height:100%;object-fit:cover}
-.reelinfo{position:absolute;bottom:15px;left:12px;right:70px;text-shadow:0 1px 5px #000}
-.reelbuttons{position:absolute;right:8px;bottom:18px;display:grid;gap:12px}
-.reelbuttons button{border-radius:50%;width:44px;height:44px;background:#0009;color:white;font-size:20px}
-.chatrow{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--line);cursor:pointer}
-.chatbox{display:flex;flex-direction:column;height:65vh}
-.messages{flex:1;overflow:auto;padding:10px}
-.bubble{padding:10px 12px;border-radius:14px;margin:7px 0;max-width:80%;background:var(--card);border:1px solid var(--line);overflow-wrap:anywhere}
-.mine{margin-left:auto;background:var(--blue);color:white}
+.reelinfo{position:absolute;left:12px;bottom:18px;right:68px;text-shadow:0 1px 5px black}
+.reelactions{position:absolute;right:7px;bottom:16px;display:flex;flex-direction:column;gap:12px}
+.reelactions button{background:#0008;color:white;border:0;border-radius:50%;width:44px;height:44px;font-size:20px}
+.chatrow{padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.chatbox{height:55vh;display:flex;flex-direction:column}
+.messages{flex:1;overflow:auto}
+.bubble{padding:10px 12px;border-radius:15px;background:var(--card);border:1px solid var(--line);margin:7px 0;max-width:80%;width:max-content}
+.bubble.mine{margin-left:auto;background:var(--blue);color:white}
 .sendrow{display:flex;gap:6px}
-.sendrow input{flex:1;min-width:0}
-.notice{padding:12px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);margin:8px 0;line-height:1.5}
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:30;align-items:flex-end;justify-content:center}
+.sendrow input{flex:1}
+.filters{display:flex;gap:6px;overflow:auto;padding:5px 0}
+.filters button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:20px;padding:8px}
+.filters button.selected{background:var(--blue);color:white}
+.preview{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.preview img,.preview video{width:100%;aspect-ratio:1;object-fit:cover;background:#080a10}
+.setting{padding:14px;border-bottom:1px solid var(--line);cursor:pointer}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:50;align-items:flex-end}
 .modal.show{display:flex}
-.sheet{width:min(520px,100%);max-height:88vh;overflow:auto;background:var(--card);padding:17px;border-radius:20px 20px 0 0}
-.sheet h3{margin-top:0}
-.setting{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
-.toast{position:fixed;z-index:50;bottom:80px;left:50%;transform:translateX(-50%);background:#151922;color:white;border-radius:10px;padding:11px 16px;display:none;max-width:90%}
-.auth{max-width:440px;margin:25px auto;padding:18px}
-hr{border:0;border-top:1px solid var(--line)}
-@media(min-width:700px){body{padding-bottom:10px}}
+.sheet{width:min(520px,100%);margin:auto;background:var(--card);color:var(--text);padding:18px;border-radius:20px 20px 0 0;max-height:85vh;overflow:auto}
+.close{float:right;border:0;background:var(--bg);color:var(--text);padding:8px 12px;border-radius:50%}
+.toast{position:fixed;z-index:100;bottom:78px;left:50%;transform:translateX(-50%);background:#151923;color:white;padding:12px 16px;border-radius:12px;display:none}
+.toast.show{display:block}
+.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:#080a12;color:white}
+.authbox{width:min(420px,100%);background:#141923;padding:22px;border-radius:22px}
+.authbox input{background:#080a12;color:white;border-color:#333b4b}
+.call{display:none;position:fixed;inset:0;z-index:80;background:#070910;color:white;flex-direction:column;text-align:center}
+.call.show{display:flex}
+.callvideo{flex:1;display:grid;place-items:center;background:#10131b}
+.callvideo video{width:100%;height:100%;object-fit:cover}
+.callcontrols{padding:25px;display:flex;justify-content:center;gap:12px}
+.callcontrols button{border:0;border-radius:50%;width:54px;height:54px;background:#292f3d;color:white;font-size:21px}
+.callcontrols .end{background:#e3314b}
+@media(max-width:360px){.nav{font-size:10px}.nav span{font-size:18px}}
 </style>
 </head>
 <body>
-<div class="app">
-<header>
-  <div class="brand">◉ Rechod</div>
-  <div>
-    <button class="icon" onclick="go('chat')">💬</button>
-    <button class="icon" onclick="go('settings')">⚙️</button>
-  </div>
-</header>
+<div id="auth" class="auth">
+ <div class="authbox">
+  <div class="brand">◈ Rechod</div>
+  <h2 id="authTitle">Rechod में स्वागत है</h2>
+  <p class="muted">Demo account बनाएं या बिना login खोलें।</p>
+  <input id="authName" placeholder="आपका नाम / Username">
+  <input id="authEmail" type="email" placeholder="Email (optional)">
+  <input id="authPass" type="password" placeholder="Password (demo)">
+  <button class="primary" style="width:100%" onclick="login()">Continue</button>
+  <button class="pill" style="width:100%;margin-top:8px" onclick="demoLogin()">Demo में खोलें</button>
+ </div>
+</div>
+
+<div id="app" class="app" style="display:none">
+<header><div class="brand">◈ Rechod</div><div><button onclick="go('notifications')">♡</button> <button onclick="go('messages')">✉</button></div></header>
 <main>
 <section id="home" class="page active">
-  <div id="stories" class="stories"></div>
-  <div id="feed"></div>
-</section>
-
-<section id="reels" class="page">
-  <h3>🎬 Reels</h3>
-  <div id="reelList"></div>
+ <div id="stories" class="stories"></div>
+ <div id="feed"></div>
 </section>
 
 <section id="search" class="page">
-  <h3>🔎 Discover people & posts</h3>
-  <input id="searchInput" class="field" placeholder="Username, name, #hashtag..." oninput="renderSearch()">
-  <div id="searchResults"></div>
+ <h2>Search</h2>
+ <div class="searchrow"><input id="searchInput" placeholder="Username या post खोजें" oninput="renderSearch()"><button class="primary" onclick="renderSearch()">Search</button></div>
+ <div id="searchResults"></div>
+</section>
+
+<section id="reels" class="page">
+ <h2>Reels</h2><div id="reelFeed"></div>
 </section>
 
 <section id="create" class="page">
-  <h3>＋ Create</h3>
-  <div class="notice">Photo, video, multi-photo, Reel या Story चुनें। यह डेमो मीडिया इसी ब्राउज़र में रखता है।</div>
-  <select id="postType" class="field">
-    <option value="post">Photo / Video Post</option>
-    <option value="multi">Multiple Photos (up to 10)</option>
-    <option value="reel">Reel</option>
-    <option value="story">Story (24 hours)</option>
-  </select>
-  <label>Choose media</label>
-  <input id="mediaInput" class="field" type="file" accept="image/*,video/*" multiple onchange="previewMedia()">
-  <div id="filters" class="filters"></div>
+ <h2>Create Post / Reel / Story</h2>
+ <div class="card" style="padding:13px">
+  <select id="createType"><option value="post">Photo Post</option><option value="multi">Multiple Photos</option><option value="reel">Reel / Video</option><option value="story">Story</option></select>
+  <input id="mediaInput" type="file" accept="image/*,video/*" multiple onchange="previewFiles()">
   <div id="preview" class="preview"></div>
-  <input id="song" class="field" placeholder="🎵 Music / song name">
-  <input id="location" class="field" placeholder="📍 Add location">
-  <input id="tags" class="field" placeholder="@Mention / #Hashtag">
-  <textarea id="caption" class="field" placeholder="Write a caption..."></textarea>
-  <button class="btn" style="width:100%" onclick="publish()">Publish</button>
+  <h3>Filters</h3><div id="filters" class="filters"></div>
+  <input id="song" placeholder="Song / Audio name">
+  <input id="tag" placeholder="@Mention / Tag">
+  <input id="location" placeholder="Location">
+  <textarea id="caption" placeholder="Caption लिखें..."></textarea>
+  <button class="pill" onclick="pickMusic()">🎵 Choose music</button>
+  <button class="primary" style="width:100%;margin-top:9px" onclick="publish()">Publish</button>
+  <p class="muted">Demo में media इसी browser के लिए है।</p>
+ </div>
 </section>
 
-<section id="profile" class="page">
-  <div id="profileArea"></div>
+<section id="messages" class="page">
+ <h2>Messages</h2><div id="chatList"></div><div id="chatPage"></div>
 </section>
 
-<section id="chat" class="page">
-  <div id="chatArea"></div>
-</section>
+<section id="profile" class="page"><div id="profileBox"></div></section>
+<section id="notifications" class="page"><h2>Notifications</h2><div id="notifs"></div></section>
 
 <section id="settings" class="page">
-  <h3>⚙️ Settings and activity</h3>
-  <div class="card">
-    <div class="row"><div class="grow"><b>Edit profile</b><div class="muted">Name, username, bio, profile photo</div></div><button class="secondary" onclick="editProfile()">Edit</button></div>
-    <div class="row"><div class="grow"><b>Account privacy</b><div class="muted">Demo private account switch</div></div><input id="privateToggle" type="checkbox" onchange="togglePrivate(this.checked)"></div>
-    <div class="row"><div class="grow"><b>Dark mode</b></div><button class="secondary" onclick="toggleDark()">🌙 Toggle</button></div>
-    <div class="row"><div class="grow"><b>Followers / Following</b></div><button class="secondary" onclick="people('followers')">Open</button></div>
-    <div class="row"><div class="grow"><b>Saved posts</b></div><button class="secondary" onclick="showSaved()">Open</button></div>
-    <div class="row"><div class="grow"><b>My activity</b></div><button class="secondary" onclick="activity()">View</button></div>
-    <div class="row"><div class="grow"><b>Notifications</b></div><button class="secondary" onclick="toast('Demo notifications settings')">Manage</button></div>
-    <div class="row"><div class="grow"><b>Story settings</b></div><button class="secondary" onclick="toast('Story settings demo')">Manage</button></div>
-    <div class="row"><div class="grow"><b>Language</b></div><button class="secondary" onclick="toast('Demo language option')">Change</button></div>
-    <div class="row"><div class="grow"><b>Help</b></div><button class="secondary" onclick="toast('Rechod Demo')">Help</button></div>
-  </div>
-  <button class="btn" onclick="logout()">Reset demo login</button>
-  <div class="notice">Demo mode: दूसरे डिवाइस पर data share नहीं होता। असली online accounts के लिए server/Firebase जरूरी है।</div>
+ <h2>Settings and Privacy</h2>
+ <div class="card">
+  <div class="setting" onclick="editProfile()">👤 Edit Profile</div>
+  <div class="setting" onclick="toggleDark()">🌙 Toggle Dark Mode</div>
+  <div class="setting" onclick="showPeople('followers')">⭐ Followers</div>
+  <div class="setting" onclick="showPeople('following')">➕ Following</div>
+  <div class="setting" onclick="showPeople('blocked')">🚫 Blocked accounts (demo)</div>
+  <div class="setting" onclick="toast('Notification preferences demo')">🔔 Notifications</div>
+  <div class="setting" onclick="toast('Privacy settings demo')">🔒 Privacy</div>
+  <div class="setting" onclick="logout()">↪ Logout</div>
+ </div>
 </section>
 </main>
 <nav class="bottom">
-  <button class="nav active" data-page="home" onclick="go('home')"><span>⌂</span>Home</button>
-  <button class="nav" data-page="reels" onclick="go('reels')"><span>▶</span>Reels</button>
-  <button class="nav" data-page="search" onclick="go('search')"><span>⌕</span>Search</button>
-  <button class="nav" data-page="create" onclick="go('create')"><span>＋</span>Create</button>
-  <button class="nav" data-page="profile" onclick="go('profile')"><span>◉</span>Profile</button>
+ <button class="nav active" onclick="go('home',this)"><span>⌂</span>Home</button>
+ <button class="nav" onclick="go('reels',this)"><span>▶</span>Reels</button>
+ <button class="nav" onclick="go('search',this)"><span>⌕</span>Search</button>
+ <button class="nav" onclick="go('create',this)"><span>⊕</span>Create</button>
+ <button class="nav" onclick="go('messages',this)"><span>✉</span>Chat</button>
+ <button class="nav" onclick="go('profile',this)"><span>◉</span>Profile</button>
+ <button class="nav" onclick="go('settings',this)"><span>⚙</span>Settings</button>
 </nav>
 </div>
-<div id="modal" class="modal" onclick="if(event.target===this)closeModal()"><div id="sheet" class="sheet"></div></div>
+
+<div id="modal" class="modal"><div id="sheet" class="sheet"></div></div>
 <div id="toast" class="toast"></div>
+<div id="call" class="call">
+ <div style="padding:20px"><h2 id="callTitle">Call</h2><div id="callStatus">Connecting…</div></div>
+ <div class="callvideo"><video id="localVideo" autoplay muted playsinline></video><div id="callMessage">Call demo UI</div></div>
+ <div class="callcontrols"><button onclick="toggleMic()">🎙</button><button onclick="toggleCam()">📷</button><button class="end" onclick="endCall()">☎</button></div>
+</div>
 
 <script>
 const $=id=>document.getElementById(id);
-const filterMap={
- Normal:'none',Bright:'brightness(1.2)',Vivid:'saturate(1.7)',Vintage:'sepia(.45)',Warm:'sepia(.2) saturate(1.4)',Cool:'hue-rotate(20deg) saturate(.9)','B&W':'grayscale(1)',Sunset:'sepia(.3) saturate(1.8)',Cinematic:'contrast(1.25) saturate(1.15)',Glow:'brightness(1.15) saturate(1.3)',Pink:'hue-rotate(320deg) saturate(1.3)',Nature:'saturate(1.5)',Dramatic:'contrast(1.6)',Fade:'contrast(.8) brightness(1.1)',Dark:'brightness(.7) contrast(1.2)'
+const filters={
+ Normal:'none',Bright:'brightness(1.2)',Vivid:'saturate(1.8)',Vintage:'sepia(.4)',Warm:'sepia(.2) saturate(1.3)',Cool:'hue-rotate(15deg)', 'B&W':'grayscale(1)',Sunset:'sepia(.25) saturate(1.6)',Cinematic:'contrast(1.3) saturate(.8)',Glow:'brightness(1.12) saturate(1.3)',Pink:'hue-rotate(320deg) saturate(1.2)',Nature:'saturate(1.4)',Dramatic:'contrast(1.5)',Fade:'contrast(.8) brightness(1.1)',Dark:'brightness(.7)'
 };
-let chosenFilter='Normal',tempFiles=[],chatWith=null,localCallStream=null,toastTimer;
-const defaultUser={name:'Rechod User',username:'rechoder',bio:'Welcome to my Rechod profile ✨',avatar:'',private:false};
-let db;
-try{db=JSON.parse(localStorage.getItem('rech_demo_db'))}catch(e){}
-if(!db||!db.user)db={user:defaultUser,posts:[],stories:[],following:[],followers:[],chats:{},users:[
- {name:'Aarav Sharma',username:'aarav',avatar:'',bio:'Photography 📸'},
- {name:'Priya Verma',username:'priya',avatar:'',bio:'Travel & lifestyle 🌍'},
- {name:'Rahul Singh',username:'rahul',avatar:'',bio:'Reels creator 🎬'},
- {name:'Neha Gupta',username:'neha',avatar:'',bio:'Music lover 🎵'}
-]};
-db.users=db.users||[];
-db.posts=db.posts||[];db.stories=db.stories||[];db.following=db.following||[];db.followers=db.followers||[];db.chats=db.chats||{};
-if(!db.users.some(u=>u.username===db.user.username))db.users.unshift(db.user);
-function save(){localStorage.setItem('rech_demo_db',JSON.stringify(db))}
-function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function toast(s){$('toast').textContent=s;$('toast').style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').style.display='none',2300)}
-function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='home')renderFeed();if(id==='reels')renderReels();if(id==='profile')renderProfile();if(id==='search')renderSearch();if(id==='chat')renderChatList();if(id==='create')renderFilters()}
-function avatar(u,size=''){return `<div class="avatar ${size}">${u.avatar?`<img src="${u.avatar}">`:esc((u.name||u.username||'?').slice(0,1).toUpperCase())}</div>`}
-function mediaHtml(p,idx=0){let m=(p.media||[])[idx];if(!m)return '';let isVideo=(p.mediaTypes||[])[idx]==='video'||p.type==='reel'&&p.video;return isVideo?`<video src="${m}" controls playsinline loop></video>`:`<img src="${m}" style="filter:${filterMap[p.filter]||'none'}" alt="Post media">`}
+let selectedFilter='Normal',tempFiles=[],chatUser='',callStream=null;
+let db={
+ user:{name:'Rechod User',username:'rechouser',bio:'Welcome to my Rechod profile!',avatar:'',following:[],followers:[],private:false},
+ users:[
+  {name:'Aarav Sharma',username:'aarav',bio:'Travel • Photography',avatar:'',following:[],followers:[]},
+  {name:'Priya Verma',username:'priya',bio:'Music and moments ✨',avatar:'',following:[],followers:[]},
+  {name:'Rahul Singh',username:'rahul',bio:'Creator | Reels',avatar:'',following:[],followers:[]},
+  {name:'Neha Gupta',username:'neha',bio:'Life in colours 💜',avatar:'',following:[],followers:[]}
+ ],
+ posts:[],stories:[],chats:{},notifs:[]
+};
+function load(){
+ try{const d=JSON.parse(localStorage.getItem('rech_demo_db'));if(d)db=d}catch(e){}
+ if(!db.posts.length){
+  db.posts=[
+   {id:'sample1',type:'post',username:'aarav',user:'Aarav Sharma',caption:'Welcome to Rechod! ✨ Share your moments.',media:[],likes:12,liked:false,saved:false,comments:[],song:'Original audio',filter:'Normal'},
+   {id:'sample2',type:'reel',username:'priya',user:'Priya Verma',caption:'Little moments, big memories 💜',media:[],likes:24,liked:false,saved:false,comments:[],song:'Chill vibes',filter:'Vivid'}
+  ];
+ }
+}
+function save(){try{localStorage.setItem('rech_demo_db',JSON.stringify(db))}catch(e){}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
+function login(){
+ let name=$('authName').value.trim()||'Rechod User';
+ db.user.name=name;db.user.username=name.toLowerCase().replace(/[^a-z0-9]/g,'')||'rechouser';
+ save();startApp()
+}
+function demoLogin(){startApp()}
+function logout(){$('app').style.display='none';$('auth').style.display='flex'}
+function startApp(){$('auth').style.display='none';$('app').style.display='block';renderAll()}
+function go(id,button){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ $(id).classList.add('active');
+ document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
+ if(button)button.classList.add('active');
+ if(id==='home')renderFeed();
+ if(id==='reels')renderReels();
+ if(id==='search')renderSearch();
+ if(id==='messages')renderChats();
+ if(id==='profile')renderProfile();
+ if(id==='notifications')renderNotifications();
+}
+function avatar(u,size=''){
+ const letter=esc((u.name||u.username||'?').slice(0,1).toUpperCase());
+ return `<div class="avatar" ${size?`style="width:${size};height:${size}"`:''}>${u.avatar?`<img src="${u.avatar}">`:letter}</div>`
+}
+function allUsers(){return [db.user,...db.users]}
+function userByName(n){return allUsers().find(u=>u.username===n)||{username:n,name:n,avatar:''}}
+function isFollowing(n){return (db.user.following||[]).includes(n)}
+function follow(n){
+ if(n===db.user.username)return;
+ db.user.following=db.user.following||[];
+ if(isFollowing(n))db.user.following=db.user.following.filter(x=>x!==n);
+ else{db.user.following.push(n);db.notifs.unshift('You followed @'+n)}
+ let u=userByName(n);u.followers=u.followers||[];
+ if(isFollowing(n)){u.followers=u.followers.filter(x=>x!==db.user.username)}
+ else if(!u.followers.includes(db.user.username))u.followers.push(db.user.username);
+ save();renderAll();toast(isFollowing(n)?'Following':'Follow updated');
+}
 function renderStories(){
-  const now=Date.now();db.stories=db.stories.filter(s=>now-s.time<86400000);save();
-  $('stories').innerHTML=`<div class="story" onclick="go('create')"><div class="ring"><div>＋</div></div>Your story</div>`+db.stories.map(s=>`<div class="story" onclick="viewStory('${s.id}')"><div class="ring"><div>${s.media?`<img src="${s.media}">`:esc(s.username[0])}</div></div>${esc(s.username)}</div>`).join('');
+ const people=[db.user,...db.users];
+ $('stories').innerHTML=people.map((u,i)=>`<div class="story" onclick="${i===0?"go('create')":`viewStory('${esc(u.username)}')`}"><div class="ring">${avatar(u,'58px')}</div>${i===0?'＋ Your story':esc(u.username)}</div>`).join('');
+}
+function viewStory(n){
+ const s=db.stories.find(x=>x.username===n);
+ showModal(`<button class="close" onclick="closeModal()">×</button><h3>@${esc(n)}'s Story</h3>${s&&s.media?`<img style="width:100%;max-height:65vh;object-fit:contain" src="${s.media}">`:'<div class="card" style="padding:50px;text-align:center">Story demo preview</div>'}`)
+}
+function mediaHTML(p){
+ if(!p.media||!p.media.length)return `<div class="postmedia" style="display:grid;place-items:center;color:white;background:linear-gradient(135deg,#101d3a,#562b80)">◈ Rechod</div>`;
+ const m=p.media[0],filter=filters[p.filter||'Normal']||'none';
+ return `<div class="postmedia">${m.type&&m.type.startsWith('video')?`<video src="${m.url}" controls playsinline style="filter:${filter}"></video>`:`<img src="${m.url}" style="filter:${filter}">`}</div>`;
+}
+function postCard(p){
+ const u=userByName(p.username);
+ return `<article class="card">
+ <div class="posthead">${avatar(u)}<div class="info"><b>@${esc(p.username)}</b><div class="muted">${esc(p.location||'Rechod')}</div></div>${p.username!==db.user.username?`<button class="pill" onclick="follow('${esc(p.username)}')">${isFollowing(p.username)?'Following':'Follow'}</button>`:''}<button class="pill" onclick="postMenu('${p.id}')">•••</button></div>
+ ${mediaHTML(p)}
+ <div class="actions"><button onclick="likePost('${p.id}')">${p.liked?'❤️':'♡'}</button><button onclick="commentPost('${p.id}')">💬</button><button onclick="sharePost('${p.id}')">↗</button><button class="save" onclick="savePost('${p.id}')">${p.saved?'🔖':'♧'}</button></div>
+ <div class="caption"><b>${p.likes||0} likes</b><br><b>@${esc(p.username)}</b> ${esc(p.caption)}${p.song?`<div class="muted">♫ ${esc(p.song)}</div>`:''}
+ <div class="muted" style="margin-top:6px" onclick="commentPost('${p.id}')">View/add comments (${(p.comments||[]).length})</div></div></article>`;
 }
 function renderFeed(){
-  renderStories();const posts=db.posts.filter(p=>p.type!=='story');
-  $('feed').innerHTML=posts.length?posts.map(p=>`<article class="card">
-  <div class="row">${avatar({name:p.user,username:p.username,avatar:p.avatar})}<div class="grow"><b>@${esc(p.username)}</b><div class="muted">${esc(p.location||'Rechod')} · ${new Date(p.time).toLocaleDateString()}</div></div>${p.username!==db.user.username?`<button class="secondary" onclick="follow('${esc(p.username)}')">${db.following.includes(p.username)?'Following':'Follow'}</button>`:`<button class="icon" onclick="deletePost('${p.id}')">⋯</button>`}</div>
-  <div class="media">${mediaHtml(p)}${p.media.length>1?`<button class="icon" style="position:absolute;right:8px;top:8px" onclick="nextMedia('${p.id}')">⇄</button>`:''}</div>
-  <div class="actions"><button class="${p.liked?'liked':''}" onclick="likePost('${p.id}')">${p.liked?'♥':'♡'}</button><button onclick="commentPost('${p.id}')">💬</button><button onclick="sharePost('${p.id}')">➤</button><button class="${p.saved?'saved':''}" style="margin-left:auto" onclick="savePost('${p.id}')">${p.saved?'🔖':'♧'}</button></div>
-  <div class="caption"><b>${p.likes||0} likes</b><br><b>${esc(p.username)}</b> ${esc(p.caption||'')}<br><span style="color:var(--blue)">${esc(p.tags||'')}</span>${p.song?`<br>♫ ${esc(p.song)}`:''}<div class="muted">${(p.comments||[]).length} comments</div><button class="secondary" onclick="commentPost('${p.id}')">View / add comments</button></div>
-  </article>`).join(''):'<div class="notice">अभी कोई पोस्ट नहीं है। Create पर जाकर पहली पोस्ट डालें।</div>';
+ renderStories();
+ $('feed').innerHTML=db.posts.filter(p=>p.type!=='reel').map(postCard).join('')||'<div class="card" style="padding:25px;text-align:center">अभी कोई पोस्ट नहीं है। Create पर जाकर पोस्ट डालें।</div>';
 }
-function nextMedia(id){const p=db.posts.find(x=>x.id===id);if(!p||p.media.length<2)return;p.index=((p.index||0)+1)%p.media.length;renderFeed()}
-function likePost(id){let p=db.posts.find(x=>x.id===id);if(!p)return;p.liked=!p.liked;p.likes=Math.max(0,(p.likes||0)+(p.liked?1:-1));save();renderFeed()}
-function savePost(id){let p=db.posts.find(x=>x.id===id);if(p){p.saved=!p.saved;save();renderFeed();toast(p.saved?'Saved':'Removed from saved')}}
-function commentPost(id){let p=db.posts.find(x=>x.id===id);if(!p)return;openModal(`<h3>Comments</h3><div>${(p.comments||[]).map(c=>`<p><b>@${esc(c.user)}</b> ${esc(c.text)}</p>`).join('')||'<p class="muted">No comments yet</p>'}</div><input id="newComment" class="field" placeholder="Write a comment..."><button class="btn" onclick="addComment('${p.id}')">Post comment</button><button class="secondary" onclick="closeModal()">Close</button>`)}
-function addComment(id){const v=$('newComment').value.trim();if(!v)return;let p=db.posts.find(x=>x.id===id);p.comments=p.comments||[];p.comments.push({user:db.user.username,text:v});save();closeModal();renderFeed();toast('Comment added')}
-function sharePost(id){const url=location.href+'#post-'+id;if(navigator.share)navigator.share({title:'Rechod',text:'Check this Rechod post',url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Post link copied')).catch(()=>toast(url));else toast(url)}
-function deletePost(id){if(confirm('Delete this post?')){db.posts=db.posts.filter(p=>p.id!==id);save();renderFeed()}}
-function renderFilters(){$('filters').innerHTML=Object.keys(filterMap).map(f=>`<button class="${chosenFilter===f?'sel':''}" onclick="chooseFilter('${f}')">${f}</button>`).join('')}
-function chooseFilter(f){chosenFilter=f;renderFilters();previewMedia()}
-function previewMedia(){
-  tempFiles=Array.from($('mediaInput').files||[]);const type=$('postType').value;
-  if(type==='multi'&&tempFiles.length>10){tempFiles=tempFiles.slice(0,10);toast('Maximum 10 photos');}
-  $('preview').innerHTML='';
-  tempFiles.forEach(f=>{const url=URL.createObjectURL(f),el=document.createElement(f.type.startsWith('video')?'video':'img');el.src=url;if(el.tagName==='VIDEO')el.controls=true;el.style.filter=filterMap[chosenFilter];$('preview').appendChild(el)});
-}
-$('postType').addEventListener('change',()=>{const t=$('postType').value;$('mediaInput').accept=t==='reel'?'video/*':'image/*,video/*';if(t==='multi')$('mediaInput').multiple=true;else $('mediaInput').multiple=false;$('mediaInput').value='';tempFiles=[];$('preview').innerHTML=''});
-function publish(){
-  if(!tempFiles.length)return toast('पहले फोटो या वीडियो चुनें');
-  const t=$('postType').value;
-  if(t==='multi'&&tempFiles.length>10)return toast('Maximum 10 photos');
-  if(t==='reel'&&!tempFiles.some(f=>f.type.startsWith('video')))return toast('Reel के लिए video चुनें');
-  if(t==='story'){
-    const f=tempFiles[0],reader=new FileReader();
-    reader.onload=()=>{db.stories.unshift({id:'s'+Date.now(),username:db.user.username,media:reader.result,time:Date.now()});save();resetCreate();renderStories();go('home');toast('Story added')};
-    reader.readAsDataURL(f);return;
-  }
-  let files=tempFiles.slice();let done=0,media=[],types=[];
-  files.forEach((f,i)=>{const r=new FileReader();r.onload=()=>{media[i]=r.result;types[i]=f.type.startsWith('video')?'video':'image';done++;if(done===files.length){
-    const p={id:'p'+Date.now(),type:t==='reel'?'reel':'post',user:db.user.name,username:db.user.username,avatar:db.user.avatar,media,mediaTypes:types,caption:$('caption').value,song:$('song').value,location:$('location').value,tags:$('tags').value,likes:0,liked:false,saved:false,comments:[],filter:chosenFilter,time:Date.now()};
-    db.posts.unshift(p);save();resetCreate();toast('Published');go(t==='reel'?'reels':'home');
-  }};r.onerror=()=>toast('File could not be read');r.readAsDataURL(f)});
-}
-function resetCreate(){tempFiles=[];$('mediaInput').value='';$('preview').innerHTML='';$('caption').value='';$('song').value='';$('location').value='';$('tags').value=''}
 function renderReels(){
- const list=db.posts.filter(p=>p.type==='reel');
- $('reelList').innerHTML=list.length?list.map(p=>`<div class="reel">${mediaHtml(p)}<div class="reelinfo"><b>@${esc(p.username)}</b><p>${esc(p.caption||'')}</p><div>♫ ${esc(p.song||'Original audio')}</div></div><div class="reelbuttons"><button onclick="likePost('${p.id}');renderReels()">${p.liked?'♥':'♡'}</button><button onclick="commentPost('${p.id}')">💬</button><button onclick="sharePost('${p.id}')">➤</button></div></div>`).join(''):'<div class="notice">अभी Reels नहीं हैं। Create → Reel से video डालें।</div>';
+ const a=db.posts.filter(p=>p.type==='reel');
+ $('reelFeed').innerHTML=a.map(p=>`<div class="reel">${p.media&&p.media[0]?p.media[0].type.startsWith('video')?`<video src="${p.media[0].url}" controls loop playsinline></video>`:`<img src="${p.media[0].url}">`:'<div style="height:100%;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#102247,#6b2680)">▶ Rechod Reel</div>'}
+ <div class="reelinfo"><b>@${esc(p.username)}</b><p>${esc(p.caption)}</p><small>♫ ${esc(p.song||'Original audio')}</small></div>
+ <div class="reelactions"><button onclick="likePost('${p.id}')">❤️</button><button onclick="commentPost('${p.id}')">💬</button><button onclick="sharePost('${p.id}')">↗</button><button onclick="savePost('${p.id}')">🔖</button></div></div>`).join('')||'<div class="notice">अभी कोई Reel नहीं है। Create में Reel चुनें।</div>';
 }
+function likePost(id){const p=db.posts.find(x=>x.id===id);if(!p)return;p.liked=!p.liked;p.likes=Math.max(0,(p.likes||0)+(p.liked?1:-1));save();renderFeed();renderReels()}
+function savePost(id){const p=db.posts.find(x=>x.id===id);if(!p)return;p.saved=!p.saved;save();toast(p.saved?'Saved':'Removed from saved');renderFeed()}
+function commentPost(id){
+ const p=db.posts.find(x=>x.id===id);if(!p)return;
+ showModal(`<button class="close" onclick="closeModal()">×</button><h3>Comments</h3><div>${(p.comments||[]).map(c=>`<p><b>@${esc(c.user)}</b> ${esc(c.text)}</p>`).join('')||'<p class="muted">अभी कोई comment नहीं।</p>'}</div><input id="newComment" placeholder="Comment लिखें"><button class="primary" style="width:100%" onclick="addComment('${id}')">Post comment</button>`)
+}
+function addComment(id){const t=$('newComment').value.trim();if(!t)return;const p=db.posts.find(x=>x.id===id);p.comments=p.comments||[];p.comments.push({user:db.user.username,text:t});save();closeModal();renderFeed();toast('Comment added')}
+function sharePost(id){const url=location.href+'#'+id;if(navigator.share)navigator.share({title:'Rechod',url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied')).catch(()=>toast(url));else toast('Post shared in demo')}
+function postMenu(id){showModal(`<button class="close" onclick="closeModal()">×</button><h3>Post options</h3><button class="pill" onclick="savePost('${id}');closeModal()">Save / Unsave</button><button class="pill" onclick="toast('Report recorded in demo');closeModal()">Report</button><button class="pill" onclick="closeModal()">Cancel</button>`)}
 function renderSearch(){
  const q=($('searchInput').value||'').toLowerCase();
- const users=[db.user,...db.users].filter((u,i,a)=>a.findIndex(x=>x.username===u.username)===i).filter(u=>(u.username+' '+u.name+' '+(u.bio||'')).toLowerCase().includes(q)&&u.username!==db.user.username);
- const posts=db.posts.filter(p=>(p.caption+' '+p.tags+' '+p.username).toLowerCase().includes(q));
- $('searchResults').innerHTML='<h4>People</h4>'+users.map(u=>`<div class="chatrow">${avatar(u)}<div class="grow"><b>@${esc(u.username)}</b><div class="muted">${esc(u.name||'')}</div></div><button class="secondary" onclick="follow('${esc(u.username)}')">${db.following.includes(u.username)?'Following':'Follow'}</button><button class="secondary" onclick="openChat('${esc(u.username)}')">Chat</button></div>`).join('')+'<h4>Posts</h4>'+posts.map(p=>`<div class="card"><div class="row"><b>@${esc(p.username)}</b></div><div class="caption">${esc(p.caption)}</div></div>`).join('')+(users.length||posts.length?'':'<div class="notice">कोई result नहीं मिला। Demo users: aarav, priya, rahul, neha</div>');
-}
-function follow(username){
- if(username===db.user.username)return;
- const i=db.following.indexOf(username);
- if(i>=0){db.following.splice(i,1);db.followers=db.followers.filter(x=>x!==db.user.username+'->'+username);toast('Unfollowed')}
- else{db.following.push(username);db.followers.push(db.user.username+'->'+username);toast('Following @'+username)}
- save();renderSearch();renderProfile();renderFeed();
+ const users=db.users.filter(u=>(u.username+' '+u.name+' '+u.bio).toLowerCase().includes(q));
+ const posts=db.posts.filter(p=>(p.username+' '+p.caption).toLowerCase().includes(q));
+ $('searchResults').innerHTML='<h3>People</h3>'+users.map(u=>`<div class="card" style="padding:10px"><div class="row">${avatar(u)}<div style="flex:1"><b>@${esc(u.username)}</b><div class="muted">${esc(u.name)}</div></div><button class="pill" onclick="follow('${esc(u.username)}')">${isFollowing(u.username)?'Following':'Follow'}</button><button class="pill" onclick="openChat('${esc(u.username)}')">Message</button></div></div>`).join('')+'<h3>Posts</h3>'+posts.map(postCard).join('');
 }
 function renderProfile(){
- const posts=db.posts.filter(p=>p.username===db.user.username);
- $('profileArea').innerHTML=`<div class="profiletop"><div class="bigavatar">${db.user.avatar?`<img src="${db.user.avatar}">`:esc(db.user.name[0]||'R')}</div><div class="grow"><b>${esc(db.user.name)}</b><div class="muted">@${esc(db.user.username)}</div></div><button class="secondary" onclick="editProfile()">Edit</button></div>
- <div class="stats"><div><b>${posts.length}</b><span>Posts</span></div><div onclick="people('followers')"><b>${db.followers.length}</b><span>Followers</span></div><div onclick="people('following')"><b>${db.following.length}</b><span>Following</span></div></div>
- <p>${esc(db.user.bio||'')}</p><div class="pbuttons"><button class="secondary" onclick="editProfile()">Edit profile</button><button class="secondary" onclick="shareProfile()">Share profile</button></div>
- <div class="pbuttons"><button class="secondary" onclick="people('followers')">Followers list</button><button class="secondary" onclick="people('following')">Following list</button></div>
- <h4>Posts & Videos</h4><div class="grid">${posts.map(p=>`<div onclick="viewPost('${p.id}')">${p.media&&p.media[0]?(p.mediaTypes&&p.mediaTypes[0]==='video'?`<video src="${p.media[0]}"></video>`:`<img src="${p.media[0]}">`):''}</div>`).join('')}</div>
- ${posts.length?'':'<div class="notice">आपकी पोस्ट यहाँ दिखाई देंगी। Create दबाकर पहली पोस्ट डालें।'}</div>`;
+ const u=db.user,posts=db.posts.filter(p=>p.username===u.username);
+ $('profileBox').innerHTML=`<div class="profiletop"><div class="bigavatar">${u.avatar?`<img src="${u.avatar}">`:esc(u.name.slice(0,1).toUpperCase())}</div><div class="stats"><div><b>${posts.length}</b><span>Posts</span></div><div onclick="showPeople('followers')"><b>${(u.followers||[]).length}</b><span>Followers</span></div><div onclick="showPeople('following')"><b>${(u.following||[]).length}</b><span>Following</span></div></div></div>
+ <h2>${esc(u.name)}</h2><div class="muted">@${esc(u.username)}</div><p>${esc(u.bio||'')}</p>
+ <div class="profilebuttons"><button class="pill" onclick="editProfile()">Edit profile</button><button class="pill" onclick="showPeople('followers')">Followers</button><button class="pill" onclick="showPeople('following')">Following</button></div>
+ <h3>Posts & Videos</h3><div class="grid">${posts.map(p=>`<div class="griditem" onclick="showPost('${p.id}')">${p.media&&p.media[0]?p.media[0].type.startsWith('video')?'<div style="color:white;padding:20px">▶ Video</div>':`<img src="${p.media[0].url}">`:'<div style="color:white;padding:20px">◈ Rechod</div>'}</div>`).join('')}</div>`;
 }
-function editProfile(){openModal(`<h3>Edit profile</h3><label>Name</label><input id="editName" class="field" value="${esc(db.user.name)}"><label>Username</label><input id="editUsername" class="field" value="${esc(db.user.username)}"><label>Bio</label><textarea id="editBio" class="field">${esc(db.user.bio||'')}</textarea><label>Profile photo</label><input id="editPhoto" class="field" type="file" accept="image/*"><button class="btn" onclick="saveProfile()">Save changes</button><button class="secondary" onclick="closeModal()">Cancel</button>`)}
+function showPost(id){const p=db.posts.find(x=>x.id===id);if(p)showModal(postCard(p))}
+function editProfile(){
+ showModal(`<button class="close" onclick="closeModal()">×</button><h3>Edit profile</h3><input id="editName" value="${esc(db.user.name)}" placeholder="Name"><input id="editUsername" value="${esc(db.user.username)}" placeholder="Username"><textarea id="editBio" placeholder="Bio">${esc(db.user.bio||'')}</textarea><label>Profile photo<input id="avatarFile" type="file" accept="image/*"></label><button class="primary" style="width:100%" onclick="saveProfile()">Save changes</button>`)
+}
 function saveProfile(){
- const name=$('editName').value.trim(),username=$('editUsername').value.trim().replace(/^@/,'').replace(/\s/g,'');
- if(!name||!username)return toast('Name और username भरें');
- if(db.users.some(u=>u.username===username&&u.username!==db.user.username))return toast('Username already used');
- db.user.name=name;db.user.username=username;db.user.bio=$('editBio').value;
- const f=$('editPhoto').files[0];
- const finish=()=>{const i=db.users.findIndex(u=>u.username!==username&&u.username===oldUser);if(i>=0)db.users.splice(i,1);if(!db.users.some(u=>u.username===username))db.users.unshift(db.user);save();closeModal();renderProfile();toast('Profile updated')};
- const oldUser=window.oldUsername||db.user.username;
- if(f){if(f.size>1500000)return toast('Profile photo 1.5MB से छोटी रखें');const r=new FileReader();r.onload=()=>{db.user.avatar=r.result;finish()};r.readAsDataURL(f)}else finish();
+ db.user.name=$('editName').value.trim()||db.user.name;
+ db.user.username=$('editUsername').value.trim().replace(/^@/,'').replace(/\s/g,'')||db.user.username;
+ db.user.bio=$('editBio').value;
+ const f=$('avatarFile').files[0];
+ if(f)db.user.avatar=URL.createObjectURL(f);
+ save();closeModal();renderAll();toast('Profile updated')
 }
-function shareProfile(){const url=location.href+'#profile-'+db.user.username;if(navigator.share)navigator.share({title:'Rechod profile',text:'Follow me on Rechod',url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Profile link copied')).catch(()=>toast(url));else toast(url)}
-function people(type){const arr=type==='following'?db.following:db.followers.map(x=>x.split('->')[1]||x);openModal(`<h3>${type==='following'?'Following':'Followers'}</h3>${arr.length?arr.map(u=>`<div class="chatrow"><div class="avatar">${esc(u[0]||'?').toUpperCase()}</div><div class="grow">@${esc(u)}</div>${type==='following'?`<button class="secondary" onclick="follow('${esc(u)}');people('following')">Unfollow</button>`:''}</div>`).join(''):'<p class="muted">Demo list अभी खाली है।</p>'}<button class="secondary" onclick="closeModal()">Close</button>`)}
-function showSaved(){const arr=db.posts.filter(p=>p.saved);openModal(`<h3>Saved posts</h3>${arr.map(p=>`<p>@${esc(p.username)} — ${esc(p.caption)}</p>`).join('')||'<p class="muted">कोई saved post नहीं है।</p>'}<button class="secondary" onclick="closeModal()">Close</button>`)}
-function activity(){openModal(`<h3>Your activity</h3><p>Posts: ${db.posts.length}</p><p>Liked: ${db.posts.filter(p=>p.liked).length}</p><p>Saved: ${db.posts.filter(p=>p.saved).length}</p><p>Comments: ${db.posts.reduce((n,p)=>n+(p.comments||[]).length,0)}</p><button class="secondary" onclick="closeModal()">Close</button>`)}
-function viewStory(id){const s=db.stories.find(x=>x.id===id);if(!s)return;openModal(`<h3>Story · @${esc(s.username)}</h3><img src="${s.media}" style="width:100%;max-height:65vh;object-fit:contain;background:#050505"><p class="muted">Stories 24 घंटे बाद हट जाती हैं।</p><button class="secondary" onclick="closeModal()">Close</button>`)}
-function viewPost(id){const p=db.posts.find(x=>x.id===id);if(!p)return;openModal(`<h3>@${esc(p.username)}</h3><div class="media">${mediaHtml(p)}</div><p>${esc(p.caption)}</p><button class="secondary" onclick="closeModal()">Close</button>`)}
-function renderChatList(){
- const names=[...new Set([...db.users.map(u=>u.username),'aarav','priya','rahul','neha'])].filter(u=>u!==db.user.username);
- $('chatArea').innerHTML=`<h3>💬 Messages</h3><div class="notice">Chat अभी इसी ब्राउज़र का demo है। दूसरे डिवाइस पर message नहीं जाएगा।</div>`+names.map(u=>`<div class="chatrow" onclick="openChat('${esc(u)}')"><div class="avatar">${esc(u[0]).toUpperCase()}</div><div class="grow"><b>@${esc(u)}</b><small>Tap to open chat</small></div><span>›</span></div>`).join('');
+function showPeople(type){
+ let list=[];
+ if(type==='following')list=(db.user.following||[]).map(userByName);
+ else if(type==='followers')list=(db.user.followers||[]).map(userByName);
+ else list=[];
+ showModal(`<button class="close" onclick="closeModal()">×</button><h3>${type[0].toUpperCase()+type.slice(1)}</h3>${list.map(u=>`<div class="row" style="padding:10px">${avatar(u)}<div style="flex:1"><b>@${esc(u.username)}</b><div class="muted">${esc(u.name)}</div></div><button class="pill" onclick="follow('${esc(u.username)}');showPeople('${type}')">${isFollowing(u.username)?'Following':'Follow'}</button></div>`).join('')||'<p class="muted">इस demo list में अभी कोई account नहीं है।</p>'}`)
 }
-function openChat(username){chatWith=username;db.chats[username]=db.chats[username]||[];openModal(`<div class="chatbox"><div class="row"><button class="secondary" onclick="closeModal()">←</button><b>@${esc(username)}</b><div class="grow"></div><button class="secondary" onclick="startCall('audio','${esc(username)}')">📞</button><button class="secondary" onclick="startCall('video','${esc(username)}')">📹</button></div><div id="chatMessages" class="messages"></div><div class="sendrow"><input id="chatInput" class="field" placeholder="Message..." onkeydown="if(event.key==='Enter')sendMessage()"><button class="btn" onclick="sendMessage()">➤</button></div></div>`);renderMessages()}
-function renderMessages(){const el=$('chatMessages');if(!el)return;el.innerHTML=(db.chats[chatWith]||[]).map(m=>`<div class="bubble ${m.mine?'mine':''}">${esc(m.text)}</div>`).join('');el.scrollTop=el.scrollHeight}
-function sendMessage(){const el=$('chatInput'),v=el.value.trim();if(!v)return;db.chats[chatWith].push({text:v,mine:true});save();renderMessages();el.value=''}
-async function startCall(type,user){
- openModal(`<h3>${type==='video'?'📹 Video call preview':'📞 Audio call preview'}</h3><p>@${esc(user)}</p><video id="localVideo" autoplay muted playsinline style="width:100%;background:#050505;max-height:40vh"></video><div id="callStatus" class="notice">यह local camera/microphone preview है, असली इंटरनेट कॉल नहीं।</div><button class="secondary" onclick="endCall()">End call</button>`);
- try{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw Error('Not supported');localCallStream=await navigator.mediaDevices.getUserMedia({audio:true,video:type==='video'});const v=$('localVideo');v.srcObject=localCallStream;if(type==='audio')v.style.display='none';$('callStatus').textContent='आपका डिवाइस चालू है। दूसरे user से connection नहीं है।'}catch(e){$('callStatus').textContent='Camera/microphone permission नहीं मिली या browser support नहीं करता।'}
+function openChat(n){
+ chatUser=n;db.chats[n]=db.chats[n]||[];
+ $('chatList').style.display='none';
+ $('chatPage').innerHTML=`<div class="chatbox"><div class="row"><button class="pill" onclick="closeChat()">←</button><b>@${esc(n)}</b><span style="flex:1"></span><button class="pill" onclick="startCall('audio','${esc(n)}')">📞</button><button class="pill" onclick="startCall('video','${esc(n)}')">📹</button></div><div class="messages" id="messageList"></div><div class="sendrow"><input id="messageInput" placeholder="Message लिखें" onkeydown="if(event.key==='Enter')sendMessage()"><button class="primary" onclick="sendMessage()">Send</button></div></div>`;
+ renderMessages()
 }
-function endCall(){if(localCallStream)localCallStream.getTracks().forEach(t=>t.stop());localCallStream=null;closeModal()}
-function togglePrivate(v){db.user.private=v;save();toast(v?'Private demo mode on':'Public demo mode on')}
-function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('rech_dark',document.body.classList.contains('dark')?'1':'0')}
-function logout(){if(confirm('Reset demo data? इससे इस browser का Rechod demo data हट जाएगा.')){localStorage.removeItem('rech_demo_db');location.reload()}}
-function openModal(html){$('sheet').innerHTML=html;$('modal').classList.add('show')}
+function closeChat(){$('chatList').style.display='block';$('chatPage').innerHTML='';chatUser='';renderChats()}
+function renderChats(){
+ $('chatList').innerHTML=db.users.map(u=>`<div class="chatrow row" onclick="openChat('${esc(u.username)}')">${avatar(u)}<div><b>@${esc(u.username)}</b><div class="muted">${esc((db.chats[u.username]||[]).slice(-1)[0]?.text||'Tap to message')}</div></div></div>`).join('')
+}
+function renderMessages(){
+ const a=db.chats[chatUser]||[];
+ $('messageList').innerHTML=a.map(m=>`<div class="bubble ${m.mine?'mine':''}">${esc(m.text)}</div>`).join('');
+ $('messageList').scrollTop=$('messageList').scrollHeight
+}
+function sendMessage(){
+ const el=$('messageInput'),t=el.value.trim();if(!t)return;
+ db.chats[chatUser]=db.chats[chatUser]||[];db.chats[chatUser].push({text:t,mine:true});
+ save();el.value='';renderMessages();renderChats()
+}
+function renderNotifications(){$('notifs').innerHTML=(db.notifs||[]).map(n=>`<div class="card" style="padding:13px">${esc(n)}</div>`).join('')||'<div class="notice">अभी कोई notification नहीं है।</div>'}
+function renderAll(){renderStories();renderFeed();renderReels();renderSearch();renderChats();renderProfile();renderNotifications();renderFilters()}
+function renderFilters(){
+ $('filters').innerHTML=Object.keys(filters).map(f=>`<button class="${f===selectedFilter?'selected':''}" onclick="selectFilter('${f}')">${f}</button>`).join('')
+}
+function selectFilter(f){selectedFilter=f;renderFilters();previewFiles()}
+function previewFiles(){
+ tempFiles=[...$('mediaInput').files];$('preview').innerHTML='';
+ tempFiles.forEach(f=>{
+  const url=URL.createObjectURL(f),el=document.createElement(f.type.startsWith('video')?'video':'img');
+  el.src=url;if(el.tagName==='VIDEO')el.controls=true;el.style.filter=filters[selectedFilter];$('preview').appendChild(el)
+ })
+}
+function publish(){
+ if(!tempFiles.length){toast('पहले photo/video चुनें');return}
+ const type=$('createType').value;
+ const files=type==='story'?tempFiles.slice(0,1):tempFiles;
+ const media=files.map(f=>({url:URL.createObjectURL(f),type:f.type}));
+ if(type==='story'){
+  db.stories.unshift({username:db.user.username,media:media[0].url});
+  save();toast('Story added');go('home');return
+ }
+ db.posts.unshift({id:'p'+Date.now(),type:type==='reel'?'reel':'post',username:db.user.username,user:db.user.name,caption:$('caption').value,song:$('song').value,tag:$('tag').value,location:$('location').value,media,likes:0,liked:false,saved:false,comments:[],filter:selectedFilter});
+ save();$('mediaInput').value='';$('preview').innerHTML='';$('caption').value='';$('song').value='';$('tag').value='';$('location').value='';tempFiles=[];toast('Published');go(type==='reel'?'reels':'home')
+}
+function pickMusic(){
+ showModal(`<button class="close" onclick="closeModal()">×</button><h3>🎵 Add music</h3><button class="pill" onclick="useMusic('Rechod Beat')">Rechod Beat</button> <button class="pill" onclick="useMusic('Chill Vibes')">Chill Vibes</button> <button class="pill" onclick="useMusic('Travel Mood')">Travel Mood</button><p>या अपना audio नाम लिखें:</p><input id="customSong" placeholder="Song name"><button class="primary" onclick="useMusic(document.getElementById('customSong').value)">Use song</button>`)
+}
+function useMusic(n){if(n)$('song').value=n;closeModal();toast('Music selected')}
+function showModal(html){$('sheet').innerHTML=html;$('modal').classList.add('show')}
 function closeModal(){$('modal').classList.remove('show')}
-if(localStorage.getItem('rech_dark')==='1')document.body.classList.add('dark');
-function init(){renderFilters();renderStories();renderFeed();renderProfile();renderSearch();renderChatList();$('privateToggle').checked=!!db.user.private}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('rech_dark',document.body.classList.contains('dark')?'1':'0')}
+function startCall(type,user){
+ $('call').classList.add('show');$('callTitle').textContent=(type==='video'?'Video call':'Audio call')+' — @'+user;
+ $('callStatus').textContent='Demo call screen — remote connection नहीं है';
+ $('callMessage').style.display='block';
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('Camera/mic इस browser में उपलब्ध नहीं');return}
+ navigator.mediaDevices.getUserMedia({audio:true,video:type==='video'}).then(s=>{
+  callStream=s;$('localVideo').srcObject=s;$('localVideo').style.display=type==='video'?'block':'none';$('callMessage').style.display=type==='video'?'none':'block';$('callStatus').textContent='Local microphone/camera connected'
+ }).catch(()=>{$('callStatus').textContent='Permission नहीं मिली';toast('Camera/microphone permission दें')})
+}
+function toggleMic(){if(!callStream)return;let t=callStream.getAudioTracks()[0];if(t)t.enabled=!t.enabled;toast(t&&t.enabled?'Mic on':'Mic off')}
+function toggleCam(){if(!callStream)return;let t=callStream.getVideoTracks()[0];if(t)t.enabled=!t.enabled;toast(t&&t.enabled?'Camera on':'Camera off')}
+function endCall(){if(callStream)callStream.getTracks().forEach(t=>t.stop());callStream=null;$('call').classList.remove('show')}
+function init(){
+ load();if(localStorage.getItem('rech_dark')==='1')document.body.classList.add('dark');
+ if(localStorage.getItem('rech_demo_login')==='1')startApp()
+}
+const oldStart=startApp;
+startApp=function(){localStorage.setItem('rech_demo_login','1');oldStart()}
 init();
 </script>
 </body>
