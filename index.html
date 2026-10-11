@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -6,391 +5,717 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#1877f2">
 <title>Rechod</title>
+
 <style>
-:root{--bg:#f4f6fb;--card:#fff;--text:#171923;--muted:#717789;--line:#e2e5ed;--blue:#1877f2}
+:root {
+ --blue:#1877f2; --bg:#f2f4f8; --card:#fff;
+ --text:#18202c; --muted:#737d8d; --line:#e2e7ef;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-body.dark{--bg:#090c12;--card:#141923;--text:#f5f6fb;--muted:#a1a9b8;--line:#2a3040}
+body{margin:0;background:var(--bg);color:var(--text);
+ font:15px Arial,sans-serif}
+body.dark{--bg:#101318;--card:#1b2029;--text:#f2f4f8;
+ --muted:#a0a8b6;--line:#343b48}
 button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:75px}
-header{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);padding:12px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-size:24px;font-weight:900;letter-spacing:-1px;background:linear-gradient(90deg,#12cfff,#1877f2,#b629ff);color:transparent;background-clip:text}
-header button,.icon{border:0;background:var(--bg);color:var(--text);padding:9px 12px;border-radius:12px}
-main{padding:10px}
-.page{display:none}.page.active{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:15px;margin-bottom:12px;overflow:hidden}
-.row{display:flex;align-items:center;gap:10px}
-.avatar{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;color:white;font-weight:bold;background:linear-gradient(135deg,#00cfff,#813bff,#ff3987);overflow:hidden}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.muted{color:var(--muted);font-size:12px}
-.stories{display:flex;gap:12px;overflow:auto;padding:6px 0 15px}
-.story{flex:none;width:66px;text-align:center;font-size:12px}
-.ring{padding:3px;border-radius:50%;background:linear-gradient(135deg,#00cfff,#853cff,#ff2e8b);margin-bottom:5px}
-.ring .avatar{width:58px;height:58px;border:2px solid var(--card)}
-.posthead{display:flex;align-items:center;gap:10px;padding:11px}
-.posthead .info{flex:1;min-width:0}
-.postmedia{width:100%;aspect-ratio:1;background:#080a10;overflow:hidden}
-.postmedia img,.postmedia video{width:100%;height:100%;object-fit:cover}
-.actions{display:flex;gap:7px;padding:9px 11px}
-.actions button{border:0;background:none;color:var(--text);font-size:22px}
-.actions .save{margin-left:auto}
-.caption{padding:0 12px 12px;line-height:1.5;font-size:14px}
-input,textarea,select{width:100%;padding:11px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--text);margin:4px 0}
-.primary{border:0;border-radius:11px;background:linear-gradient(120deg,#1877f2,#853bff);color:white;font-weight:bold;padding:12px}
-.pill{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);display:flex;background:var(--card);border-top:1px solid var(--line);height:66px;z-index:20}
-.nav{flex:1;border:0;background:none;color:var(--muted);font-size:11px}
-.nav span{display:block;font-size:21px;margin-bottom:3px}
-.nav.active{color:var(--blue);font-weight:bold}
-.searchrow{display:flex;gap:6px}
-.searchrow input{flex:1}
+button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px}
+.primary{background:var(--blue);color:white}
+.secondary{background:var(--bg);color:var(--text)}
+.danger{background:#ffe8e8;color:#bd2020}
+input,textarea,select{width:100%;padding:12px;border:1px solid var(--line);
+ border-radius:9px;background:var(--card);color:var(--text);margin:5px 0}
+textarea{resize:vertical}
+header{position:sticky;top:0;z-index:5;background:var(--card);
+ border-bottom:1px solid var(--line);padding:12px 15px;
+ display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:25px;font-weight:bold;color:var(--blue)}
+main{max-width:650px;margin:auto;padding:12px 10px 90px}
+.card{background:var(--card);border:1px solid var(--line);
+ border-radius:13px;padding:13px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:9px}
+.between{justify-content:space-between}
+.avatar{width:43px;height:43px;border-radius:50%;object-fit:cover;
+ background:#dbe8ff;flex-shrink:0}
+.small{font-size:12px;color:var(--muted)}
+.hidden{display:none!important}
+.actions{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.actions button{background:var(--bg);color:var(--text)}
+img.media,video.media{width:100%;max-height:560px;object-fit:contain;
+ background:#111;border-radius:8px;margin-top:10px}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:10;
+ display:flex;justify-content:space-around;background:var(--card);
+ border-top:1px solid var(--line);padding:8px 2px calc(8px + env(safe-area-inset-bottom))}
+nav button{padding:9px 5px;background:transparent;color:var(--text);
+ font-size:12px;flex:1}
+nav button.active{color:var(--blue);font-weight:bold}
+h2{font-size:19px}
+h3{font-size:16px}
+.storybar{display:flex;gap:12px;overflow:auto;padding:10px 0}
+.story{min-width:64px;text-align:center;font-size:12px}
+.story img{width:57px;height:57px;border-radius:50%;object-fit:cover;
+ border:3px solid #e34c8b}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.griditem{aspect-ratio:1;background:#10131b;overflow:hidden}
-.griditem img,.griditem video{width:100%;height:100%;object-fit:cover}
-.stats{display:flex;justify-content:space-around;flex:1;text-align:center}
-.stats b{display:block;font-size:18px}
-.stats span{font-size:12px;color:var(--muted)}
-.profiletop{display:flex;align-items:center;gap:14px;padding:12px 2px}
-.bigavatar{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#00cfff,#843cff,#ff3987);color:white;font-size:26px;font-weight:bold;overflow:hidden}
-.bigavatar img{width:100%;height:100%;object-fit:cover}
-.profilebuttons{display:flex;gap:7px;margin:10px 0}
-.profilebuttons button{flex:1}
-.reel{height:calc(100vh - 160px);min-height:450px;background:#080a10;position:relative;border-radius:14px;overflow:hidden;margin-bottom:12px;color:white}
-.reel>img,.reel>video{width:100%;height:100%;object-fit:cover}
-.reelinfo{position:absolute;left:12px;bottom:18px;right:68px;text-shadow:0 1px 5px black}
-.reelactions{position:absolute;right:7px;bottom:16px;display:flex;flex-direction:column;gap:12px}
-.reelactions button{background:#0008;color:white;border:0;border-radius:50%;width:44px;height:44px;font-size:20px}
-.chatrow{padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
-.chatbox{height:55vh;display:flex;flex-direction:column}
-.messages{flex:1;overflow:auto}
-.bubble{padding:10px 12px;border-radius:15px;background:var(--card);border:1px solid var(--line);margin:7px 0;max-width:80%;width:max-content}
-.bubble.mine{margin-left:auto;background:var(--blue);color:white}
-.sendrow{display:flex;gap:6px}
-.sendrow input{flex:1}
-.filters{display:flex;gap:6px;overflow:auto;padding:5px 0}
-.filters button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:20px;padding:8px}
-.filters button.selected{background:var(--blue);color:white}
-.preview{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.preview img,.preview video{width:100%;aspect-ratio:1;object-fit:cover;background:#080a10}
-.setting{padding:14px;border-bottom:1px solid var(--line);cursor:pointer}
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:50;align-items:flex-end}
-.modal.show{display:flex}
-.sheet{width:min(520px,100%);margin:auto;background:var(--card);color:var(--text);padding:18px;border-radius:20px 20px 0 0;max-height:85vh;overflow:auto}
-.close{float:right;border:0;background:var(--bg);color:var(--text);padding:8px 12px;border-radius:50%}
-.toast{position:fixed;z-index:100;bottom:78px;left:50%;transform:translateX(-50%);background:#151923;color:white;padding:12px 16px;border-radius:12px;display:none}
-.toast.show{display:block}
-.auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px;background:#080a12;color:white}
-.authbox{width:min(420px,100%);background:#141923;padding:22px;border-radius:22px}
-.authbox input{background:#080a12;color:white;border-color:#333b4b}
-.call{display:none;position:fixed;inset:0;z-index:80;background:#070910;color:white;flex-direction:column;text-align:center}
-.call.show{display:flex}
-.callvideo{flex:1;display:grid;place-items:center;background:#10131b}
-.callvideo video{width:100%;height:100%;object-fit:cover}
-.callcontrols{padding:25px;display:flex;justify-content:center;gap:12px}
-.callcontrols button{border:0;border-radius:50%;width:54px;height:54px;background:#292f3d;color:white;font-size:21px}
-.callcontrols .end{background:#e3314b}
-@media(max-width:360px){.nav{font-size:10px}.nav span{font-size:18px}}
+.grid img,.grid video{width:100%;aspect-ratio:1;object-fit:cover;background:#ddd}
+#notice{position:fixed;top:65px;left:10px;right:10px;z-index:30;
+ background:#172033;color:white;padding:12px;border-radius:10px;display:none}
+.reel{min-height:70vh;background:#111;color:white;border-radius:12px;
+ margin-bottom:14px;padding:12px;display:flex;flex-direction:column;
+ justify-content:space-between}
+.reel video{width:100%;max-height:65vh;object-fit:contain}
+.filter{display:flex;gap:7px;overflow:auto;padding:7px 0}
+.filter button{white-space:nowrap}
+hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+a{color:var(--blue)}
 </style>
 </head>
+
 <body>
-<div id="auth" class="auth">
- <div class="authbox">
-  <div class="brand">◈ Rechod</div>
-  <h2 id="authTitle">Rechod में स्वागत है</h2>
-  <p class="muted">Demo account बनाएं या बिना login खोलें।</p>
-  <input id="authName" placeholder="आपका नाम / Username">
-  <input id="authEmail" type="email" placeholder="Email (optional)">
-  <input id="authPass" type="password" placeholder="Password (demo)">
-  <button class="primary" style="width:100%" onclick="login()">Continue</button>
-  <button class="pill" style="width:100%;margin-top:8px" onclick="demoLogin()">Demo में खोलें</button>
+<header>
+ <div class="logo">Rechod</div>
+ <div class="row">
+  <button class="secondary" onclick="page('notifications')">🔔</button>
+  <button class="secondary" onclick="page('chat')">💬</button>
  </div>
-</div>
+</header>
 
-<div id="app" class="app" style="display:none">
-<header><div class="brand">◈ Rechod</div><div><button onclick="go('notifications')">♡</button> <button onclick="go('messages')">✉</button></div></header>
-<main>
-<section id="home" class="page active">
- <div id="stories" class="stories"></div>
- <div id="feed"></div>
-</section>
+<div id="notice"></div>
+<main id="app">
+ <section id="auth">
+  <div class="card">
+   <h2>Welcome to Rechod</h2>
+   <p class="small">Login या नया अकाउंट बनाएँ</p>
+   <div class="filter">
+    <button class="primary" onclick="authMode='login';renderAuth()">Login</button>
+    <button class="secondary" onclick="authMode='signup';renderAuth()">Sign Up</button>
+   </div>
+   <div id="authFields"></div>
+  </div>
+  <div class="card">
+   <h3>Phone OTP Login</h3>
+   <input id="phone" placeholder="+919876543210" type="tel">
+   <div id="recaptcha"></div>
+   <button class="primary" onclick="sendOTP()">Send OTP</button>
+   <input id="otp" placeholder="OTP डालें">
+   <button class="primary" onclick="verifyOTP()">Verify OTP</button>
+  </div>
+ </section>
 
-<section id="search" class="page">
- <h2>Search</h2>
- <div class="searchrow"><input id="searchInput" placeholder="Username या post खोजें" oninput="renderSearch()"><button class="primary" onclick="renderSearch()">Search</button></div>
- <div id="searchResults"></div>
-</section>
+ <section id="home" class="hidden">
+  <div class="card">
+   <b>Stories</b>
+   <div id="stories" class="storybar"></div>
+   <button class="secondary" onclick="page('create')">＋ Add Story</button>
+  </div>
+  <div id="feed"></div>
+ </section>
 
-<section id="reels" class="page">
- <h2>Reels</h2><div id="reelFeed"></div>
-</section>
+ <section id="search" class="hidden">
+  <div class="card">
+   <h2>Discover People</h2>
+   <input id="searchInput" placeholder="Username खोजें..." oninput="searchUsers()">
+   <div id="searchResults"></div>
+  </div>
+ </section>
 
-<section id="create" class="page">
- <h2>Create Post / Reel / Story</h2>
- <div class="card" style="padding:13px">
-  <select id="createType"><option value="post">Photo Post</option><option value="multi">Multiple Photos</option><option value="reel">Reel / Video</option><option value="story">Story</option></select>
-  <input id="mediaInput" type="file" accept="image/*,video/*" multiple onchange="previewFiles()">
-  <div id="preview" class="preview"></div>
-  <h3>Filters</h3><div id="filters" class="filters"></div>
-  <input id="song" placeholder="Song / Audio name">
-  <input id="tag" placeholder="@Mention / Tag">
-  <input id="location" placeholder="Location">
-  <textarea id="caption" placeholder="Caption लिखें..."></textarea>
-  <button class="pill" onclick="pickMusic()">🎵 Choose music</button>
-  <button class="primary" style="width:100%;margin-top:9px" onclick="publish()">Publish</button>
-  <p class="muted">Demo में media इसी browser के लिए है।</p>
- </div>
-</section>
+ <section id="create" class="hidden">
+  <div class="card">
+   <h2>Create Post / Reel / Story</h2>
+   <select id="uploadType">
+    <option value="post">Photo / Video Post</option>
+    <option value="reel">Reel</option>
+    <option value="story">Story (24 hours)</option>
+   </select>
+   <input id="mediaFiles" type="file" accept="image/*,video/*" multiple>
+   <p class="small">एक पोस्ट में अधिकतम 10 फोटो। Demo में एक वीडियो/रील अपलोड करें।</p>
+   <div class="filter" id="filters"></div>
+   <label>Brightness</label><input id="brightness" type="range" min="50" max="180" value="100">
+   <label>Contrast</label><input id="contrast" type="range" min="50" max="180" value="100">
+   <label>Saturation</label><input id="saturation" type="range" min="0" max="200" value="100">
+   <div id="preview"></div>
+   <textarea id="caption" placeholder="Caption लिखें... #Rechod @username"></textarea>
+   <input id="music" placeholder="Music का नाम (वैकल्पिक)">
+   <input id="location" placeholder="Location (वैकल्पिक)">
+   <button class="primary" onclick="uploadPost()">Upload</button>
+  </div>
+ </section>
 
-<section id="messages" class="page">
- <h2>Messages</h2><div id="chatList"></div><div id="chatPage"></div>
-</section>
+ <section id="reels" class="hidden">
+  <h2>Reels</h2>
+  <div id="reelFeed"></div>
+ </section>
 
-<section id="profile" class="page"><div id="profileBox"></div></section>
-<section id="notifications" class="page"><h2>Notifications</h2><div id="notifs"></div></section>
+ <section id="profile" class="hidden">
+  <div id="profileContent"></div>
+  <h3>Posts & Videos</h3>
+  <div id="profileGrid" class="grid"></div>
+  <div id="profilePosts"></div>
+ </section>
 
-<section id="settings" class="page">
- <h2>Settings and Privacy</h2>
- <div class="card">
-  <div class="setting" onclick="editProfile()">👤 Edit Profile</div>
-  <div class="setting" onclick="toggleDark()">🌙 Toggle Dark Mode</div>
-  <div class="setting" onclick="showPeople('followers')">⭐ Followers</div>
-  <div class="setting" onclick="showPeople('following')">➕ Following</div>
-  <div class="setting" onclick="showPeople('blocked')">🚫 Blocked accounts (demo)</div>
-  <div class="setting" onclick="toast('Notification preferences demo')">🔔 Notifications</div>
-  <div class="setting" onclick="toast('Privacy settings demo')">🔒 Privacy</div>
-  <div class="setting" onclick="logout()">↪ Logout</div>
- </div>
-</section>
+ <section id="chat" class="hidden">
+  <div class="card">
+   <h2>Messages</h2>
+   <input id="chatUsername" placeholder="जिससे चैट करनी है उसका username">
+   <button class="primary" onclick="openChat()">Open Chat</button>
+   <div id="chatArea"></div>
+  </div>
+ </section>
+
+ <section id="notifications" class="hidden">
+  <div class="card"><h2>Notifications</h2><div id="notificationList"></div></div>
+ </section>
+
+ <section id="settings" class="hidden">
+  <div class="card">
+   <h2>Settings</h2>
+   <button class="secondary" onclick="document.body.classList.toggle('dark')">🌙 Dark Mode</button>
+   <hr>
+   <input id="editName" placeholder="Display Name">
+   <input id="editBio" placeholder="Bio">
+   <input id="editAvatar" type="file" accept="image/*">
+   <button class="primary" onclick="saveProfile()">Save Profile</button>
+   <hr>
+   <button class="secondary" onclick="page('profile')">My Profile</button>
+   <button class="danger" onclick="logout()">Logout</button>
+  </div>
+ </section>
 </main>
-<nav class="bottom">
- <button class="nav active" onclick="go('home',this)"><span>⌂</span>Home</button>
- <button class="nav" onclick="go('reels',this)"><span>▶</span>Reels</button>
- <button class="nav" onclick="go('search',this)"><span>⌕</span>Search</button>
- <button class="nav" onclick="go('create',this)"><span>⊕</span>Create</button>
- <button class="nav" onclick="go('messages',this)"><span>✉</span>Chat</button>
- <button class="nav" onclick="go('profile',this)"><span>◉</span>Profile</button>
- <button class="nav" onclick="go('settings',this)"><span>⚙</span>Settings</button>
-</nav>
-</div>
 
-<div id="modal" class="modal"><div id="sheet" class="sheet"></div></div>
-<div id="toast" class="toast"></div>
-<div id="call" class="call">
- <div style="padding:20px"><h2 id="callTitle">Call</h2><div id="callStatus">Connecting…</div></div>
- <div class="callvideo"><video id="localVideo" autoplay muted playsinline></video><div id="callMessage">Call demo UI</div></div>
- <div class="callcontrols"><button onclick="toggleMic()">🎙</button><button onclick="toggleCam()">📷</button><button class="end" onclick="endCall()">☎</button></div>
-</div>
+<nav id="nav" class="hidden">
+ <button onclick="page('home')" data-page="home">⌂<br>Home</button>
+ <button onclick="page('reels')" data-page="reels">▶<br>Reels</button>
+ <button onclick="page('search')" data-page="search">⌕<br>Search</button>
+ <button onclick="page('create')" data-page="create">＋<br>Create</button>
+ <button onclick="page('chat')" data-page="chat">✉<br>Chat</button>
+ <button onclick="page('profile')" data-page="profile">◉<br>Profile</button>
+ <button onclick="page('settings')" data-page="settings">⚙<br>Settings</button>
+</nav>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <script>
-const $=id=>document.getElementById(id);
-const filters={
- Normal:'none',Bright:'brightness(1.2)',Vivid:'saturate(1.8)',Vintage:'sepia(.4)',Warm:'sepia(.2) saturate(1.3)',Cool:'hue-rotate(15deg)', 'B&W':'grayscale(1)',Sunset:'sepia(.25) saturate(1.6)',Cinematic:'contrast(1.3) saturate(.8)',Glow:'brightness(1.12) saturate(1.3)',Pink:'hue-rotate(320deg) saturate(1.2)',Nature:'saturate(1.4)',Dramatic:'contrast(1.5)',Fade:'contrast(.8) brightness(1.1)',Dark:'brightness(.7)'
+/* RECHOD FIREBASE CONFIG */
+const firebaseConfig = {
+ apiKey: "AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
+ authDomain: "vibe-social-app-6750d.firebaseapp.com",
+ databaseURL: "https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId: "vibe-social-app-6750d",
+ storageBucket: "vibe-social-app-6750d.firebasestorage.app",
+ messagingSenderId: "",
+ appId: "",
+ measurementId: "G-DKZQ133PSN"
 };
-let selectedFilter='Normal',tempFiles=[],chatUser='',callStream=null;
-let db={
- user:{name:'Rechod User',username:'rechouser',bio:'Welcome to my Rechod profile!',avatar:'',following:[],followers:[],private:false},
- users:[
-  {name:'Aarav Sharma',username:'aarav',bio:'Travel • Photography',avatar:'',following:[],followers:[]},
-  {name:'Priya Verma',username:'priya',bio:'Music and moments ✨',avatar:'',following:[],followers:[]},
-  {name:'Rahul Singh',username:'rahul',bio:'Creator | Reels',avatar:'',following:[],followers:[]},
-  {name:'Neha Gupta',username:'neha',bio:'Life in colours 💜',avatar:'',following:[],followers:[]}
- ],
- posts:[],stories:[],chats:{},notifs:[]
+
+/* CLOUDINARY CONFIG */
+const CLOUD_NAME = "ut6gs93p";
+const UPLOAD_PRESET = "rechod_upload";
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+const $ = id => document.getElementById(id);
+
+let me = null, myProfile = null, authMode = "login";
+let confirmation = null, recaptcha = null, activeChat = null;
+let selectedFilter = "Normal", allPosts = {}, allProfiles = {};
+let currentProfile = null;
+
+const filters = {
+ Normal:"none", Bright:"brightness(1.15)", Vivid:"saturate(1.5)",
+ Vintage:"sepia(.35)", Warm:"sepia(.2) saturate(1.3)",
+ Cool:"hue-rotate(15deg)", "B&W":"grayscale(1)",
+ Sunset:"sepia(.3) saturate(1.5)", Cinematic:"contrast(1.2) saturate(.8)",
+ Glow:"brightness(1.12) saturate(1.2)", Pink:"hue-rotate(320deg)",
+ Nature:"saturate(1.35)", Dramatic:"contrast(1.4)",
+ Fade:"opacity(.85) contrast(.85)", Dark:"brightness(.75)"
 };
-function load(){
- try{const d=JSON.parse(localStorage.getItem('rech_demo_db'));if(d)db=d}catch(e){}
- if(!db.posts.length){
-  db.posts=[
-   {id:'sample1',type:'post',username:'aarav',user:'Aarav Sharma',caption:'Welcome to Rechod! ✨ Share your moments.',media:[],likes:12,liked:false,saved:false,comments:[],song:'Original audio',filter:'Normal'},
-   {id:'sample2',type:'reel',username:'priya',user:'Priya Verma',caption:'Little moments, big memories 💜',media:[],likes:24,liked:false,saved:false,comments:[],song:'Chill vibes',filter:'Vivid'}
-  ];
+
+function toast(msg) {
+ $("notice").textContent = msg;
+ $("notice").style.display = "block";
+ setTimeout(() => $("notice").style.display = "none", 3500);
+}
+function esc(s="") {
+ return String(s).replace(/[&<>"']/g, c => ({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+function avatar(p) {
+ return p?.photoURL || "https://placehold.co/100x100?text=R";
+}
+function id() { return auth.currentUser?.uid; }
+function timeAgo(t) {
+ return t ? new Date(t).toLocaleString() : "";
+}
+function safeId(s) { return String(s).replace(/[.#$[\]/]/g,"_"); }
+
+function renderAuth() {
+ $("authFields").innerHTML = `
+  ${authMode==="signup" ? '<input id="suName" placeholder="Display Name">' : ''}
+  <input id="authUser" placeholder="Email या Username">
+  <input id="authPass" type="password" placeholder="Password">
+  <button class="primary" onclick="emailAuth()"> ${authMode==="signup"?"Create Account":"Login"} </button>
+  <button class="secondary" onclick="googleLogin()">Continue with Google</button>
+ `;
+}
+renderAuth();
+
+auth.onAuthStateChanged(async user => {
+ me = user;
+ if (!user) {
+  myProfile = null;
+  $("auth").classList.remove("hidden");
+  $("nav").classList.add("hidden");
+  ["home","search","create","reels","profile","chat","settings","notifications"]
+   .forEach(x => $(x).classList.add("hidden"));
+  return;
+ }
+ $("auth").classList.add("hidden");
+ $("nav").classList.remove("hidden");
+ await ensureProfile(user);
+ subscribeProfiles();
+ subscribePosts();
+ subscribeStories();
+ subscribeNotifications();
+ page("home");
+});
+
+async function emailAuth() {
+ const login = $("authUser").value.trim();
+ const pass = $("authPass").value;
+ if (!login || !pass) return toast("Email/Username और Password भरें");
+ try {
+  if (authMode === "signup") {
+   if (!login.includes("@")) return toast("Sign Up के लिए Email डालें");
+   const cred = await auth.createUserWithEmailAndPassword(login,pass);
+   const username = "user" + cred.user.uid.slice(0,8).toLowerCase();
+   await db.ref("profiles/"+cred.user.uid).set({
+    uid:cred.user.uid, username, displayName:$("suName").value.trim() || username,
+    email:login, bio:"", photoURL:"", createdAt:Date.now()
+   });
+   await db.ref("usernames/"+username).set(cred.user.uid);
+   toast("Account बन गया");
+  } else {
+   let email = login;
+   if (!login.includes("@")) {
+    const key = login.toLowerCase().replace(/^@/,"");
+    const snap = await db.ref("usernames/"+key).get();
+    if (!snap.exists()) return toast("Username नहीं मिला");
+    const ps = await db.ref("profiles/"+snap.val()).get();
+    email = ps.val()?.email;
+    if (!email) return toast("इस अकाउंट में Email Login सेट नहीं है");
+   }
+   await auth.signInWithEmailAndPassword(email,pass);
+  }
+ } catch(e) { toast(e.message); }
+}
+async function googleLogin() {
+ try {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  await auth.signInWithPopup(provider);
+ } catch(e) { toast(e.message); }
+}
+async function sendOTP() {
+ try {
+  let phone = $("phone").value.replace(/[^\d+]/g,"");
+  if (/^\d{10}$/.test(phone)) phone = "+91"+phone;
+  if (!/^\+[1-9]\d{7,14}$/.test(phone)) return toast("Country code सहित सही नंबर डालें");
+  if (!recaptcha) {
+   recaptcha = new firebase.auth.RecaptchaVerifier("recaptcha", {size:"normal"});
+   await recaptcha.render();
+  }
+  confirmation = await auth.signInWithPhoneNumber(phone,recaptcha);
+  toast("OTP भेज दिया गया");
+ } catch(e) {
+  toast(e.message);
+  if (recaptcha) { try {recaptcha.clear()} catch(_){} recaptcha=null; }
  }
 }
-function save(){try{localStorage.setItem('rech_demo_db',JSON.stringify(db))}catch(e){}}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2200)}
-function login(){
- let name=$('authName').value.trim()||'Rechod User';
- db.user.name=name;db.user.username=name.toLowerCase().replace(/[^a-z0-9]/g,'')||'rechouser';
- save();startApp()
+async function verifyOTP() {
+ try {
+  if (!confirmation) return toast("पहले Send OTP दबाएँ");
+  await confirmation.confirm($("otp").value.trim());
+ } catch(e) { toast("OTP गलत या समाप्त हो गया"); }
 }
-function demoLogin(){startApp()}
-function logout(){$('app').style.display='none';$('auth').style.display='flex'}
-function startApp(){$('auth').style.display='none';$('app').style.display='block';renderAll()}
-function go(id,button){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- $(id).classList.add('active');
- document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
- if(button)button.classList.add('active');
- if(id==='home')renderFeed();
- if(id==='reels')renderReels();
- if(id==='search')renderSearch();
- if(id==='messages')renderChats();
- if(id==='profile')renderProfile();
- if(id==='notifications')renderNotifications();
+
+async function ensureProfile(user) {
+ const ref = db.ref("profiles/"+user.uid);
+ let snap = await ref.get();
+ if (!snap.exists()) {
+  const username = "user"+user.uid.slice(0,8).toLowerCase();
+  myProfile = {uid:user.uid,username,displayName:user.displayName||username,
+   email:user.email||"",photoURL:user.photoURL||"",bio:"",createdAt:Date.now()};
+  await ref.set(myProfile);
+  await db.ref("usernames/"+username).set(user.uid);
+ } else {
+  myProfile = snap.val();
+  if (!myProfile.username) {
+   myProfile.username = "user"+user.uid.slice(0,8).toLowerCase();
+   await ref.update({username:myProfile.username});
+   await db.ref("usernames/"+myProfile.username).set(user.uid);
+  }
+  if (user.email && !myProfile.email) {
+   myProfile.email = user.email;
+   await ref.update({email:user.email});
+  }
+ }
 }
-function avatar(u,size=''){
- const letter=esc((u.name||u.username||'?').slice(0,1).toUpperCase());
- return `<div class="avatar" ${size?`style="width:${size};height:${size}"`:''}>${u.avatar?`<img src="${u.avatar}">`:letter}</div>`
+function subscribeProfiles() {
+ db.ref("profiles").on("value",s => {allProfiles=s.val()||{};});
 }
-function allUsers(){return [db.user,...db.users]}
-function userByName(n){return allUsers().find(u=>u.username===n)||{username:n,name:n,avatar:''}}
-function isFollowing(n){return (db.user.following||[]).includes(n)}
-function follow(n){
- if(n===db.user.username)return;
- db.user.following=db.user.following||[];
- if(isFollowing(n))db.user.following=db.user.following.filter(x=>x!==n);
- else{db.user.following.push(n);db.notifs.unshift('You followed @'+n)}
- let u=userByName(n);u.followers=u.followers||[];
- if(isFollowing(n)){u.followers=u.followers.filter(x=>x!==db.user.username)}
- else if(!u.followers.includes(db.user.username))u.followers.push(db.user.username);
- save();renderAll();toast(isFollowing(n)?'Following':'Follow updated');
+function subscribePosts() {
+ db.ref("posts").on("value",s => {
+  allPosts=s.val()||{};
+  renderFeed(); renderReels(); renderProfileGrid();
+ });
 }
-function renderStories(){
- const people=[db.user,...db.users];
- $('stories').innerHTML=people.map((u,i)=>`<div class="story" onclick="${i===0?"go('create')":`viewStory('${esc(u.username)}')`}"><div class="ring">${avatar(u,'58px')}</div>${i===0?'＋ Your story':esc(u.username)}</div>`).join('');
+function subscribeStories() {
+ db.ref("stories").on("value",s => {
+  const stories=s.val()||{};
+  const now=Date.now();
+  $("stories").innerHTML=Object.entries(stories)
+   .filter(([k,v])=>v.createdAt>now-86400000)
+   .map(([k,v])=>`<div class="story" onclick="viewStory('${k}')">
+    <img src="${esc(v.mediaURL)}"><div>${esc(v.username||"User")}</div></div>`).join("");
+ });
 }
-function viewStory(n){
- const s=db.stories.find(x=>x.username===n);
- showModal(`<button class="close" onclick="closeModal()">×</button><h3>@${esc(n)}'s Story</h3>${s&&s.media?`<img style="width:100%;max-height:65vh;object-fit:contain" src="${s.media}">`:'<div class="card" style="padding:50px;text-align:center">Story demo preview</div>'}`)
+function subscribeNotifications() {
+ db.ref("notifs/"+id()).limitToLast(50).on("value",s=>{
+  const v=s.val()||{};
+  $("notificationList").innerHTML=Object.values(v).reverse().map(n=>
+   `<div class="card">${esc(n.text)}<div class="small">${timeAgo(n.createdAt)}</div></div>`
+  ).join("")||"कोई Notification नहीं";
+ });
 }
-function mediaHTML(p){
- if(!p.media||!p.media.length)return `<div class="postmedia" style="display:grid;place-items:center;color:white;background:linear-gradient(135deg,#101d3a,#562b80)">◈ Rechod</div>`;
- const m=p.media[0],filter=filters[p.filter||'Normal']||'none';
- return `<div class="postmedia">${m.type&&m.type.startsWith('video')?`<video src="${m.url}" controls playsinline style="filter:${filter}"></video>`:`<img src="${m.url}" style="filter:${filter}">`}</div>`;
+async function notify(uid,text) {
+ if (!uid || uid===id()) return;
+ await db.ref("notifs/"+uid).push({text,from:id(),createdAt:Date.now()});
 }
-function postCard(p){
- const u=userByName(p.username);
+function page(name) {
+ if (!me && name!=="home") return toast("पहले Login करें");
+ ["home","search","create","reels","profile","chat","settings","notifications"]
+  .forEach(x=>$(x).classList.toggle("hidden",x!==name));
+ $("nav").classList.toggle("hidden",!me);
+ document.querySelectorAll("nav button").forEach(b=>
+  b.classList.toggle("active",b.dataset.page===name));
+ if (name==="profile") showProfile(id());
+ if (name==="create") setupFilters();
+}
+
+function setupFilters() {
+ $("filters").innerHTML=Object.keys(filters).map(f=>
+  `<button class="secondary" onclick="applyFilter('${f}')">${f}</button>`).join("");
+}
+function applyFilter(f) {
+ selectedFilter=f;
+ const preview=$("preview");
+ preview.style.filter=filters[f];
+ preview.querySelectorAll("img,video").forEach(el=>el.style.filter=filters[f]);
+}
+$("mediaFiles").addEventListener("change",e=>{
+ const files=[...e.target.files].slice(0,10);
+ $("preview").innerHTML="";
+ files.forEach(f=>{
+  if (!f.type.startsWith("image/")&&!f.type.startsWith("video/")) return;
+  const url=URL.createObjectURL(f);
+  const el=document.createElement(f.type.startsWith("video/")?"video":"img");
+  el.src=url; el.className="media";
+  if (el.tagName==="VIDEO") {el.controls=true;el.muted=true;}
+  el.style.filter=filters[selectedFilter];
+  $("preview").appendChild(el);
+ });
+});
+
+async function cloudUpload(file) {
+ if (!file) throw Error("फ़ाइल नहीं चुनी गई");
+ const isVideo=file.type.startsWith("video/");
+ const endpoint=isVideo?"video":"image";
+ const fd=new FormData();
+ fd.append("file",file);
+ fd.append("upload_preset",UPLOAD_PRESET);
+ const res=await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${endpoint}/upload`,
+  {method:"POST",body:fd});
+ const data=await res.json();
+ if (!res.ok) throw Error(data.error?.message||"Cloudinary Upload Failed");
+ return {url:data.secure_url,kind:isVideo?"video":"image",publicId:data.public_id};
+}
+
+async function uploadPost() {
+ const files=[...$("mediaFiles").files];
+ if (!files.length) return toast("पहले Photo या Video चुनें");
+ if (files.length>10) return toast("अधिकतम 10 फ़ाइलें");
+ const type=$("uploadType").value;
+ if (type!=="post" && files.length>1) return toast("Reel/Story में एक फ़ाइल चुनें");
+ try {
+  toast("Upload हो रहा है...");
+  const media=[];
+  for (const file of files) {
+   if (file.size>100*1024*1024) throw Error("Demo सीमा: प्रति फ़ाइल 100 MB");
+   media.push(await cloudUpload(file));
+  }
+  const post={
+   uid:id(),username:myProfile.username,displayName:myProfile.displayName,
+   photoURL:myProfile.photoURL||"",type,media,
+   caption:$("caption").value.trim(),music:$("music").value.trim(),
+   location:$("location").value.trim(),filter:selectedFilter,
+   createdAt:Date.now(),likes:{},comments:{},saves:{}
+  };
+  const ref=db.ref((type==="story"?"stories":"posts")).push();
+  await ref.set(post);
+  $("mediaFiles").value="";$("caption").value="";
+  $("music").value="";$("location").value="";
+  $("preview").innerHTML="";
+  toast("Upload सफल!");
+  page(type==="reel"?"reels":"home");
+ } catch(e) {toast(e.message);}
+}
+function getPosts(type) {
+ return Object.entries(allPosts)
+ .filter(([k,p])=>!type||p.type===type)
+ .sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+}
+function mediaHTML(p) {
+ return (p.media||[]).map(m=>m.kind==="video"
+  ?`<video class="media" src="${esc(m.url)}" controls playsinline preload="metadata"></video>`
+  :`<img class="media" src="${esc(m.url)}" style="filter:${filters[p.filter]||"none"}">`
+ ).join("");
+}
+function renderFeed() {
+ if (!$("feed")) return;
+ $("feed").innerHTML=getPosts().filter(([k,p])=>p.type!=="story"&&p.type!=="reel")
+ .map(([k,p])=>postHTML(k,p)).join("")||'<div class="card">अभी कोई Post नहीं है।</div>';
+}
+function postHTML(k,p) {
+ const liked=!!p.likes?.[id()];
+ const saved=!!p.saves?.[id()];
  return `<article class="card">
- <div class="posthead">${avatar(u)}<div class="info"><b>@${esc(p.username)}</b><div class="muted">${esc(p.location||'Rechod')}</div></div>${p.username!==db.user.username?`<button class="pill" onclick="follow('${esc(p.username)}')">${isFollowing(p.username)?'Following':'Follow'}</button>`:''}<button class="pill" onclick="postMenu('${p.id}')">•••</button></div>
- ${mediaHTML(p)}
- <div class="actions"><button onclick="likePost('${p.id}')">${p.liked?'❤️':'♡'}</button><button onclick="commentPost('${p.id}')">💬</button><button onclick="sharePost('${p.id}')">↗</button><button class="save" onclick="savePost('${p.id}')">${p.saved?'🔖':'♧'}</button></div>
- <div class="caption"><b>${p.likes||0} likes</b><br><b>@${esc(p.username)}</b> ${esc(p.caption)}${p.song?`<div class="muted">♫ ${esc(p.song)}</div>`:''}
- <div class="muted" style="margin-top:6px" onclick="commentPost('${p.id}')">View/add comments (${(p.comments||[]).length})</div></div></article>`;
+  <div class="row">
+   <img class="avatar" src="${esc(p.photoURL||avatar(allProfiles[p.uid]))}">
+   <div><b onclick="showProfile('${p.uid}')" style="cursor:pointer">${esc(p.displayName||p.username)}</b>
+    <div class="small">@${esc(p.username||"user")} · ${timeAgo(p.createdAt)}</div>
+   </div>
+   <div style="margin-left:auto"><button class="secondary" onclick="followUser('${p.uid}')">Follow</button></div>
+  </div>
+  ${p.location?`<p class="small">📍 ${esc(p.location)}</p>`:""}
+  ${mediaHTML(p)}
+  ${p.caption?`<p>${esc(p.caption)}</p>`:""}
+  ${p.music?`<p class="small">♫ ${esc(p.music)}</p>`:""}
+  <div class="actions">
+   <button onclick="likePost('${k}')">${liked?"❤️":"🤍"} ${Object.keys(p.likes||{}).length}</button>
+   <button onclick="commentPost('${k}')">💬 ${Object.keys(p.comments||{}).length}</button>
+   <button onclick="sharePost('${k}')">↗ Share</button>
+   <button onclick="savePost('${k}')">${saved?"🔖 Saved":"🔖 Save"}</button>
+  </div>
+  <div id="comments-${k}"></div>
+ </article>`;
 }
-function renderFeed(){
- renderStories();
- $('feed').innerHTML=db.posts.filter(p=>p.type!=='reel').map(postCard).join('')||'<div class="card" style="padding:25px;text-align:center">अभी कोई पोस्ट नहीं है। Create पर जाकर पोस्ट डालें।</div>';
-}
-function renderReels(){
- const a=db.posts.filter(p=>p.type==='reel');
- $('reelFeed').innerHTML=a.map(p=>`<div class="reel">${p.media&&p.media[0]?p.media[0].type.startsWith('video')?`<video src="${p.media[0].url}" controls loop playsinline></video>`:`<img src="${p.media[0].url}">`:'<div style="height:100%;display:grid;place-items:center;color:white;background:linear-gradient(135deg,#102247,#6b2680)">▶ Rechod Reel</div>'}
- <div class="reelinfo"><b>@${esc(p.username)}</b><p>${esc(p.caption)}</p><small>♫ ${esc(p.song||'Original audio')}</small></div>
- <div class="reelactions"><button onclick="likePost('${p.id}')">❤️</button><button onclick="commentPost('${p.id}')">💬</button><button onclick="sharePost('${p.id}')">↗</button><button onclick="savePost('${p.id}')">🔖</button></div></div>`).join('')||'<div class="notice">अभी कोई Reel नहीं है। Create में Reel चुनें।</div>';
-}
-function likePost(id){const p=db.posts.find(x=>x.id===id);if(!p)return;p.liked=!p.liked;p.likes=Math.max(0,(p.likes||0)+(p.liked?1:-1));save();renderFeed();renderReels()}
-function savePost(id){const p=db.posts.find(x=>x.id===id);if(!p)return;p.saved=!p.saved;save();toast(p.saved?'Saved':'Removed from saved');renderFeed()}
-function commentPost(id){
- const p=db.posts.find(x=>x.id===id);if(!p)return;
- showModal(`<button class="close" onclick="closeModal()">×</button><h3>Comments</h3><div>${(p.comments||[]).map(c=>`<p><b>@${esc(c.user)}</b> ${esc(c.text)}</p>`).join('')||'<p class="muted">अभी कोई comment नहीं।</p>'}</div><input id="newComment" placeholder="Comment लिखें"><button class="primary" style="width:100%" onclick="addComment('${id}')">Post comment</button>`)
-}
-function addComment(id){const t=$('newComment').value.trim();if(!t)return;const p=db.posts.find(x=>x.id===id);p.comments=p.comments||[];p.comments.push({user:db.user.username,text:t});save();closeModal();renderFeed();toast('Comment added')}
-function sharePost(id){const url=location.href+'#'+id;if(navigator.share)navigator.share({title:'Rechod',url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied')).catch(()=>toast(url));else toast('Post shared in demo')}
-function postMenu(id){showModal(`<button class="close" onclick="closeModal()">×</button><h3>Post options</h3><button class="pill" onclick="savePost('${id}');closeModal()">Save / Unsave</button><button class="pill" onclick="toast('Report recorded in demo');closeModal()">Report</button><button class="pill" onclick="closeModal()">Cancel</button>`)}
-function renderSearch(){
- const q=($('searchInput').value||'').toLowerCase();
- const users=db.users.filter(u=>(u.username+' '+u.name+' '+u.bio).toLowerCase().includes(q));
- const posts=db.posts.filter(p=>(p.username+' '+p.caption).toLowerCase().includes(q));
- $('searchResults').innerHTML='<h3>People</h3>'+users.map(u=>`<div class="card" style="padding:10px"><div class="row">${avatar(u)}<div style="flex:1"><b>@${esc(u.username)}</b><div class="muted">${esc(u.name)}</div></div><button class="pill" onclick="follow('${esc(u.username)}')">${isFollowing(u.username)?'Following':'Follow'}</button><button class="pill" onclick="openChat('${esc(u.username)}')">Message</button></div></div>`).join('')+'<h3>Posts</h3>'+posts.map(postCard).join('');
-}
-function renderProfile(){
- const u=db.user,posts=db.posts.filter(p=>p.username===u.username);
- $('profileBox').innerHTML=`<div class="profiletop"><div class="bigavatar">${u.avatar?`<img src="${u.avatar}">`:esc(u.name.slice(0,1).toUpperCase())}</div><div class="stats"><div><b>${posts.length}</b><span>Posts</span></div><div onclick="showPeople('followers')"><b>${(u.followers||[]).length}</b><span>Followers</span></div><div onclick="showPeople('following')"><b>${(u.following||[]).length}</b><span>Following</span></div></div></div>
- <h2>${esc(u.name)}</h2><div class="muted">@${esc(u.username)}</div><p>${esc(u.bio||'')}</p>
- <div class="profilebuttons"><button class="pill" onclick="editProfile()">Edit profile</button><button class="pill" onclick="showPeople('followers')">Followers</button><button class="pill" onclick="showPeople('following')">Following</button></div>
- <h3>Posts & Videos</h3><div class="grid">${posts.map(p=>`<div class="griditem" onclick="showPost('${p.id}')">${p.media&&p.media[0]?p.media[0].type.startsWith('video')?'<div style="color:white;padding:20px">▶ Video</div>':`<img src="${p.media[0].url}">`:'<div style="color:white;padding:20px">◈ Rechod</div>'}</div>`).join('')}</div>`;
-}
-function showPost(id){const p=db.posts.find(x=>x.id===id);if(p)showModal(postCard(p))}
-function editProfile(){
- showModal(`<button class="close" onclick="closeModal()">×</button><h3>Edit profile</h3><input id="editName" value="${esc(db.user.name)}" placeholder="Name"><input id="editUsername" value="${esc(db.user.username)}" placeholder="Username"><textarea id="editBio" placeholder="Bio">${esc(db.user.bio||'')}</textarea><label>Profile photo<input id="avatarFile" type="file" accept="image/*"></label><button class="primary" style="width:100%" onclick="saveProfile()">Save changes</button>`)
-}
-function saveProfile(){
- db.user.name=$('editName').value.trim()||db.user.name;
- db.user.username=$('editUsername').value.trim().replace(/^@/,'').replace(/\s/g,'')||db.user.username;
- db.user.bio=$('editBio').value;
- const f=$('avatarFile').files[0];
- if(f)db.user.avatar=URL.createObjectURL(f);
- save();closeModal();renderAll();toast('Profile updated')
-}
-function showPeople(type){
- let list=[];
- if(type==='following')list=(db.user.following||[]).map(userByName);
- else if(type==='followers')list=(db.user.followers||[]).map(userByName);
- else list=[];
- showModal(`<button class="close" onclick="closeModal()">×</button><h3>${type[0].toUpperCase()+type.slice(1)}</h3>${list.map(u=>`<div class="row" style="padding:10px">${avatar(u)}<div style="flex:1"><b>@${esc(u.username)}</b><div class="muted">${esc(u.name)}</div></div><button class="pill" onclick="follow('${esc(u.username)}');showPeople('${type}')">${isFollowing(u.username)?'Following':'Follow'}</button></div>`).join('')||'<p class="muted">इस demo list में अभी कोई account नहीं है।</p>'}`)
-}
-function openChat(n){
- chatUser=n;db.chats[n]=db.chats[n]||[];
- $('chatList').style.display='none';
- $('chatPage').innerHTML=`<div class="chatbox"><div class="row"><button class="pill" onclick="closeChat()">←</button><b>@${esc(n)}</b><span style="flex:1"></span><button class="pill" onclick="startCall('audio','${esc(n)}')">📞</button><button class="pill" onclick="startCall('video','${esc(n)}')">📹</button></div><div class="messages" id="messageList"></div><div class="sendrow"><input id="messageInput" placeholder="Message लिखें" onkeydown="if(event.key==='Enter')sendMessage()"><button class="primary" onclick="sendMessage()">Send</button></div></div>`;
- renderMessages()
-}
-function closeChat(){$('chatList').style.display='block';$('chatPage').innerHTML='';chatUser='';renderChats()}
-function renderChats(){
- $('chatList').innerHTML=db.users.map(u=>`<div class="chatrow row" onclick="openChat('${esc(u.username)}')">${avatar(u)}<div><b>@${esc(u.username)}</b><div class="muted">${esc((db.chats[u.username]||[]).slice(-1)[0]?.text||'Tap to message')}</div></div></div>`).join('')
-}
-function renderMessages(){
- const a=db.chats[chatUser]||[];
- $('messageList').innerHTML=a.map(m=>`<div class="bubble ${m.mine?'mine':''}">${esc(m.text)}</div>`).join('');
- $('messageList').scrollTop=$('messageList').scrollHeight
-}
-function sendMessage(){
- const el=$('messageInput'),t=el.value.trim();if(!t)return;
- db.chats[chatUser]=db.chats[chatUser]||[];db.chats[chatUser].push({text:t,mine:true});
- save();el.value='';renderMessages();renderChats()
-}
-function renderNotifications(){$('notifs').innerHTML=(db.notifs||[]).map(n=>`<div class="card" style="padding:13px">${esc(n)}</div>`).join('')||'<div class="notice">अभी कोई notification नहीं है।</div>'}
-function renderAll(){renderStories();renderFeed();renderReels();renderSearch();renderChats();renderProfile();renderNotifications();renderFilters()}
-function renderFilters(){
- $('filters').innerHTML=Object.keys(filters).map(f=>`<button class="${f===selectedFilter?'selected':''}" onclick="selectFilter('${f}')">${f}</button>`).join('')
-}
-function selectFilter(f){selectedFilter=f;renderFilters();previewFiles()}
-function previewFiles(){
- tempFiles=[...$('mediaInput').files];$('preview').innerHTML='';
- tempFiles.forEach(f=>{
-  const url=URL.createObjectURL(f),el=document.createElement(f.type.startsWith('video')?'video':'img');
-  el.src=url;if(el.tagName==='VIDEO')el.controls=true;el.style.filter=filters[selectedFilter];$('preview').appendChild(el)
- })
-}
-function publish(){
- if(!tempFiles.length){toast('पहले photo/video चुनें');return}
- const type=$('createType').value;
- const files=type==='story'?tempFiles.slice(0,1):tempFiles;
- const media=files.map(f=>({url:URL.createObjectURL(f),type:f.type}));
- if(type==='story'){
-  db.stories.unshift({username:db.user.username,media:media[0].url});
-  save();toast('Story added');go('home');return
+async function likePost(k) {
+ const ref=db.ref("posts/"+k+"/likes/"+id());
+ const s=await ref.get();
+ if(s.exists()) await ref.remove(); else {
+  await ref.set(true); const p=allPosts[k]; await notify(p.uid,myProfile.username+" ने आपका Post Like किया");
  }
- db.posts.unshift({id:'p'+Date.now(),type:type==='reel'?'reel':'post',username:db.user.username,user:db.user.name,caption:$('caption').value,song:$('song').value,tag:$('tag').value,location:$('location').value,media,likes:0,liked:false,saved:false,comments:[],filter:selectedFilter});
- save();$('mediaInput').value='';$('preview').innerHTML='';$('caption').value='';$('song').value='';$('tag').value='';$('location').value='';tempFiles=[];toast('Published');go(type==='reel'?'reels':'home')
 }
-function pickMusic(){
- showModal(`<button class="close" onclick="closeModal()">×</button><h3>🎵 Add music</h3><button class="pill" onclick="useMusic('Rechod Beat')">Rechod Beat</button> <button class="pill" onclick="useMusic('Chill Vibes')">Chill Vibes</button> <button class="pill" onclick="useMusic('Travel Mood')">Travel Mood</button><p>या अपना audio नाम लिखें:</p><input id="customSong" placeholder="Song name"><button class="primary" onclick="useMusic(document.getElementById('customSong').value)">Use song</button>`)
+async function savePost(k) {
+ const ref=db.ref("posts/"+k+"/saves/"+id());
+ const s=await ref.get();
+ if(s.exists()) await ref.remove(); else await ref.set(true);
 }
-function useMusic(n){if(n)$('song').value=n;closeModal();toast('Music selected')}
-function showModal(html){$('sheet').innerHTML=html;$('modal').classList.add('show')}
-function closeModal(){$('modal').classList.remove('show')}
-function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('rech_dark',document.body.classList.contains('dark')?'1':'0')}
-function startCall(type,user){
- $('call').classList.add('show');$('callTitle').textContent=(type==='video'?'Video call':'Audio call')+' — @'+user;
- $('callStatus').textContent='Demo call screen — remote connection नहीं है';
- $('callMessage').style.display='block';
- if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('Camera/mic इस browser में उपलब्ध नहीं');return}
- navigator.mediaDevices.getUserMedia({audio:true,video:type==='video'}).then(s=>{
-  callStream=s;$('localVideo').srcObject=s;$('localVideo').style.display=type==='video'?'block':'none';$('callMessage').style.display=type==='video'?'none':'block';$('callStatus').textContent='Local microphone/camera connected'
- }).catch(()=>{$('callStatus').textContent='Permission नहीं मिली';toast('Camera/microphone permission दें')})
+async function commentPost(k) {
+ const text=prompt("Comment लिखें");
+ if (!text?.trim()) return;
+ await db.ref("posts/"+k+"/comments").push({
+  uid:id(),username:myProfile.username,text:text.trim(),createdAt:Date.now()
+ });
+ await notify(allPosts[k]?.uid,myProfile.username+" ने Comment किया");
 }
-function toggleMic(){if(!callStream)return;let t=callStream.getAudioTracks()[0];if(t)t.enabled=!t.enabled;toast(t&&t.enabled?'Mic on':'Mic off')}
-function toggleCam(){if(!callStream)return;let t=callStream.getVideoTracks()[0];if(t)t.enabled=!t.enabled;toast(t&&t.enabled?'Camera on':'Camera off')}
-function endCall(){if(callStream)callStream.getTracks().forEach(t=>t.stop());callStream=null;$('call').classList.remove('show')}
-function init(){
- load();if(localStorage.getItem('rech_dark')==='1')document.body.classList.add('dark');
- if(localStorage.getItem('rech_demo_login')==='1')startApp()
+function sharePost(k) {
+ const url=location.href.split("#")[0]+"#post="+k;
+ if(navigator.share) navigator.share({title:"Rechod",url}).catch(()=>{});
+ else if(navigator.clipboard) navigator.clipboard.writeText(url).then(()=>toast("Link Copy हो गया"));
+ else prompt("Post Link",url);
 }
-const oldStart=startApp;
-startApp=function(){localStorage.setItem('rech_demo_login','1');oldStart()}
-init();
+function renderReels() {
+ $("reelFeed").innerHTML=getPosts("reel").map(([k,p])=>
+  `<div class="reel"><div>${esc(p.username||"User")} · ${esc(p.caption||"")}</div>
+  ${mediaHTML(p)}<div class="actions">
+   <button onclick="likePost('${k}')">❤️ ${Object.keys(p.likes||{}).length}</button>
+   <button onclick="commentPost('${k}')">💬 Comment</button>
+   <button onclick="sharePost('${k}')">↗ Share</button>
+  </div></div>`
+ ).join("")||"अभी कोई Reel नहीं है";
+}
+function renderProfileGrid() {
+ if (!me) return;
+ const posts=getPosts().filter(([k,p])=>p.uid===id()&&p.type!=="story");
+ $("profileGrid").innerHTML=posts.map(([k,p])=>{
+  const m=p.media?.[0];
+  return m?(m.kind==="video"
+   ?`<video src="${esc(m.url)}" controls></video>`
+   :`<img src="${esc(m.url)}" onclick="showPost('${k}')">`):"";
+ }).join("");
+}
+function showPost(k) {
+ const p=allPosts[k];if(!p)return;
+ $("profilePosts").innerHTML=postHTML(k,p);
+}
+function showProfile(uid) {
+ currentProfile=uid;
+ const p=allProfiles[uid]||(uid===id()?myProfile:null);
+ if(!p) return toast("Profile लोड हो रहा है");
+ const followers=p.followers||{},following=p.following||{};
+ const mine=uid===id();
+ $("profileContent").innerHTML=`
+  <div class="card">
+   <div class="row"><img class="avatar" style="width:76px;height:76px" src="${esc(avatar(p))}">
+    <div><h2>${esc(p.displayName||p.username)}</h2><div>@${esc(p.username)}</div></div>
+   </div>
+   <p>${esc(p.bio||"")}</p>
+   <div class="row between">
+    <span>${Object.keys(p.posts||{}).length} Posts</span>
+    <span onclick="showFollowList('${uid}','followers')">${Object.keys(followers).length} Followers</span>
+    <span onclick="showFollowList('${uid}','following')">${Object.keys(following).length} Following</span>
+   </div>
+   <div class="actions">
+    ${mine?'<button onclick="page(\\'settings\\')">Edit Profile</button>':
+    `<button class="primary" onclick="followUser('${uid}')">${following[id()]?"Following":"Follow"}</button>
+     <button onclick="startChat('${uid}')">Message</button>
+     <button onclick="startCall('${uid}','audio')">Audio Call</button>
+     <button onclick="startCall('${uid}','video')">Video Call</button>`}
+    <button onclick="shareProfile('${uid}')">Share Profile</button>
+   </div>
+  </div>`;
+ $("profileGrid").innerHTML=getPosts().filter(([k,x])=>x.uid===uid&&x.type!=="story")
+ .map(([k,x])=>x.media?.[0]?.kind==="video"
+  ?`<video src="${esc(x.media[0].url)}" controls></video>`
+  :x.media?.[0]?`<img src="${esc(x.media[0].url)}" onclick="showPost('${k}')">`:"").join("");
+ page("profile");
+}
+async function followUser(uid) {
+ if(!uid||uid===id()) return;
+ const ref=db.ref("profiles/"+uid+"/followers/"+id());
+ const s=await ref.get();
+ if(s.exists()) {
+  await ref.remove(); await db.ref("profiles/"+id()+"/following/"+uid).remove();
+ } else {
+  await ref.set(true); await db.ref("profiles/"+id()+"/following/"+uid).set(true);
+  await notify(uid,myProfile.username+" ने आपको Follow किया");
+ }
+}
+function showFollowList(uid,kind) {
+ const ids=Object.keys(allProfiles[uid]?.[kind]||{});
+ const list=ids.map(x=>allProfiles[x]).filter(Boolean);
+ alert(list.map(p=>"@"+p.username).join("\n")||"कोई नहीं");
+}
+function shareProfile(uid) {
+ const url=location.href.split("#")[0]+"#profile="+uid;
+ if(navigator.share) navigator.share({title:"Rechod Profile",url}).catch(()=>{});
+ else if(navigator.clipboard) navigator.clipboard.writeText(url).then(()=>toast("Profile Link Copy हुआ"));
+ else prompt("Profile Link",url);
+}
+function searchUsers() {
+ const q=$("searchInput").value.trim().toLowerCase().replace(/^@/,"");
+ $("searchResults").innerHTML=Object.entries(allProfiles)
+ .filter(([uid,p])=>uid!==id()&&((p.username||"").toLowerCase().includes(q)||
+ (p.displayName||"").toLowerCase().includes(q)))
+ .slice(0,30).map(([uid,p])=>`
+  <div class="row card"><img class="avatar" src="${esc(avatar(p))}">
+   <div style="flex:1"><b>${esc(p.displayName||p.username)}</b><div class="small">@${esc(p.username)}</div></div>
+   <button class="primary" onclick="showProfile('${uid}')">View</button>
+  </div>`).join("");
+}
+
+async function saveProfile() {
+ try {
+  const updates={displayName:$("editName").value.trim()||myProfile.displayName,
+   bio:$("editBio").value.trim()};
+  const f=$("editAvatar").files[0];
+  if(f) updates.photoURL=(await cloudUpload(f)).url;
+  await db.ref("profiles/"+id()).update(updates);
+  myProfile={...myProfile,...updates};
+  toast("Profile Save हो गया");showProfile(id());
+ } catch(e){toast(e.message);}
+}
+
+function viewStory(k) {
+ const s=allStoriesCache?.[k];
+ if(s) window.open(s.media?.[0]?.url||s.mediaURL,"_blank");
+ else db.ref("stories/"+k).get().then(x=>{
+  const v=x.val();if(v)window.open(v.media?.[0]?.url||v.mediaURL,"_blank");
+ });
+}
+let allStoriesCache={};
+db.ref("stories").on("value",s=>{allStoriesCache=s.val()||{};});
+
+async function openChat() {
+ const name=$("chatUsername").value.trim().toLowerCase().replace(/^@/,"");
+ const s=await db.ref("usernames/"+name).get();
+ if(!s.exists()) return toast("Username नहीं मिला");
+ startChat(s.val());
+}
+function startChat(uid) {
+ if(!uid||uid===id()) return;
+ activeChat=[id(),uid].sort().join("_");
+ page("chat");
+ $("chatArea").innerHTML=`
+  <h3>Chat: @${esc(allProfiles[uid]?.username||"User")}</h3>
+  <div id="messages" style="max-height:45vh;overflow:auto"></div>
+  <textarea id="messageText" placeholder="Message लिखें"></textarea>
+  <button class="primary" onclick="sendMessage()">Send</button>`;
+ db.ref("messages/"+activeChat).limitToLast(100).on("value",s=>{
+  const data=s.val()||{};
+  const box=$("messages");if(!box)return;
+  box.innerHTML=Object.values(data).map(m=>
+   `<div class="card"><b>${esc(m.username||"User")}</b><p>${esc(m.text||"")}</p>
+   <div class="small">${timeAgo(m.createdAt)}</div></div>`).join("");
+  box.scrollTop=box.scrollHeight;
+ });
+}
+async function sendMessage() {
+ const text=$("messageText")?.value.trim();
+ if(!text||!activeChat)return;
+ await db.ref("messages/"+activeChat).push({
+  uid:id(),username:myProfile.username,text,createdAt:Date.now()
+ });
+ $("messageText").value="";
+}
+
+async function startCall(uid,type) {
+ if(!uid||uid===id())return;
+ toast("Call setup शुरू हो रहा है...");
+ try {
+  const stream=await navigator.mediaDevices.getUserMedia({
+   audio:true,video:type==="video"
+  });
+  const pc=new RTCPeerConnection({
+   iceServers:[{urls:"stun:stun.l.google.com:19302"}]
+  });
+  stream.getTracks().forEach(t=>pc.addTrack(t,stream));
+  const callRef=db.ref("calls").push();
+  const offer=await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  await callRef.set({
+   from:id(),to:uid,type,offer:offer.toJSON(),status:"ringing",createdAt:Date.now()
+  });
+  const win=window.open("","Rechod Call","width=360,height=600");
+  if(win) win.document.write(
+   "<title>Rechod Call</title><h2>Rechod "+esc(type)+" Call</h2>"+
+   "<p>Call request भेज दी गई। Answering/ICE signaling server जोड़ना आवश्यक है।</p>"
+  );
+  toast("Call request भेजी गई; यह अभी signaling demo है");
+  // Stop local devices after the demo request.
+  stream.getTracks().forEach(t=>t.stop());pc.close();
+ } catch(e) {
+  toast("Call के लिए HTTPS और Microphone/Camera permission चाहिए: "+e.message);
+ }
+}
+async function logout() {
+ try {
+  await auth.signOut();
+  db.ref("profiles").off();db.ref("posts").off();db.ref("stories").off();
+  toast("Logout हो गया");
+ } catch(e){toast(e.message);}
+}
 </script>
 </body>
 </html>
