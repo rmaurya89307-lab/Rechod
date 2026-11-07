@@ -3,7 +3,7 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#087b52">
 <title>GharSathi - घर बनाने का साथी</title>
 
@@ -17,147 +17,189 @@ body{font-family:Arial,sans-serif;background:#f4f7f5;color:#202b25}
 header{background:#087b52;color:white;padding:17px 15px}
 .brand{font-size:25px;font-weight:bold}
 .tag{font-size:12px;margin-top:4px}
-.location{margin-top:14px;background:#ffffff20;padding:10px;border-radius:9px}
-main{max-width:650px;margin:auto;padding:15px;padding-bottom:90px}
-.search{display:flex;background:white;border:1px solid #ddd;border-radius:12px;padding:13px;margin-bottom:20px}
-.search input{border:0;outline:0;width:100%;font-size:15px}
-h2{font-size:19px;margin:19px 0 12px}
-.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.location{margin-top:14px;background:#ffffff20;padding:12px;border-radius:9px}
+main{max-width:650px;margin:auto;padding:15px 15px 100px}
+.hero{background:#e0f3e8;border-radius:15px;padding:19px;margin-top:15px}
+.hero h2{margin:0 0 8px;color:#075e40}
+h2{font-size:19px;margin:20px 0 12px}
+.muted{color:#69756d;font-size:13px;line-height:1.5}
+.search{background:white;border:1px solid #ddd;border-radius:12px;padding:13px;margin:12px 0 20px}
+.search input{width:100%;border:0;outline:0;font-size:15px}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .category{background:white;border-radius:13px;padding:15px 5px;text-align:center;border:1px solid #e5ece7;cursor:pointer}
-.category .emoji{font-size:30px;margin-bottom:8px}
+.category:active{background:#e0f3e8}
+.emoji{font-size:30px;margin-bottom:8px}
 .category p{font-size:13px;font-weight:bold}
 .category small{color:#777;font-size:10px}
-.card{background:white;border-radius:13px;padding:16px;margin-top:15px;border:1px solid #e4e9e5}
+.card{background:white;border-radius:13px;padding:15px;margin:12px 0;border:1px solid #e4e9e5}
+.field{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:8px 0 13px;background:white}
+label{font-size:13px;font-weight:bold}
 .btn{background:#087b52;color:white;border:0;border-radius:9px;padding:12px 16px;font-size:14px;cursor:pointer}
 .btn2{background:#e5f4ed;color:#087b52}
-input,select{font-size:15px}
-.field{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:8px 0 13px}
-label{font-size:13px;font-weight:bold}
-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:13px 3px;border-top:1px solid #ddd}
-nav button{border:0;background:none;font-size:12px;color:#087b52}
-nav span{display:block;font-size:20px;margin-bottom:3px}
-.hidden{display:none}
-#status{font-size:13px;margin:12px 0;color:#087b52}
-#recaptcha-container{margin:12px 0}
-.hero{background:#e0f3e8;border-radius:15px;padding:19px;margin-top:16px}
-.hero h2{margin:0 0 8px;color:#075e40}
-.muted{color:#69756d;font-size:13px;line-height:1.5}
+button:disabled{opacity:.5}
+.hidden{display:none!important}
+.product{background:white;border:1px solid #e4e9e5;border-radius:14px;overflow:hidden;margin:13px 0}
+.product img{width:100%;height:190px;object-fit:cover;background:#e8eee9}
+.product-info{padding:14px}
+.product-name{font-size:17px;font-weight:bold}
+.price{font-size:21px;font-weight:bold;color:#087b52;margin:8px 0}
+.seller{background:#f1f7f3;padding:11px;border-radius:9px;margin:10px 0;font-size:13px;line-height:1.8}
+.whatsapp{display:inline-block;background:#168b4b;color:white;text-decoration:none;padding:11px 14px;border-radius:8px;font-size:13px}
+.topbtn{margin:8px 5px 0 0}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:12px 3px;border-top:1px solid #ddd;z-index:10}
+nav button{border:0;background:none;font-size:12px;color:#087b52;cursor:pointer}
+nav span{display:block;font-size:21px;margin-bottom:3px}
+#status,#profileStatus,#productStatus{font-size:13px;color:#087b52;margin-top:10px}
+.empty{text-align:center;padding:25px;color:#777}
+.back{border:0;background:none;color:#087b52;font-weight:bold;font-size:15px;cursor:pointer}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="brand">🏠 GharSathi</div>
-  <div class="tag">घर बनाने का हर सामान, अब एक ही जगह</div>
-  <div class="location">📍 <span id="topLocation">अपना शहर चुनें</span></div>
+ <div class="brand">🏠 GharSathi</div>
+ <div class="tag">घर बनाने का हर सामान, अब एक ही जगह</div>
+ <div class="location">📍 <span id="topLocation">अपना शहर चुनें</span></div>
 </header>
 
 <main>
 
 <section id="homePage">
-  <div class="hero">
-    <h2>सपनों का घर बनाना अब आसान!</h2>
-    <p class="muted">सामान खोजें, कीमत जानें और दुकानदार से जुड़ें।</p>
-  </div>
+ <div class="hero">
+  <h2>सपनों का घर बनाना अब आसान!</h2>
+  <p class="muted">सामान खोजें, कीमत जानें और दुकानदार से जुड़ें।</p>
+ </div>
 
-  <h2>🔍 क्या खोज रहे हैं?</h2>
-  <div class="search">
-    <input id="searchInput" placeholder="सीमेंट, ईंट, सरिया, पुट्टी..." oninput="searchCategory()">
-  </div>
+ <h2>🔍 क्या खोज रहे हैं?</h2>
+ <div class="search">
+  <input id="searchInput" placeholder="सीमेंट, ईंट, सरिया, पुट्टी..." oninput="searchCategory()">
+ </div>
 
-  <h2>सामान की कैटेगरी</h2>
-  <div class="categories" id="categoryList"></div>
+ <h2>सामान की कैटेगरी</h2>
+ <div class="categories" id="categoryList"></div>
 
-  <div class="card">
-    <h2>🛠️ घर बनाने की सेवाएँ</h2>
-    <p class="muted">राजमिस्त्री, मजदूर, प्लंबर, इलेक्ट्रिशियन और पेंटर की जानकारी जल्द उपलब्ध होगी।</p>
-  </div>
+ <div class="card">
+  <h2>🛠️ घर बनाने की सेवाएँ</h2>
+  <p class="muted">राजमिस्त्री, मजदूर, प्लंबर, इलेक्ट्रिशियन और पेंटर की जानकारी जल्द उपलब्ध होगी।</p>
+ </div>
+ <div class="card">
+  <h2>🏡 जमीन खरीदें और बेचें</h2>
+  <p class="muted">अपने शहर में जमीन और प्लॉट की लिस्टिंग जल्द उपलब्ध होगी।</p>
+ </div>
+</section>
 
-  <div class="card">
-    <h2>🏡 जमीन खरीदें और बेचें</h2>
-    <p class="muted">अपने शहर में जमीन और प्लॉट की लिस्टिंग खोजें।</p>
-  </div>
+<section id="productsPage" class="hidden">
+ <button class="back" onclick="showPage('homePage')">← वापस जाएँ</button>
+ <h2 id="selectedCategory">सामान की लिस्ट</h2>
+ <p class="muted">दुकानदारों द्वारा जोड़ी गई उपलब्ध लिस्टिंग</p>
+ <div id="productList"><div class="empty">सामान लोड हो रहा है...</div></div>
 </section>
 
 <section id="loginPage" class="hidden">
-  <div class="card">
-    <h2>📱 मोबाइल से लॉगिन करें</h2>
-    <p class="muted">अपना मोबाइल नंबर +91 के साथ लिखें।</p>
-    <input class="field" id="phone" type="tel" placeholder="+919876543210">
-    <div id="recaptcha-container"></div>
-    <button class="btn" onclick="sendOTP()">OTP भेजें</button>
-
-    <div id="otpArea" class="hidden">
-      <input class="field" id="otp" type="number" placeholder="6 अंकों का OTP">
-      <button class="btn" onclick="verifyOTP()">OTP Verify करें</button>
-    </div>
-    <p id="status"></p>
+ <div class="card">
+  <h2>📱 मोबाइल से लॉगिन करें</h2>
+  <p class="muted">अपना मोबाइल नंबर +91 के साथ लिखें।</p>
+  <input class="field" id="phone" type="tel" placeholder="+919876543210">
+  <div id="recaptcha-container"></div>
+  <button class="btn" onclick="sendOTP()">OTP भेजें</button>
+  <div id="otpArea" class="hidden">
+   <input class="field" id="otp" type="number" placeholder="6 अंकों का OTP">
+   <button class="btn" onclick="verifyOTP()">OTP Verify करें</button>
   </div>
+  <p id="status"></p>
+ </div>
 </section>
 
 <section id="profilePage" class="hidden">
-  <div class="card">
-    <h2>👤 अपनी प्रोफाइल बनाएँ</h2>
-    <label>आपका नाम</label>
-    <input class="field" id="userName" placeholder="पूरा नाम">
-    <label>अपना शहर</label>
-    <input class="field" id="city" placeholder="जैसे मिर्जापुर">
-    <label>राज्य</label>
-    <input class="field" id="state" placeholder="जैसे उत्तर प्रदेश">
+ <div class="card">
+  <h2>👤 अपनी प्रोफाइल बनाएँ</h2>
+  <label>आपका नाम</label>
+  <input class="field" id="userName" placeholder="पूरा नाम">
+  <label>अपना शहर</label>
+  <input class="field" id="city" placeholder="जैसे मिर्जापुर">
+  <label>राज्य</label>
+  <input class="field" id="state" placeholder="जैसे उत्तर प्रदेश">
+  <label>आप ऐप का उपयोग कैसे करेंगे?</label>
+  <select class="field" id="role">
+   <option value="customer">ग्राहक - सामान खरीदना है</option>
+   <option value="seller">दुकानदार - सामान बेचना है</option>
+   <option value="both">दोनों</option>
+   <option value="worker">मजदूर / मिस्त्री</option>
+  </select>
+  <button class="btn" onclick="saveProfile()">प्रोफाइल सेव करें</button>
+  <p id="profileStatus"></p>
+ </div>
+</section>
 
-    <label>आप ऐप का उपयोग कैसे करेंगे?</label>
-    <select class="field" id="role">
-      <option value="customer">ग्राहक - सामान खरीदना है</option>
-      <option value="seller">दुकानदार - सामान बेचना है</option>
-      <option value="both">दोनों</option>
-      <option value="worker">मजदूर / मिस्त्री</option>
-    </select>
+<section id="addPage" class="hidden">
+ <div class="card">
+  <h2>➕ अपना सामान जोड़ें</h2>
+  <p class="muted">अपनी दुकान का सामान ग्राहकों को दिखाएँ।</p>
 
-    <button class="btn" onclick="saveProfile()">प्रोफाइल सेव करें</button>
-    <p id="profileStatus"></p>
-  </div>
+  <label>सामान का नाम</label>
+  <input class="field" id="pName" placeholder="जैसे UltraTech Cement">
+
+  <label>कैटेगरी</label>
+  <select class="field" id="pCategory"></select>
+
+  <label>ब्रांड</label>
+  <input class="field" id="pBrand" placeholder="जैसे UltraTech">
+
+  <label>कीमत (₹)</label>
+  <input class="field" id="pPrice" type="number" min="0" placeholder="जैसे 380">
+
+  <label>इकाई / पैकिंग</label>
+  <input class="field" id="pUnit" placeholder="जैसे 1 बोरी, 1 किलो, 1 पीस">
+
+  <label>सामान की फोटो का HTTPS लिंक (वैकल्पिक)</label>
+  <input class="field" id="pImage" type="url" placeholder="https://example.com/photo.jpg">
+
+  <label>सामान की जानकारी</label>
+  <textarea class="field" id="pDescription" rows="3" placeholder="सामान की विशेषताएँ लिखें"></textarea>
+
+  <button class="btn" onclick="addProduct()">सामान प्रकाशित करें</button>
+  <p id="productStatus"></p>
+ </div>
 </section>
 
 <section id="accountPage" class="hidden">
-  <div class="card">
-    <h2>मेरा अकाउंट</h2>
-    <p id="accountInfo" class="muted">अभी लॉगिन नहीं किया है।</p>
-    <button class="btn" onclick="showPage('loginPage')">लॉगिन / रजिस्टर</button>
-    <button class="btn btn2" onclick="logout()" style="margin-top:10px">लॉगआउट</button>
-  </div>
+ <div class="card">
+  <h2>👤 मेरा अकाउंट</h2>
+  <p id="accountInfo" class="muted">अभी लॉगिन नहीं किया है।</p>
+  <button class="btn topbtn" onclick="showPage('loginPage')">लॉगिन / रजिस्टर</button>
+  <button class="btn btn2 topbtn" onclick="openAddPage()">सामान जोड़ें</button>
+  <button class="btn btn2 topbtn" onclick="logout()">लॉगआउट</button>
+ </div>
 </section>
 
 </main>
 
 <nav>
-  <button onclick="showPage('homePage')"><span>🏠</span>होम</button>
-  <button onclick="showPage('homePage');document.getElementById('searchInput').focus()"><span>🔍</span>सर्च</button>
-  <button onclick="showPage('loginPage')"><span>➕</span>जुड़ें</button>
-  <button onclick="showPage('accountPage')"><span>👤</span>अकाउंट</button>
+ <button onclick="showPage('homePage')"><span>🏠</span>होम</button>
+ <button onclick="showPage('homePage');document.getElementById('searchInput').focus()"><span>🔍</span>सर्च</button>
+ <button onclick="openAddPage()"><span>➕</span>जुड़ें</button>
+ <button onclick="showPage('accountPage')"><span>👤</span>अकाउंट</button>
 </nav>
 
 <script>
-// GharSathi Firebase configuration
-// Rechod के पुराने Firebase प्रोजेक्ट का इस्तेमाल
-
+// FIREBASE CONFIG
 const firebaseConfig = {
-  apiKey: "AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
-  authDomain: "vibe-social-app-6750d.firebaseapp.com",
-  databaseURL: "https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "vibe-social-app-6750d",
-  storageBucket: "vibe-social-app-6750d.firebasestorage.app",
-  messagingSenderId: "897864313569",
-  appId: "1:897864313569:web:738169cb0e6694d3d2a5a0",
-  measurementId: "G-DKZQ133PSN"
+ apiKey:"AIzaSyAMJKKGaxwxmvn-0QZcnkKol0eVs1nU_y0",
+ authDomain:"vibe-social-app-6750d.firebaseapp.com",
+ databaseURL:"https://vibe-social-app-6750d-default-rtdb.asia-southeast1.firebasedatabase.app",
+ projectId:"vibe-social-app-6750d",
+ storageBucket:"vibe-social-app-6750d.firebasestorage.app",
+ messagingSenderId:"897864313569",
+ appId:"1:897864313569:web:738169cb0e6694d3d2a5a0",
+ measurementId:"G-DKZQ133PSN"
 };
 
-firebase.initializeApp(firebaseConfig);
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.database();
 
-const auth = firebase.auth();
-const db = firebase.database();
-
-const categories = [
+const categories=[
  ["🧱","ईंट और ब्लॉक","ईंट, फ्लाई ऐश ब्लॉक"],
  ["🏗️","सीमेंट","सभी ब्रांड"],
  ["🔩","सरिया","TMT और स्टील"],
@@ -176,155 +218,287 @@ const categories = [
  ["🧱","वाटरप्रूफिंग","केमिकल और कोटिंग"]
 ];
 
-const categoryList = document.getElementById("categoryList");
+let currentProfile=null;
+let confirmationResult=null;
+let recaptchaVerifier=null;
+let selectedCategory="";
 
-function renderCategories(items) {
- categoryList.innerHTML = "";
- items.forEach(item => {
-   const div = document.createElement("div");
-   div.className = "category";
-   div.innerHTML = `<div class="emoji">${item[0]}</div><p></p><small></small>`;
-   div.querySelector("p").textContent = item[1];
-   div.querySelector("small").textContent = item[2];
-   div.onclick = () => {
-     alert(item[1] + " की दुकान और सामान की लिस्टिंग अगले चरण में जोड़ी जाएगी।");
-   };
-   categoryList.appendChild(div);
+const $=id=>document.getElementById(id);
+
+function showPage(id){
+ ["homePage","productsPage","loginPage","profilePage","addPage","accountPage"].forEach(x=>$(x).classList.add("hidden"));
+ $(id).classList.remove("hidden");
+ window.scrollTo(0,0);
+}
+
+function renderCategories(items){
+ $("categoryList").innerHTML="";
+ items.forEach(item=>{
+  const div=document.createElement("div");
+  div.className="category";
+  const emoji=document.createElement("div");
+  emoji.className="emoji";
+  emoji.textContent=item[0];
+  const p=document.createElement("p");
+  p.textContent=item[1];
+  const small=document.createElement("small");
+  small.textContent=item[2];
+  div.append(emoji,p,small);
+  div.onclick=()=>loadProducts(item[1]);
+  $("categoryList").appendChild(div);
  });
 }
 
+function searchCategory(){
+ const q=$("searchInput").value.toLowerCase();
+ renderCategories(categories.filter(item=>item.join(" ").toLowerCase().includes(q)));
+}
 renderCategories(categories);
 
-function searchCategory() {
- const q = document.getElementById("searchInput").value.toLowerCase();
- renderCategories(categories.filter(item =>
-   item.join(" ").toLowerCase().includes(q)
- ));
+function loadCategoryOptions(){
+ $("pCategory").innerHTML="";
+ categories.forEach(item=>{
+  const option=document.createElement("option");
+  option.value=item[1];
+  option.textContent=item[1];
+  $("pCategory").appendChild(option);
+ });
 }
+loadCategoryOptions();
 
-function showPage(id) {
- ["homePage","loginPage","profilePage","accountPage"].forEach(x =>
-   document.getElementById(x).classList.add("hidden")
- );
- document.getElementById(id).classList.remove("hidden");
-}
+function loadProducts(category){
+ selectedCategory=category;
+ $("selectedCategory").textContent="🛒 "+category;
+ $("productList").innerHTML='<div class="empty">सामान लोड हो रहा है...</div>';
+ showPage("productsPage");
 
-let confirmationResult = null;
-let recaptchaVerifier = null;
-
-function setupRecaptcha() {
- if (recaptchaVerifier) return;
- recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-   "recaptcha-container", {size:"normal"}
- );
- recaptchaVerifier.render();
-}
-
-async function sendOTP() {
- const phone = document.getElementById("phone").value.trim();
- const status = document.getElementById("status");
-
- if (!/^\+[1-9]\d{7,14}$/.test(phone)) {
-   status.textContent = "सही नंबर लिखें, जैसे +919876543210";
+ db.ref("gharsathi/products").orderByChild("category").equalTo(category).once("value")
+ .then(snapshot=>{
+  $("productList").innerHTML="";
+  if(!snapshot.exists()){
+   $("productList").innerHTML='<div class="empty">इस कैटेगरी में अभी कोई सामान उपलब्ध नहीं है।<br><br>दुकानदार अपना सामान जोड़ सकते हैं।</div>';
    return;
+  }
+  const products=[];
+  snapshot.forEach(child=>{
+   products.push({...child.val(),id:child.key});
+  });
+  products.reverse().forEach(showProduct);
+ })
+ .catch(e=>{
+  $("productList").textContent="डेटा लोड नहीं हुआ: "+e.message;
+ });
+}
+
+function showProduct(p){
+ const box=document.createElement("div");
+ box.className="product";
+
+ if(p.image && /^https:\/\//i.test(p.image)){
+  const img=document.createElement("img");
+  img.src=p.image;
+  img.alt=p.name||"सामान";
+  img.onerror=()=>img.remove();
+  box.appendChild(img);
  }
 
- try {
-   status.textContent = "कृपया CAPTCHA पूरा करें...";
-   setupRecaptcha();
-   await recaptchaVerifier.render();
-   confirmationResult = await auth.signInWithPhoneNumber(phone,recaptchaVerifier);
-   document.getElementById("otpArea").classList.remove("hidden");
-   status.textContent = "OTP भेज दिया गया है।";
- } catch(e) {
-   status.textContent = "समस्या: " + e.message;
-   if(recaptchaVerifier) {
-     recaptchaVerifier.clear();
-     recaptchaVerifier = null;
-   }
+ const info=document.createElement("div");
+ info.className="product-info";
+
+ const name=document.createElement("div");
+ name.className="product-name";
+ name.textContent=p.name||"सामान";
+
+ const brand=document.createElement("p");
+ brand.className="muted";
+ brand.textContent="ब्रांड: "+(p.brand||"उपलब्ध नहीं");
+
+ const price=document.createElement("div");
+ price.className="price";
+ price.textContent="₹"+Number(p.price||0).toLocaleString("en-IN")+" / "+(p.unit||"इकाई");
+
+ const description=document.createElement("p");
+ description.className="muted";
+ description.textContent=p.description||"कोई अतिरिक्त जानकारी नहीं";
+
+ const seller=document.createElement("div");
+ seller.className="seller";
+ seller.textContent="🏪 दुकानदार: "+(p.sellerName||"दुकानदार")+
+  "\n📍 "+(p.city||"")+", "+(p.state||"")+
+  "\n📞 "+(p.phone||"");
+
+ info.append(name,brand,price,description,seller);
+
+ if(p.phone){
+  const phone=String(p.phone).replace(/\D/g,"");
+  const wa=document.createElement("a");
+  wa.className="whatsapp";
+  wa.href="https://wa.me/"+phone+"?text="+encodeURIComponent("नमस्ते, मुझे "+(p.name||"सामान")+" के बारे में जानकारी चाहिए।");
+  wa.target="_blank";
+  wa.rel="noopener";
+  wa.textContent="🟢 WhatsApp पर संपर्क करें";
+  info.appendChild(wa);
+ }
+
+ box.appendChild(info);
+ $("productList").appendChild(box);
+}
+
+function setupRecaptcha(){
+ if(recaptchaVerifier)return;
+ recaptchaVerifier=new firebase.auth.RecaptchaVerifier("recaptcha-container",{size:"normal"});
+}
+
+async function sendOTP(){
+ const phone=$("phone").value.trim();
+ if(!/^\+[1-9]\d{7,14}$/.test(phone)){
+  $("status").textContent="सही नंबर लिखें, जैसे +919876543210";
+  return;
+ }
+ try{
+  $("status").textContent="CAPTCHA पूरा करें...";
+  setupRecaptcha();
+  await recaptchaVerifier.render();
+  confirmationResult=await auth.signInWithPhoneNumber(phone,recaptchaVerifier);
+  $("otpArea").classList.remove("hidden");
+  $("status").textContent="OTP भेज दिया गया है।";
+ }catch(e){
+  $("status").textContent="समस्या: "+e.message;
+  if(recaptchaVerifier){recaptchaVerifier.clear();recaptchaVerifier=null;}
  }
 }
 
-async function verifyOTP() {
- const code = document.getElementById("otp").value.trim();
- try {
-   if(!confirmationResult) throw new Error("पहले OTP भेजें।");
-   await confirmationResult.confirm(code);
-   document.getElementById("status").textContent = "लॉगिन सफल!";
- } catch(e) {
-   document.getElementById("status").textContent = "OTP गलत है या समय समाप्त हुआ है।";
+async function verifyOTP(){
+ try{
+  if(!confirmationResult)throw new Error("पहले OTP भेजें।");
+  await confirmationResult.confirm($("otp").value.trim());
+  $("status").textContent="लॉगिन सफल!";
+ }catch(e){
+  $("status").textContent="OTP गलत है या समय समाप्त हुआ है।";
  }
 }
 
-auth.onAuthStateChanged(async user => {
- if(user) {
-   document.getElementById("accountInfo").textContent =
-     "मोबाइल: " + (user.phoneNumber || "लॉगिन सफल");
-
-   try {
-     const snap = await db.ref("gharsathi/users/"+user.uid).once("value");
-     if(snap.exists()) {
-       const p = snap.val();
-       document.getElementById("accountInfo").textContent =
-         (p.name || "यूजर") + " | " + (p.city || "") + " | " + (user.phoneNumber || "");
-       document.getElementById("topLocation").textContent = p.city || "अपना शहर चुनें";
-       showPage("accountPage");
-     } else {
-       showPage("profilePage");
-     }
-   } catch(e) {
-     document.getElementById("status").textContent =
-       "प्रोफाइल पढ़ने में समस्या: " + e.message;
-     showPage("profilePage");
-   }
+auth.onAuthStateChanged(async user=>{
+ if(!user){
+  currentProfile=null;
+  $("accountInfo").textContent="अभी लॉगिन नहीं किया है।";
+  return;
+ }
+ try{
+  const snap=await db.ref("gharsathi/users/"+user.uid).once("value");
+  if(snap.exists()){
+   currentProfile=snap.val();
+   $("accountInfo").textContent=(currentProfile.name||"यूजर")+" | "+(currentProfile.city||"")+" | "+(user.phoneNumber||"");
+   $("topLocation").textContent=currentProfile.city||"अपना शहर चुनें";
+   if(!$("profilePage").classList.contains("hidden"))showPage("accountPage");
+  }else{
+   showPage("profilePage");
+  }
+ }catch(e){
+  $("status").textContent="प्रोफाइल पढ़ने में समस्या: "+e.message;
  }
 });
 
-async function saveProfile() {
- const user = auth.currentUser;
- if(!user) {
-   alert("पहले मोबाइल OTP से लॉगिन करें।");
-   showPage("loginPage");
-   return;
+async function saveProfile(){
+ const user=auth.currentUser;
+ if(!user){showPage("loginPage");return;}
+ const profile={
+  uid:user.uid,
+  phone:user.phoneNumber||"",
+  name:$("userName").value.trim(),
+  city:$("city").value.trim(),
+  state:$("state").value.trim(),
+  role:$("role").value,
+  createdAt:Date.now()
+ };
+ if(!profile.name||!profile.city||!profile.state){
+  alert("कृपया सभी जानकारी भरें।");return;
+ }
+ try{
+  await db.ref("gharsathi/users/"+user.uid).update(profile);
+  currentProfile=profile;
+  $("topLocation").textContent=profile.city;
+  $("accountInfo").textContent=profile.name+" | "+profile.city+" | "+profile.role;
+  $("profileStatus").textContent="प्रोफाइल सेव हो गई!";
+  showPage("accountPage");
+ }catch(e){
+  $("profileStatus").textContent="सेव नहीं हुआ: "+e.message;
+ }
+}
+
+function openAddPage(){
+ if(!auth.currentUser){
+  alert("पहले मोबाइल OTP से लॉगिन करें।");
+  showPage("loginPage");
+  return;
+ }
+ if(!currentProfile){
+  alert("पहले अपनी प्रोफाइल पूरी करें।");
+  showPage("profilePage");
+  return;
+ }
+ if(!["seller","both"].includes(currentProfile.role)){
+  alert("सामान जोड़ने के लिए प्रोफाइल में दुकानदार या दोनों विकल्प चुनें।");
+  showPage("accountPage");
+  return;
+ }
+ $("productStatus").textContent="";
+ showPage("addPage");
+}
+
+async function addProduct(){
+ const user=auth.currentUser;
+ if(!user||!currentProfile){alert("पहले लॉगिन करें।");return;}
+ if(!["seller","both"].includes(currentProfile.role)){
+  alert("आपका अकाउंट दुकानदार के रूप में नहीं है।");return;
  }
 
- const profile = {
-   uid:user.uid,
-   phone:user.phoneNumber || "",
-   name:document.getElementById("userName").value.trim(),
-   city:document.getElementById("city").value.trim(),
-   state:document.getElementById("state").value.trim(),
-   role:document.getElementById("role").value,
-   createdAt:Date.now()
+ const name=$("pName").value.trim();
+ const price=Number($("pPrice").value);
+ const unit=$("pUnit").value.trim();
+ const image=$("pImage").value.trim();
+
+ if(!name||!price||price<0||!unit){
+  alert("सामान का नाम, सही कीमत और इकाई भरें।");return;
+ }
+ if(image&&!/^https:\/\//i.test(image)){
+  alert("फोटो का लिंक HTTPS से शुरू होना चाहिए।");return;
+ }
+
+ const product={
+  name:name,
+  category:$("pCategory").value,
+  brand:$("pBrand").value.trim(),
+  price:price,
+  unit:unit,
+  image:image,
+  description:$("pDescription").value.trim(),
+  sellerUid:user.uid,
+  sellerName:currentProfile.name,
+  phone:user.phoneNumber||currentProfile.phone||"",
+  city:currentProfile.city,
+  state:currentProfile.state,
+  createdAt:Date.now()
  };
 
- if(!profile.name || !profile.city || !profile.state) {
-   alert("कृपया सभी जानकारी भरें।");
-   return;
- }
-
- try {
-   await db.ref("gharsathi/users/"+user.uid).update(profile);
-   document.getElementById("topLocation").textContent = profile.city;
-   document.getElementById("accountInfo").textContent =
-     profile.name + " | " + profile.city + " | " + profile.role;
-   document.getElementById("profileStatus").textContent = "प्रोफाइल सेव हो गई!";
-   showPage("accountPage");
- } catch(e) {
-   document.getElementById("profileStatus").textContent =
-     "सेव नहीं हुआ: " + e.message;
+ try{
+  $("productStatus").textContent="सामान सेव हो रहा है...";
+  const ref=db.ref("gharsathi/products").push();
+  await ref.set(product);
+  $("productStatus").textContent="✅ आपका सामान सफलतापूर्वक प्रकाशित हो गया!";
+  ["pName","pBrand","pPrice","pUnit","pImage","pDescription"].forEach(id=>$(id).value="");
+ }catch(e){
+  $("productStatus").textContent="समस्या: "+e.message;
  }
 }
 
-async function logout() {
- try {
-   await auth.signOut();
-   showPage("homePage");
- } catch(e) {
-   alert(e.message);
- }
+async function logout(){
+ try{
+  await auth.signOut();
+  currentProfile=null;
+  showPage("homePage");
+ }catch(e){alert(e.message);}
 }
 </script>
-
 </body>
 </html>
